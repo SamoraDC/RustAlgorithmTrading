@@ -1,0 +1,52 @@
+[package]
+name = "market-data"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+# Workspace dependencies
+common = { path = "../common" }
+
+# Async runtime
+tokio.workspace = true
+tokio-tungstenite.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Messaging
+zmq.workspace = true
+
+# Observability
+metrics.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+# Time
+chrono.workspace = true
+
+# Error handling
+anyhow.workspace = true
+thiserror.workspace = true
+
+# Networking
+url.workspace = true
+tungstenite.workspace = true
+
+# Data structures
+indexmap.workspace = true
+
+[dev-dependencies]
+mockall.workspace = true
+tokio-test = "0.4"
+
+[[bin]]
+name = "market-data"
+path = "src/main.rs"
+
+[lib]
+name = "market_data"
+path = "src/lib.rs"

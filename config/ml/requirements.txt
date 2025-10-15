@@ -1,0 +1,31 @@
+# Machine Learning Trading Strategy Requirements
+# Install with: pip install -r requirements.txt
+
+# Core ML libraries
+scikit-learn>=1.3.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Optional: Deep Learning (uncomment if needed)
+# tensorflow>=2.13.0
+# torch>=2.0.0
+
+# Data visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Model persistence and versioning
+joblib>=1.3.0
+
+# Performance optimization
+numba>=0.57.0
+
+# Technical analysis (if additional indicators needed)
+ta-lib>=0.4.0  # Requires TA-Lib C library installation
+
+# Time series specific
+statsmodels>=0.14.0

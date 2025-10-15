@@ -1,0 +1,32 @@
+# Code coverage configuration for cargo-tarpaulin
+
+[tarpaulin]
+# Minimum coverage threshold (percentage)
+minimum-coverage = 90
+
+# Exclude paths from coverage
+exclude = [
+    "tests/*",
+    "*/tests/*",
+    "benches/*",
+    "*/benches/*",
+]
+
+# Include only specific paths
+include = [
+    "rust/common/src/*",
+    "rust/market-data/src/*",
+    "rust/execution-engine/src/*",
+    "rust/risk-manager/src/*",
+    "rust/signal-bridge/src/*",
+]
+
+# Output formats
+output-formats = ["Html", "Lcov", "Json"]
+
+# Additional settings
+timeout = 300
+follow-exec = true
+release = true
+all-features = true
+workspace = true

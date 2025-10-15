@@ -1,0 +1,53 @@
+[package]
+name = "signal-bridge"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+# Workspace dependencies
+common = { path = "../common" }
+
+# Python bindings
+pyo3.workspace = true
+
+# Async runtime
+tokio.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Messaging
+zmq.workspace = true
+
+# Observability
+metrics.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+# Time
+chrono.workspace = true
+
+# Error handling
+anyhow.workspace = true
+thiserror.workspace = true
+
+# Technical indicators
+ta = "0.5"
+
+# Numerical computing
+ndarray = "0.15"
+
+[dev-dependencies]
+mockall.workspace = true
+
+[lib]
+name = "signal_bridge"
+path = "src/lib.rs"
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "signal-bridge"
+path = "src/main.rs"

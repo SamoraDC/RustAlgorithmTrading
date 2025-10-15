@@ -1,0 +1,213 @@
+"""
+Event-driven backtesting engine.
+"""
+
+from collections import deque
+from datetime import datetime
+from typing import Dict, List, Optional
+from loguru import logger
+
+from src.models.events import Event, EventType, MarketEvent
+from .data_handler import HistoricalDataHandler
+from .execution_handler import SimulatedExecutionHandler
+from .portfolio_handler import PortfolioHandler
+from .performance import PerformanceAnalyzer
+
+
+class BacktestEngine:
+    """
+    Event-driven backtesting engine that processes events in chronological order.
+
+    This engine implements a queue-based event processing system where market data,
+    signals, orders, and fills are processed sequentially, mimicking live trading.
+    """
+
+    def __init__(
+        self,
+        data_handler: HistoricalDataHandler,
+        execution_handler: SimulatedExecutionHandler,
+        portfolio_handler: PortfolioHandler,
+        strategy,
+        start_date: Optional[datetime] = None,
+        end_date: Optional[datetime] = None,
+    ):
+        """
+        Initialize backtesting engine.
+
+        Args:
+            data_handler: Historical data provider
+            execution_handler: Order execution simulator
+            portfolio_handler: Portfolio and position tracker
+            strategy: Trading strategy instance
+            start_date: Backtest start date
+            end_date: Backtest end date
+        """
+        self.data_handler = data_handler
+        self.execution_handler = execution_handler
+        self.portfolio_handler = portfolio_handler
+        self.strategy = strategy
+        self.start_date = start_date
+        self.end_date = end_date
+
+        self.events: deque[Event] = deque()
+        self.continue_backtest = True
+        self.performance_analyzer = PerformanceAnalyzer()
+
+        # Metrics
+        self.events_processed = 0
+        self.signals_generated = 0
+        self.orders_placed = 0
+        self.fills_executed = 0
+
+        logger.info(
+            f"Initialized BacktestEngine from {start_date} to {end_date}"
+        )
+
+    def run(self) -> Dict:
+        """
+        Execute backtest and return performance metrics.
+
+        Returns:
+            Dictionary containing performance metrics and equity curve
+        """
+        logger.info("Starting backtest execution")
+        start_time = datetime.utcnow()
+
+        # Process all market data events
+        while self.continue_backtest:
+            # Update market data bars
+            if self.data_handler.continue_backtest:
+                self.data_handler.update_bars()
+            else:
+                self.continue_backtest = False
+
+            # Process event queue
+            while self.events:
+                event = self.events.popleft()
+                self._dispatch_event(event)
+                self.events_processed += 1
+
+        # Calculate final performance metrics
+        end_time = datetime.utcnow()
+        duration = (end_time - start_time).total_seconds()
+
+        results = self._generate_results(duration)
+
+        logger.info(
+            f"Backtest completed in {duration:.2f}s. "
+            f"Processed {self.events_processed} events, "
+            f"Generated {self.signals_generated} signals, "
+            f"Placed {self.orders_placed} orders, "
+            f"Executed {self.fills_executed} fills"
+        )
+
+        return results
+
+    def _dispatch_event(self, event: Event):
+        """
+        Dispatch event to appropriate handler.
+
+        Args:
+            event: Event to process
+        """
+        if event.event_type == EventType.MARKET:
+            self._handle_market_event(event)
+        elif event.event_type == EventType.SIGNAL:
+            self._handle_signal_event(event)
+            self.signals_generated += 1
+        elif event.event_type == EventType.ORDER:
+            self._handle_order_event(event)
+            self.orders_placed += 1
+        elif event.event_type == EventType.FILL:
+            self._handle_fill_event(event)
+            self.fills_executed += 1
+
+    def _handle_market_event(self, event: MarketEvent):
+        """
+        Handle market data update.
+
+        Args:
+            event: Market event
+        """
+        # Update portfolio with latest prices
+        self.portfolio_handler.update_timeindex(event.timestamp)
+
+        # Update strategy with market data
+        signals = self.strategy.calculate_signals(event)
+
+        # Add signal events to queue
+        if signals:
+            for signal in signals:
+                self.events.append(signal)
+
+    def _handle_signal_event(self, event):
+        """
+        Handle trading signal.
+
+        Args:
+            event: Signal event
+        """
+        # Convert signal to orders
+        orders = self.portfolio_handler.generate_orders(event)
+
+        # Add order events to queue
+        for order in orders:
+            self.events.append(order)
+
+    def _handle_order_event(self, event):
+        """
+        Handle order placement.
+
+        Args:
+            event: Order event
+        """
+        # Execute order through simulated execution
+        fill_event = self.execution_handler.execute_order(event)
+
+        if fill_event:
+            self.events.append(fill_event)
+
+    def _handle_fill_event(self, event):
+        """
+        Handle order fill.
+
+        Args:
+            event: Fill event
+        """
+        # Update portfolio with fill
+        self.portfolio_handler.update_fill(event)
+
+        # Record for performance analysis
+        self.performance_analyzer.record_fill(event)
+
+    def _generate_results(self, duration: float) -> Dict:
+        """
+        Generate backtest results and performance metrics.
+
+        Args:
+            duration: Backtest duration in seconds
+
+        Returns:
+            Results dictionary
+        """
+        equity_curve = self.portfolio_handler.get_equity_curve()
+        holdings = self.portfolio_handler.get_holdings()
+
+        metrics = self.performance_analyzer.calculate_performance_metrics(
+            equity_curve=equity_curve,
+            initial_capital=self.portfolio_handler.initial_capital
+        )
+
+        return {
+            'metrics': metrics.to_dict(),
+            'equity_curve': equity_curve,
+            'holdings': holdings,
+            'execution_stats': {
+                'duration_seconds': duration,
+                'events_processed': self.events_processed,
+                'signals_generated': self.signals_generated,
+                'orders_placed': self.orders_placed,
+                'fills_executed': self.fills_executed,
+                'events_per_second': self.events_processed / duration if duration > 0 else 0,
+            }
+        }
