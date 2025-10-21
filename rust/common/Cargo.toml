@@ -20,6 +20,11 @@ thiserror.workspace = true
 # Data structures
 indexmap.workspace = true
 
+# HTTP server for health checks
+axum = "0.7"
+tokio.workspace = true
+tracing.workspace = true
+
 [dev-dependencies]
 serde_test = "1.0"
 

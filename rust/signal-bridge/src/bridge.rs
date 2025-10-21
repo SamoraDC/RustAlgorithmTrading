@@ -119,7 +119,7 @@ impl FeatureComputer {
         let mut volumes = Vec::with_capacity(bar_count);
 
         for item in bars.iter() {
-            let bar: &Bar = item.extract()?;
+            let bar: Bar = item.extract()?;
             closes.push(bar.close);
             highs.push(bar.high);
             lows.push(bar.low);

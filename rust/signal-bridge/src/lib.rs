@@ -11,7 +11,6 @@ pub use features::FeatureEngine;
 pub use indicators::*;
 
 use common::Result;
-use pyo3::prelude::*;
 
 /// Main signal bridge service
 pub struct SignalBridgeService {
@@ -19,7 +18,7 @@ pub struct SignalBridgeService {
 }
 
 impl SignalBridgeService {
-    pub fn new(config: common::config::SignalConfig) -> Result<Self> {
+    pub fn new(_config: common::config::SignalConfig) -> Result<Self> {
         let feature_engine = FeatureEngine::new();
 
         Ok(Self {
@@ -28,9 +27,4 @@ impl SignalBridgeService {
     }
 }
 
-/// Python module for feature computation
-#[pymodule]
-fn signal_bridge(_py: Python, m: &PyModule) -> PyResult<()> {
-    m.add_class::<bridge::FeatureComputer>()?;
-    Ok(())
-}
+// PyO3 module is defined in bridge.rs to avoid duplicate symbols

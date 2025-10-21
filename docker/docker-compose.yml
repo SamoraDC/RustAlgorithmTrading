@@ -1,0 +1,275 @@
+version: '3.8'
+
+services:
+  # Market Data Service - Handles market data ingestion and distribution
+  market_data_service:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: market_data_service
+    container_name: trading_market_data
+    environment:
+      - RUST_LOG=info
+      - MARKET_DATA_PORT=5555
+      - BINANCE_API_KEY=${BINANCE_API_KEY}
+      - BINANCE_API_SECRET=${BINANCE_API_SECRET}
+    ports:
+      - "5555:5555"
+    networks:
+      - trading_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "5555"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    volumes:
+      - market_data_logs:/app/logs
+      - market_data_cache:/app/cache
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+  # Order Execution Service - Manages order placement and execution
+  order_execution_service:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: order_execution_service
+    container_name: trading_order_execution
+    environment:
+      - RUST_LOG=info
+      - ORDER_EXECUTION_PORT=5556
+      - MARKET_DATA_ENDPOINT=tcp://market_data_service:5555
+      - BINANCE_API_KEY=${BINANCE_API_KEY}
+      - BINANCE_API_SECRET=${BINANCE_API_SECRET}
+    ports:
+      - "5556:5556"
+    networks:
+      - trading_network
+    depends_on:
+      market_data_service:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "5556"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    volumes:
+      - order_execution_logs:/app/logs
+      - order_execution_data:/app/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+  # Risk Management Service - Monitors and enforces risk limits
+  risk_management_service:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: risk_management_service
+    container_name: trading_risk_management
+    environment:
+      - RUST_LOG=info
+      - RISK_MANAGEMENT_PORT=5557
+      - MARKET_DATA_ENDPOINT=tcp://market_data_service:5555
+      - ORDER_EXECUTION_ENDPOINT=tcp://order_execution_service:5556
+      - MAX_POSITION_SIZE=${MAX_POSITION_SIZE:-10000}
+      - MAX_DAILY_LOSS=${MAX_DAILY_LOSS:-1000}
+    ports:
+      - "5557:5557"
+    networks:
+      - trading_network
+    depends_on:
+      market_data_service:
+        condition: service_healthy
+      order_execution_service:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "5557"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    volumes:
+      - risk_management_logs:/app/logs
+      - risk_management_data:/app/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+
+  # Strategy Engine - Executes trading strategies
+  strategy_engine:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: strategy_engine
+    container_name: trading_strategy_engine
+    environment:
+      - RUST_LOG=info
+      - STRATEGY_ENGINE_PORT=5558
+      - MARKET_DATA_ENDPOINT=tcp://market_data_service:5555
+      - ORDER_EXECUTION_ENDPOINT=tcp://order_execution_service:5556
+      - RISK_MANAGEMENT_ENDPOINT=tcp://risk_management_service:5557
+    ports:
+      - "5558:5558"
+    networks:
+      - trading_network
+    depends_on:
+      market_data_service:
+        condition: service_healthy
+      order_execution_service:
+        condition: service_healthy
+      risk_management_service:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "5558"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    volumes:
+      - strategy_engine_logs:/app/logs
+      - strategy_engine_data:/app/data
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 1G
+        reservations:
+          cpus: '1.0'
+          memory: 512M
+
+  # API Gateway - REST API and WebSocket interface
+  api_gateway:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: api_gateway
+    container_name: trading_api_gateway
+    environment:
+      - RUST_LOG=info
+      - API_GATEWAY_PORT=8080
+      - MARKET_DATA_ENDPOINT=tcp://market_data_service:5555
+      - ORDER_EXECUTION_ENDPOINT=tcp://order_execution_service:5556
+      - RISK_MANAGEMENT_ENDPOINT=tcp://risk_management_service:5557
+      - STRATEGY_ENGINE_ENDPOINT=tcp://strategy_engine:5558
+    ports:
+      - "8080:8080"
+    networks:
+      - trading_network
+    depends_on:
+      market_data_service:
+        condition: service_healthy
+      order_execution_service:
+        condition: service_healthy
+      risk_management_service:
+        condition: service_healthy
+      strategy_engine:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    volumes:
+      - api_gateway_logs:/app/logs
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+  # Prometheus - Metrics collection
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: trading_prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=30d'
+    ports:
+      - "9090:9090"
+    networks:
+      - trading_network
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  # Grafana - Metrics visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: trading_grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+    ports:
+      - "3000:3000"
+    networks:
+      - trading_network
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana-dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+networks:
+  trading_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+
+volumes:
+  market_data_logs:
+  market_data_cache:
+  order_execution_logs:
+  order_execution_data:
+  risk_management_logs:
+  risk_management_data:
+  strategy_engine_logs:
+  strategy_engine_data:
+  api_gateway_logs:
+  prometheus_data:
+  grafana_data:

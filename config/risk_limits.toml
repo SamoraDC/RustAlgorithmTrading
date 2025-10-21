@@ -1,0 +1,138 @@
+# Risk Management Configuration
+# This file defines comprehensive risk limits for the trading system
+
+[position_limits]
+# Maximum shares per position
+max_shares = 1000
+# Maximum notional value per position (USD)
+max_notional_per_position = 10000.0
+# Maximum total notional exposure across all positions (USD)
+max_total_exposure = 50000.0
+# Maximum number of concurrent open positions
+max_open_positions = 5
+# Maximum concentration in a single symbol (percentage of total portfolio)
+max_concentration_percent = 25.0
+
+[loss_limits]
+# Maximum loss per trade (USD)
+max_loss_per_trade = 500.0
+# Maximum daily loss (USD) - triggers circuit breaker
+max_daily_loss = 5000.0
+# Maximum weekly loss (USD)
+max_weekly_loss = 15000.0
+# Maximum monthly loss (USD)
+max_monthly_loss = 50000.0
+# Drawdown percentage that triggers position reduction
+drawdown_threshold_percent = 10.0
+
+[stop_loss]
+# Default stop loss percentage below entry price
+default_stop_loss_percent = 2.0
+# Minimum stop loss percentage (cannot be set lower)
+min_stop_loss_percent = 0.5
+# Maximum stop loss percentage (cannot be set higher)
+max_stop_loss_percent = 10.0
+# Enable trailing stop loss
+enable_trailing_stop = true
+# Trailing stop distance (percentage)
+trailing_stop_percent = 1.5
+# Trailing stop activation (only activate after profit exceeds this %)
+trailing_activation_percent = 2.0
+
+[take_profit]
+# Default take profit percentage above entry price
+default_take_profit_percent = 5.0
+# Minimum risk/reward ratio for new trades
+min_risk_reward_ratio = 2.0
+# Enable partial profit taking
+enable_partial_profit = true
+# Percentage of position to close at first target
+partial_profit_percent = 50.0
+# First take profit target (percentage above entry)
+first_target_percent = 3.0
+# Second take profit target (percentage above entry)
+second_target_percent = 5.0
+
+[circuit_breaker]
+# Enable circuit breaker mechanism
+enabled = true
+# Daily loss threshold to trigger circuit breaker (USD)
+daily_loss_threshold = 5000.0
+# Maximum consecutive losing trades before pause
+max_consecutive_losses = 5
+# Maximum number of trades per day
+max_trades_per_day = 50
+# Cooldown period after circuit breaker trips (minutes)
+cooldown_minutes = 60
+# Auto-resume after cooldown
+auto_resume = false
+
+[order_validation]
+# Minimum order size (shares)
+min_order_size = 1
+# Maximum order size (shares)
+max_order_size = 1000
+# Maximum order value (USD)
+max_order_value = 10000.0
+# Minimum price for orders (USD)
+min_price = 0.01
+# Maximum price for orders (USD)
+max_price = 10000.0
+# Maximum slippage tolerance (percentage)
+max_slippage_percent = 0.5
+
+[leverage]
+# Enable leverage
+allow_leverage = false
+# Maximum leverage ratio (1 = no leverage, 2 = 2x, etc.)
+max_leverage = 1.0
+# Minimum margin requirement (percentage)
+min_margin_percent = 100.0
+
+[volatility]
+# Maximum allowed volatility (ATR as percentage of price)
+max_atr_percent = 5.0
+# Reduce position size when volatility exceeds threshold
+reduce_on_high_volatility = true
+# Volatility-based position sizing
+enable_volatility_scaling = true
+# Base volatility for scaling (percentage)
+base_volatility_percent = 2.0
+
+[time_restrictions]
+# Allow trading only during market hours
+enforce_market_hours = true
+# Allow trading in pre-market (4:00 AM - 9:30 AM ET)
+allow_premarket = false
+# Allow trading in after-hours (4:00 PM - 8:00 PM ET)
+allow_afterhours = false
+# Blackout periods (no trading) in format "HH:MM-HH:MM ET"
+blackout_periods = [
+    "09:30-09:45",  # Market open volatility
+    "15:45-16:00"   # Market close volatility
+]
+
+[correlation]
+# Maximum correlation between positions
+max_position_correlation = 0.7
+# Check correlation before opening new positions
+enforce_correlation_check = true
+# Lookback period for correlation calculation (days)
+correlation_lookback_days = 30
+
+[monitoring]
+# Send alert when approaching position limit (percentage)
+position_limit_alert_threshold = 80.0
+# Send alert when approaching daily loss limit (percentage)
+loss_limit_alert_threshold = 80.0
+# Enable email notifications
+email_notifications = false
+# Enable SMS notifications for critical alerts
+sms_notifications = false
+# Webhook URL for alerts
+alert_webhook_url = ""
+
+[metadata]
+version = "1.0.0"
+last_updated = "2025-10-21"
+description = "Comprehensive risk limits for algorithmic trading system"

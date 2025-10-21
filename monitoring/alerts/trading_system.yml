@@ -1,0 +1,272 @@
+groups:
+  # ===== CRITICAL ALERTS (P0) =====
+  - name: trading_critical
+    interval: 10s
+    rules:
+      - alert: CircuitBreakerTriggered
+        expr: risk_manager_risk_failures_total{failure_type="circuit_breaker_triggered"} > 0
+        for: 0s
+        labels:
+          severity: critical
+          priority: P0
+          team: trading
+        annotations:
+          summary: "CRITICAL: Circuit breaker triggered - all trading halted"
+          description: "Risk Manager has triggered circuit breaker. Immediate action required. Check position limits and P&L."
+          runbook: "https://docs.internal/runbooks/circuit-breaker-triggered"
+
+      - alert: MaxDailyLossExceeded
+        expr: trading_unrealized_pnl_usd < -5000
+        for: 1m
+        labels:
+          severity: critical
+          priority: P0
+          team: trading
+        annotations:
+          summary: "CRITICAL: Max daily loss exceeded ($5000)"
+          description: "Unrealized P&L: {{ $value }} USD. Halt trading immediately and close positions."
+          runbook: "https://docs.internal/runbooks/max-loss-exceeded"
+
+      - alert: WebSocketDisconnected
+        expr: rate(market_data_websocket_connection_failures_total[5m]) > 0.6
+        for: 2m
+        labels:
+          severity: critical
+          priority: P0
+          team: infrastructure
+        annotations:
+          summary: "Market data WebSocket disconnecting frequently"
+          description: "{{ $value }} disconnections/sec. Trading may be impaired. Check network connectivity."
+          runbook: "https://docs.internal/runbooks/websocket-disconnect"
+
+      - alert: ExecutionAPIDown
+        expr: rate(execution_engine_api_failures_total{status_code=~"5.."}[5m]) > 0.17
+        for: 3m
+        labels:
+          severity: critical
+          priority: P0
+          team: infrastructure
+        annotations:
+          summary: "Execution API returning 5xx errors"
+          description: "{{ $value }} API failures/sec. Pause order submission immediately."
+          runbook: "https://docs.internal/runbooks/api-down"
+
+      - alert: MemoryLeak
+        expr: system_memory_usage_mb{service=~".*"} > 1000
+        for: 5m
+        labels:
+          severity: critical
+          priority: P0
+          team: infrastructure
+        annotations:
+          summary: "Memory leak detected in {{ $labels.service }}"
+          description: "Memory usage: {{ $value }} MB. Restart service before OOM kill."
+          runbook: "https://docs.internal/runbooks/memory-leak"
+
+  # ===== HIGH PRIORITY ALERTS (P1) =====
+  - name: trading_high_priority
+    interval: 30s
+    rules:
+      - alert: HighOrderLatency
+        expr: histogram_quantile(0.99, rate(execution_engine_order_submission_latency_us_bucket[5m])) > 5000
+        for: 5m
+        labels:
+          severity: high
+          priority: P1
+          team: trading
+        annotations:
+          summary: "High order submission latency (p99 > 5ms)"
+          description: "p99 latency: {{ $value }}μs. Investigate execution pipeline and network."
+          runbook: "https://docs.internal/runbooks/high-order-latency"
+
+      - alert: HighSlippage
+        expr: histogram_quantile(0.95, rate(trading_slippage_bps_bucket[15m])) > 50
+        for: 10m
+        labels:
+          severity: high
+          priority: P1
+          team: trading
+        annotations:
+          summary: "High slippage detected (p95 > 50 bps)"
+          description: "p95 slippage: {{ $value }} bps. Review execution strategy and market conditions."
+          runbook: "https://docs.internal/runbooks/high-slippage"
+
+      - alert: MLInferenceFailure
+        expr: increase(signal_bridge_inference_errors_total[5m]) > 0
+        for: 1m
+        labels:
+          severity: high
+          priority: P1
+          team: ml
+        annotations:
+          summary: "ML inference errors detected"
+          description: "Error count: {{ $value }}. Validate model file and ONNX runtime."
+          runbook: "https://docs.internal/runbooks/ml-inference-failure"
+
+      - alert: RiskCheckFailures
+        expr: rate(risk_manager_risk_failures_total{failure_type="position_limit_exceeded"}[5m]) > 0.17
+        for: 5m
+        labels:
+          severity: high
+          priority: P1
+          team: trading
+        annotations:
+          summary: "High rate of position limit violations"
+          description: "{{ $value }} failures/sec. Review position sizing and limits."
+          runbook: "https://docs.internal/runbooks/risk-check-failures"
+
+      - alert: LowFillRate
+        expr: (rate(execution_engine_orders_submitted_total{status="success",order_type="market"}[10m]) / rate(execution_engine_orders_submitted_total{order_type="market"}[10m])) < 0.90
+        for: 10m
+        labels:
+          severity: high
+          priority: P1
+          team: trading
+        annotations:
+          summary: "Low order fill rate for market orders"
+          description: "Fill rate: {{ $value | humanizePercentage }}. Check exchange status and order parameters."
+          runbook: "https://docs.internal/runbooks/low-fill-rate"
+
+      - alert: APIRateLimitHit
+        expr: increase(execution_engine_api_failures_total{status_code="429"}[5m]) > 0
+        for: 1m
+        labels:
+          severity: high
+          priority: P1
+          team: infrastructure
+        annotations:
+          summary: "API rate limit exceeded"
+          description: "Hit rate limit {{ $value }} times in 5 minutes. Reduce request rate."
+          runbook: "https://docs.internal/runbooks/rate-limit"
+
+  # ===== MEDIUM PRIORITY ALERTS (P2) =====
+  - name: trading_medium_priority
+    interval: 60s
+    rules:
+      - alert: ElevatedMarketDataLatency
+        expr: histogram_quantile(0.95, rate(market_data_websocket_latency_us_bucket[5m])) > 500
+        for: 10m
+        labels:
+          severity: medium
+          priority: P2
+          team: infrastructure
+        annotations:
+          summary: "Elevated market data processing latency"
+          description: "p95 latency: {{ $value }}μs. Optimize WebSocket parser or check CPU."
+          runbook: "https://docs.internal/runbooks/elevated-latency"
+
+      - alert: HighCPUUsage
+        expr: system_cpu_usage_percent{service=~".*"} > 80
+        for: 10m
+        labels:
+          severity: medium
+          priority: P2
+          team: infrastructure
+        annotations:
+          summary: "High CPU usage in {{ $labels.service }}"
+          description: "CPU usage: {{ $value }}%. Consider optimization or scaling."
+          runbook: "https://docs.internal/runbooks/high-cpu"
+
+      - alert: ZMQQueueBacklog
+        expr: system_zmq_queue_depth{service=~".*"} > 5000
+        for: 5m
+        labels:
+          severity: medium
+          priority: P2
+          team: infrastructure
+        annotations:
+          summary: "ZMQ queue backlog in {{ $labels.service }}"
+          description: "Queue depth: {{ $value }} messages. Increase consumer rate or optimize pipeline."
+          runbook: "https://docs.internal/runbooks/zmq-backlog"
+
+      - alert: RetryEscalation
+        expr: increase(execution_engine_retry_delay_ms_bucket{retry_attempt="3",le="+Inf"}[5m]) > 10
+        for: 5m
+        labels:
+          severity: medium
+          priority: P2
+          team: trading
+        annotations:
+          summary: "High retry escalation rate"
+          description: "{{ $value }} orders reached max retry attempts. Investigate root cause."
+          runbook: "https://docs.internal/runbooks/retry-escalation"
+
+      - alert: LowMessageThroughput
+        expr: rate(market_data_messages_processed_total{symbol=~"AAPL|MSFT|GOOGL"}[5m]) < 1.67
+        for: 10m
+        labels:
+          severity: medium
+          priority: P2
+          team: infrastructure
+        annotations:
+          summary: "Low message throughput for active symbols"
+          description: "Throughput: {{ $value }}/sec. Check WebSocket connection and market hours."
+          runbook: "https://docs.internal/runbooks/low-throughput"
+
+  # ===== SERVICE HEALTH ALERTS =====
+  - name: service_health
+    interval: 30s
+    rules:
+      - alert: ServiceDown
+        expr: up{job=~"market-data|signal-bridge|risk-manager|execution-engine"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          priority: P0
+          team: infrastructure
+        annotations:
+          summary: "{{ $labels.job }} service is down"
+          description: "Service {{ $labels.job }} is not responding to health checks."
+          runbook: "https://docs.internal/runbooks/service-down"
+
+      - alert: PrometheusScrapeFailing
+        expr: up == 0
+        for: 2m
+        labels:
+          severity: high
+          priority: P1
+          team: infrastructure
+        annotations:
+          summary: "Prometheus scrape failing for {{ $labels.job }}"
+          description: "Cannot scrape metrics from {{ $labels.job }}. Check metrics endpoint."
+          runbook: "https://docs.internal/runbooks/scrape-failure"
+
+  # ===== BUSINESS METRICS ALERTS =====
+  - name: business_metrics
+    interval: 60s
+    rules:
+      - alert: PositionSizeExceeded
+        expr: abs(trading_position_value_usd) > 10000
+        for: 5m
+        labels:
+          severity: high
+          priority: P1
+          team: trading
+        annotations:
+          summary: "Position size limit exceeded for {{ $labels.symbol }}"
+          description: "Position value: ${{ $value }}. Max allowed: $10,000."
+          runbook: "https://docs.internal/runbooks/position-limit"
+
+      - alert: PortfolioDrawdown
+        expr: trading_portfolio_value_usd < (trading_portfolio_value_usd offset 24h) * 0.95
+        for: 5m
+        labels:
+          severity: high
+          priority: P1
+          team: trading
+        annotations:
+          summary: "Portfolio drawdown > 5%"
+          description: "Current value: ${{ $value }}. Down >5% from 24h ago."
+          runbook: "https://docs.internal/runbooks/drawdown"
+
+      - alert: TooManyOpenPositions
+        expr: trading_open_positions_count > 20
+        for: 5m
+        labels:
+          severity: medium
+          priority: P2
+          team: trading
+        annotations:
+          summary: "Too many open positions"
+          description: "{{ $value }} positions open. Max recommended: 20."
+          runbook: "https://docs.internal/runbooks/too-many-positions"

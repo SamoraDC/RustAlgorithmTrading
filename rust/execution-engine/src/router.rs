@@ -1,6 +1,5 @@
 use common::{Result, TradingError, types::Order, config::ExecutionConfig};
 use crate::retry::RetryPolicy;
-use crate::slippage::SlippageChecker;
 use governor::{Quota, RateLimiter, clock::DefaultClock, state::{InMemoryState, NotKeyed}};
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
@@ -33,33 +32,47 @@ pub struct AlpacaOrderResponse {
 pub struct OrderRouter {
     config: ExecutionConfig,
     retry_policy: RetryPolicy,
-    slippage_checker: SlippageChecker,
+    max_slippage_bps: f64,
     rate_limiter: Arc<RateLimiter<NotKeyed, InMemoryState, DefaultClock>>,
     http_client: Client,
 }
 
 impl OrderRouter {
     pub fn new(config: ExecutionConfig) -> Result<Self> {
+        // Validate HTTPS is used for live trading
+        config.validate_https()?;
+
+        // Validate credentials are present for live trading
+        config.validate_credentials()?;
+
         let retry_policy = RetryPolicy::new(
             config.retry_attempts,
             config.retry_delay_ms,
         );
 
-        let slippage_checker = SlippageChecker::new(50.0); // 50 bps max slippage
+        let max_slippage_bps = 50.0; // 50 basis points max slippage
 
-        // Create rate limiter (200 requests per minute = ~3.33/sec)
-        let quota = Quota::per_second(NonZeroU32::new(config.rate_limit_per_second).unwrap());
+        // Create rate limiter with proper error handling
+        let quota = Quota::per_second(
+            NonZeroU32::new(config.rate_limit_per_second)
+                .ok_or_else(|| TradingError::Configuration(
+                    "rate_limit_per_second must be greater than 0".to_string()
+                ))?
+        );
         let rate_limiter = Arc::new(RateLimiter::direct(quota));
 
+        // Configure HTTP client with TLS requirements
         let http_client = Client::builder()
             .timeout(std::time::Duration::from_secs(10))
+            .min_tls_version(reqwest::tls::Version::TLS_1_2)
+            .https_only(!config.paper_trading) // Enforce HTTPS in live trading
             .build()
             .map_err(|e| TradingError::Network(format!("HTTP client error: {}", e)))?;
 
         Ok(Self {
             config,
             retry_policy,
-            slippage_checker,
+            max_slippage_bps,
             rate_limiter,
             http_client,
         })
@@ -70,10 +83,11 @@ impl OrderRouter {
         // Check slippage for limit orders
         if let Some(limit_price) = order.price {
             if let Some(market_price) = current_market_price {
-                if !self.slippage_checker.check(limit_price.0, market_price) {
+                let slippage_bps = ((limit_price.0 - market_price).abs() / market_price) * 10000.0;
+                if slippage_bps > self.max_slippage_bps {
                     return Err(TradingError::Risk(format!(
-                        "Slippage too high: limit={}, market={}",
-                        limit_price.0, market_price
+                        "Slippage too high: {:.2} bps (limit={}, market={}, max={})",
+                        slippage_bps, limit_price.0, market_price, self.max_slippage_bps
                     )));
                 }
             }
@@ -141,12 +155,30 @@ impl OrderRouter {
             });
         }
 
+        // Validate URL uses HTTPS before sending credentials
+        if !config.exchange_api_url.starts_with("https://") {
+            return Err(TradingError::Configuration(
+                "Cannot send API credentials over non-HTTPS connection".to_string()
+            ));
+        }
+
         let url = format!("{}/v2/orders", config.exchange_api_url);
+
+        // Get credentials with proper error handling
+        let api_key = config.api_key.as_ref()
+            .ok_or_else(|| TradingError::Configuration(
+                "API key not configured".to_string()
+            ))?;
+
+        let api_secret = config.api_secret.as_ref()
+            .ok_or_else(|| TradingError::Configuration(
+                "API secret not configured".to_string()
+            ))?;
 
         let response = client
             .post(&url)
-            .header("APCA-API-KEY-ID", config.api_key.as_ref().unwrap())
-            .header("APCA-API-SECRET-KEY", config.api_secret.as_ref().unwrap())
+            .header("APCA-API-KEY-ID", api_key)
+            .header("APCA-API-SECRET-KEY", api_secret)
             .json(&order)
             .send()
             .await
@@ -154,7 +186,8 @@ impl OrderRouter {
 
         if !response.status().is_success() {
             let status = response.status();
-            let text = response.text().await.unwrap_or_default();
+            let text = response.text().await
+                .unwrap_or_else(|_| "<failed to read response body>".to_string());
             return Err(TradingError::Exchange(format!(
                 "Order rejected: {} - {}",
                 status, text
@@ -197,13 +230,31 @@ impl OrderRouter {
     pub async fn get_order_status(&self, order_id: &str) -> Result<AlpacaOrderResponse> {
         self.rate_limiter.until_ready().await;
 
+        // Validate HTTPS before sending credentials
+        if !self.config.paper_trading && !self.config.exchange_api_url.starts_with("https://") {
+            return Err(TradingError::Configuration(
+                "Cannot send API credentials over non-HTTPS connection".to_string()
+            ));
+        }
+
         let url = format!("{}/v2/orders/{}", self.config.exchange_api_url, order_id);
+
+        // Get credentials with proper error handling
+        let api_key = self.config.api_key.as_ref()
+            .ok_or_else(|| TradingError::Configuration(
+                "API key not configured".to_string()
+            ))?;
+
+        let api_secret = self.config.api_secret.as_ref()
+            .ok_or_else(|| TradingError::Configuration(
+                "API secret not configured".to_string()
+            ))?;
 
         let response = self
             .http_client
             .get(&url)
-            .header("APCA-API-KEY-ID", self.config.api_key.as_ref().unwrap())
-            .header("APCA-API-SECRET-KEY", self.config.api_secret.as_ref().unwrap())
+            .header("APCA-API-KEY-ID", api_key)
+            .header("APCA-API-SECRET-KEY", api_secret)
             .send()
             .await
             .map_err(|e| TradingError::Network(format!("Request failed: {}", e)))?;
@@ -218,12 +269,30 @@ impl OrderRouter {
     pub async fn cancel_order(&self, order_id: &str) -> Result<()> {
         self.rate_limiter.until_ready().await;
 
+        // Validate HTTPS before sending credentials
+        if !self.config.paper_trading && !self.config.exchange_api_url.starts_with("https://") {
+            return Err(TradingError::Configuration(
+                "Cannot send API credentials over non-HTTPS connection".to_string()
+            ));
+        }
+
         let url = format!("{}/v2/orders/{}", self.config.exchange_api_url, order_id);
+
+        // Get credentials with proper error handling
+        let api_key = self.config.api_key.as_ref()
+            .ok_or_else(|| TradingError::Configuration(
+                "API key not configured".to_string()
+            ))?;
+
+        let api_secret = self.config.api_secret.as_ref()
+            .ok_or_else(|| TradingError::Configuration(
+                "API secret not configured".to_string()
+            ))?;
 
         self.http_client
             .delete(&url)
-            .header("APCA-API-KEY-ID", self.config.api_key.as_ref().unwrap())
-            .header("APCA-API-SECRET-KEY", self.config.api_secret.as_ref().unwrap())
+            .header("APCA-API-KEY-ID", api_key)
+            .header("APCA-API-SECRET-KEY", api_secret)
             .send()
             .await
             .map_err(|e| TradingError::Network(format!("Cancel failed: {}", e)))?;

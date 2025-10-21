@@ -12,6 +12,7 @@ common = { path = "../common" }
 # Async runtime
 tokio.workspace = true
 tokio-tungstenite.workspace = true
+futures-util = "0.3"
 
 # Serialization
 serde.workspace = true

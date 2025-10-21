@@ -40,6 +40,9 @@ ta = "0.5"
 # Numerical computing
 ndarray = "0.15"
 
+# SIMD operations (stable Rust)
+wide = "0.7"
+
 [dev-dependencies]
 mockall.workspace = true
 

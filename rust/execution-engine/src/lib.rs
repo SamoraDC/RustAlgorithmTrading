@@ -29,8 +29,8 @@ impl ExecutionEngineService {
         // Estimate slippage
         let _estimated_slippage = self.slippage_estimator.estimate(&order);
 
-        // Route order
-        self.router.route(order).await?;
+        // Route order (current market price would come from market data feed in production)
+        self.router.route(order, None).await?;
 
         Ok(())
     }

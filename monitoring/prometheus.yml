@@ -1,0 +1,76 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'trading-system'
+    environment: 'production'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+# Load rules once and periodically evaluate them
+rule_files:
+  - 'alerts.yml'
+
+# Scrape configurations
+scrape_configs:
+  # Market Data Service
+  - job_name: 'market_data_service'
+    static_configs:
+      - targets: ['market_data_service:5555']
+        labels:
+          service: 'market_data'
+          component: 'ingestion'
+    metrics_path: '/metrics'
+    scrape_interval: 5s
+
+  # Order Execution Service
+  - job_name: 'order_execution_service'
+    static_configs:
+      - targets: ['order_execution_service:5556']
+        labels:
+          service: 'order_execution'
+          component: 'trading'
+    metrics_path: '/metrics'
+    scrape_interval: 5s
+
+  # Risk Management Service
+  - job_name: 'risk_management_service'
+    static_configs:
+      - targets: ['risk_management_service:5557']
+        labels:
+          service: 'risk_management'
+          component: 'compliance'
+    metrics_path: '/metrics'
+    scrape_interval: 5s
+
+  # Strategy Engine
+  - job_name: 'strategy_engine'
+    static_configs:
+      - targets: ['strategy_engine:5558']
+        labels:
+          service: 'strategy_engine'
+          component: 'trading'
+    metrics_path: '/metrics'
+    scrape_interval: 5s
+
+  # API Gateway
+  - job_name: 'api_gateway'
+    static_configs:
+      - targets: ['api_gateway:8080']
+        labels:
+          service: 'api_gateway'
+          component: 'interface'
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          service: 'prometheus'
+          component: 'monitoring'

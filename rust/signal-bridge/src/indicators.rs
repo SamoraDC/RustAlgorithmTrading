@@ -1,5 +1,5 @@
 /// High-performance technical indicators with SIMD optimization
-use std::simd::{f64x4, SimdFloat};
+use wide::f64x4;
 
 /// Simple Moving Average (SMA)
 pub struct SMA {
@@ -203,13 +203,24 @@ pub fn calculate_momentum_simd(prices: &[f64], period: usize) -> Vec<f64> {
     for i in 0..chunks {
         let idx = i * 4;
 
-        let current = f64x4::from_slice(&prices[idx + period..idx + period + 4]);
-        let old = f64x4::from_slice(&prices[idx..idx + 4]);
+        let current = f64x4::new([
+            prices[idx + period],
+            prices[idx + period + 1],
+            prices[idx + period + 2],
+            prices[idx + period + 3],
+        ]);
+        let old = f64x4::new([
+            prices[idx],
+            prices[idx + 1],
+            prices[idx + 2],
+            prices[idx + 3],
+        ]);
 
         let diff = current - old;
         let result = (diff / old) * f64x4::splat(100.0);
 
-        result.copy_to_slice(&mut momentum[idx..idx + 4]);
+        let result_array = result.to_array();
+        momentum[idx..idx + 4].copy_from_slice(&result_array);
     }
 
     // Handle remaining elements
@@ -236,13 +247,24 @@ pub fn calculate_returns_simd(prices: &[f64]) -> Vec<f64> {
     for i in 0..chunks {
         let idx = i * 4;
 
-        let p1 = f64x4::from_slice(&prices[idx + 1..idx + 5]);
-        let p0 = f64x4::from_slice(&prices[idx..idx + 4]);
+        let p1 = f64x4::new([
+            prices[idx + 1],
+            prices[idx + 2],
+            prices[idx + 3],
+            prices[idx + 4],
+        ]);
+        let p0 = f64x4::new([
+            prices[idx],
+            prices[idx + 1],
+            prices[idx + 2],
+            prices[idx + 3],
+        ]);
 
         let ratio = p1 / p0;
         let log_returns = ratio.ln();
 
-        log_returns.copy_to_slice(&mut returns[idx..idx + 4]);
+        let result_array = log_returns.to_array();
+        returns[idx..idx + 4].copy_from_slice(&result_array);
     }
 
     let remainder_start = chunks * 4;

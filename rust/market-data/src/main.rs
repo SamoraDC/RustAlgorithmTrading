@@ -1,6 +1,9 @@
 use market_data::MarketDataService;
 use tracing_subscriber::{fmt, prelude::*, EnvFilter};
 use common::config::SystemConfig;
+use common::health::HealthCheck;
+use std::sync::Arc;
+use tokio::sync::RwLock;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -12,14 +15,68 @@ async fn main() -> anyhow::Result<()> {
 
     tracing::info!("Market Data Service starting...");
 
-    // Load configuration
-    let config = SystemConfig::from_file("config/system.json")?;
+    // Load configuration with validation
+    let config = match SystemConfig::from_file("config/system.json") {
+        Ok(cfg) => {
+            tracing::info!(
+                "Configuration loaded successfully - Environment: {}, Paper Trading: {}",
+                cfg.environment(),
+                cfg.is_paper_trading()
+            );
+            cfg
+        }
+        Err(e) => {
+            tracing::error!("Failed to load configuration: {}", e);
+            return Err(anyhow::anyhow!("Configuration error: {}", e));
+        }
+    };
+
+    // Validate we're in the correct environment
+    if config.is_production() && config.is_paper_trading() {
+        tracing::warn!("⚠️  Production environment with paper trading enabled - this may be unintended!");
+    }
+
+    // Create health status tracker
+    let health = Arc::new(RwLock::new(HealthCheck::healthy("market-data")));
+
+    // Store values before move
+    let symbols_count = config.market_data.symbols.len();
 
     // Initialize service
-    let mut service = MarketDataService::new(config.market_data).await?;
+    let mut service = match MarketDataService::new(config.market_data).await {
+        Ok(svc) => {
+            tracing::info!("✓ Market Data Service initialized successfully");
+            svc
+        }
+        Err(e) => {
+            tracing::error!("Failed to initialize service: {}", e);
+            let mut h = health.write().await;
+            *h = HealthCheck::unhealthy("market-data", format!("Initialization failed: {}", e));
+            return Err(anyhow::anyhow!("Service initialization error: {}", e));
+        }
+    };
 
-    // Run service
-    service.run().await?;
+    // Update health status
+    {
+        let mut h = health.write().await;
+        *h = HealthCheck::healthy("market-data")
+            .with_metric("status", "running")
+            .with_metric("symbols", symbols_count.to_string());
+    }
 
-    Ok(())
+    tracing::info!("🚀 Market Data Service is running");
+
+    // Run service with error handling
+    match service.run().await {
+        Ok(_) => {
+            tracing::info!("Market Data Service stopped gracefully");
+            Ok(())
+        }
+        Err(e) => {
+            tracing::error!("Service error: {}", e);
+            let mut h = health.write().await;
+            *h = HealthCheck::unhealthy("market-data", format!("Service error: {}", e));
+            Err(anyhow::anyhow!("Service error: {}", e))
+        }
+    }
 }

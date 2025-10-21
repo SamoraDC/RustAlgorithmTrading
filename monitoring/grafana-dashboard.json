@@ -1,0 +1,236 @@
+{
+  "dashboard": {
+    "title": "Rust Trading System Dashboard",
+    "tags": ["trading", "rust", "production"],
+    "timezone": "browser",
+    "schemaVersion": 16,
+    "version": 0,
+    "refresh": "5s",
+    "panels": [
+      {
+        "id": 1,
+        "title": "System Overview",
+        "type": "row",
+        "gridPos": {"h": 1, "w": 24, "x": 0, "y": 0}
+      },
+      {
+        "id": 2,
+        "title": "Service Status",
+        "type": "stat",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 1},
+        "targets": [
+          {
+            "expr": "up",
+            "legendFormat": "{{ job }}",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"]
+          },
+          "orientation": "auto",
+          "textMode": "auto",
+          "colorMode": "value",
+          "graphMode": "area"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "red"},
+                {"value": 1, "color": "green"}
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 3,
+        "title": "Total Requests Rate",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 1},
+        "targets": [
+          {
+            "expr": "sum(rate(http_requests_total[5m])) by (service)",
+            "legendFormat": "{{ service }}",
+            "refId": "A"
+          }
+        ],
+        "yaxes": [
+          {"format": "reqps", "label": "Requests/sec"},
+          {"format": "short"}
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Performance Metrics",
+        "type": "row",
+        "gridPos": {"h": 1, "w": 24, "x": 0, "y": 9}
+      },
+      {
+        "id": 5,
+        "title": "CPU Usage",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 8, "x": 0, "y": 10},
+        "targets": [
+          {
+            "expr": "rate(process_cpu_seconds_total[5m]) * 100",
+            "legendFormat": "{{ service }}",
+            "refId": "A"
+          }
+        ],
+        "yaxes": [
+          {"format": "percent", "label": "CPU %"},
+          {"format": "short"}
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Memory Usage",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 8, "x": 8, "y": 10},
+        "targets": [
+          {
+            "expr": "process_resident_memory_bytes / 1024 / 1024",
+            "legendFormat": "{{ service }}",
+            "refId": "A"
+          }
+        ],
+        "yaxes": [
+          {"format": "mbytes", "label": "Memory (MB)"},
+          {"format": "short"}
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Request Latency (p95)",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 8, "x": 16, "y": 10},
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "{{ service }}",
+            "refId": "A"
+          }
+        ],
+        "yaxes": [
+          {"format": "s", "label": "Latency"},
+          {"format": "short"}
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Trading Metrics",
+        "type": "row",
+        "gridPos": {"h": 1, "w": 24, "x": 0, "y": 18}
+      },
+      {
+        "id": 9,
+        "title": "Order Execution Rate",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 19},
+        "targets": [
+          {
+            "expr": "rate(orders_executed_total[5m])",
+            "legendFormat": "Executed",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(orders_failed_total[5m])",
+            "legendFormat": "Failed",
+            "refId": "B"
+          }
+        ],
+        "yaxes": [
+          {"format": "ops", "label": "Orders/sec"},
+          {"format": "short"}
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Active Positions",
+        "type": "stat",
+        "gridPos": {"h": 8, "w": 6, "x": 12, "y": 19},
+        "targets": [
+          {
+            "expr": "active_positions_total",
+            "legendFormat": "Positions",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"]
+          },
+          "colorMode": "value",
+          "graphMode": "area"
+        }
+      },
+      {
+        "id": 11,
+        "title": "Risk Metrics",
+        "type": "stat",
+        "gridPos": {"h": 8, "w": 6, "x": 18, "y": 19},
+        "targets": [
+          {
+            "expr": "current_risk_exposure",
+            "legendFormat": "Exposure",
+            "refId": "A"
+          },
+          {
+            "expr": "risk_limit_utilization",
+            "legendFormat": "Utilization %",
+            "refId": "B"
+          }
+        ],
+        "options": {
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"]
+          },
+          "colorMode": "value",
+          "graphMode": "area"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 70, "color": "yellow"},
+                {"value": 90, "color": "red"}
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 12,
+        "title": "Error Rates",
+        "type": "row",
+        "gridPos": {"h": 1, "w": 24, "x": 0, "y": 27}
+      },
+      {
+        "id": 13,
+        "title": "Error Rate by Service",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 24, "x": 0, "y": 28},
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{status=~\"5..\"}[5m])",
+            "legendFormat": "{{ service }} - {{ status }}",
+            "refId": "A"
+          }
+        ],
+        "yaxes": [
+          {"format": "reqps", "label": "Errors/sec"},
+          {"format": "short"}
+        ]
+      }
+    ]
+  }
+}

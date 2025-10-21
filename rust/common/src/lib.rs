@@ -7,6 +7,10 @@ pub mod types;
 pub mod messaging;
 pub mod errors;
 pub mod config;
+pub mod health;
+pub mod http;
 
 pub use types::*;
 pub use errors::{TradingError, Result};
+pub use health::{HealthCheck, HealthStatus, SystemHealth};
+pub use http::{create_health_router, start_health_server, HealthResponse};

@@ -10,7 +10,7 @@ pub mod publisher;
 
 pub use websocket::WebSocketClient;
 pub use orderbook::OrderBookManager;
-pub use aggregation::BarAggregator;
+pub use aggregation::{BarAggregator, TimeWindow};
 pub use publisher::MarketDataPublisher;
 
 use common::{Result, TradingError};
@@ -28,9 +28,34 @@ impl MarketDataService {
     pub async fn new(config: common::config::MarketDataConfig) -> Result<Self> {
         info!("Initializing Market Data Service for exchange: {}", config.exchange);
 
-        let ws_client = WebSocketClient::new(&config.websocket_url)?;
+        // Load API credentials from environment
+        let api_key = std::env::var("ALPACA_API_KEY")
+            .map_err(|_| TradingError::Configuration(
+                "ALPACA_API_KEY environment variable not set".to_string()
+            ))?;
+
+        let api_secret = std::env::var("ALPACA_SECRET_KEY")
+            .map_err(|_| TradingError::Configuration(
+                "ALPACA_SECRET_KEY environment variable not set".to_string()
+            ))?;
+
+        // Create WebSocket client with proper parameters
+        let ws_client = WebSocketClient::new(
+            api_key,
+            api_secret,
+            config.symbols.clone(),
+        )?;
+
         let orderbook_manager = OrderBookManager::new();
-        let bar_aggregator = BarAggregator::new();
+
+        // Create BarAggregator with default time windows
+        let time_windows = vec![
+            TimeWindow::Minutes1,
+            TimeWindow::Minutes5,
+            TimeWindow::Minutes15,
+        ];
+        let bar_aggregator = BarAggregator::new(time_windows);
+
         let publisher = MarketDataPublisher::new(&config.zmq_publish_address)?;
 
         Ok(Self {

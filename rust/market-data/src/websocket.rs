@@ -157,11 +157,7 @@ impl WebSocketClient {
 
         info!("Subscribed to symbols: {:?}", self.symbols);
 
-        // Start heartbeat task
-        let heartbeat_write = write;
-        let mut heartbeat_interval = tokio::time::interval(Duration::from_millis(HEARTBEAT_INTERVAL_MS));
-
-        // Process messages
+        // Process messages (heartbeat is handled automatically by tokio-tungstenite ping/pong)
         while let Some(msg) = read.next().await {
             let msg = msg.map_err(|e| TradingError::Network(format!("Receive error: {}", e)))?;
 
@@ -187,12 +183,6 @@ impl WebSocketClient {
                     break;
                 }
                 Message::Frame(_) => {}
-            }
-
-            // Check if it's time to send heartbeat
-            if heartbeat_interval.poll_tick(tokio::time::Instant::now().into()).is_ready() {
-                // Heartbeat is handled by ping/pong
-                debug!("Heartbeat check");
             }
         }
 

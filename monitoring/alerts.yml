@@ -1,0 +1,103 @@
+groups:
+  - name: trading_system_alerts
+    interval: 30s
+    rules:
+      # Service availability alerts
+      - alert: ServiceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Service {{ $labels.job }} is down"
+          description: "{{ $labels.job }} has been down for more than 1 minute"
+
+      # High error rate alerts
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High error rate on {{ $labels.service }}"
+          description: "Error rate is {{ $value }} requests/second"
+
+      # Memory usage alerts
+      - alert: HighMemoryUsage
+        expr: (process_resident_memory_bytes / 1024 / 1024) > 800
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage on {{ $labels.service }}"
+          description: "Memory usage is {{ $value }} MB"
+
+      # CPU usage alerts
+      - alert: HighCPUUsage
+        expr: rate(process_cpu_seconds_total[5m]) > 0.8
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage on {{ $labels.service }}"
+          description: "CPU usage is {{ $value }}%"
+
+      # Order execution alerts
+      - alert: OrderExecutionFailureRate
+        expr: rate(order_execution_failures_total[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High order execution failure rate"
+          description: "Order failure rate is {{ $value }} failures/second"
+
+      # Risk management alerts
+      - alert: RiskLimitBreach
+        expr: risk_limit_breaches_total > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Risk limit breach detected"
+          description: "{{ $value }} risk limit breaches detected"
+
+      # Market data alerts
+      - alert: MarketDataStale
+        expr: (time() - market_data_last_update_timestamp) > 60
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Market data is stale"
+          description: "No market data updates for {{ $value }} seconds"
+
+      # API Gateway alerts
+      - alert: HighAPILatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High API latency"
+          description: "95th percentile latency is {{ $value }} seconds"
+
+      # Strategy engine alerts
+      - alert: StrategyExecutionErrors
+        expr: rate(strategy_execution_errors_total[5m]) > 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Strategy execution errors detected"
+          description: "{{ $value }} strategy errors/second"
+
+      # Disk space alerts
+      - alert: LowDiskSpace
+        expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes) < 0.1
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Low disk space"
+          description: "Only {{ $value }}% disk space remaining"

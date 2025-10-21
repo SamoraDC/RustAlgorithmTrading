@@ -1,0 +1,61 @@
+{
+  "market_data": {
+    "exchange": "alpaca",
+    "symbols": [
+      "AAPL",
+      "MSFT",
+      "GOOGL",
+      "AMZN"
+    ],
+    "websocket_url": "wss://stream.data.alpaca.markets/v2/iex",
+    "reconnect_delay_ms": 2000,
+    "zmq_publish_address": "tcp://127.0.0.1:5555"
+  },
+  "risk": {
+    "max_position_size": 250.0,
+    "max_notional_exposure": 10000.0,
+    "max_open_positions": 2,
+    "stop_loss_percent": 1.0,
+    "trailing_stop_percent": 0.75,
+    "enable_circuit_breaker": true,
+    "max_loss_threshold": 1000.0
+  },
+  "execution": {
+    "exchange_api_url": "https://api.alpaca.markets/v2",
+    "api_key": null,
+    "api_secret": null,
+    "rate_limit_per_second": 200,
+    "retry_attempts": 5,
+    "retry_delay_ms": 500,
+    "paper_trading": false
+  },
+  "signal": {
+    "model_path": "models/trading_model_prod.pkl",
+    "features": [
+      "rsi",
+      "macd",
+      "macd_signal",
+      "macd_histogram",
+      "bollinger_bands",
+      "bollinger_upper",
+      "bollinger_lower",
+      "moving_average_20",
+      "moving_average_50",
+      "moving_average_200",
+      "volume_ratio",
+      "price_momentum",
+      "atr",
+      "obv",
+      "stochastic_k",
+      "stochastic_d"
+    ],
+    "update_interval_ms": 250,
+    "zmq_subscribe_address": "tcp://127.0.0.1:5555",
+    "zmq_publish_address": "tcp://127.0.0.1:5556"
+  },
+  "metadata": {
+    "environment": "production",
+    "version": "1.0.0",
+    "description": "Production configuration with strict risk controls and live trading"
+  }
+}

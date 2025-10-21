@@ -30,6 +30,15 @@ assert_matches = "1.5"
 name = "integration"
 path = "integration/test_end_to_end.rs"
 
+[[test]]
+name = "websocket_integration"
+path = "integration/test_websocket.rs"
+
+[[test]]
+name = "concurrent_integration"
+path = "integration/test_concurrent.rs"
+
 [[bench]]
 name = "orderbook_bench"
+path = "benchmarks/orderbook_bench.rs"
 harness = false

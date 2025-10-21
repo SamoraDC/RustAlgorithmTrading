@@ -620,6 +620,140 @@ The typical development cycle for a new trading strategy:
 
 See [docs/guides/workflow.md](docs/guides/workflow.md) for detailed workflow documentation.
 
+## Production Deployment
+
+### Quick Start Deployment
+
+For production deployment, follow these essential steps:
+
+```bash
+# 1. Install prerequisites
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+sudo apt-get install -y build-essential libzmq3-dev
+
+# 2. Configure API credentials
+cp .env.example .env
+nano .env  # Add your Alpaca API keys
+
+# 3. Review and adjust risk limits
+cp config/system.production.json config/system.json
+nano config/risk_limits.toml  # Adjust for your risk tolerance
+
+# 4. Build Rust services
+cd rust
+cargo build --release --workspace
+
+# 5. Deploy services
+# Option A: Native deployment (lowest latency)
+sudo ./scripts/install_systemd_services.sh
+sudo systemctl start trading-market-data
+sudo systemctl start trading-risk-manager
+sudo systemctl start trading-execution-engine
+
+# Option B: Docker deployment (easiest)
+docker-compose -f docker/docker-compose.yml up -d
+
+# 6. Verify deployment
+./scripts/health_check.sh
+```
+
+### Deployment Options
+
+| Method | Latency | Complexity | Best For |
+|--------|---------|------------|----------|
+| **Native** | <50μs | Medium | Production, low-latency trading |
+| **Docker** | <500μs | Low | Development, testing, easy deployment |
+| **Kubernetes** | <1ms | High | Enterprise, high availability, scale |
+
+### Production Architecture
+
+```
+┌─────────────────────────────────────────────────────┐
+│                 Production Setup                    │
+├─────────────────────────────────────────────────────┤
+│                                                     │
+│  ┌─────────────┐    ┌─────────────┐               │
+│  │  Prometheus │────│   Grafana   │  Monitoring   │
+│  │   :9090     │    │    :3000    │               │
+│  └─────────────┘    └─────────────┘               │
+│         ▲                                          │
+│         │ metrics                                  │
+│         │                                          │
+│  ┌──────┴────────────────────────────────┐        │
+│  │      Rust Trading Services            │        │
+│  │                                        │        │
+│  │  ┌──────────┐  ┌──────────────┐      │        │
+│  │  │  Market  │→ │ Risk Manager │      │        │
+│  │  │   Data   │  └──────┬───────┘      │        │
+│  │  └────┬─────┘         │              │        │
+│  │       │               ▼              │        │
+│  │       │      ┌─────────────────┐    │        │
+│  │       └─────→│ Execution Engine│    │        │
+│  │              └────────┬────────┘    │        │
+│  └───────────────────────┼─────────────┘        │
+│                          │                        │
+│                          ▼                        │
+│                  Alpaca Markets API               │
+└─────────────────────────────────────────────────────┘
+```
+
+### Essential Configuration Files
+
+| File | Purpose |
+|------|---------|
+| `.env` | API credentials and environment variables |
+| `config/system.json` | System-wide configuration (symbols, endpoints) |
+| `config/risk_limits.toml` | Risk management parameters |
+| `docker/docker-compose.yml` | Docker service orchestration |
+
+### Comprehensive Guides
+
+- **[Deployment Guide](docs/guides/deployment.md)** - Complete production deployment procedures
+  - Prerequisites and system requirements
+  - Configuration setup
+  - Native, Docker, and Kubernetes deployment
+  - Service startup sequence
+  - Verification and health checks
+  - Security considerations
+
+- **[Operations Guide](docs/guides/operations.md)** - Day-to-day operational procedures
+  - Starting/stopping services
+  - Health monitoring
+  - Log analysis and locations
+  - Metrics dashboards (Prometheus/Grafana)
+  - Backup and recovery
+  - Common operational tasks
+  - Emergency procedures
+
+- **[Troubleshooting Guide](docs/guides/troubleshooting.md)** - Common issues and solutions
+  - Quick diagnostics
+  - Service-specific troubleshooting
+  - Network and connectivity issues
+  - API authentication problems
+  - Performance degradation
+  - Emergency scenarios
+
+### Production Checklist
+
+Before going live:
+
+- [ ] API keys configured for paper trading
+- [ ] Risk limits reviewed and tested
+- [ ] All services pass health checks
+- [ ] Monitoring dashboards accessible
+- [ ] Alert notifications configured
+- [ ] Backup procedures tested
+- [ ] Emergency stop procedures documented
+- [ ] Paper trading validated (minimum 1 week)
+
+### Support and Documentation
+
+For production deployment support:
+- **Deployment Issues**: [docs/guides/deployment.md](docs/guides/deployment.md)
+- **Operational Questions**: [docs/guides/operations.md](docs/guides/operations.md)
+- **Troubleshooting**: [docs/guides/troubleshooting.md](docs/guides/troubleshooting.md)
+- **GitHub Issues**: https://github.com/SamoraDC/RustAlgorithmTrading/issues
+
 ## Future Enhancements
 
 ### Short-Term (3-6 months)

@@ -25,6 +25,18 @@ pub enum TradingError {
     #[error("Configuration error: {0}")]
     Configuration(String),
 
+    #[error("Network error: {0}")]
+    Network(String),
+
+    #[error("Exchange error: {0}")]
+    Exchange(String),
+
+    #[error("Parse error: {0}")]
+    Parse(String),
+
+    #[error("Risk error: {0}")]
+    Risk(String),
+
     #[error("Serialization error: {0}")]
     Serialization(#[from] serde_json::Error),
 
