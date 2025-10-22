@@ -1,0 +1,80 @@
+{
+  "AAPL": {
+    "bars": 237,
+    "rsi_stats": {
+      "min": 16.74811195024428,
+      "max": 96.16295594504986,
+      "mean": 54.40716932241217,
+      "median": 55.27981767536083,
+      "std": 17.885021444132683,
+      "q25": 40.52339413164155,
+      "q75": 67.55102040816323
+    },
+    "current_params_35_65": {
+      "oversold_bars": 32,
+      "overbought_bars": 72,
+      "oversold_crossings": 7,
+      "overbought_crossings": 14,
+      "total_signals": 21
+    },
+    "industry_params_30_70": {
+      "oversold_bars": 21,
+      "overbought_bars": 50,
+      "oversold_crossings": 3,
+      "overbought_crossings": 14,
+      "total_signals": 17
+    }
+  },
+  "MSFT": {
+    "bars": 237,
+    "rsi_stats": {
+      "min": 17.542343587970933,
+      "max": 96.03529148983694,
+      "mean": 55.30377767410985,
+      "median": 54.45840813883903,
+      "std": 17.834574287814203,
+      "q25": 42.70799347471453,
+      "q75": 68.53301224162145
+    },
+    "current_params_35_65": {
+      "oversold_bars": 37,
+      "overbought_bars": 80,
+      "oversold_crossings": 9,
+      "overbought_crossings": 9,
+      "total_signals": 18
+    },
+    "industry_params_30_70": {
+      "oversold_bars": 23,
+      "overbought_bars": 52,
+      "oversold_crossings": 13,
+      "overbought_crossings": 9,
+      "total_signals": 22
+    }
+  },
+  "GOOGL": {
+    "bars": 237,
+    "rsi_stats": {
+      "min": 12.984218077474807,
+      "max": 93.25864779874207,
+      "mean": 56.46947586005865,
+      "median": 56.77535148070595,
+      "std": 17.081445801290506,
+      "q25": 44.41212121212122,
+      "q75": 68.73167871799882
+    },
+    "current_params_35_65": {
+      "oversold_bars": 24,
+      "overbought_bars": 74,
+      "oversold_crossings": 4,
+      "overbought_crossings": 11,
+      "total_signals": 15
+    },
+    "industry_params_30_70": {
+      "oversold_bars": 17,
+      "overbought_bars": 52,
+      "oversold_crossings": 6,
+      "overbought_crossings": 11,
+      "total_signals": 17
+    }
+  }
+}

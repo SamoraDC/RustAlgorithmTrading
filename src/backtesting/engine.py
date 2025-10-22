@@ -79,6 +79,21 @@ class BacktestEngine:
             # Update market data bars
             if self.data_handler.continue_backtest:
                 self.data_handler.update_bars()
+
+                # FIXED: Create MarketEvent after updating bars
+                # Get latest bar from first symbol to trigger signal generation for all symbols
+                if self.data_handler.symbols:
+                    symbol = self.data_handler.symbols[0]
+                    latest_bars = self.data_handler.get_latest_bars(symbol, n=1)
+                    if latest_bars:
+                        bar = latest_bars[0]
+                        market_event = MarketEvent(
+                            timestamp=bar.timestamp,
+                            symbol=symbol,
+                            price=bar.close,
+                            volume=bar.volume
+                        )
+                        self.events.append(market_event)
             else:
                 self.continue_backtest = False
 
@@ -171,10 +186,11 @@ class BacktestEngine:
             if all_signals:
                 for signal in all_signals:
                     # Convert Strategy Signal to SignalEvent
+                    # FIXED: Use signal_type.value instead of action attribute
                     signal_event = SignalEvent(
                         timestamp=event.timestamp,
                         symbol=signal.symbol,
-                        signal_type=signal.action,  # 'BUY', 'SELL', 'HOLD'
+                        signal_type=signal.signal_type.value,  # 'BUY', 'SELL', 'HOLD'
                         strength=getattr(signal, 'confidence', 0.8),
                         strategy_id=self.strategy.name
                     )
