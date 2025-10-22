@@ -354,3 +354,9 @@ Traceback (most recent call last):
     return func(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^
 BrokenPipeError: [Errno 32] Broken pipe
+2025-10-22 17:22:14,222 - download_historical_data - INFO - Initialized AlpacaDataDownloader for 1 symbols
+2025-10-22 17:22:14,223 - download_historical_data - INFO - Starting download for AAPL
+2025-10-22 17:22:14,223 - download_historical_data - INFO - Fetching data for AAPL (attempt 1/3)
+2025-10-22 17:22:14,719 - download_historical_data - ERROR - Symbol AAPL not in API response
+2025-10-22 17:22:14,720 - download_historical_data - ERROR - Available symbols in response: N/A
+2025-10-22 17:22:14,721 - download_historical_data - ERROR - Try different date range or verify symbol is valid

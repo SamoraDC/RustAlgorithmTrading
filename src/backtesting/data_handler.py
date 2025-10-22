@@ -2,7 +2,8 @@
 Historical data handler for backtesting.
 """
 
-from datetime import datetime
+import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Optional
 import pandas as pd
@@ -73,8 +74,18 @@ class HistoricalDataHandler:
             raise ValueError(f"start_date ({start_date}) must be before end_date ({end_date})")
 
         self.symbols = symbols
-        self.start_date = start_date
-        self.end_date = end_date
+
+        # TIMEZONE FIX: Ensure dates are timezone-aware (UTC) for consistent comparisons
+        # This prevents "can't compare offset-naive and offset-aware datetimes" errors
+        if start_date is not None:
+            self.start_date = start_date if start_date.tzinfo is not None else start_date.replace(tzinfo=timezone.utc)
+        else:
+            self.start_date = None
+
+        if end_date is not None:
+            self.end_date = end_date if end_date.tzinfo is not None else end_date.replace(tzinfo=timezone.utc)
+        else:
+            self.end_date = None
 
         self.symbol_data: Dict[str, pd.DataFrame] = {}
         self.latest_bars: Dict[str, list[Bar]] = {s: [] for s in symbols}
@@ -88,15 +99,118 @@ class HistoricalDataHandler:
             f"from {start_date} to {end_date}"
         )
 
+    def _check_data_availability(self, symbol: str) -> bool:
+        """
+        Check if data is available for a symbol.
+
+        Args:
+            symbol: Symbol to check
+
+        Returns:
+            True if data exists and is valid
+        """
+        parquet_path = self.data_dir / f"{symbol}.parquet"
+        csv_path = self.data_dir / f"{symbol}.csv"
+
+        if parquet_path.exists() or csv_path.exists():
+            # Check if file has data
+            try:
+                if parquet_path.exists():
+                    df = pd.read_parquet(parquet_path)
+                else:
+                    df = pd.read_csv(csv_path, nrows=5)
+
+                if len(df) > 0:
+                    return True
+            except Exception as e:
+                logger.debug(f"Error checking {symbol}: {e}")
+
+        return False
+
+    def _attempt_auto_download(self) -> bool:
+        """
+        Attempt to automatically download missing data.
+
+        Returns:
+            True if download was attempted
+        """
+        try:
+            import subprocess
+            from datetime import datetime, timedelta
+
+            logger.info("Attempting to auto-download missing data...")
+
+            # Calculate date range
+            if self.start_date and self.end_date:
+                days_back = (self.end_date - self.start_date).days
+            else:
+                days_back = 365
+
+            # Run download script
+            download_script = Path(__file__).parent.parent.parent / "scripts" / "download_market_data.py"
+
+            if not download_script.exists():
+                logger.warning(f"Download script not found: {download_script}")
+                return False
+
+            cmd = [
+                sys.executable,
+                str(download_script),
+                "--symbols",
+                *self.symbols,
+                "--days",
+                str(days_back),
+                "--output-dir",
+                str(self.data_dir.parent)
+            ]
+
+            logger.info(f"Running: {' '.join(cmd)}")
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+
+            if result.returncode == 0:
+                logger.info("Auto-download completed successfully")
+                return True
+            else:
+                logger.error(f"Auto-download failed: {result.stderr}")
+                return False
+
+        except subprocess.TimeoutExpired:
+            logger.error("Auto-download timed out after 5 minutes")
+            return False
+        except Exception as e:
+            logger.error(f"Error during auto-download: {e}")
+            return False
+
     def _load_data(self):
         """
         Load historical data for all symbols.
 
         Raises:
             ValueError: If data format is invalid or required columns are missing
+            FileNotFoundError: If data files are missing and auto-download fails
             Exception: If file reading fails
         """
         required_columns = ['timestamp', 'open', 'high', 'low', 'close', 'volume']
+
+        # Check data availability
+        missing_symbols = [s for s in self.symbols if not self._check_data_availability(s)]
+
+        if missing_symbols:
+            logger.warning(f"Missing data for {len(missing_symbols)} symbols: {missing_symbols}")
+            logger.info("Attempting automatic data download...")
+
+            if self._attempt_auto_download():
+                # Re-check availability after download
+                still_missing = [s for s in missing_symbols if not self._check_data_availability(s)]
+                if still_missing:
+                    logger.error(
+                        f"Still missing data for {len(still_missing)} symbols after auto-download: {still_missing}"
+                    )
+            else:
+                logger.error(
+                    "Auto-download failed. Please run manually:\n"
+                    f"  python scripts/download_market_data.py --symbols {' '.join(missing_symbols)}"
+                )
 
         for symbol in self.symbols:
             try:
@@ -119,7 +233,11 @@ class HistoricalDataHandler:
                         logger.error(f"Failed to read CSV file {csv_path}: {e}")
                         raise ValueError(f"Invalid CSV file for {symbol}: {e}")
                 else:
-                    logger.warning(
+                    logger.error(
+                        f"No data file found for {symbol}. "
+                        f"Please download data using: python scripts/download_market_data.py --symbols {symbol}"
+                    )
+                    raise FileNotFoundError(
                         f"No data file found for {symbol} "
                         f"(checked: {parquet_path}, {csv_path})"
                     )
@@ -138,10 +256,16 @@ class HistoricalDataHandler:
                     logger.warning(f"Found {df['timestamp'].isna().sum()} null timestamps for {symbol}")
                     df = df.dropna(subset=['timestamp'])
 
-                # Filter by date range
+                # Filter by date range (ensure timestamps are timezone-aware for comparison)
                 if self.start_date:
+                    # Make timestamp column timezone-aware if needed
+                    if df['timestamp'].dt.tz is None:
+                        df['timestamp'] = df['timestamp'].dt.tz_localize(timezone.utc)
                     df = df[df['timestamp'] >= self.start_date]
                 if self.end_date:
+                    # Make timestamp column timezone-aware if needed
+                    if df['timestamp'].dt.tz is None:
+                        df['timestamp'] = df['timestamp'].dt.tz_localize(timezone.utc)
                     df = df[df['timestamp'] <= self.end_date]
 
                 if len(df) == 0:

@@ -156,6 +156,99 @@ build_rust_services() {
 }
 
 ################################################################################
+# Data Download Phase
+################################################################################
+
+download_market_data() {
+    log_info "=========================================="
+    log_info "PHASE 0: DATA PREPARATION"
+    log_info "=========================================="
+
+    log_info "Checking for historical market data..."
+
+    # Check if data directory exists and has files
+    local data_dir="$PROJECT_ROOT/data/historical"
+    local has_data=false
+
+    if [ -d "$data_dir" ]; then
+        local file_count=$(find "$data_dir" -name "*.parquet" -o -name "*.csv" 2>/dev/null | wc -l)
+        if [ "$file_count" -gt 0 ]; then
+            log_info "Found $file_count data files in $data_dir"
+            has_data=true
+
+            # Check data freshness (if files older than 7 days, re-download)
+            local old_files=$(find "$data_dir" -name "*.parquet" -mtime +7 2>/dev/null | wc -l)
+            if [ "$old_files" -gt 0 ]; then
+                log_warning "Found $old_files data files older than 7 days"
+                log_info "Refreshing market data..."
+                has_data=false
+            fi
+        fi
+    fi
+
+    if [ "$has_data" = false ]; then
+        log_info "Downloading historical market data..."
+
+        cd "$PROJECT_ROOT"
+
+        # Run download script with uv
+        uv run python scripts/download_market_data.py \
+            --symbols AAPL MSFT GOOGL \
+            --days 365 \
+            --output-dir data
+
+        local download_status=$?
+
+        if [ $download_status -eq 0 ]; then
+            log_success "Market data downloaded successfully"
+        else
+            log_error "Failed to download market data"
+            log_info "Attempting fallback download with shorter time range..."
+
+            # Fallback: Try with 90 days
+            uv run python scripts/download_market_data.py \
+                --symbols AAPL MSFT GOOGL \
+                --days 90 \
+                --output-dir data
+
+            local fallback_status=$?
+
+            if [ $fallback_status -eq 0 ]; then
+                log_success "Market data downloaded successfully (90-day range)"
+            else
+                log_error "Market data download failed"
+                log_error "Please check:"
+                log_error "  1. Alpaca API credentials in .env"
+                log_error "  2. Internet connection"
+                log_error "  3. API rate limits"
+                return 1
+            fi
+        fi
+    else
+        log_success "Using existing market data"
+    fi
+
+    # Verify data files exist
+    local required_symbols=("AAPL" "MSFT" "GOOGL")
+    local missing_data=false
+
+    for symbol in "${required_symbols[@]}"; do
+        if [ ! -f "$data_dir/${symbol}.parquet" ] && [ ! -f "$data_dir/${symbol}.csv" ]; then
+            log_error "Missing data file for $symbol"
+            missing_data=true
+        fi
+    done
+
+    if [ "$missing_data" = true ]; then
+        log_error "Some required data files are missing"
+        return 1
+    fi
+
+    log_success "All required market data is available"
+    return 0
+}
+
+################################################################################
 # Backtesting Phase
 ################################################################################
 
@@ -193,7 +286,7 @@ try:
     symbols = ['AAPL', 'MSFT', 'GOOGL']
     start_date = datetime.now() - timedelta(days=365)
     end_date = datetime.now() - timedelta(days=1)
-    initial_capital = 100000.0
+    initial_capital = 1000.0  # FIXED: Changed from $100,000 to $1,000
 
     print(f"[BACKTEST] Running backtest for {symbols}")
     print(f"[BACKTEST] Period: {start_date.date()} to {end_date.date()}")
@@ -235,7 +328,20 @@ try:
             print(f"[BACKTEST] WARNING: Missing or invalid metric '{key}'")
             metrics[key] = 0.0
 
-    final_value = results.get('equity_curve', {}).get('equity', [0])[-1] if results.get('equity_curve') else initial_capital
+    # FIXED: Handle equity_curve correctly (could be DataFrame or dict)
+    equity_curve = results.get('equity_curve')
+    if equity_curve is not None and not (isinstance(equity_curve, dict) and len(equity_curve) == 0):
+        # If equity_curve is a DataFrame, get last value
+        if hasattr(equity_curve, 'iloc'):
+            final_value = equity_curve['equity'].iloc[-1] if len(equity_curve) > 0 else initial_capital
+        # If it's a dict with equity list
+        elif isinstance(equity_curve, dict) and 'equity' in equity_curve:
+            equity_list = equity_curve['equity']
+            final_value = equity_list[-1] if equity_list else initial_capital
+        else:
+            final_value = initial_capital
+    else:
+        final_value = initial_capital
     sharpe_ratio = metrics.get('sharpe_ratio', 0.0)
     max_drawdown = metrics.get('max_drawdown', 0.0) / 100.0  # Convert from percentage
     win_rate = metrics.get('win_rate', 0.0) / 100.0  # Convert from percentage
@@ -669,7 +775,7 @@ main() {
     case "$MODE" in
         "full")
             # Run complete pipeline
-            if run_backtesting && run_simulation; then
+            if download_market_data && run_backtesting && run_simulation; then
                 log_success "Validation passed - proceeding to paper trading"
                 run_paper_trading
             else
@@ -679,7 +785,7 @@ main() {
             ;;
 
         "backtest-only")
-            run_backtesting
+            download_market_data && run_backtesting
             ;;
 
         "paper-only")
@@ -689,7 +795,7 @@ main() {
 
         "continuous")
             # Run validation once, then continuous trading
-            if run_backtesting && run_simulation; then
+            if download_market_data && run_backtesting && run_simulation; then
                 log_success "Initial validation passed"
                 monitor_and_restart
             else

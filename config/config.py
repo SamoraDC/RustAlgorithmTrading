@@ -38,6 +38,16 @@ class RiskConfig(BaseModel):
     max_drawdown_limit: float = Field(default=0.20, description="Max drawdown before stopping")
 
 
+class DataConfig(BaseModel):
+    """Data management configuration"""
+    data_dir: str = Field(default="data", description="Base data directory")
+    historical_dir: str = Field(default="data/historical", description="Historical data directory")
+    auto_download: bool = Field(default=True, description="Auto-download missing data")
+    max_age_days: int = Field(default=7, description="Maximum data age before refresh")
+    default_symbols: list[str] = Field(default=["AAPL", "MSFT", "GOOGL"], description="Default symbols")
+    days_back: int = Field(default=365, description="Default days of historical data")
+
+
 class LoggingConfig(BaseModel):
     """Logging configuration"""
     level: str = Field(default="INFO", description="Log level")
@@ -52,6 +62,7 @@ class TradingConfig(BaseModel):
     backtest: BacktestConfig = Field(default_factory=BacktestConfig)
     monte_carlo: MonteCarloConfig = Field(default_factory=MonteCarloConfig)
     risk: RiskConfig = Field(default_factory=RiskConfig)
+    data: DataConfig = Field(default_factory=DataConfig)
     logging: LoggingConfig = Field(default_factory=LoggingConfig)
 
 
@@ -100,6 +111,15 @@ class ConfigManager:
             max_drawdown_limit=float(os.getenv("RISK_MAX_DRAWDOWN", "0.20"))
         )
 
+        data_config = DataConfig(
+            data_dir=os.getenv("DATA_DIR", "data"),
+            historical_dir=os.getenv("DATA_HISTORICAL_DIR", "data/historical"),
+            auto_download=os.getenv("DATA_AUTO_DOWNLOAD", "true").lower() == "true",
+            max_age_days=int(os.getenv("DATA_MAX_AGE_DAYS", "7")),
+            default_symbols=os.getenv("DATA_DEFAULT_SYMBOLS", "AAPL,MSFT,GOOGL").split(","),
+            days_back=int(os.getenv("DATA_DAYS_BACK", "365"))
+        )
+
         logging_config = LoggingConfig(
             level=os.getenv("LOG_LEVEL", "INFO"),
             log_file=os.getenv("LOG_FILE", "logs/trading.log"),
@@ -112,6 +132,7 @@ class ConfigManager:
             backtest=backtest_config,
             monte_carlo=monte_carlo_config,
             risk=risk_config,
+            data=data_config,
             logging=logging_config
         )
 
