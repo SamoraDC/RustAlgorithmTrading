@@ -5,10 +5,12 @@
 pub mod router;
 pub mod retry;
 pub mod slippage;
+pub mod stop_loss_executor;
 
 pub use router::OrderRouter;
 pub use retry::RetryPolicy;
 pub use slippage::SlippageEstimator;
+pub use stop_loss_executor::StopLossExecutor;
 
 use common::{Result, types::Order};
 

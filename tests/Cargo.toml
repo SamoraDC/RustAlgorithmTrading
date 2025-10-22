@@ -10,6 +10,7 @@ market-data = { path = "../rust/market-data" }
 execution-engine = { path = "../rust/execution-engine" }
 risk-manager = { path = "../rust/risk-manager" }
 signal-bridge = { path = "../rust/signal-bridge" }
+database = { path = "../rust/database" }
 
 # Testing dependencies
 tokio = { version = "1.38", features = ["full", "test-util"] }
@@ -17,6 +18,7 @@ chrono = { version = "0.4", features = ["serde"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 uuid = { version = "1.10", features = ["v4", "serde"] }
+rand = "0.8"
 
 # Test-only dependencies
 [dev-dependencies]
@@ -25,7 +27,53 @@ proptest = "1.5"
 criterion = "0.5"
 tempfile = "3.12"
 assert_matches = "1.5"
+reqwest = { version = "0.12", features = ["json", "rustls-tls"] }
+wiremock = "0.6"
+fake = { version = "2.9", features = ["derive", "chrono"] }
+futures = "0.3"
 
+# Unit tests
+[[test]]
+name = "test_common_types"
+path = "unit/test_common_types.rs"
+
+[[test]]
+name = "test_common_health"
+path = "unit/test_common_health.rs"
+
+[[test]]
+name = "test_market_data_orderbook"
+path = "unit/test_market_data_orderbook.rs"
+
+[[test]]
+name = "test_risk_limits"
+path = "unit/test_risk_limits.rs"
+
+[[test]]
+name = "test_execution_router"
+path = "unit/test_execution_router.rs"
+
+[[test]]
+name = "test_alpaca_client"
+path = "unit/test_alpaca_client.rs"
+
+[[test]]
+name = "test_alpaca_auth"
+path = "unit/test_alpaca_auth.rs"
+
+[[test]]
+name = "test_alpaca_data_parser"
+path = "unit/test_alpaca_data_parser.rs"
+
+[[test]]
+name = "test_alpaca_error_handling"
+path = "unit/test_alpaca_error_handling.rs"
+
+[[test]]
+name = "test_alpaca_rate_limiter"
+path = "unit/test_alpaca_rate_limiter.rs"
+
+# Integration tests
 [[test]]
 name = "integration"
 path = "integration/test_end_to_end.rs"
@@ -38,7 +86,46 @@ path = "integration/test_websocket.rs"
 name = "concurrent_integration"
 path = "integration/test_concurrent.rs"
 
+[[test]]
+name = "duckdb_storage_integration"
+path = "integration/test_duckdb_storage.rs"
+
+[[test]]
+name = "stop_loss_integration"
+path = "integration/test_stop_loss_integration.rs"
+
+[[test]]
+name = "observability_integration"
+path = "integration/test_observability_integration.rs"
+
+[[test]]
+name = "error_handling_integration"
+path = "integration/test_error_handling_integration.rs"
+
+[[test]]
+name = "risk_execution_observability"
+path = "integration/test_risk_execution_observability.rs"
+
+[[test]]
+name = "performance_load"
+path = "integration/test_performance_load.rs"
+
+[[test]]
+name = "alpaca_api_integration"
+path = "integration/test_alpaca_api.rs"
+
+# Property-based tests
+[[test]]
+name = "test_order_invariants"
+path = "property/test_order_invariants.rs"
+
+# Benchmarks
 [[bench]]
 name = "orderbook_bench"
 path = "benchmarks/orderbook_bench.rs"
+harness = false
+
+[[bench]]
+name = "critical_path_benchmarks"
+path = "benchmarks/critical_path_benchmarks.rs"
 harness = false

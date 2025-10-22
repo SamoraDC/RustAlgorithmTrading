@@ -1,0 +1,36 @@
+# Development Override for Docker Compose
+# Usage: docker-compose -f docker-compose.observability.yml -f docker-compose.dev.yml up
+
+version: '3.8'
+
+services:
+  observability-api:
+    build:
+      context: ../src/observability
+      dockerfile: Dockerfile
+      target: builder  # Use builder stage for development
+    volumes:
+      - ../src/observability:/app/src:rw  # Read-write for hot reload
+      - ../data:/app/data:rw
+      - ../logs:/app/logs:rw
+    environment:
+      - DEBUG_MODE=true
+      - RELOAD_ON_CHANGE=true
+      - LOG_LEVEL=DEBUG
+    command: ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload", "--log-level", "debug"]
+
+  grafana:
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=dev123
+      - GF_LOG_LEVEL=debug
+      - GF_FEATURE_TOGGLES_ENABLE=publicDashboards,devenv
+    ports:
+      - "3001:3000"  # Additional dev port
+
+  prometheus:
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+      - '--web.enable-admin-api'
+      - '--log.level=debug'

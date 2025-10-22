@@ -2,13 +2,13 @@
 ///
 /// This crate provides core domain types, messaging protocols, and utility functions
 /// used throughout the algorithmic trading system.
-
 pub mod types;
 pub mod messaging;
 pub mod errors;
 pub mod config;
 pub mod health;
 pub mod http;
+pub mod metrics;
 
 pub use types::*;
 pub use errors::{TradingError, Result};

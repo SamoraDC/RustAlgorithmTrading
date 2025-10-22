@@ -1,0 +1,621 @@
+INFO:     Started server process [17268]
+INFO:     Waiting for application startup.
+2025-10-22 14:56:21.514 | INFO     | observability.api.main:start:39 - Starting Observability API...
+2025-10-22 14:56:22.381 | DEBUG    | observability.database.duckdb_manager:_get_connection:59 - Created DuckDB connection for thread 140679467468608
+2025-10-22 14:56:22.410 | INFO     | observability.database.duckdb_manager:_init_database:180 - DuckDB schema initialized
+2025-10-22 14:56:22.411 | INFO     | observability.database.duckdb_manager:__init__:49 - DuckDB manager initialized: data/observability.duckdb
+2025-10-22 14:56:22.412 | INFO     | observability.metrics.collectors:start:38 - Starting market_data collector...
+2025-10-22 14:56:22.412 | INFO     | observability.metrics.rust_bridge:__init__:39 - Initialized RustMetricsBridge with 3 services
+2025-10-22 14:56:22.412 | INFO     | observability.metrics.rust_bridge:start:46 - Metrics bridge started
+2025-10-22 14:56:22.413 | INFO     | observability.metrics.market_data_collector:_start_impl:62 - Market data collector started - connected to Rust service on port 9091
+2025-10-22 14:56:22.413 | INFO     | observability.metrics.collectors:start:42 - market_data collector started
+2025-10-22 14:56:22.413 | INFO     | observability.api.main:start:54 - Started market_data collector
+2025-10-22 14:56:22.414 | INFO     | observability.metrics.collectors:start:38 - Starting strategy collector...
+2025-10-22 14:56:22.414 | INFO     | observability.metrics.strategy_collector:_start_impl:55 - Strategy collector started (mock mode)
+2025-10-22 14:56:22.415 | INFO     | observability.metrics.collectors:start:42 - strategy collector started
+2025-10-22 14:56:22.415 | INFO     | observability.api.main:start:54 - Started strategy collector
+2025-10-22 14:56:22.415 | INFO     | observability.metrics.collectors:start:38 - Starting execution collector...
+2025-10-22 14:56:22.416 | INFO     | observability.metrics.execution_collector:_start_impl:63 - Execution collector started (mock mode)
+2025-10-22 14:56:22.416 | INFO     | observability.metrics.collectors:start:42 - execution collector started
+2025-10-22 14:56:22.417 | INFO     | observability.api.main:start:54 - Started execution collector
+2025-10-22 14:56:22.417 | INFO     | observability.metrics.collectors:start:38 - Starting system collector...
+2025-10-22 14:56:22.418 | INFO     | observability.metrics.system_collector:_start_impl:66 - System collector started
+2025-10-22 14:56:22.418 | INFO     | observability.metrics.collectors:start:42 - system collector started
+2025-10-22 14:56:22.419 | INFO     | observability.api.main:start:54 - Started system collector
+2025-10-22 14:56:22.419 | INFO     | observability.api.main:start:62 - Observability API started successfully
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+============================================================
+Starting Observability API Server
+============================================================
+Host: 0.0.0.0
+Port: 8000
+Workers: 1
+Reload: False
+Log Level: info
+============================================================
+
+API Documentation: http://localhost:8000/docs
+WebSocket Endpoint: ws://localhost:8000/ws/metrics
+Health Check: http://localhost:8000/health
+
+Press Ctrl+C to stop the server
+============================================================
+INFO:     127.0.0.1:38070 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38078 - "GET /health/ready HTTP/1.1" 200 OK
+2025-10-22 14:56:30.698 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:30.714 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:30.859 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:30.861 | ERROR    | observability.metrics.rust_bridge:scrape_service:86 - Unexpected error scraping market_data: 
+2025-10-22 14:56:30.862 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+INFO:     127.0.0.1:38088 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38088 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+2025-10-22 14:56:31.736 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:31.749 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:31.974 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:31.976 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:31.977 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:32.781 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:32.798 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:33.103 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:33.106 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:33.107 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:33.836 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:33.854 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:33.886 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_6
+2025-10-22 14:56:34.247 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:34.249 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:34.250 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:34.898 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:34.909 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:35.368 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:35.371 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:35.372 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:35.949 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:35.964 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:35.984 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_6
+2025-10-22 14:56:36.495 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:36.499 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:36.500 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:36.992 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:37.020 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:37.043 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_11
+2025-10-22 14:56:37.613 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:37.614 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:37.614 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:38.057 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:38.070 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:38.084 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_11
+2025-10-22 14:56:38.728 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:38.730 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:38.730 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:39.088 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:39.098 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:39.865 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:39.867 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:39.869 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:40.161 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:40.178 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:41.011 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:41.014 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:41.015 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:41.228 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:41.243 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:41.261 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_19
+2025-10-22 14:56:42.142 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:42.145 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:42.146 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:42.284 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:42.304 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:42.324 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_23
+2025-10-22 14:56:43.260 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:43.261 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:43.262 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:43.313 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:43.322 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:44.394 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:44.440 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:44.456 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:44.473 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_25
+2025-10-22 14:56:44.475 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:44.475 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:45.532 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:45.579 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:45.597 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:45.599 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:45.599 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:46.667 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:46.709 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:46.724 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:46.726 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:46.727 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:47.788 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:47.838 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:47.854 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:47.872 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_28
+2025-10-22 14:56:47.875 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:47.876 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:48.903 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:48.934 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:48.946 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:48.958 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_28
+2025-10-22 14:56:48.960 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:48.960 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:50.033 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:50.072 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:50.088 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:50.090 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:50.091 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:51.148 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:51.175 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:51.187 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:51.188 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:51.189 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:52.263 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:52.298 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:52.311 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:52.314 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:52.315 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:53.795 | DEBUG    | observability.database.duckdb_manager:insert_market_data:215 - Inserted 100 market data records
+2025-10-22 14:56:53.927 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:53.964 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:53.976 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:54.798 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:54.798 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:55.057 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:55.093 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:55.107 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:55.800 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:55.801 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:56.180 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:56.227 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:56.238 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:56.803 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:56.805 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:56.506 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:56.533 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:56.543 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:57.019 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:57.020 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:57.634 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:57.661 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:57.675 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:57.687 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_41
+2025-10-22 14:56:58.021 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:58.021 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:56:59.011 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:56:59.108 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:56:59.135 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:56:59.140 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:56:59.143 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+INFO:     127.0.0.1:33346 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33346 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+2025-10-22 14:57:00.142 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:00.179 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:00.192 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:00.195 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:00.196 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:01.259 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:01.294 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:01.306 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:01.321 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_47
+2025-10-22 14:57:01.323 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:01.323 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:02.376 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:02.409 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:02.422 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:02.423 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:02.424 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:03.495 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:03.533 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:03.550 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:03.551 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:03.552 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:04.625 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:04.662 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:04.676 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:04.679 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:04.680 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:05.754 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:05.784 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:05.794 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:05.796 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:05.796 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:06.868 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:06.908 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:06.921 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:06.923 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:06.924 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:07.987 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:08.020 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:08.037 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:08.053 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_52
+2025-10-22 14:57:08.054 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:08.055 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:09.115 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:09.142 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:09.151 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:09.153 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:09.153 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:10.242 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:10.274 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:10.286 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:10.300 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_54
+2025-10-22 14:57:10.301 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:10.302 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:11.360 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:11.395 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:11.408 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:11.424 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_56
+2025-10-22 14:57:11.425 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:11.426 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:12.487 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:12.527 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:12.541 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:12.544 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:12.545 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:13.601 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:13.641 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:13.654 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:13.656 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:13.656 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:14.713 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:14.745 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:14.757 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:14.759 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:14.760 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:16.238 | DEBUG    | observability.database.duckdb_manager:insert_market_data:215 - Inserted 100 market data records
+2025-10-22 14:57:16.366 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:16.409 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:16.426 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:17.242 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:17.243 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:17.482 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:17.518 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:17.530 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:18.248 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:18.249 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:18.610 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:18.652 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:18.670 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:19.252 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:19.253 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:19.724 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:19.754 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:19.766 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:20.258 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:20.259 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:20.836 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:20.866 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:20.876 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:21.263 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:21.263 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:21.951 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:21.982 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:21.999 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:22.266 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:22.267 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:23.074 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:23.134 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:23.154 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:23.269 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:23.270 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:24.200 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:24.238 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:24.283 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:24.301 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_71
+2025-10-22 14:57:24.303 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:24.303 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:25.319 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:25.353 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:25.365 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:25.369 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:25.369 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:26.446 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:26.505 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:26.530 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:26.534 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:26.535 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:27.570 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:27.607 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:27.621 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:27.622 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:27.623 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:27.843 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:27.871 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:27.882 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:27.895 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_74
+2025-10-22 14:57:27.896 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:27.897 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:28.959 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:29.005 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:29.021 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:29.023 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:29.023 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:30.102 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:30.176 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:30.194 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:30.196 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:30.197 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:31.233 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:31.262 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:31.273 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:31.274 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:31.275 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:32.351 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:32.390 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:32.404 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:32.405 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:32.406 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:33.469 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:33.508 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:33.521 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:33.540 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_84
+2025-10-22 14:57:33.541 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:33.542 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:34.587 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:34.620 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:34.631 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:34.632 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:34.633 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:35.705 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:35.737 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:35.750 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:35.762 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_85
+2025-10-22 14:57:35.763 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:35.764 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:36.828 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:36.863 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:36.876 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:36.878 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:36.879 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:37.983 | DEBUG    | observability.database.duckdb_manager:insert_market_data:215 - Inserted 100 market data records
+2025-10-22 14:57:38.096 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:38.127 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:38.139 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:38.986 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:38.987 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:39.227 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:39.259 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:39.270 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:39.283 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_88
+2025-10-22 14:57:39.988 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:39.989 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:40.355 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:40.381 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:40.392 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:40.993 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:40.994 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:41.471 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:41.502 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:41.512 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:41.997 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:41.998 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:42.591 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:42.623 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:42.635 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:43.001 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:43.002 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:43.717 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:43.752 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:43.766 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:44.005 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:44.006 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:44.832 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:44.863 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:44.875 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:45.009 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:45.009 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:45.961 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:45.997 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:46.010 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:46.023 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_91
+2025-10-22 14:57:46.024 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:46.025 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:47.078 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:47.114 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:47.129 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:47.148 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_93
+2025-10-22 14:57:47.150 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:47.151 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:48.197 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:48.231 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:48.241 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:48.242 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:48.242 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:49.321 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:49.367 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:49.384 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:49.385 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:49.385 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:50.436 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:50.469 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:50.484 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:50.487 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:50.487 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:51.549 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:51.575 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:51.586 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:51.587 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:51.588 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:52.662 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:52.689 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:52.699 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:52.700 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:52.701 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:53.773 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:53.801 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:53.811 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:53.812 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:53.812 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:54.885 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:54.912 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:54.923 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:54.934 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_103
+2025-10-22 14:57:54.935 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:54.935 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:56.007 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:56.042 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:56.054 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:56.067 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_104
+2025-10-22 14:57:56.068 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:56.068 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:57.141 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:57.187 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:57.201 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:57.203 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:57.203 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:58.263 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:58.302 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:58.315 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:58.317 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:58.318 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:59.392 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:59.431 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:57:59.452 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:57:59.454 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:57:59.455 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:57:59.822 | DEBUG    | observability.database.duckdb_manager:insert_market_data:215 - Inserted 100 market data records
+2025-10-22 14:57:59.955 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:57:59.990 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:00.001 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:00.826 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:00.827 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:01.070 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:01.100 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:01.112 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:01.126 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_113
+2025-10-22 14:58:01.828 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:01.829 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:02.190 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:02.225 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:02.274 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:02.338 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_113
+2025-10-22 14:58:02.831 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:02.831 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:03.317 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:03.346 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:03.357 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:03.835 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:03.836 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:04.445 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:04.474 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:04.483 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:04.840 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:04.840 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:05.611 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:05.657 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:05.670 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:05.844 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:05.845 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:06.728 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:06.761 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:06.774 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:06.848 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:06.849 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:07.845 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:07.876 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:07.887 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:07.888 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:07.889 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:08.960 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:08.988 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:08.999 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:09.002 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:09.003 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:10.073 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:10.103 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:10.115 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:10.128 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_121
+2025-10-22 14:58:10.128 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:10.129 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:11.188 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:11.215 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:11.226 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:11.228 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:11.228 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:12.305 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:12.344 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:12.354 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:12.368 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_122
+2025-10-22 14:58:12.369 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:12.369 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:13.434 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:13.466 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:13.479 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:13.493 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_122
+2025-10-22 14:58:13.494 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:13.494 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:14.552 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:14.587 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:14.597 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:14.599 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:14.599 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+INFO:     127.0.0.1:44794 - "GET / HTTP/1.1" 200 OK
+2025-10-22 14:58:15.677 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:15.730 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:15.746 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:15.748 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:15.749 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:16.805 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:16.841 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:16.856 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:16.868 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_128
+2025-10-22 14:58:16.869 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:16.870 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:17.923 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:17.977 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:17.992 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:18.008 | DEBUG    | observability.database.duckdb_manager:insert_trade:321 - Inserted trade: trade_129
+2025-10-22 14:58:18.010 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:18.010 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:19.041 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:19.082 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:19.098 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:19.100 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:19.100 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:20.176 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:20.225 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:20.239 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:20.292 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:20.292 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:21.293 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:21.326 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:21.339 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+2025-10-22 14:58:21.341 | DEBUG    | observability.metrics.rust_bridge:scrape_service:83 - Connection error scraping market_data: Cannot connect to host 127.0.0.1:9091 ssl:default [Connect call failed ('127.0.0.1', 9091)]
+2025-10-22 14:58:21.342 | DEBUG    | observability.metrics.market_data_collector:_aggregate_metrics:93 - Rust service unavailable, using mock data
+2025-10-22 14:58:22.604 | DEBUG    | observability.database.duckdb_manager:insert_market_data:215 - Inserted 100 market data records
+INFO:     Shutting down
+2025-10-22 14:58:22.725 | DEBUG    | observability.database.duckdb_manager:insert_system_metrics:295 - Inserted system metrics
+2025-10-22 14:58:22.764 | DEBUG    | observability.database.duckdb_manager:insert_strategy_metrics:246 - Inserted 3 strategy metrics records
+2025-10-22 14:58:22.774 | DEBUG    | observability.database.duckdb_manager:insert_execution_metrics:271 - Inserted execution metrics
+INFO:     Waiting for application shutdown.
+2025-10-22 14:58:22.775 | INFO     | observability.api.main:stop:66 - Stopping Observability API...
+2025-10-22 14:58:22.776 | INFO     | observability.api.main:_stream_metrics:104 - Metrics streaming task cancelled
+2025-10-22 14:58:22.776 | INFO     | observability.metrics.collectors:stop:51 - Stopping market_data collector...
+2025-10-22 14:58:22.777 | INFO     | observability.metrics.market_data_collector:_aggregate_metrics:100 - Market data aggregation task cancelled
+2025-10-22 14:58:22.777 | INFO     | observability.metrics.market_data_collector:_stop_impl:73 - Market data collector stopped
+2025-10-22 14:58:22.778 | INFO     | observability.metrics.collectors:stop:54 - market_data collector stopped
+2025-10-22 14:58:22.778 | INFO     | observability.api.main:stop:82 - Stopped market_data collector
+2025-10-22 14:58:22.779 | INFO     | observability.metrics.collectors:stop:51 - Stopping strategy collector...
+2025-10-22 14:58:22.780 | INFO     | observability.metrics.strategy_collector:_collect_metrics:82 - Strategy collection task cancelled
+2025-10-22 14:58:22.780 | INFO     | observability.metrics.strategy_collector:_stop_impl:66 - Strategy collector stopped
+2025-10-22 14:58:22.781 | INFO     | observability.metrics.collectors:stop:54 - strategy collector stopped
+2025-10-22 14:58:22.782 | INFO     | observability.api.main:stop:82 - Stopped strategy collector
+2025-10-22 14:58:22.783 | INFO     | observability.metrics.collectors:stop:51 - Stopping execution collector...
+2025-10-22 14:58:22.783 | INFO     | observability.metrics.execution_collector:_collect_metrics:90 - Execution collection task cancelled
+2025-10-22 14:58:22.784 | INFO     | observability.metrics.execution_collector:_stop_impl:74 - Execution collector stopped
+2025-10-22 14:58:22.784 | INFO     | observability.metrics.collectors:stop:54 - execution collector stopped
+2025-10-22 14:58:22.785 | INFO     | observability.api.main:stop:82 - Stopped execution collector
+2025-10-22 14:58:22.785 | INFO     | observability.metrics.collectors:stop:51 - Stopping system collector...
+2025-10-22 14:58:22.786 | INFO     | observability.metrics.system_collector:_collect_metrics:98 - System collection task cancelled
+2025-10-22 14:58:22.786 | INFO     | observability.metrics.system_collector:_stop_impl:77 - System collector stopped
+2025-10-22 14:58:22.787 | INFO     | observability.metrics.collectors:stop:54 - system collector stopped
+2025-10-22 14:58:22.787 | INFO     | observability.api.main:stop:82 - Stopped system collector
+2025-10-22 14:58:22.788 | INFO     | observability.api.websocket_manager:disconnect_all:166 - Disconnecting all 0 WebSocket clients...
+2025-10-22 14:58:22.789 | INFO     | observability.api.websocket_manager:disconnect_all:179 - All WebSocket clients disconnected
+2025-10-22 14:58:22.790 | INFO     | observability.api.main:stop:89 - Observability API stopped
+2025-10-22 14:58:22.790 | INFO     | observability.api.websocket_manager:_heartbeat_loop:264 - Heartbeat loop cancelled
+2025-10-22 14:58:22.791 | INFO     | observability.api.websocket_manager:_process_message_queue:233 - Message queue processor cancelled
+INFO:     Application shutdown complete.
+INFO:     Finished server process [17268]

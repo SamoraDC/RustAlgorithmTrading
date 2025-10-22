@@ -175,14 +175,18 @@ run_backtesting() {
 import sys
 import json
 from datetime import datetime, timedelta
+from pathlib import Path
 import os
 
 # Add src to path
 sys.path.insert(0, 'src')
 
 try:
+    # FIXED: Added all required imports
     from backtesting.engine import BacktestEngine
     from backtesting.data_handler import HistoricalDataHandler
+    from backtesting.execution_handler import SimulatedExecutionHandler
+    from backtesting.portfolio_handler import PortfolioHandler
     from strategies.simple_momentum import SimpleMomentumStrategy
 
     # Configuration
@@ -195,22 +199,48 @@ try:
     print(f"[BACKTEST] Period: {start_date.date()} to {end_date.date()}")
     print(f"[BACKTEST] Initial capital: ${initial_capital:,.2f}")
 
-    # Initialize components
-    data_handler = HistoricalDataHandler(symbols, start_date, end_date)
+    # FIXED: Initialize all required components with correct parameters
+    data_handler = HistoricalDataHandler(
+        symbols=symbols,
+        data_dir=Path('data/historical'),
+        start_date=start_date,
+        end_date=end_date
+    )
+
+    execution_handler = SimulatedExecutionHandler()
+    portfolio_handler = PortfolioHandler(initial_capital=initial_capital)
     strategy = SimpleMomentumStrategy(symbols)
-    engine = BacktestEngine(data_handler, strategy, initial_capital)
+
+    # FIXED: Pass all required parameters
+    engine = BacktestEngine(
+        data_handler=data_handler,
+        execution_handler=execution_handler,
+        portfolio_handler=portfolio_handler,
+        strategy=strategy,
+        start_date=start_date,
+        end_date=end_date
+    )
 
     # Run backtest
     print("[BACKTEST] Executing backtest...")
     results = engine.run()
 
-    # Calculate metrics
-    final_value = results['final_portfolio_value']
+    # FIXED: Extract metrics from correct structure
+    metrics = results.get('metrics', {})
+
+    # FIXED: Validate metrics exist and are valid
+    required_keys = ['sharpe_ratio', 'max_drawdown', 'win_rate', 'profit_factor']
+    for key in required_keys:
+        if key not in metrics or metrics[key] is None:
+            print(f"[BACKTEST] WARNING: Missing or invalid metric '{key}'")
+            metrics[key] = 0.0
+
+    final_value = results.get('equity_curve', {}).get('equity', [0])[-1] if results.get('equity_curve') else initial_capital
+    sharpe_ratio = metrics.get('sharpe_ratio', 0.0)
+    max_drawdown = metrics.get('max_drawdown', 0.0) / 100.0  # Convert from percentage
+    win_rate = metrics.get('win_rate', 0.0) / 100.0  # Convert from percentage
+    profit_factor = metrics.get('profit_factor', 0.0)
     total_return = (final_value - initial_capital) / initial_capital
-    sharpe_ratio = results.get('sharpe_ratio', 0.0)
-    max_drawdown = results.get('max_drawdown', 0.0)
-    win_rate = results.get('win_rate', 0.0)
-    profit_factor = results.get('profit_factor', 0.0)
 
     # Print results
     print(f"\n[BACKTEST] Results:")
@@ -238,7 +268,7 @@ try:
             'max_drawdown': max_drawdown,
             'win_rate': win_rate,
             'profit_factor': profit_factor,
-            'trades': results.get('trades', []),
+            'metrics': metrics,
         }, f, indent=2)
 
     print(f"[BACKTEST] Results saved to {output_file}")
@@ -251,6 +281,12 @@ try:
         print("[BACKTEST] PASSED - All metrics meet threshold")
         sys.exit(0)
 
+except ImportError as e:
+    print(f"[BACKTEST] IMPORT ERROR: {e}")
+    print("[BACKTEST] Make sure all dependencies are installed: uv sync")
+    import traceback
+    traceback.print_exc()
+    sys.exit(1)
 except Exception as e:
     print(f"[BACKTEST] ERROR: {e}")
     import traceback
@@ -613,11 +649,12 @@ monitor_and_restart() {
 ################################################################################
 
 main() {
-    # Create log directory FIRST before any logging
+    # FIXED: Create ALL required directories FIRST before any logging
     mkdir -p "$LOG_DIR"
     mkdir -p "$BACKTEST_RESULTS"
     mkdir -p "$SIMULATION_RESULTS"
     mkdir -p "$PROJECT_ROOT/data/live_trading"
+    mkdir -p "$PROJECT_ROOT/data/historical"
 
     log_info "=========================================="
     log_info "AUTONOMOUS TRADING SYSTEM"

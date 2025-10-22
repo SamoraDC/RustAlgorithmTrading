@@ -1,4 +1,4 @@
-use common::{Result, TradingError, types::{Order, Position, OrderType}, config::RiskConfig};
+use common::{Result, TradingError, types::{Order, Position}, config::RiskConfig};
 use std::collections::HashMap;
 
 pub struct LimitChecker {

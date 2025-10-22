@@ -6,6 +6,7 @@ members = [
     "risk-manager",
     "execution-engine",
     "common",
+    "database",
 ]
 
 [workspace.package]

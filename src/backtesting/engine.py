@@ -5,9 +5,10 @@ Event-driven backtesting engine.
 from collections import deque
 from datetime import datetime
 from typing import Dict, List, Optional
+import pandas as pd
 from loguru import logger
 
-from src.models.events import Event, EventType, MarketEvent
+from src.models.events import Event, EventType, MarketEvent, SignalEvent
 from .data_handler import HistoricalDataHandler
 from .execution_handler import SimulatedExecutionHandler
 from .portfolio_handler import PortfolioHandler
@@ -132,13 +133,55 @@ class BacktestEngine:
         # Update portfolio with latest prices
         self.portfolio_handler.update_timeindex(event.timestamp)
 
-        # Update strategy with market data
-        signals = self.strategy.calculate_signals(event)
+        # FIXED: Convert MarketEvent to format strategy expects
+        try:
+            # Get latest bars for all symbols from data handler
+            bars_data = {}
+            for symbol in self.data_handler.symbols:
+                # Get last N bars for technical indicators
+                bars = self.data_handler.get_latest_bars(symbol, n=50)
+                if bars:
+                    # Convert to DataFrame format
+                    df = pd.DataFrame([
+                        {
+                            'timestamp': bar.timestamp,
+                            'open': bar.open,
+                            'high': bar.high,
+                            'low': bar.low,
+                            'close': bar.close,
+                            'volume': bar.volume
+                        }
+                        for bar in bars
+                    ])
+                    df.set_index('timestamp', inplace=True)
+                    bars_data[symbol] = df
 
-        # Add signal events to queue
-        if signals:
-            for signal in signals:
-                self.events.append(signal)
+            # Generate signals for each symbol with enough data
+            all_signals = []
+            for symbol, df in bars_data.items():
+                if len(df) >= 20:  # Minimum bars for indicators
+                    # Call strategy's per-symbol signal generation
+                    if hasattr(self.strategy, 'generate_signals_for_symbol'):
+                        signals = self.strategy.generate_signals_for_symbol(symbol, df)
+                        all_signals.extend(signals)
+                    else:
+                        logger.warning(f"Strategy {self.strategy} doesn't support per-symbol signals")
+
+            # Add signal events to queue
+            if all_signals:
+                for signal in all_signals:
+                    # Convert Strategy Signal to SignalEvent
+                    signal_event = SignalEvent(
+                        timestamp=event.timestamp,
+                        symbol=signal.symbol,
+                        signal_type=signal.action,  # 'BUY', 'SELL', 'HOLD'
+                        strength=getattr(signal, 'confidence', 0.8),
+                        strategy_id=self.strategy.name
+                    )
+                    self.events.append(signal_event)
+
+        except Exception as e:
+            logger.error(f"Error generating signals from market event: {e}", exc_info=True)
 
     def _handle_signal_event(self, event):
         """

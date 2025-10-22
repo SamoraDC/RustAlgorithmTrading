@@ -1,6 +1,7 @@
 use common::{Result, TradingError, config::RiskConfig};
 
 pub struct CircuitBreaker {
+    #[allow(dead_code)]
     config: RiskConfig,
     is_tripped: bool,
 }

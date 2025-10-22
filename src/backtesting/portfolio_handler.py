@@ -30,7 +30,21 @@ class PortfolioHandler:
         Args:
             initial_capital: Starting capital
             position_sizer: Position sizing strategy (defaults to FixedAmountSizer)
+
+        Raises:
+            TypeError: If initial_capital is not a number
+            ValueError: If initial_capital is not positive
         """
+        # Validate initial_capital
+        if not isinstance(initial_capital, (int, float)):
+            raise TypeError(f"initial_capital must be a number, got {type(initial_capital).__name__}")
+
+        if initial_capital <= 0:
+            raise ValueError(f"initial_capital must be positive, got {initial_capital}")
+
+        if position_sizer is not None and not isinstance(position_sizer, PositionSizer):
+            raise TypeError(f"position_sizer must be a PositionSizer instance or None, got {type(position_sizer).__name__}")
+
         self.initial_capital = initial_capital
         self.position_sizer = position_sizer or FixedAmountSizer(10000.0)
 
@@ -51,7 +65,13 @@ class PortfolioHandler:
 
         Args:
             timestamp: Current timestamp
+
+        Raises:
+            TypeError: If timestamp is not a datetime
         """
+        if not isinstance(timestamp, datetime):
+            raise TypeError(f"timestamp must be a datetime, got {type(timestamp).__name__}")
+
         self.portfolio.timestamp = timestamp
 
         # Record equity curve point
@@ -179,7 +199,17 @@ class FixedAmountSizer(PositionSizer):
 
         Args:
             amount: Fixed dollar amount per position
+
+        Raises:
+            TypeError: If amount is not a number
+            ValueError: If amount is not positive
         """
+        if not isinstance(amount, (int, float)):
+            raise TypeError(f"amount must be a number, got {type(amount).__name__}")
+
+        if amount <= 0:
+            raise ValueError(f"amount must be positive, got {amount}")
+
         self.amount = amount
 
     def calculate_position_size(
@@ -207,7 +237,17 @@ class PercentageOfEquitySizer(PositionSizer):
 
         Args:
             percentage: Percentage of equity to allocate (0-1)
+
+        Raises:
+            TypeError: If percentage is not a number
+            ValueError: If percentage is not in range (0, 1]
         """
+        if not isinstance(percentage, (int, float)):
+            raise TypeError(f"percentage must be a number, got {type(percentage).__name__}")
+
+        if not 0 < percentage <= 1:
+            raise ValueError(f"percentage must be in range (0, 1], got {percentage}")
+
         self.percentage = percentage
 
     def calculate_position_size(
@@ -236,7 +276,17 @@ class KellyPositionSizer(PositionSizer):
 
         Args:
             fraction: Fraction of Kelly to use (for safety)
+
+        Raises:
+            TypeError: If fraction is not a number
+            ValueError: If fraction is not in range (0, 1]
         """
+        if not isinstance(fraction, (int, float)):
+            raise TypeError(f"fraction must be a number, got {type(fraction).__name__}")
+
+        if not 0 < fraction <= 1:
+            raise ValueError(f"fraction must be in range (0, 1], got {fraction}")
+
         self.fraction = fraction
 
     def calculate_position_size(

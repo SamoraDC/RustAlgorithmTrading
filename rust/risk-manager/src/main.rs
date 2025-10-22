@@ -2,6 +2,7 @@ use risk_manager::RiskManagerService;
 use tracing_subscriber::{fmt, prelude::*, EnvFilter};
 use common::config::SystemConfig;
 use common::health::HealthCheck;
+use common::metrics::{MetricsConfig, start_metrics_server};
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
@@ -43,6 +44,19 @@ async fn main() -> anyhow::Result<()> {
     // Create health status tracker
     let health = Arc::new(RwLock::new(HealthCheck::healthy("risk-manager")));
 
+    // Start metrics server
+    let metrics_config = MetricsConfig::risk_manager();
+    let metrics_handle = match start_metrics_server(metrics_config) {
+        Ok(handle) => {
+            tracing::info!("✓ Metrics server started on port 9093");
+            Some(handle)
+        }
+        Err(e) => {
+            tracing::warn!("Failed to start metrics server: {}. Continuing without metrics.", e);
+            None
+        }
+    };
+
     // Store values needed after moving config.risk
     let circuit_breaker_enabled = config.risk.enable_circuit_breaker;
     let max_positions = config.risk.max_open_positions;
@@ -75,6 +89,12 @@ async fn main() -> anyhow::Result<()> {
     // Keep service running
     tokio::signal::ctrl_c().await?;
     tracing::info!("Shutdown signal received, stopping Risk Manager...");
+
+    // Stop metrics server
+    if let Some(handle) = metrics_handle {
+        handle.abort();
+        tracing::info!("Metrics server stopped");
+    }
 
     Ok(())
 }

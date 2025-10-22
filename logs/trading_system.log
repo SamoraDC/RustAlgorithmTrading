@@ -1,0 +1,154 @@
+[0;34m[INFO][0m 2025-10-22 14:56:23 - ==========================================
+[0;34m[INFO][0m 2025-10-22 14:56:23 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-22 14:56:23 - Mode: full
+[0;34m[INFO][0m 2025-10-22 14:56:23 - ==========================================
+[0;34m[INFO][0m 2025-10-22 14:56:23 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-22 14:56:23 - Environment setup complete
+[0;34m[INFO][0m 2025-10-22 14:56:23 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-22 14:56:24 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-22 14:56:24 - Building Rust services in release mode...
+   Compiling pyo3-ffi v0.21.2
+   Compiling pyo3 v0.21.2
+warning: unused import: `TradingError`
+ --> market-data/src/publisher.rs:1:22
+  |
+1 | use common::{Result, TradingError, messaging::Message};
+  |                      ^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `error`
+  --> market-data/src/lib.rs:17:21
+   |
+17 | use tracing::{info, error};
+   |                     ^^^^^
+
+warning: unused variable: `data`
+   --> market-data/src/websocket.rs:174:31
+    |
+174 |                 Message::Ping(data) => {
+    |                               ^^^^ help: if this is intentional, prefix it with an underscore: `_data`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `message`
+  --> market-data/src/publisher.rs:14:27
+   |
+14 |     pub fn publish(&self, message: Message) -> Result<()> {
+   |                           ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_message`
+
+warning: fields `ws_client`, `orderbook_manager`, `bar_aggregator`, and `publisher` are never read
+  --> market-data/src/lib.rs:21:5
+   |
+20 | pub struct MarketDataService {
+   |            ----------------- fields in this struct
+21 |     ws_client: WebSocketClient,
+   |     ^^^^^^^^^
+22 |     orderbook_manager: OrderBookManager,
+   |     ^^^^^^^^^^^^^^^^^
+23 |     bar_aggregator: BarAggregator,
+   |     ^^^^^^^^^^^^^^
+24 |     publisher: MarketDataPublisher,
+   |     ^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: constant `HEARTBEAT_INTERVAL_MS` is never used
+  --> market-data/src/websocket.rs:12:7
+   |
+12 | const HEARTBEAT_INTERVAL_MS: u64 = 30000;
+   |       ^^^^^^^^^^^^^^^^^^^^^
+
+warning: field `address` is never read
+ --> market-data/src/publisher.rs:4:5
+  |
+3 | pub struct MarketDataPublisher {
+  |            ------------------- field in this struct
+4 |     address: String,
+  |     ^^^^^^^
+
+warning: unused import: `Side`
+ --> execution-engine/src/slippage.rs:1:39
+  |
+1 | use common::types::{Order, OrderType, Side};
+  |                                       ^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused variable: `assumed_mid`
+  --> execution-engine/src/slippage.rs:99:17
+   |
+99 |             let assumed_mid = limit_price.0;
+   |                 ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_assumed_mid`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: `market-data` (lib) generated 7 warnings (run `cargo fix --lib -p market-data` to apply 2 suggestions)
+warning: `execution-engine` (lib) generated 2 warnings (run `cargo fix --lib -p execution-engine` to apply 1 suggestion)
+   Compiling signal-bridge v0.1.0 (/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/rust/signal-bridge)
+warning: use of deprecated method `pyo3::deprecations::GilRefs::<T>::function_arg`: use `&Bound<'_, T>` instead for this function argument
+   --> signal-bridge/src/bridge.rs:111:51
+    |
+111 |     pub fn compute_batch(&self, py: Python, bars: &PyList) -> PyResult<Vec<Vec<f64>>> {
+    |                                                   ^
+    |
+    = note: `#[warn(deprecated)]` on by default
+
+warning: use of deprecated method `pyo3::deprecations::GilRefs::<T>::function_arg`: use `&Bound<'_, T>` instead for this function argument
+   --> signal-bridge/src/bridge.rs:197:31
+    |
+197 | fn signal_bridge(_py: Python, m: &PyModule) -> PyResult<()> {
+    |                               ^
+
+warning: unused variable: `py`
+   --> signal-bridge/src/bridge.rs:111:33
+    |
+111 |     pub fn compute_batch(&self, py: Python, bars: &PyList) -> PyResult<Vec<Vec<f64>>> {
+    |                                 ^^ help: if this is intentional, prefix it with an underscore: `_py`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: field `feature_engine` is never read
+  --> signal-bridge/src/lib.rs:17:5
+   |
+16 | pub struct SignalBridgeService {
+   |            ------------------- field in this struct
+17 |     feature_engine: FeatureEngine,
+   |     ^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: field `engine` is never read
+  --> signal-bridge/src/bridge.rs:43:5
+   |
+42 | pub struct FeatureComputer {
+   |            --------------- field in this struct
+43 |     engine: FeatureEngine,
+   |     ^^^^^^
+
+warning: `signal-bridge` (lib) generated 5 warnings
+    Finished `release` profile [optimized] target(s) in 1m 33s
+[0;32m[SUCCESS][0m 2025-10-22 14:57:57 - Rust services built successfully
+[0;34m[INFO][0m 2025-10-22 14:57:57 - ==========================================
+[0;34m[INFO][0m 2025-10-22 14:57:57 - PHASE 1: BACKTESTING
+[0;34m[INFO][0m 2025-10-22 14:57:57 - ==========================================
+[0;34m[INFO][0m 2025-10-22 14:57:57 - Running backtesting engine with historical data...
+Traceback (most recent call last):
+  File "<stdin>", line 25, in <module>
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py", line 39, in __init__
+    self.data_dir = Path(data_dir)
+                    ^^^^^^^^^^^^^^
+  File "/home/samoradc/.local/share/uv/python/cpython-3.12.11-linux-x86_64-gnu/lib/python3.12/pathlib.py", line 1162, in __init__
+    super().__init__(*args)
+  File "/home/samoradc/.local/share/uv/python/cpython-3.12.11-linux-x86_64-gnu/lib/python3.12/pathlib.py", line 373, in __init__
+    raise TypeError(
+TypeError: argument should be a str or an os.PathLike object where __fspath__ returns a str, not 'datetime'
+[BACKTEST] Running backtest for ['AAPL', 'MSFT', 'GOOGL']
+[BACKTEST] Period: 2024-10-22 to 2025-10-21
+[BACKTEST] Initial capital: $100,000.00
+[BACKTEST] ERROR: argument should be a str or an os.PathLike object where __fspath__ returns a str, not 'datetime'
+[0;31m[ERROR][0m 2025-10-22 14:58:21 - Backtesting phase FAILED - metrics below threshold
+[0;31m[ERROR][0m 2025-10-22 14:58:21 - Validation failed - aborting paper trading
+[0;34m[INFO][0m 2025-10-22 14:58:21 - Cleanup triggered...
+[0;34m[INFO][0m 2025-10-22 14:58:21 - Stopping all services...
+[0;32m[SUCCESS][0m 2025-10-22 14:58:21 - All services stopped

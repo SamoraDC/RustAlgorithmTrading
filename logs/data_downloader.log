@@ -1,0 +1,356 @@
+2025-10-22 16:37:16,178 - __main__ - INFO - Initialized AlpacaDataDownloader for 3 symbols
+2025-10-22 16:37:16,179 - __main__ - INFO - Starting bulk download for 3 symbols
+2025-10-22 16:37:16,187 - __main__ - INFO - Starting download for AAPL
+2025-10-22 16:37:16,189 - __main__ - INFO - Fetching data for AAPL (attempt 1/3)
+2025-10-22 16:37:16,800 - __main__ - WARNING - No data returned for AAPL
+2025-10-22 16:37:16,803 - __main__ - INFO - Starting download for MSFT
+2025-10-22 16:37:16,804 - __main__ - INFO - Fetching data for MSFT (attempt 1/3)
+2025-10-22 16:37:16,953 - __main__ - WARNING - No data returned for MSFT
+2025-10-22 16:37:16,956 - __main__ - INFO - Starting download for GOOGL
+2025-10-22 16:37:16,957 - __main__ - INFO - Fetching data for GOOGL (attempt 1/3)
+2025-10-22 16:37:17,120 - __main__ - WARNING - No data returned for GOOGL
+2025-10-22 16:37:17,122 - __main__ - INFO - ================================================================================
+2025-10-22 16:37:17,123 - __main__ - INFO - DOWNLOAD SUMMARY
+2025-10-22 16:37:17,124 - __main__ - INFO - ================================================================================
+2025-10-22 16:37:17,125 - __main__ - INFO - Total symbols: 3
+2025-10-22 16:37:17,126 - __main__ - INFO - Successful downloads: 0
+2025-10-22 16:37:17,127 - __main__ - INFO - Failed downloads: 3
+2025-10-22 16:37:17,127 - __main__ - INFO - Total rows downloaded: 0
+2025-10-22 16:37:17,128 - __main__ - INFO - Duration: 0.94 seconds
+2025-10-22 16:37:17,129 - __main__ - INFO - Average time per symbol: 0.31 seconds
+2025-10-22 16:37:17,129 - __main__ - INFO - ================================================================================
+2025-10-22 16:37:17,140 - __main__ - INFO - Saved statistics to data/download_stats_20251022_163717.json
+2025-10-22 16:37:17,141 - __main__ - WARNING - Completed with 3 failures
+2025-10-22 16:52:31,131 - download_historical_data - INFO - Initialized AlpacaDataDownloader for 1 symbols
+2025-10-22 16:52:31,133 - download_historical_data - INFO - Starting download for AAPL
+2025-10-22 16:52:31,133 - download_historical_data - INFO - Fetching data for AAPL (attempt 1/3)
+2025-10-22 16:52:31,626 - download_historical_data - ERROR - Symbol AAPL not in API response
+2025-10-22 16:52:31,628 - download_historical_data - ERROR - Available symbols in response: N/A
+2025-10-22 16:52:31,629 - download_historical_data - ERROR - Try different date range or verify symbol is valid
+2025-10-22 16:53:00,755 - __main__ - DEBUG - Debug logging enabled
+2025-10-22 16:53:00,762 - __main__ - INFO - Initialized AlpacaDataDownloader for 3 symbols
+2025-10-22 16:53:00,762 - __main__ - INFO - Starting bulk download for 3 symbols
+2025-10-22 16:53:00,767 - __main__ - INFO - Starting download for AAPL
+2025-10-22 16:53:00,768 - __main__ - INFO - Fetching data for AAPL (attempt 1/3)
+2025-10-22 16:53:00,768 - __main__ - DEBUG - Request parameters: timeframe=1Day, start=2024-09-01, end=2024-10-21, feed=iex, adjustment=Adjustment.ALL
+2025-10-22 16:53:00,776 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): data.alpaca.markets:443
+2025-10-22 16:53:01,385 - urllib3.connectionpool - DEBUG - https://data.alpaca.markets:443 "GET /v2/stocks/bars?start=2024-09-01T00%3A00%3A00%2B00%3A00&end=2024-10-21T00%3A00%3A00%2B00%3A00&timeframe=1Day&adjustment=all&feed=iex&symbols=AAPL&limit=10000 HTTP/1.1" 200 None
+2025-10-22 16:53:01,388 - __main__ - DEBUG - API Response type: <class 'alpaca.data.models.bars.BarSet'>
+2025-10-22 16:53:01,391 - __main__ - DEBUG - API Response data: data={'AAPL': [{   'close': 221.7,
+    'high': 227.95,
+    'low': 220.23,
+    'open': 227.55,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 3, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 12525.0,
+    'volume': 893528.0,
+    'vwap': 222.58}, {   'close': 219.72,
+    'high': 220.74,
+    'low': 216.5,
+    'open': 220.71,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 4, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 13621.0,
+    'volume': 1276056.0,
+    'vwap': 218.61}, {   'close': 221.28,
+    'high': 224.44,
+    'low': 220.63,
+    'open': 220.63,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 5, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 8511.0,
+    'volume': 666252.0,
+    'vwap': 222.21}, {   'close': 219.94,
+    'high': 224.2,
+    'low': 218.83,
+    'open': 222.92,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 6, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 12497.0,
+    'volume': 1049899.0,
+    'vwap': 221.13}, {   'close': 219.94,
+    'high': 220.23,
+    'low': 215.73,
+    'open': 220.02,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 9, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 19385.0,
+    'volume': 1606171.0,
+    'vwap': 218.1}, {   'close': 219.1,
+    'high': 220.44,
+    'low': 215.79,
+    'open': 217.86,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 10, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 11418.0,
+    'volume': 957648.0,
+    'vwap': 218.37}, {   'close': 221.54,
+    'high': 222.05,
+    'low': 216.92,
+    'open': 220.28,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 11, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 10217.0,
+    'volume': 844135.0,
+    'vwap': 219.8}, {   'close': 221.83,
+    'high': 222.51,
+    'low': 218.84,
+    'open': 221.37,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 12, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 8534.0,
+    'volume': 677459.0,
+    'vwap': 221.26}, {   'close': 221.4,
+    'high': 222.98,
+    'low': 220.99,
+    'open': 222.77,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 13, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 7783.0,
+    'volume': 637521.0,
+    'vwap': 221.93}, {   'close': 215.47,
+    'high': 216.21,
+    'low': 212.96,
+    'open': 215.61,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 16, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 15791.0,
+    'volume': 1439907.0,
+    'vwap': 214.78}, {   'close': 215.86,
+    'high': 215.9,
+    'low': 213.52,
+    'open': 214.77,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 17, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 10436.0,
+    'volume': 949661.0,
+    'vwap': 215.1}, {   'close': 219.82,
+    'high': 221.61,
+    'low': 216.56,
+    'open': 216.56,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 18, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 13529.0,
+    'volume': 1204282.0,
+    'vwap': 219.48}, {   'close': 227.86,
+    'high': 228.75,
+    'low': 223.62,
+    'open': 224.07,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 19, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 20717.0,
+    'volume': 2617911.0,
+    'vwap': 227.64}, {   'close': 227.49,
+    'high': 232.01,
+    'low': 226.64,
+    'open': 228.93,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 20, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 27153.0,
+    'volume': 3617727.0,
+    'vwap': 229.79}, {   'close': 225.46,
+    'high': 228.39,
+    'low': 224.82,
+    'open': 226.14,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 23, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 13830.0,
+    'volume': 1013326.0,
+    'vwap': 226.08}, {   'close': 226.42,
+    'high': 228.29,
+    'low': 224.72,
+    'open': 227.6,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 24, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 9408.0,
+    'volume': 716012.0,
+    'vwap': 226.08}, {   'close': 225.33,
+    'high': 226.22,
+    'low': 223.0,
+    'open': 223.96,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 25, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 10877.0,
+    'volume': 917606.0,
+    'vwap': 224.56}, {   'close': 226.63,
+    'high': 227.41,
+    'low': 224.49,
+    'open': 226.53,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 26, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 10562.0,
+    'volume': 876871.0,
+    'vwap': 226.2}, {   'close': 226.69,
+    'high': 228.45,
+    'low': 226.26,
+    'open': 227.53,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 27, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 9674.0,
+    'volume': 718703.0,
+    'vwap': 227.2}, {   'close': 231.79,
+    'high': 231.94,
+    'low': 228.63,
+    'open': 228.99,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 9, 30, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 11761.0,
+    'volume': 929770.0,
+    'vwap': 230.73}, {   'close': 225.17,
+    'high': 228.53,
+    'low': 222.73,
+    'open': 228.47,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 10, 1, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 16829.0,
+    'volume': 1491424.0,
+    'vwap': 224.62}, {   'close': 225.73,
+    'high': 226.31,
+    'low': 222.01,
+    'open': 225.06,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 10, 2, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 8905.0,
+    'volume': 813257.0,
+    'vwap': 224.9}, {   'close': 224.57,
+    'high': 225.77,
+    'low': 222.31,
+    'open': 224.11,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 10, 3, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 8995.0,
+    'volume': 790847.0,
+    'vwap': 223.78}, {   'close': 225.66,
+    'high': 226.92,
+    'low': 223.15,
+    'open': 226.88,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 10, 4, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 11005.0,
+    'volume': 920089.0,
+    'vwap': 224.53}, {   'close': 220.73,
+    'high': 224.65,
+    'low': 220.32,
+    'open': 223.45,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 10, 7, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 9531.0,
+    'volume': 818946.0,
+    'vwap': 222.83}, {   'close': 224.76,
+    'high': 224.94,
+    'low': 222.26,
+    'open': 223.24,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 10, 8, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 9847.0,
+    'volume': 746690.0,
+    'vwap': 224.06}, {   'close': 228.46,
+    'high': 228.7,
+    'low': 223.89,
+    'open': 224.14,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 10, 9, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 8521.0,
+    'volume': 684369.0,
+    'vwap': 227.24}, {   'close': 227.98,
+    'high': 228.44,
+    'low': 226.13,
+    'open': 226.76,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 10, 10, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 6658.0,
+    'volume': 455382.0,
+    'vwap': 227.38}, {   'close': 226.47,
+    'high': 228.35,
+    'low': 226.33,
+    'open': 228.35,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 10, 11, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 6684.0,
+    'volume': 544805.0,
+    'vwap': 227.15}, {   'close': 230.24,
+    'high': 230.67,
+    'low': 227.61,
+    'open': 227.68,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 10, 14, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 7979.0,
+    'volume': 691749.0,
+    'vwap': 229.61}, {   'close': 232.86,
+    'high': 236.41,
+    'low': 231.34,
+    'open': 232.57,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 10, 15, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 14301.0,
+    'volume': 1152069.0,
+    'vwap': 233.97}, {   'close': 230.66,
+    'high': 231.03,
+    'low': 228.8,
+    'open': 230.54,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 10, 16, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 9252.0,
+    'volume': 717358.0,
+    'vwap': 229.77}, {   'close': 231.11,
+    'high': 232.7,
+    'low': 229.5,
+    'open': 232.39,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 10, 17, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 7104.0,
+    'volume': 548744.0,
+    'vwap': 230.93}, {   'close': 233.88,
+    'high': 234.93,
+    'low': 232.97,
+    'open': 234.93,
+    'symbol': 'AAPL',
+    'timestamp': datetime.datetime(2024, 10, 18, 4, 0, tzinfo=TzInfo(0)),
+    'trade_count': 9851.0,
+    'volume': 849948.0,
+    'vwap': 234.1}]}
+2025-10-22 16:53:01,392 - __main__ - ERROR - Symbol AAPL not in API response
+2025-10-22 16:53:01,392 - __main__ - ERROR - Available symbols in response: N/A
+2025-10-22 16:53:01,393 - __main__ - ERROR - Try different date range or verify symbol is valid
+2025-10-22 16:53:01,394 - __main__ - ERROR - Fatal error: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/scripts/download_historical_data.py", line 449, in download_all
+    pbar.update(1)
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/.venv/lib/python3.12/site-packages/tqdm/std.py", line 1242, in update
+    self.refresh(lock_args=self.lock_args)
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/.venv/lib/python3.12/site-packages/tqdm/std.py", line 1347, in refresh
+    self.display()
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/.venv/lib/python3.12/site-packages/tqdm/std.py", line 1495, in display
+    self.sp(self.__str__() if msg is None else msg)
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/.venv/lib/python3.12/site-packages/tqdm/std.py", line 459, in print_status
+    fp_write('\r' + s + (' ' * max(last_len[0] - len_s, 0)))
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/.venv/lib/python3.12/site-packages/tqdm/std.py", line 452, in fp_write
+    fp.write(str(s))
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/.venv/lib/python3.12/site-packages/tqdm/utils.py", line 196, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/scripts/download_historical_data.py", line 654, in main
+    stats = downloader.download_all()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/scripts/download_historical_data.py", line 446, in download_all
+    with tqdm(total=len(self.config.symbols), desc="Downloading symbols") as pbar:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/.venv/lib/python3.12/site-packages/tqdm/std.py", line 1140, in __exit__
+    self.close()
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/.venv/lib/python3.12/site-packages/tqdm/std.py", line 1302, in close
+    self.display(pos=0)
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/.venv/lib/python3.12/site-packages/tqdm/std.py", line 1495, in display
+    self.sp(self.__str__() if msg is None else msg)
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/.venv/lib/python3.12/site-packages/tqdm/std.py", line 459, in print_status
+    fp_write('\r' + s + (' ' * max(last_len[0] - len_s, 0)))
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/.venv/lib/python3.12/site-packages/tqdm/std.py", line 452, in fp_write
+    fp.write(str(s))
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/.venv/lib/python3.12/site-packages/tqdm/utils.py", line 196, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [Errno 32] Broken pipe

@@ -124,6 +124,7 @@ pub async fn start_health_server(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use tower::Service;
 
     #[tokio::test]
     async fn test_health_endpoint() {

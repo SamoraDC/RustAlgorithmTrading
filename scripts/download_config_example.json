@@ -1,0 +1,11 @@
+{
+  "symbols": ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"],
+  "start_date": "2024-01-01",
+  "end_date": "2024-12-31",
+  "timeframe": "1Day",
+  "output_dir": "data",
+  "save_csv": true,
+  "save_parquet": true,
+  "retry_attempts": 3,
+  "retry_delay": 5
+}

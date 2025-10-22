@@ -17,5 +17,24 @@ loguru>=0.7.0
 scikit-learn>=1.3.0
 xgboost>=1.7.6
 
+# FastAPI Backend & WebSocket
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+websockets>=12.0
+pydantic>=2.5.0
+python-multipart>=0.0.6
+
+# System Monitoring
+psutil>=5.9.0
+
+# Database & Storage
+duckdb>=0.9.0  # Time-series analytics database
+aiosqlite>=0.19.0  # Async SQLite for operational data
+
+# Async HTTP Client
+aiohttp>=3.9.0  # Async HTTP client for Rust bridge communication
+
 # Development
 pytest>=7.4.0
+pytest-asyncio>=0.21.0  # For async tests
+httpx>=0.25.0  # For testing FastAPI

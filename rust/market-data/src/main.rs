@@ -2,6 +2,7 @@ use market_data::MarketDataService;
 use tracing_subscriber::{fmt, prelude::*, EnvFilter};
 use common::config::SystemConfig;
 use common::health::HealthCheck;
+use common::metrics::{MetricsConfig, start_metrics_server};
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
@@ -39,6 +40,19 @@ async fn main() -> anyhow::Result<()> {
     // Create health status tracker
     let health = Arc::new(RwLock::new(HealthCheck::healthy("market-data")));
 
+    // Start metrics server
+    let metrics_config = MetricsConfig::market_data();
+    let metrics_handle = match start_metrics_server(metrics_config) {
+        Ok(handle) => {
+            tracing::info!("✓ Metrics server started on port 9091");
+            Some(handle)
+        }
+        Err(e) => {
+            tracing::warn!("Failed to start metrics server: {}. Continuing without metrics.", e);
+            None
+        }
+    };
+
     // Store values before move
     let symbols_count = config.market_data.symbols.len();
 
@@ -67,7 +81,7 @@ async fn main() -> anyhow::Result<()> {
     tracing::info!("🚀 Market Data Service is running");
 
     // Run service with error handling
-    match service.run().await {
+    let result = match service.run().await {
         Ok(_) => {
             tracing::info!("Market Data Service stopped gracefully");
             Ok(())
@@ -78,5 +92,13 @@ async fn main() -> anyhow::Result<()> {
             *h = HealthCheck::unhealthy("market-data", format!("Service error: {}", e));
             Err(anyhow::anyhow!("Service error: {}", e))
         }
+    };
+
+    // Stop metrics server
+    if let Some(handle) = metrics_handle {
+        handle.abort();
+        tracing::info!("Metrics server stopped");
     }
+
+    result
 }

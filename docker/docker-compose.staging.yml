@@ -1,0 +1,342 @@
+version: '3.8'
+
+networks:
+  staging-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+
+volumes:
+  staging-postgres-data:
+    driver: local
+  staging-duckdb-data:
+    driver: local
+  staging-grafana-data:
+    driver: local
+  staging-prometheus-data:
+    driver: local
+
+services:
+  # PostgreSQL Database
+  postgres-staging:
+    image: postgres:15-alpine
+    container_name: trading-postgres-staging
+    restart: unless-stopped
+    networks:
+      - staging-network
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: ${STAGING_POSTGRES_DB:-trading_staging}
+      POSTGRES_USER: ${STAGING_POSTGRES_USER:-trading_user}
+      POSTGRES_PASSWORD: ${STAGING_POSTGRES_PASSWORD:-staging_password_change_me}
+      POSTGRES_MAX_CONNECTIONS: 200
+      POSTGRES_SHARED_BUFFERS: 512MB
+    volumes:
+      - staging-postgres-data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${STAGING_POSTGRES_USER:-trading_user} -d ${STAGING_POSTGRES_DB:-trading_staging}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '1.0'
+          memory: 1G
+    command: >
+      postgres
+      -c max_connections=200
+      -c shared_buffers=512MB
+      -c effective_cache_size=2GB
+      -c maintenance_work_mem=256MB
+      -c checkpoint_completion_target=0.9
+      -c wal_buffers=16MB
+      -c default_statistics_target=100
+      -c random_page_cost=1.1
+      -c effective_io_concurrency=200
+      -c work_mem=10MB
+      -c min_wal_size=1GB
+      -c max_wal_size=4GB
+      -c log_statement=all
+      -c log_duration=on
+      -c log_line_prefix='%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h '
+
+  # DuckDB Storage Service
+  duckdb-staging:
+    image: python:3.11-slim
+    container_name: trading-duckdb-staging
+    restart: unless-stopped
+    networks:
+      - staging-network
+    ports:
+      - "8001:8000"
+    environment:
+      DUCKDB_PATH: ${STAGING_DUCKDB_PATH:-/data/staging_trading.duckdb}
+      POSTGRES_CONNECTION: "postgresql://${STAGING_POSTGRES_USER:-trading_user}:${STAGING_POSTGRES_PASSWORD:-staging_password_change_me}@postgres-staging:5432/${STAGING_POSTGRES_DB:-trading_staging}"
+      LOG_LEVEL: DEBUG
+      WORKERS: 4
+    volumes:
+      - staging-duckdb-data:/data
+      - ../rust/database:/app:ro
+      - ../scripts:/scripts:ro
+    working_dir: /app
+    command: >
+      sh -c "
+        pip install --no-cache-dir duckdb fastapi uvicorn psycopg2-binary &&
+        python -m uvicorn storage_api:app --host 0.0.0.0 --port 8000 --workers 4 --log-level debug
+      "
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 45s
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
+    depends_on:
+      postgres-staging:
+        condition: service_healthy
+
+  # Trading Engine
+  trading-engine-staging:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile.rust
+    container_name: trading-engine-staging
+    restart: unless-stopped
+    networks:
+      - staging-network
+    ports:
+      - "9001:9000"
+    environment:
+      RUST_LOG: ${STAGING_RUST_LOG:-debug}
+      DATABASE_URL: "postgresql://${STAGING_POSTGRES_USER:-trading_user}:${STAGING_POSTGRES_PASSWORD:-staging_password_change_me}@postgres-staging:5432/${STAGING_POSTGRES_DB:-trading_staging}"
+      DUCKDB_URL: "http://duckdb-staging:8000"
+      BINANCE_API_KEY: ${STAGING_BINANCE_API_KEY}
+      BINANCE_SECRET_KEY: ${STAGING_BINANCE_SECRET_KEY}
+      ENABLE_TESTNET: "true"
+      MAX_POSITION_SIZE: ${STAGING_MAX_POSITION_SIZE:-1000}
+      RISK_LIMIT_PERCENT: ${STAGING_RISK_LIMIT_PERCENT:-2.0}
+      ENABLE_OBSERVABILITY: "true"
+      PROMETHEUS_PORT: 9090
+      JAEGER_ENDPOINT: "http://jaeger-staging:14268/api/traces"
+    volumes:
+      - ../rust:/app:ro
+      - /app/target
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9000/health || exit 1"]
+      interval: 20s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 8G
+        reservations:
+          cpus: '2.0'
+          memory: 4G
+    depends_on:
+      postgres-staging:
+        condition: service_healthy
+      duckdb-staging:
+        condition: service_healthy
+
+  # Prometheus
+  prometheus-staging:
+    image: prom/prometheus:latest
+    container_name: trading-prometheus-staging
+    restart: unless-stopped
+    networks:
+      - staging-network
+    ports:
+      - "9091:9090"
+    environment:
+      - TZ=UTC
+    volumes:
+      - ./prometheus/prometheus-staging.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/alerts-staging.yml:/etc/prometheus/alerts.yml:ro
+      - staging-prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+      - '--storage.tsdb.min-block-duration=2h'
+      - '--storage.tsdb.max-block-duration=2h'
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:9090/-/healthy || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+  # Grafana
+  grafana-staging:
+    image: grafana/grafana:latest
+    container_name: trading-grafana-staging
+    restart: unless-stopped
+    networks:
+      - staging-network
+    ports:
+      - "3001:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: ${STAGING_GRAFANA_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${STAGING_GRAFANA_PASSWORD:-staging_grafana_pass}
+      GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-simple-json-datasource
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_SERVER_ROOT_URL: "http://localhost:3001"
+      GF_LOG_LEVEL: debug
+    volumes:
+      - staging-grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/api/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    depends_on:
+      prometheus-staging:
+        condition: service_healthy
+
+  # Jaeger Tracing
+  jaeger-staging:
+    image: jaegertracing/all-in-one:latest
+    container_name: trading-jaeger-staging
+    restart: unless-stopped
+    networks:
+      - staging-network
+    ports:
+      - "5776:5775/udp"
+      - "6832:6831/udp"
+      - "6833:6832/udp"
+      - "16687:16686"
+      - "14269:14268"
+    environment:
+      COLLECTOR_ZIPKIN_HOST_PORT: ":9411"
+      SPAN_STORAGE_TYPE: badger
+      BADGER_EPHEMERAL: "false"
+      BADGER_DIRECTORY_VALUE: /badger/data
+      BADGER_DIRECTORY_KEY: /badger/key
+    volumes:
+      - ./jaeger-data:/badger
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:16686/ || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # Redis Cache (for session management and caching)
+  redis-staging:
+    image: redis:7-alpine
+    container_name: trading-redis-staging
+    restart: unless-stopped
+    networks:
+      - staging-network
+    ports:
+      - "6380:6379"
+    command: >
+      redis-server
+      --maxmemory 512mb
+      --maxmemory-policy allkeys-lru
+      --appendonly yes
+      --appendfsync everysec
+      --loglevel debug
+    volumes:
+      - ./redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 768M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # Load Testing Service
+  load-tester:
+    image: python:3.11-slim
+    container_name: trading-load-tester
+    networks:
+      - staging-network
+    environment:
+      TRADING_ENGINE_URL: "http://trading-engine-staging:9000"
+      DUCKDB_URL: "http://duckdb-staging:8000"
+      POSTGRES_URL: "postgresql://${STAGING_POSTGRES_USER:-trading_user}:${STAGING_POSTGRES_PASSWORD:-staging_password_change_me}@postgres-staging:5432/${STAGING_POSTGRES_DB:-trading_staging}"
+      REDIS_URL: "redis://redis-staging:6379"
+    volumes:
+      - ../scripts/load_testing:/tests:ro
+      - ./load-test-results:/results
+    working_dir: /tests
+    command: >
+      sh -c "
+        pip install --no-cache-dir locust pytest pytest-asyncio aiohttp asyncpg redis websockets &&
+        tail -f /dev/null
+      "
+    depends_on:
+      trading-engine-staging:
+        condition: service_healthy
+      duckdb-staging:
+        condition: service_healthy
+      postgres-staging:
+        condition: service_healthy
+      redis-staging:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '1.0'
+          memory: 512M

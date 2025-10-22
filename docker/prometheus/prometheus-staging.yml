@@ -1,0 +1,61 @@
+global:
+  scrape_interval: 10s
+  evaluation_interval: 10s
+  external_labels:
+    environment: 'staging'
+    cluster: 'trading-staging'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+# Load rules
+rule_files:
+  - 'alerts.yml'
+
+# Scrape configurations
+scrape_configs:
+  # Trading Engine Metrics
+  - job_name: 'trading-engine'
+    static_configs:
+      - targets: ['trading-engine-staging:9090']
+    metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: 'go_.*'
+        action: drop
+
+  # PostgreSQL Metrics
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres-staging:5432']
+    metrics_path: '/metrics'
+
+  # DuckDB Storage Metrics
+  - job_name: 'duckdb-storage'
+    static_configs:
+      - targets: ['duckdb-staging:8000']
+    metrics_path: '/metrics'
+
+  # Redis Metrics
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-staging:6379']
+
+  # Prometheus Self-Monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Grafana Metrics
+  - job_name: 'grafana'
+    static_configs:
+      - targets: ['grafana-staging:3000']
+    metrics_path: '/metrics'
+
+  # Jaeger Metrics
+  - job_name: 'jaeger'
+    static_configs:
+      - targets: ['jaeger-staging:14269']
+    metrics_path: '/metrics'

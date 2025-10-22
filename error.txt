@@ -1,0 +1,1009 @@
+2025-10-22 16:15:19.679 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.680 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.681 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.681 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.681 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.681 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.681 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.681 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.682 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.682 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.682 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.683 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.683 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.684 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.684 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.684 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.684 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.684 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.684 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.684 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.684 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.684 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.684 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.685 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.685 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.685 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.685 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.686 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.686 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.686 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.686 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.686 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.686 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.686 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.686 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.686 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.687 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.688 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.689 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.690 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.691 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.692 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.693 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.694 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.694 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.694 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.694 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.694 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.694 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.694 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.695 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.695 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.695 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.695 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.695 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.695 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.695 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.695 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.695 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.695 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.696 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.696 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.696 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.696 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.696 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.696 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.696 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.696 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.696 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.696 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.697 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.697 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.697 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.697 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.697 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.698 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.698 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.698 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.698 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.698 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.698 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.699 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.699 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.699 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.699 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.699 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.700 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.700 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.700 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.701 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.701 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.702 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.702 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.702 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.702 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.702 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.702 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.703 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.703 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.703 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.703 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.703 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.704 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.704 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.704 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.704 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.704 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.704 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.704 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.704 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.704 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.704 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.704 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.704 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.704 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.705 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.706 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.707 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.708 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.709 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.710 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.711 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.712 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.713 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.714 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.714 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.714 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.714 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.714 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.714 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.714 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.714 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.714 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.714 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.714 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.714 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.714 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.716 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.716 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.716 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.717 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.717 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.717 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.718 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.718 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.719 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.719 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.720 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.720 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.721 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.721 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.721 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.721 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.721 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.721 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.722 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.722 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.722 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.722 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.722 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.722 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.723 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.724 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.724 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+2025-10-22 16:15:19.724 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for MSFT, skipping update
+2025-10-22 16:15:19.724 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for GOOGL, skipping update
+2025-10-22 16:15:19.724 | DEBUG    | backtesting.data_handler:update_bars:183 -
+ No data loaded for AAPL, skipping update
+^C2025-10-22 16:15:19.724 | DEBUG    | backtesting.data_handler:update_bars:183 - No data loaded for MSFT, skipping update
