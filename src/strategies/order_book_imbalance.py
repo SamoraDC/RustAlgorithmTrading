@@ -100,7 +100,7 @@ class OrderBookImbalanceStrategy(Strategy):
                     signals.append(Signal(
                         timestamp=current_time,
                         symbol=symbol,
-                        signal_type=SignalType.SELL,
+                        signal_type=SignalType.EXIT,
                         price=current_price,
                         confidence=0.8,
                         metadata={'reason': 'holding_period_exit'}
@@ -129,11 +129,11 @@ class OrderBookImbalanceStrategy(Strategy):
 
                 # Generate signals
                 if imbalance > threshold and symbol not in self.entry_bars:
-                    # Strong bid side - buy signal
+                    # Strong bid side - long signal
                     signals.append(Signal(
                         timestamp=current_time,
                         symbol=symbol,
-                        signal_type=SignalType.BUY,
+                        signal_type=SignalType.LONG,
                         price=current_price,
                         confidence=min(imbalance, 1.0),
                         metadata={
@@ -145,11 +145,11 @@ class OrderBookImbalanceStrategy(Strategy):
                     self.entry_bars[symbol] = i
 
                 elif imbalance < (1 - threshold) and symbol not in self.entry_bars:
-                    # Strong ask side - sell signal
+                    # Strong ask side - short signal
                     signals.append(Signal(
                         timestamp=current_time,
                         symbol=symbol,
-                        signal_type=SignalType.SELL,
+                        signal_type=SignalType.SHORT,
                         price=current_price,
                         confidence=min(1 - imbalance, 1.0),
                         metadata={

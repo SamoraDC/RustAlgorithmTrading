@@ -97,11 +97,15 @@ class BacktestEngine:
             else:
                 self.continue_backtest = False
 
-            # Process event queue
+            # Process event queue for this bar
             while self.events:
                 event = self.events.popleft()
                 self._dispatch_event(event)
                 self.events_processed += 1
+
+            # RACE FIX: Clear reserved cash after all events in bar are processed
+            # This resets the cash reservation system for the next bar
+            self.portfolio_handler.clear_reserved_cash()
 
         # Calculate final performance metrics
         end_time = datetime.utcnow()

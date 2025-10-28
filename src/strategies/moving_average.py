@@ -85,12 +85,12 @@ class MovingAverageCrossover(Strategy):
             # Bullish crossover (fast crosses above slow)
             if (previous['fast_ma'] <= previous['slow_ma'] and
                 current['fast_ma'] > current['slow_ma']):
-                signal_type = SignalType.BUY
+                signal_type = SignalType.LONG
 
             # Bearish crossover (fast crosses below slow)
             elif (previous['fast_ma'] >= previous['slow_ma'] and
                   current['fast_ma'] < current['slow_ma']):
-                signal_type = SignalType.SELL
+                signal_type = SignalType.SHORT
 
             if signal_type != SignalType.HOLD:
                 # Calculate signal confidence based on MA separation

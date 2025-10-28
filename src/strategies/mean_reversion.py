@@ -86,15 +86,15 @@ class MeanReversion(Strategy):
 
             signal_type = SignalType.HOLD
 
-            # Buy signal: price at/below lower band and RSI oversold
+            # Long signal: price at/below lower band and RSI oversold
             if (current['close'] <= current['bb_lower'] and
                 current['rsi'] <= rsi_oversold):
-                signal_type = SignalType.BUY
+                signal_type = SignalType.LONG
 
-            # Sell signal: price at/above upper band and RSI overbought
+            # Short signal: price at/above upper band and RSI overbought
             elif (current['close'] >= current['bb_upper'] and
                   current['rsi'] >= rsi_overbought):
-                signal_type = SignalType.SELL
+                signal_type = SignalType.SHORT
 
             if signal_type != SignalType.HOLD:
                 # Calculate confidence based on how far from mean

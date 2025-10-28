@@ -48,7 +48,7 @@ class Position(BaseModel):
 class Portfolio(BaseModel):
     """Portfolio tracking with positions and cash."""
     initial_capital: float = Field(gt=0)
-    cash: float = Field(gt=0)
+    cash: float = Field(ge=0)  # Changed from gt=0 to ge=0 to allow zero cash
     positions: Dict[str, Position] = Field(default_factory=dict)
     timestamp: datetime = Field(default_factory=datetime.utcnow)
 
@@ -72,7 +72,26 @@ class Portfolio(BaseModel):
         return ((self.equity - self.initial_capital) / self.initial_capital) * 100.0
 
     def update_position(self, symbol: str, quantity: int, price: float):
-        """Update position with new fill."""
+        """
+        Update position with new fill.
+
+        Args:
+            symbol: Symbol being traded
+            quantity: Quantity (positive for buy, negative for sell)
+            price: Fill price
+
+        Raises:
+            ValueError: If updating would result in negative cash
+        """
+        # CRITICAL FIX: Check if we have enough cash BEFORE updating
+        cash_impact = quantity * price
+
+        if quantity > 0:  # BUY
+            if cash_impact > self.cash:
+                raise ValueError(
+                    f"Insufficient cash: need ${cash_impact:,.2f} but only have ${self.cash:,.2f}"
+                )
+
         if symbol in self.positions:
             pos = self.positions[symbol]
             new_quantity = pos.quantity + quantity
@@ -107,6 +126,10 @@ class Portfolio(BaseModel):
 
         # Update cash
         self.cash -= quantity * price
+
+        # Final validation
+        if self.cash < 0:
+            raise ValueError(f"Cash went negative: ${self.cash:,.2f}")
 
 
 class PerformanceMetrics(BaseModel):

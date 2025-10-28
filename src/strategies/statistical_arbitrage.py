@@ -141,7 +141,7 @@ class StatisticalArbitrageStrategy(Strategy):
                     signals.append(Signal(
                         timestamp=current_time,
                         symbol=symbol,
-                        signal_type=SignalType.SELL if entry_side == 'long' else SignalType.BUY,
+                        signal_type=SignalType.EXIT,
                         price=current_price,
                         confidence=min(abs(z_score) / entry_threshold, 1.0),
                         metadata={
@@ -161,7 +161,7 @@ class StatisticalArbitrageStrategy(Strategy):
                     signals.append(Signal(
                         timestamp=current_time,
                         symbol=symbol,
-                        signal_type=SignalType.SELL,
+                        signal_type=SignalType.SHORT,
                         price=current_price,
                         confidence=min(z_score / entry_threshold, 1.0),
                         metadata={
@@ -178,7 +178,7 @@ class StatisticalArbitrageStrategy(Strategy):
                     signals.append(Signal(
                         timestamp=current_time,
                         symbol=symbol,
-                        signal_type=SignalType.BUY,
+                        signal_type=SignalType.LONG,
                         price=current_price,
                         confidence=min(abs(z_score) / entry_threshold, 1.0),
                         metadata={

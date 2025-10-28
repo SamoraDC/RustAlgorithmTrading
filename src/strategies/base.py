@@ -13,9 +13,10 @@ from loguru import logger
 
 class SignalType(Enum):
     """Trading signal types"""
-    BUY = "buy"
-    SELL = "sell"
-    HOLD = "hold"
+    LONG = "LONG"
+    SHORT = "SHORT"
+    EXIT = "EXIT"
+    HOLD = "HOLD"
 
 
 @dataclass
@@ -110,7 +111,7 @@ class Strategy(ABC):
         Returns:
             True if should enter position
         """
-        return signal.signal_type in [SignalType.BUY, SignalType.SELL]
+        return signal.signal_type in [SignalType.LONG, SignalType.SHORT]
 
     def should_exit(self, signal: Signal, current_position: float) -> bool:
         """
@@ -123,10 +124,13 @@ class Strategy(ABC):
         Returns:
             True if should exit position
         """
-        # Exit if holding long and signal is sell, or holding short and signal is buy
-        if current_position > 0 and signal.signal_type == SignalType.SELL:
+        # Exit signal explicitly
+        if signal.signal_type == SignalType.EXIT:
             return True
-        if current_position < 0 and signal.signal_type == SignalType.BUY:
+        # Exit if holding long and signal is short, or holding short and signal is long
+        if current_position > 0 and signal.signal_type == SignalType.SHORT:
+            return True
+        if current_position < 0 and signal.signal_type == SignalType.LONG:
             return True
         return False
 

@@ -318,29 +318,29 @@ class EnhancedMomentumStrategy(Strategy):
         if pd.isna(rsi) or pd.isna(rsi_prev):
             return None, 0.0, "invalid"
 
-        # Strong buy: Rising from oversold
+        # Strong long: Rising from oversold
         if rsi > self.thresholds.rsi_oversold and rsi_prev <= self.thresholds.rsi_oversold:
             strength = min((50 - rsi) / 50, 1.0)  # Normalize to 0-1
-            return SignalType.BUY, strength, "rising_from_oversold"
+            return SignalType.LONG, strength, "rising_from_oversold"
 
-        # Moderate buy: In moderate oversold zone with upward momentum
+        # Moderate long: In moderate oversold zone with upward momentum
         elif (rsi > self.thresholds.rsi_oversold and
               rsi < self.thresholds.rsi_moderate_oversold and
               rsi > rsi_prev):
             strength = 0.6
-            return SignalType.BUY, strength, "moderate_oversold_rising"
+            return SignalType.LONG, strength, "moderate_oversold_rising"
 
-        # Strong sell: Falling from overbought
+        # Strong short: Falling from overbought
         elif rsi < self.thresholds.rsi_overbought and rsi_prev >= self.thresholds.rsi_overbought:
             strength = min((rsi - 50) / 50, 1.0)
-            return SignalType.SELL, strength, "falling_from_overbought"
+            return SignalType.SHORT, strength, "falling_from_overbought"
 
-        # Moderate sell: In moderate overbought zone with downward momentum
+        # Moderate short: In moderate overbought zone with downward momentum
         elif (rsi < self.thresholds.rsi_overbought and
               rsi > self.thresholds.rsi_moderate_overbought and
               rsi < rsi_prev):
             strength = 0.6
-            return SignalType.SELL, strength, "moderate_overbought_falling"
+            return SignalType.SHORT, strength, "moderate_overbought_falling"
 
         return SignalType.HOLD, 0.0, "neutral"
 
@@ -363,22 +363,22 @@ class EnhancedMomentumStrategy(Strategy):
         # Bullish crossover: MACD crosses above signal
         if macd > signal and macd_prev <= signal_prev:
             strength = min(abs(histogram) / row['close'], 1.0)
-            return SignalType.BUY, strength, "bullish_crossover"
+            return SignalType.LONG, strength, "bullish_crossover"
 
         # Bearish crossover: MACD crosses below signal
         elif macd < signal and macd_prev >= signal_prev:
             strength = min(abs(histogram) / row['close'], 1.0)
-            return SignalType.SELL, strength, "bearish_crossover"
+            return SignalType.SHORT, strength, "bearish_crossover"
 
         # Continued bullish momentum
         elif macd > signal and histogram > self.thresholds.macd_histogram_threshold:
             strength = 0.5 * min(abs(histogram) / row['close'], 1.0)
-            return SignalType.BUY, strength, "bullish_momentum"
+            return SignalType.LONG, strength, "bullish_momentum"
 
         # Continued bearish momentum
         elif macd < signal and histogram < -self.thresholds.macd_histogram_threshold:
             strength = 0.5 * min(abs(histogram) / row['close'], 1.0)
-            return SignalType.SELL, strength, "bearish_momentum"
+            return SignalType.SHORT, strength, "bearish_momentum"
 
         return SignalType.HOLD, 0.0, "neutral"
 
@@ -442,42 +442,42 @@ class EnhancedMomentumStrategy(Strategy):
             Tuple of (signal_quality, confidence_score)
         """
         # Count indicator alignment
-        buy_count = sum([
-            rsi_signal == SignalType.BUY,
-            macd_signal == SignalType.BUY,
+        long_count = sum([
+            rsi_signal == SignalType.LONG,
+            macd_signal == SignalType.LONG,
             trend_direction == "bullish"
         ])
 
-        sell_count = sum([
-            rsi_signal == SignalType.SELL,
-            macd_signal == SignalType.SELL,
+        short_count = sum([
+            rsi_signal == SignalType.SHORT,
+            macd_signal == SignalType.SHORT,
             trend_direction == "bearish"
         ])
 
         # Check for contradictions
-        if (rsi_signal == SignalType.BUY and macd_signal == SignalType.SELL) or \
-           (rsi_signal == SignalType.SELL and macd_signal == SignalType.BUY):
+        if (rsi_signal == SignalType.LONG and macd_signal == SignalType.SHORT) or \
+           (rsi_signal == SignalType.SHORT and macd_signal == SignalType.LONG):
             return SignalQuality.INVALID, 0.0
 
         # Calculate confidence score
         avg_strength = (rsi_strength + macd_strength) / 2
 
         # Strong signal: All aligned + volume
-        if buy_count == 3 and volume_confirmed:
+        if long_count == 3 and volume_confirmed:
             return SignalQuality.STRONG, min(avg_strength * 1.2, 1.0)
-        elif sell_count == 3 and volume_confirmed:
+        elif short_count == 3 and volume_confirmed:
             return SignalQuality.STRONG, min(avg_strength * 1.2, 1.0)
 
         # Moderate signal: Majority aligned
-        elif buy_count >= 2:
+        elif long_count >= 2:
             confidence = avg_strength * (0.9 if volume_confirmed else 0.7)
             return SignalQuality.MODERATE, confidence
-        elif sell_count >= 2:
+        elif short_count >= 2:
             confidence = avg_strength * (0.9 if volume_confirmed else 0.7)
             return SignalQuality.MODERATE, confidence
 
         # Weak signal: Minimal alignment
-        elif buy_count == 1 or sell_count == 1:
+        elif long_count == 1 or short_count == 1:
             return SignalQuality.WEAK, avg_strength * 0.5
 
         # No clear signal
@@ -501,10 +501,10 @@ class EnhancedMomentumStrategy(Strategy):
         Returns:
             Tuple of (stop_loss_price, take_profit_price, risk_reward_ratio)
         """
-        if signal_type == SignalType.BUY:
+        if signal_type == SignalType.LONG:
             stop_loss = entry_price - (atr * self.risk_params.stop_loss_atr_multiple)
             take_profit = entry_price + (atr * self.risk_params.take_profit_atr_multiple)
-        elif signal_type == SignalType.SELL:
+        elif signal_type == SignalType.SHORT:
             stop_loss = entry_price + (atr * self.risk_params.stop_loss_atr_multiple)
             take_profit = entry_price - (atr * self.risk_params.take_profit_atr_multiple)
         else:
@@ -647,16 +647,16 @@ class EnhancedMomentumStrategy(Strategy):
 
             # Apply trend filter if enabled
             if self.enable_trend_filter:
-                if rsi_signal == SignalType.BUY and trend_direction == "bearish":
-                    logger.debug(f"Bar {i}: BUY signal rejected - trend filter (bearish trend)")
+                if rsi_signal == SignalType.LONG and trend_direction == "bearish":
+                    logger.debug(f"Bar {i}: LONG signal rejected - trend filter (bearish trend)")
                     continue
-                if rsi_signal == SignalType.SELL and trend_direction == "bullish":
-                    logger.debug(f"Bar {i}: SELL signal rejected - trend filter (bullish trend)")
+                if rsi_signal == SignalType.SHORT and trend_direction == "bullish":
+                    logger.debug(f"Bar {i}: SHORT signal rejected - trend filter (bullish trend)")
                     continue
 
             # Apply volume filter if enabled
             if self.enable_volume_filter and not volume_confirmed:
-                if rsi_signal in [SignalType.BUY, SignalType.SELL]:
+                if rsi_signal in [SignalType.LONG, SignalType.SHORT]:
                     logger.debug(f"Bar {i}: Signal rejected - volume filter (ratio: {volume_ratio:.2f})")
                     continue
 
@@ -675,10 +675,10 @@ class EnhancedMomentumStrategy(Strategy):
                 continue
 
             # Determine final signal type from consensus
-            if rsi_signal == SignalType.BUY or macd_signal == SignalType.BUY:
-                final_signal_type = SignalType.BUY
-            elif rsi_signal == SignalType.SELL or macd_signal == SignalType.SELL:
-                final_signal_type = SignalType.SELL
+            if rsi_signal == SignalType.LONG or macd_signal == SignalType.LONG:
+                final_signal_type = SignalType.LONG
+            elif rsi_signal == SignalType.SHORT or macd_signal == SignalType.SHORT:
+                final_signal_type = SignalType.SHORT
             else:
                 continue
 

@@ -301,7 +301,10 @@ try:
     )
 
     execution_handler = SimulatedExecutionHandler()
-    portfolio_handler = PortfolioHandler(initial_capital=initial_capital)
+    portfolio_handler = PortfolioHandler(
+        initial_capital=initial_capital,
+        data_handler=data_handler
+    )
 
     # Use SimpleMomentumStrategy with industry-standard RSI thresholds (30/70)
     # Based on quantitative analysis: ~56 potential signals across 3 symbols over 249 days

@@ -1,0 +1,510 @@
+[0;34m[INFO][0m 2025-10-28 16:01:06 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:01:06 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-28 16:01:06 - Mode: backtest-only
+[0;34m[INFO][0m 2025-10-28 16:01:06 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:01:06 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-28 16:01:06 - Environment setup complete
+[0;34m[INFO][0m 2025-10-28 16:01:06 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-28 16:01:07 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-28 16:01:07 - Building Rust services in release mode...
+warning: unused import: `Side`
+ --> execution-engine/src/slippage.rs:1:39
+  |
+1 | use common::types::{Order, OrderType, Side};
+  |                                       ^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused variable: `assumed_mid`
+  --> execution-engine/src/slippage.rs:99:17
+   |
+99 |             let assumed_mid = limit_price.0;
+   |                 ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_assumed_mid`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: unused import: `TradingError`
+ --> market-data/src/publisher.rs:1:22
+  |
+1 | use common::{Result, TradingError, messaging::Message};
+  |                      ^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `error`
+  --> market-data/src/lib.rs:17:21
+   |
+17 | use tracing::{info, error};
+   |                     ^^^^^
+
+warning: unused variable: `data`
+   --> market-data/src/websocket.rs:174:31
+    |
+174 |                 Message::Ping(data) => {
+    |                               ^^^^ help: if this is intentional, prefix it with an underscore: `_data`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `message`
+  --> market-data/src/publisher.rs:14:27
+   |
+14 |     pub fn publish(&self, message: Message) -> Result<()> {
+   |                           ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_message`
+
+warning: fields `ws_client`, `orderbook_manager`, `bar_aggregator`, and `publisher` are never read
+  --> market-data/src/lib.rs:21:5
+   |
+20 | pub struct MarketDataService {
+   |            ----------------- fields in this struct
+21 |     ws_client: WebSocketClient,
+   |     ^^^^^^^^^
+22 |     orderbook_manager: OrderBookManager,
+   |     ^^^^^^^^^^^^^^^^^
+23 |     bar_aggregator: BarAggregator,
+   |     ^^^^^^^^^^^^^^
+24 |     publisher: MarketDataPublisher,
+   |     ^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: constant `HEARTBEAT_INTERVAL_MS` is never used
+  --> market-data/src/websocket.rs:12:7
+   |
+12 | const HEARTBEAT_INTERVAL_MS: u64 = 30000;
+   |       ^^^^^^^^^^^^^^^^^^^^^
+
+warning: field `address` is never read
+ --> market-data/src/publisher.rs:4:5
+  |
+3 | pub struct MarketDataPublisher {
+  |            ------------------- field in this struct
+4 |     address: String,
+  |     ^^^^^^^
+
+warning: `execution-engine` (lib) generated 2 warnings (run `cargo fix --lib -p execution-engine` to apply 1 suggestion)
+warning: `market-data` (lib) generated 7 warnings (run `cargo fix --lib -p market-data` to apply 2 suggestions)
+warning: use of deprecated method `pyo3::deprecations::GilRefs::<T>::function_arg`: use `&Bound<'_, T>` instead for this function argument
+   --> signal-bridge/src/bridge.rs:111:51
+    |
+111 |     pub fn compute_batch(&self, py: Python, bars: &PyList) -> P...
+    |                                                   ^
+    |
+    = note: `#[warn(deprecated)]` on by default
+
+warning: use of deprecated method `pyo3::deprecations::GilRefs::<T>::function_arg`: use `&Bound<'_, T>` instead for this function argument
+   --> signal-bridge/src/bridge.rs:197:31
+    |
+197 | fn signal_bridge(_py: Python, m: &PyModule) -> PyResult<()> {
+    |                               ^
+
+warning: unused variable: `py`
+   --> signal-bridge/src/bridge.rs:111:33
+    |
+111 | ...n compute_batch(&self, py: Python, bars: &PyList) -> PyResul...
+    |                           ^^ help: if this is intentional, prefix it with an underscore: `_py`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: field `feature_engine` is never read
+  --> signal-bridge/src/lib.rs:17:5
+   |
+16 | pub struct SignalBridgeService {
+   |            ------------------- field in this struct
+17 |     feature_engine: FeatureEngine,
+   |     ^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: field `engine` is never read
+  --> signal-bridge/src/bridge.rs:43:5
+   |
+42 | pub struct FeatureComputer {
+   |            --------------- field in this struct
+43 |     engine: FeatureEngine,
+   |     ^^^^^^
+
+warning: `signal-bridge` (lib) generated 5 warnings
+    Finished `release` profile [optimized] target(s) in 27.10s
+[0;32m[SUCCESS][0m 2025-10-28 16:01:35 - Rust services built successfully
+[0;34m[INFO][0m 2025-10-28 16:01:35 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:01:35 - PHASE 0: DATA PREPARATION
+[0;34m[INFO][0m 2025-10-28 16:01:35 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:01:35 - Checking for historical market data...
+[0;34m[INFO][0m 2025-10-28 16:01:35 - Found 6 data files in /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/data/historical
+[0;32m[SUCCESS][0m 2025-10-28 16:01:35 - Using existing market data
+[0;32m[SUCCESS][0m 2025-10-28 16:01:35 - All required market data is available
+[0;34m[INFO][0m 2025-10-28 16:01:35 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:01:35 - PHASE 1: BACKTESTING
+[0;34m[INFO][0m 2025-10-28 16:01:35 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:01:35 - Running backtesting engine with historical data...
+2025-10-28 16:01:51.166 | DEBUG    | backtesting.data_handler:_load_data:224 - Loaded AAPL from Parquet: data/historical/AAPL.parquet
+2025-10-28 16:01:51.180 | INFO     | backtesting.data_handler:_load_data:287 - Loaded 246 bars for AAPL from 2024-10-29 04:00:00+00:00 to 2025-10-22 04:00:00+00:00
+2025-10-28 16:01:51.189 | DEBUG    | backtesting.data_handler:_load_data:224 - Loaded MSFT from Parquet: data/historical/MSFT.parquet
+2025-10-28 16:01:51.191 | INFO     | backtesting.data_handler:_load_data:287 - Loaded 246 bars for MSFT from 2024-10-29 04:00:00+00:00 to 2025-10-22 04:00:00+00:00
+2025-10-28 16:01:51.200 | DEBUG    | backtesting.data_handler:_load_data:224 - Loaded GOOGL from Parquet: data/historical/GOOGL.parquet
+2025-10-28 16:01:51.202 | INFO     | backtesting.data_handler:_load_data:287 - Loaded 246 bars for GOOGL from 2024-10-29 04:00:00+00:00 to 2025-10-22 04:00:00+00:00
+2025-10-28 16:01:51.202 | INFO     | backtesting.data_handler:__init__:97 - Loaded historical data for 3 symbols from 2024-10-28 16:01:50.166824 to 2025-10-27 16:01:50.166830
+2025-10-28 16:01:51.202 | INFO     | backtesting.execution_handler:__init__:45 - Initialized SimulatedExecutionHandler with commission=0.0010, slippage=5.0bps, impact=2.0bps/$1M
+2025-10-28 16:01:51.203 | INFO     | backtesting.portfolio_handler:__init__:60 - Initialized PortfolioHandler with $1,000.00
+2025-10-28 16:01:51.203 | INFO     | src.strategies.base:__init__:69 - Strategy 'MomentumStrategy' initialized with parameters: {'rsi_period': 14, 'rsi_oversold': 30, 'rsi_overbought': 70, 'ema_fast': 12, 'ema_slow': 26, 'macd_signal': 9, 'position_size': 0.1}
+2025-10-28 16:01:51.203 | INFO     | strategies.simple_momentum:__init__:66 - SimpleMomentumStrategy initialized for symbols: ['AAPL', 'MSFT', 'GOOGL'] (RSI: 14, Oversold: 30, Overbought: 70, Position: 10.0%)
+2025-10-28 16:01:51.203 | INFO     | backtesting.performance:__init__:36 - Initialized PerformanceAnalyzer (rf=0.02)
+2025-10-28 16:01:51.203 | INFO     | backtesting.engine:__init__:63 - Initialized BacktestEngine from 2024-10-28 16:01:50.166824 to 2025-10-27 16:01:50.166830
+2025-10-28 16:01:51.203 | INFO     | backtesting.engine:run:74 - Starting backtest execution
+2025-10-28 16:01:51.206 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 1 available
+2025-10-28 16:01:51.256 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 1 available
+2025-10-28 16:01:51.257 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 1 available
+2025-10-28 16:01:51.258 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 2 available
+2025-10-28 16:01:51.258 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 2 available
+2025-10-28 16:01:51.259 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 2 available
+2025-10-28 16:01:51.259 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 3 available
+2025-10-28 16:01:51.260 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 3 available
+2025-10-28 16:01:51.260 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 3 available
+2025-10-28 16:01:51.261 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 4 available
+2025-10-28 16:01:51.261 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 4 available
+2025-10-28 16:01:51.262 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 4 available
+2025-10-28 16:01:51.263 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 5 available
+2025-10-28 16:01:51.263 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 5 available
+2025-10-28 16:01:51.264 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 5 available
+2025-10-28 16:01:51.264 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 6 available
+2025-10-28 16:01:51.265 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 6 available
+2025-10-28 16:01:51.265 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 6 available
+2025-10-28 16:01:51.266 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 7 available
+2025-10-28 16:01:51.266 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 7 available
+2025-10-28 16:01:51.267 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 7 available
+2025-10-28 16:01:51.267 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 8 available
+2025-10-28 16:01:51.268 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 8 available
+2025-10-28 16:01:51.268 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 8 available
+2025-10-28 16:01:51.269 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 9 available
+2025-10-28 16:01:51.269 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 9 available
+2025-10-28 16:01:51.269 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 9 available
+2025-10-28 16:01:51.270 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 10 available
+2025-10-28 16:01:51.270 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 10 available
+2025-10-28 16:01:51.271 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 10 available
+2025-10-28 16:01:51.271 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 11 available
+2025-10-28 16:01:51.272 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 11 available
+2025-10-28 16:01:51.272 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 11 available
+2025-10-28 16:01:51.273 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 12 available
+2025-10-28 16:01:51.273 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 12 available
+2025-10-28 16:01:51.274 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 12 available
+2025-10-28 16:01:51.274 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 13 available
+2025-10-28 16:01:51.275 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 13 available
+2025-10-28 16:01:51.275 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 13 available
+2025-10-28 16:01:51.276 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 14 available
+2025-10-28 16:01:51.276 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 14 available
+2025-10-28 16:01:51.277 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 14 available
+2025-10-28 16:01:51.277 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 15 available
+2025-10-28 16:01:51.278 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 15 available
+2025-10-28 16:01:51.278 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 15 available
+2025-10-28 16:01:51.279 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 16 available
+2025-10-28 16:01:51.280 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 16 available
+2025-10-28 16:01:51.280 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 16 available
+2025-10-28 16:01:51.281 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 17 available
+2025-10-28 16:01:51.281 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 17 available
+2025-10-28 16:01:51.281 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 17 available
+2025-10-28 16:01:51.282 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 18 available
+2025-10-28 16:01:51.282 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 18 available
+2025-10-28 16:01:51.283 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 18 available
+2025-10-28 16:01:51.283 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 19 available
+2025-10-28 16:01:51.284 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 19 available
+2025-10-28 16:01:51.284 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 19 available
+2025-10-28 16:01:51.285 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 20 available
+2025-10-28 16:01:51.286 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 20 available
+2025-10-28 16:01:51.286 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 20 available
+2025-10-28 16:01:51.293 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.295 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.297 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.297 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 21 available
+2025-10-28 16:01:51.298 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 21 available
+2025-10-28 16:01:51.298 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 21 available
+2025-10-28 16:01:51.300 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.302 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.304 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.304 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 22 available
+2025-10-28 16:01:51.305 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 22 available
+2025-10-28 16:01:51.305 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 22 available
+2025-10-28 16:01:51.307 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.309 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.311 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.311 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 23 available
+2025-10-28 16:01:51.311 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 23 available
+2025-10-28 16:01:51.312 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 23 available
+2025-10-28 16:01:51.314 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.316 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.317 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.318 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 24 available
+2025-10-28 16:01:51.318 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 24 available
+2025-10-28 16:01:51.319 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 24 available
+2025-10-28 16:01:51.321 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.323 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.325 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.325 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 25 available
+2025-10-28 16:01:51.326 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 25 available
+2025-10-28 16:01:51.326 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 25 available
+2025-10-28 16:01:51.329 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.331 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.333 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.333 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 26 available
+2025-10-28 16:01:51.334 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 26 available
+2025-10-28 16:01:51.336 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 26 available
+2025-10-28 16:01:51.340 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.341 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.343 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.344 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 27 available
+2025-10-28 16:01:51.344 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 27 available
+2025-10-28 16:01:51.345 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 27 available
+2025-10-28 16:01:51.347 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.350 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.352 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.353 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 28 available
+2025-10-28 16:01:51.353 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 28 available
+2025-10-28 16:01:51.354 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 28 available
+2025-10-28 16:01:51.356 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.358 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.359 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.360 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 29 available
+2025-10-28 16:01:51.360 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 29 available
+2025-10-28 16:01:51.361 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 29 available
+2025-10-28 16:01:51.364 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.366 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.368 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.369 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 30 available
+2025-10-28 16:01:51.369 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 30 available
+2025-10-28 16:01:51.370 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 30 available
+2025-10-28 16:01:51.372 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.374 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.376 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.376 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 31 available
+2025-10-28 16:01:51.377 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 31 available
+2025-10-28 16:01:51.378 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 31 available
+2025-10-28 16:01:51.381 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.383 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.385 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.385 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 32 available
+2025-10-28 16:01:51.386 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 32 available
+2025-10-28 16:01:51.386 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 32 available
+2025-10-28 16:01:51.388 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.390 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.392 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.392 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 33 available
+2025-10-28 16:01:51.393 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 33 available
+2025-10-28 16:01:51.393 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 33 available
+2025-10-28 16:01:51.396 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.398 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.400 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.401 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 34 available
+2025-10-28 16:01:51.401 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 34 available
+2025-10-28 16:01:51.401 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 34 available
+2025-10-28 16:01:51.404 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.406 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.408 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.408 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 35 available
+2025-10-28 16:01:51.409 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 35 available
+2025-10-28 16:01:51.409 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 35 available
+2025-10-28 16:01:51.412 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.414 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.416 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.416 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 36 available
+2025-10-28 16:01:51.417 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 36 available
+2025-10-28 16:01:51.417 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 36 available
+2025-10-28 16:01:51.420 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.422 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.424 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.424 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 37 available
+2025-10-28 16:01:51.425 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 37 available
+2025-10-28 16:01:51.425 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 37 available
+2025-10-28 16:01:51.428 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.430 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.433 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.433 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 38 available
+2025-10-28 16:01:51.433 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 38 available
+2025-10-28 16:01:51.434 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 38 available
+2025-10-28 16:01:51.437 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.439 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.442 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.442 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 39 available
+2025-10-28 16:01:51.443 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 39 available
+2025-10-28 16:01:51.443 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 39 available
+2025-10-28 16:01:51.450 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.454 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.456 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.457 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 40 available
+2025-10-28 16:01:51.457 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 40 available
+2025-10-28 16:01:51.458 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 40 available
+2025-10-28 16:01:51.460 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.463 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.466 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.466 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 41 available
+2025-10-28 16:01:51.467 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 41 available
+2025-10-28 16:01:51.467 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 41 available
+2025-10-28 16:01:51.470 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.473 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.475 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.475 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 42 available
+2025-10-28 16:01:51.476 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 42 available
+2025-10-28 16:01:51.476 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 42 available
+2025-10-28 16:01:51.479 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.481 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.484 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.485 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 43 available
+2025-10-28 16:01:51.485 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 43 available
+2025-10-28 16:01:51.486 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 43 available
+2025-10-28 16:01:51.489 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.491 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.494 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.494 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 44 available
+2025-10-28 16:01:51.495 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 44 available
+2025-10-28 16:01:51.495 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 44 available
+2025-10-28 16:01:51.498 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.501 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.504 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.505 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 45 available
+2025-10-28 16:01:51.505 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 45 available
+2025-10-28 16:01:51.506 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 45 available
+2025-10-28 16:01:51.509 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.512 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.515 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.515 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 46 available
+2025-10-28 16:01:51.516 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 46 available
+2025-10-28 16:01:51.516 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 46 available
+2025-10-28 16:01:51.519 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.522 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.525 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.526 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 47 available
+2025-10-28 16:01:51.526 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 47 available
+2025-10-28 16:01:51.527 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 47 available
+2025-10-28 16:01:51.532 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.536 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.540 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.540 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 48 available
+2025-10-28 16:01:51.540 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 48 available
+2025-10-28 16:01:51.541 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 48 available
+2025-10-28 16:01:51.544 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.547 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.551 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.553 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for AAPL, but only 49 available
+2025-10-28 16:01:51.554 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for MSFT, but only 49 available
+2025-10-28 16:01:51.554 | DEBUG    | backtesting.data_handler:get_latest_bars:403 - Requested 50 bars for GOOGL, but only 49 available
+2025-10-28 16:01:51.558 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.560 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.563 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.568 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.571 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.573 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.578 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.581 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.584 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.588 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.591 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.593 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.597 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.600 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.603 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.607 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.609 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.612 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.615 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.618 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.621 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.625 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.627 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.630 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.634 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.637 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.640 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.644 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.647 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.649 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.653 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.656 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.658 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.662 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.665 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.668 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.672 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.674 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.677 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.681 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.685 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.688 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.692 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.696 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.701 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.705 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.708 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.712 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.716 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.719 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.721 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.725 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.728 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.731 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.735 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.738 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.742 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.746 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.748 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.751 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.755 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.758 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.761 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.766 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.768 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.774 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.781 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.784 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.787 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.793 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.801 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.804 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.809 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.812 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.816 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.821 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.824 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.827 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.831 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.835 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.839 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.843 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.846 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.849 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.861 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.864 | INFO     | strategies.momentum:generate_signals:129 - Generated 1 signals for Momentum strategy
+2025-10-28 16:01:51.867 | INFO     | strategies.momentum:generate_signals:129 - Generated 0 signals for Momentum strategy
+2025-10-28 16:01:51.868 | DEBUG    | backtesting.portfolio_handler:generate_orders:125 - Generated BUY order for 100 MSFT (current: 0, target: 100)
+2025-10-28 16:01:51.869 | DEBUG    | backtesting.execution_handler:execute_order:84 - Executed BUY 100 MSFT @ 100.04 (commission: 10.00)
+Traceback (most recent call last):
+  File "<stdin>", line 61, in <module>
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/engine.py", line 103, in run
+    self._dispatch_event(event)
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/engine.py", line 138, in _dispatch_event
+    self._handle_fill_event(event)
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/engine.py", line 237, in _handle_fill_event
+    self.portfolio_handler.update_fill(event)
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/portfolio_handler.py", line 140, in update_fill
+    self.portfolio.update_position(
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/models/portfolio.py", line 109, in update_position
+    self.cash -= quantity * price
+    ^^^^^^^^^
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/.venv/lib/python3.12/site-packages/pydantic/main.py", line 1033, in __setattr__
+    setattr_handler(self, name, value)  # call here to not memo on possibly unknown fields
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/.venv/lib/python3.12/site-packages/pydantic/main.py", line 111, in <lambda>
+    'validate_assignment': lambda model, name, val: model.__pydantic_validator__.validate_assignment(model, name, val),  # pyright: ignore[reportAssignmentType]
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Portfolio
+cash
+  Input should be greater than 0 [type=greater_than, input_value=-9003.964556673818, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.12/v/greater_than
+[BACKTEST] Running backtest for ['AAPL', 'MSFT', 'GOOGL']
+[BACKTEST] Period: 2024-10-28 to 2025-10-27
+[BACKTEST] Initial capital: $1,000.00
+[BACKTEST] Executing backtest...
+[BACKTEST] ERROR: 1 validation error for Portfolio
+cash
+  Input should be greater than 0 [type=greater_than, input_value=-9003.964556673818, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.12/v/greater_than
+[0;34m[INFO][0m 2025-10-28 16:01:52 - Cleanup triggered...
+[0;34m[INFO][0m 2025-10-28 16:01:52 - Stopping all services...
+[0;32m[SUCCESS][0m 2025-10-28 16:01:52 - All services stopped

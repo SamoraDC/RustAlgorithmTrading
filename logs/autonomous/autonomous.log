@@ -552,3 +552,323 @@
 [0;34m[INFO][0m 2025-10-22 20:17:56 - Cleanup triggered...
 [0;34m[INFO][0m 2025-10-22 20:17:56 - Stopping all services...
 [0;32m[SUCCESS][0m 2025-10-22 20:17:56 - All services stopped
+[0;34m[INFO][0m 2025-10-28 15:04:36 - ==========================================
+[0;34m[INFO][0m 2025-10-28 15:04:36 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-28 15:04:36 - Mode: full
+[0;34m[INFO][0m 2025-10-28 15:04:36 - ==========================================
+[0;34m[INFO][0m 2025-10-28 15:04:36 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-28 15:04:36 - Environment setup complete
+[0;34m[INFO][0m 2025-10-28 15:04:36 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-28 15:04:40 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-28 15:04:40 - Building Rust services in release mode...
+[0;32m[SUCCESS][0m 2025-10-28 15:05:09 - Rust services built successfully
+[0;34m[INFO][0m 2025-10-28 15:05:09 - ==========================================
+[0;34m[INFO][0m 2025-10-28 15:05:09 - PHASE 0: DATA PREPARATION
+[0;34m[INFO][0m 2025-10-28 15:05:09 - ==========================================
+[0;34m[INFO][0m 2025-10-28 15:05:09 - Checking for historical market data...
+[0;34m[INFO][0m 2025-10-28 15:05:09 - Found 6 data files in /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/data/historical
+[0;32m[SUCCESS][0m 2025-10-28 15:05:09 - Using existing market data
+[0;32m[SUCCESS][0m 2025-10-28 15:05:09 - All required market data is available
+[0;34m[INFO][0m 2025-10-28 15:05:09 - ==========================================
+[0;34m[INFO][0m 2025-10-28 15:05:09 - PHASE 1: BACKTESTING
+[0;34m[INFO][0m 2025-10-28 15:05:09 - ==========================================
+[0;34m[INFO][0m 2025-10-28 15:05:09 - Running backtesting engine with historical data...
+[0;31m[ERROR][0m 2025-10-28 15:05:58 - Backtesting phase FAILED - metrics below threshold
+[0;31m[ERROR][0m 2025-10-28 15:05:58 - Validation failed - aborting paper trading
+[0;34m[INFO][0m 2025-10-28 15:05:58 - Cleanup triggered...
+[0;34m[INFO][0m 2025-10-28 15:05:58 - Stopping all services...
+[0;32m[SUCCESS][0m 2025-10-28 15:05:58 - All services stopped
+[0;34m[INFO][0m 2025-10-28 16:01:06 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:01:06 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-28 16:01:06 - Mode: backtest-only
+[0;34m[INFO][0m 2025-10-28 16:01:06 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:01:06 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-28 16:01:06 - Environment setup complete
+[0;34m[INFO][0m 2025-10-28 16:01:06 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-28 16:01:07 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-28 16:01:07 - Building Rust services in release mode...
+[0;32m[SUCCESS][0m 2025-10-28 16:01:35 - Rust services built successfully
+[0;34m[INFO][0m 2025-10-28 16:01:35 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:01:35 - PHASE 0: DATA PREPARATION
+[0;34m[INFO][0m 2025-10-28 16:01:35 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:01:35 - Checking for historical market data...
+[0;34m[INFO][0m 2025-10-28 16:01:35 - Found 6 data files in /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/data/historical
+[0;32m[SUCCESS][0m 2025-10-28 16:01:35 - Using existing market data
+[0;32m[SUCCESS][0m 2025-10-28 16:01:35 - All required market data is available
+[0;34m[INFO][0m 2025-10-28 16:01:35 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:01:35 - PHASE 1: BACKTESTING
+[0;34m[INFO][0m 2025-10-28 16:01:35 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:01:35 - Running backtesting engine with historical data...
+[0;34m[INFO][0m 2025-10-28 16:01:52 - Cleanup triggered...
+[0;34m[INFO][0m 2025-10-28 16:01:52 - Stopping all services...
+[0;32m[SUCCESS][0m 2025-10-28 16:01:52 - All services stopped
+[0;34m[INFO][0m 2025-10-28 16:04:50 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:04:50 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-28 16:04:50 - Mode: full
+[0;34m[INFO][0m 2025-10-28 16:04:50 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:04:50 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-28 16:04:50 - Environment setup complete
+[0;34m[INFO][0m 2025-10-28 16:04:50 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-28 16:04:51 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-28 16:04:51 - Building Rust services in release mode...
+[0;32m[SUCCESS][0m 2025-10-28 16:04:59 - Rust services built successfully
+[0;34m[INFO][0m 2025-10-28 16:05:00 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:05:00 - PHASE 0: DATA PREPARATION
+[0;34m[INFO][0m 2025-10-28 16:05:00 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:05:00 - Checking for historical market data...
+[0;34m[INFO][0m 2025-10-28 16:05:00 - Found 6 data files in /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/data/historical
+[0;32m[SUCCESS][0m 2025-10-28 16:05:00 - Using existing market data
+[0;32m[SUCCESS][0m 2025-10-28 16:05:00 - All required market data is available
+[0;34m[INFO][0m 2025-10-28 16:05:00 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:05:00 - PHASE 1: BACKTESTING
+[0;34m[INFO][0m 2025-10-28 16:05:00 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:05:00 - Running backtesting engine with historical data...
+[0;31m[ERROR][0m 2025-10-28 16:05:12 - Backtesting phase FAILED - metrics below threshold
+[0;31m[ERROR][0m 2025-10-28 16:05:12 - Validation failed - aborting paper trading
+[0;34m[INFO][0m 2025-10-28 16:05:12 - Cleanup triggered...
+[0;34m[INFO][0m 2025-10-28 16:05:12 - Stopping all services...
+[0;32m[SUCCESS][0m 2025-10-28 16:05:12 - All services stopped
+[0;34m[INFO][0m 2025-10-28 16:13:08 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:13:08 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-28 16:13:08 - Mode: full
+[0;34m[INFO][0m 2025-10-28 16:13:08 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:13:08 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-28 16:13:08 - Environment setup complete
+[0;34m[INFO][0m 2025-10-28 16:13:08 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-28 16:13:09 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-28 16:13:09 - Building Rust services in release mode...
+[0;32m[SUCCESS][0m 2025-10-28 16:13:17 - Rust services built successfully
+[0;34m[INFO][0m 2025-10-28 16:13:17 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:13:17 - PHASE 0: DATA PREPARATION
+[0;34m[INFO][0m 2025-10-28 16:13:17 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:13:17 - Checking for historical market data...
+[0;34m[INFO][0m 2025-10-28 16:13:17 - Found 6 data files in /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/data/historical
+[0;32m[SUCCESS][0m 2025-10-28 16:13:17 - Using existing market data
+[0;32m[SUCCESS][0m 2025-10-28 16:13:17 - All required market data is available
+[0;34m[INFO][0m 2025-10-28 16:13:17 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:13:17 - PHASE 1: BACKTESTING
+[0;34m[INFO][0m 2025-10-28 16:13:17 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:13:17 - Running backtesting engine with historical data...
+[0;31m[ERROR][0m 2025-10-28 16:13:30 - Backtesting phase FAILED - metrics below threshold
+[0;31m[ERROR][0m 2025-10-28 16:13:30 - Validation failed - aborting paper trading
+[0;34m[INFO][0m 2025-10-28 16:13:30 - Cleanup triggered...
+[0;34m[INFO][0m 2025-10-28 16:13:30 - Stopping all services...
+[0;32m[SUCCESS][0m 2025-10-28 16:13:30 - All services stopped
+[0;34m[INFO][0m 2025-10-28 16:37:50 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:37:50 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-28 16:37:50 - Mode: backtest
+[0;34m[INFO][0m 2025-10-28 16:37:50 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:37:50 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-28 16:37:50 - Environment setup complete
+[0;34m[INFO][0m 2025-10-28 16:37:50 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-28 16:37:53 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-28 16:37:53 - Building Rust services in release mode...
+[0;34m[INFO][0m 2025-10-28 16:38:28 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:38:28 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-28 16:38:28 - Mode: backtest
+[0;34m[INFO][0m 2025-10-28 16:38:28 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:38:28 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-28 16:38:28 - Environment setup complete
+[0;34m[INFO][0m 2025-10-28 16:38:28 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-28 16:38:29 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-28 16:38:29 - Building Rust services in release mode...
+[0;32m[SUCCESS][0m 2025-10-28 16:38:42 - Rust services built successfully
+[0;31m[ERROR][0m 2025-10-28 16:38:42 - Unknown mode: backtest
+[0;34m[INFO][0m 2025-10-28 16:38:42 - Cleanup triggered...
+[0;34m[INFO][0m 2025-10-28 16:38:42 - Stopping all services...
+[0;32m[SUCCESS][0m 2025-10-28 16:38:42 - All services stopped
+[0;34m[INFO][0m 2025-10-28 16:38:54 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:38:54 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-28 16:38:54 - Mode: backtest-only
+[0;34m[INFO][0m 2025-10-28 16:38:54 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:38:54 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-28 16:38:54 - Environment setup complete
+[0;34m[INFO][0m 2025-10-28 16:38:54 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-28 16:38:56 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-28 16:38:56 - Building Rust services in release mode...
+[0;32m[SUCCESS][0m 2025-10-28 16:39:06 - Rust services built successfully
+[0;34m[INFO][0m 2025-10-28 16:39:06 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:39:06 - PHASE 0: DATA PREPARATION
+[0;34m[INFO][0m 2025-10-28 16:39:06 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:39:06 - Checking for historical market data...
+[0;34m[INFO][0m 2025-10-28 16:39:06 - Found 6 data files in /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/data/historical
+[0;32m[SUCCESS][0m 2025-10-28 16:39:06 - Using existing market data
+[0;32m[SUCCESS][0m 2025-10-28 16:39:06 - All required market data is available
+[0;34m[INFO][0m 2025-10-28 16:39:06 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:39:06 - PHASE 1: BACKTESTING
+[0;34m[INFO][0m 2025-10-28 16:39:06 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:39:06 - Running backtesting engine with historical data...
+[0;34m[INFO][0m 2025-10-28 16:39:28 - Cleanup triggered...
+[0;34m[INFO][0m 2025-10-28 16:39:28 - Stopping all services...
+[0;32m[SUCCESS][0m 2025-10-28 16:39:28 - All services stopped
+[0;34m[INFO][0m 2025-10-28 16:40:40 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:40:41 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-28 16:40:41 - Mode: backtest-only
+[0;34m[INFO][0m 2025-10-28 16:40:41 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:40:41 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-28 16:40:41 - Environment setup complete
+[0;34m[INFO][0m 2025-10-28 16:40:41 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-28 16:40:44 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-28 16:40:44 - Building Rust services in release mode...
+[0;32m[SUCCESS][0m 2025-10-28 16:41:34 - Rust services built successfully
+[0;34m[INFO][0m 2025-10-28 16:41:34 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:41:34 - PHASE 0: DATA PREPARATION
+[0;34m[INFO][0m 2025-10-28 16:41:34 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:41:34 - Checking for historical market data...
+[0;34m[INFO][0m 2025-10-28 16:41:34 - Found 6 data files in /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/data/historical
+[0;32m[SUCCESS][0m 2025-10-28 16:41:34 - Using existing market data
+[0;32m[SUCCESS][0m 2025-10-28 16:41:34 - All required market data is available
+[0;34m[INFO][0m 2025-10-28 16:41:34 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:41:34 - PHASE 1: BACKTESTING
+[0;34m[INFO][0m 2025-10-28 16:41:34 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:41:34 - Running backtesting engine with historical data...
+[0;34m[INFO][0m 2025-10-28 16:42:31 - Cleanup triggered...
+[0;34m[INFO][0m 2025-10-28 16:42:31 - Stopping all services...
+[0;32m[SUCCESS][0m 2025-10-28 16:42:31 - All services stopped
+[0;34m[INFO][0m 2025-10-28 16:48:03 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:48:03 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-28 16:48:03 - Mode: full
+[0;34m[INFO][0m 2025-10-28 16:48:03 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:48:03 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-28 16:48:03 - Environment setup complete
+[0;34m[INFO][0m 2025-10-28 16:48:03 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-28 16:48:04 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-28 16:48:04 - Building Rust services in release mode...
+[0;32m[SUCCESS][0m 2025-10-28 16:48:11 - Rust services built successfully
+[0;34m[INFO][0m 2025-10-28 16:48:11 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:48:11 - PHASE 0: DATA PREPARATION
+[0;34m[INFO][0m 2025-10-28 16:48:11 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:48:11 - Checking for historical market data...
+[0;34m[INFO][0m 2025-10-28 16:48:11 - Found 6 data files in /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/data/historical
+[0;32m[SUCCESS][0m 2025-10-28 16:48:11 - Using existing market data
+[0;32m[SUCCESS][0m 2025-10-28 16:48:11 - All required market data is available
+[0;34m[INFO][0m 2025-10-28 16:48:11 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:48:11 - PHASE 1: BACKTESTING
+[0;34m[INFO][0m 2025-10-28 16:48:11 - ==========================================
+[0;34m[INFO][0m 2025-10-28 16:48:11 - Running backtesting engine with historical data...
+[0;31m[ERROR][0m 2025-10-28 16:48:23 - Backtesting phase FAILED - metrics below threshold
+[0;31m[ERROR][0m 2025-10-28 16:48:23 - Validation failed - aborting paper trading
+[0;34m[INFO][0m 2025-10-28 16:48:23 - Cleanup triggered...
+[0;34m[INFO][0m 2025-10-28 16:48:23 - Stopping all services...
+[0;32m[SUCCESS][0m 2025-10-28 16:48:24 - All services stopped
+[0;34m[INFO][0m 2025-10-28 17:03:27 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:03:27 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-28 17:03:27 - Mode: full
+[0;34m[INFO][0m 2025-10-28 17:03:27 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:03:27 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-28 17:03:27 - Environment setup complete
+[0;34m[INFO][0m 2025-10-28 17:03:27 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-28 17:03:29 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-28 17:03:29 - Building Rust services in release mode...
+[0;32m[SUCCESS][0m 2025-10-28 17:04:01 - Rust services built successfully
+[0;34m[INFO][0m 2025-10-28 17:04:01 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:04:01 - PHASE 0: DATA PREPARATION
+[0;34m[INFO][0m 2025-10-28 17:04:01 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:04:01 - Checking for historical market data...
+[0;34m[INFO][0m 2025-10-28 17:04:01 - Found 6 data files in /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/data/historical
+[0;32m[SUCCESS][0m 2025-10-28 17:04:01 - Using existing market data
+[0;32m[SUCCESS][0m 2025-10-28 17:04:01 - All required market data is available
+[0;34m[INFO][0m 2025-10-28 17:04:02 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:04:02 - PHASE 1: BACKTESTING
+[0;34m[INFO][0m 2025-10-28 17:04:02 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:04:02 - Running backtesting engine with historical data...
+[0;31m[ERROR][0m 2025-10-28 17:04:56 - Backtesting phase FAILED - metrics below threshold
+[0;31m[ERROR][0m 2025-10-28 17:04:56 - Validation failed - aborting paper trading
+[0;34m[INFO][0m 2025-10-28 17:04:56 - Cleanup triggered...
+[0;34m[INFO][0m 2025-10-28 17:04:56 - Stopping all services...
+[0;32m[SUCCESS][0m 2025-10-28 17:04:57 - All services stopped
+[0;34m[INFO][0m 2025-10-28 17:39:48 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:39:48 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-28 17:39:49 - Mode: backtest-only
+[0;34m[INFO][0m 2025-10-28 17:39:49 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:39:49 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-28 17:39:49 - Environment setup complete
+[0;34m[INFO][0m 2025-10-28 17:39:49 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-28 17:39:50 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-28 17:39:50 - Building Rust services in release mode...
+[0;32m[SUCCESS][0m 2025-10-28 17:40:02 - Rust services built successfully
+[0;34m[INFO][0m 2025-10-28 17:40:02 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:40:02 - PHASE 0: DATA PREPARATION
+[0;34m[INFO][0m 2025-10-28 17:40:02 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:40:02 - Checking for historical market data...
+[0;34m[INFO][0m 2025-10-28 17:40:02 - Found 6 data files in /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/data/historical
+[0;32m[SUCCESS][0m 2025-10-28 17:40:02 - Using existing market data
+[0;32m[SUCCESS][0m 2025-10-28 17:40:02 - All required market data is available
+[0;34m[INFO][0m 2025-10-28 17:40:02 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:40:02 - PHASE 1: BACKTESTING
+[0;34m[INFO][0m 2025-10-28 17:40:02 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:40:02 - Running backtesting engine with historical data...
+[0;34m[INFO][0m 2025-10-28 17:40:24 - Cleanup triggered...
+[0;34m[INFO][0m 2025-10-28 17:40:24 - Stopping all services...
+[0;32m[SUCCESS][0m 2025-10-28 17:40:24 - All services stopped
+[0;34m[INFO][0m 2025-10-28 17:40:37 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:40:37 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-28 17:40:37 - Mode: backtest-only
+[0;34m[INFO][0m 2025-10-28 17:40:37 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:40:37 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-28 17:40:37 - Environment setup complete
+[0;34m[INFO][0m 2025-10-28 17:40:37 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-28 17:40:38 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-28 17:40:38 - Building Rust services in release mode...
+[0;32m[SUCCESS][0m 2025-10-28 17:40:48 - Rust services built successfully
+[0;34m[INFO][0m 2025-10-28 17:40:48 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:40:48 - PHASE 0: DATA PREPARATION
+[0;34m[INFO][0m 2025-10-28 17:40:48 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:40:48 - Checking for historical market data...
+[0;34m[INFO][0m 2025-10-28 17:40:48 - Found 6 data files in /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/data/historical
+[0;32m[SUCCESS][0m 2025-10-28 17:40:48 - Using existing market data
+[0;32m[SUCCESS][0m 2025-10-28 17:40:48 - All required market data is available
+[0;34m[INFO][0m 2025-10-28 17:40:48 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:40:48 - PHASE 1: BACKTESTING
+[0;34m[INFO][0m 2025-10-28 17:40:48 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:40:48 - Running backtesting engine with historical data...
+[0;34m[INFO][0m 2025-10-28 17:47:20 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:47:20 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-28 17:47:20 - Mode: full
+[0;34m[INFO][0m 2025-10-28 17:47:20 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:47:20 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-28 17:47:20 - Environment setup complete
+[0;34m[INFO][0m 2025-10-28 17:47:20 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-28 17:47:21 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-28 17:47:21 - Building Rust services in release mode...
+[0;32m[SUCCESS][0m 2025-10-28 17:47:27 - Rust services built successfully
+[0;34m[INFO][0m 2025-10-28 17:47:27 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:47:27 - PHASE 0: DATA PREPARATION
+[0;34m[INFO][0m 2025-10-28 17:47:27 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:47:27 - Checking for historical market data...
+[0;34m[INFO][0m 2025-10-28 17:47:27 - Found 6 data files in /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/data/historical
+[0;32m[SUCCESS][0m 2025-10-28 17:47:27 - Using existing market data
+[0;32m[SUCCESS][0m 2025-10-28 17:47:27 - All required market data is available
+[0;34m[INFO][0m 2025-10-28 17:47:27 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:47:28 - PHASE 1: BACKTESTING
+[0;34m[INFO][0m 2025-10-28 17:47:28 - ==========================================
+[0;34m[INFO][0m 2025-10-28 17:47:28 - Running backtesting engine with historical data...
+[0;31m[ERROR][0m 2025-10-28 17:47:43 - Backtesting phase FAILED - metrics below threshold
+[0;31m[ERROR][0m 2025-10-28 17:47:43 - Validation failed - aborting paper trading
+[0;34m[INFO][0m 2025-10-28 17:47:43 - Cleanup triggered...
+[0;34m[INFO][0m 2025-10-28 17:47:43 - Stopping all services...
+[0;32m[SUCCESS][0m 2025-10-28 17:47:43 - All services stopped
+[0;34m[INFO][0m 2025-10-28 19:06:46 - ==========================================
+[0;34m[INFO][0m 2025-10-28 19:06:46 - AUTONOMOUS TRADING SYSTEM
+[0;34m[INFO][0m 2025-10-28 19:06:46 - Mode: backtest-only
+[0;34m[INFO][0m 2025-10-28 19:06:46 - ==========================================
+[0;34m[INFO][0m 2025-10-28 19:06:46 - Setting up autonomous trading environment...
+[0;32m[SUCCESS][0m 2025-10-28 19:06:46 - Environment setup complete
+[0;34m[INFO][0m 2025-10-28 19:06:46 - Validating system configuration...
+[0;32m[SUCCESS][0m 2025-10-28 19:06:49 - Configuration validation complete
+[0;34m[INFO][0m 2025-10-28 19:06:49 - Building Rust services in release mode...
+[0;32m[SUCCESS][0m 2025-10-28 19:07:14 - Rust services built successfully
+[0;34m[INFO][0m 2025-10-28 19:07:14 - ==========================================
+[0;34m[INFO][0m 2025-10-28 19:07:14 - PHASE 0: DATA PREPARATION
+[0;34m[INFO][0m 2025-10-28 19:07:14 - ==========================================
+[0;34m[INFO][0m 2025-10-28 19:07:14 - Checking for historical market data...
+[0;34m[INFO][0m 2025-10-28 19:07:14 - Found 6 data files in /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/data/historical
+[0;32m[SUCCESS][0m 2025-10-28 19:07:14 - Using existing market data
+[0;32m[SUCCESS][0m 2025-10-28 19:07:14 - All required market data is available
+[0;34m[INFO][0m 2025-10-28 19:07:14 - ==========================================
+[0;34m[INFO][0m 2025-10-28 19:07:15 - PHASE 1: BACKTESTING
+[0;34m[INFO][0m 2025-10-28 19:07:15 - ==========================================
+[0;34m[INFO][0m 2025-10-28 19:07:15 - Running backtesting engine with historical data...
+[0;34m[INFO][0m 2025-10-28 19:08:13 - Cleanup triggered...
+[0;34m[INFO][0m 2025-10-28 19:08:13 - Stopping all services...
+[0;32m[SUCCESS][0m 2025-10-28 19:08:13 - All services stopped

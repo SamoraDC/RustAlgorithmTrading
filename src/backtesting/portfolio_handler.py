@@ -23,6 +23,7 @@ class PortfolioHandler:
         self,
         initial_capital: float,
         position_sizer: Optional['PositionSizer'] = None,
+        data_handler: Optional['HistoricalDataHandler'] = None,
     ):
         """
         Initialize portfolio handler.
@@ -30,6 +31,7 @@ class PortfolioHandler:
         Args:
             initial_capital: Starting capital
             position_sizer: Position sizing strategy (defaults to FixedAmountSizer)
+            data_handler: Data handler for getting current prices
 
         Raises:
             TypeError: If initial_capital is not a number
@@ -46,6 +48,7 @@ class PortfolioHandler:
             raise TypeError(f"position_sizer must be a PositionSizer instance or None, got {type(position_sizer).__name__}")
 
         self.initial_capital = initial_capital
+        self.data_handler = data_handler
         self.position_sizer = position_sizer or FixedAmountSizer(10000.0)
 
         self.portfolio = Portfolio(
@@ -56,6 +59,9 @@ class PortfolioHandler:
         # Track equity curve
         self.equity_curve: List[Dict] = []
         self.holdings_history: List[Dict] = []
+
+        # RACE FIX: Track reserved cash for pending orders in the same bar
+        self.reserved_cash: float = 0.0
 
         logger.info(f"Initialized PortfolioHandler with ${initial_capital:,.2f}")
 
@@ -85,20 +91,41 @@ class PortfolioHandler:
 
     def generate_orders(self, signal: SignalEvent) -> List[OrderEvent]:
         """
-        Generate orders from trading signal.
+        Generate orders from trading signal with race condition protection.
+
+        This method prevents cash overdraft when multiple orders are generated
+        in the same bar by tracking reserved cash for pending orders.
 
         Args:
             signal: Trading signal
 
         Returns:
-            List of order events
+            List of order events (may be empty if insufficient cash)
         """
         orders = []
+
+        # Get current market price
+        current_price = None
+        if self.data_handler:
+            latest_bar = self.data_handler.get_latest_bar(signal.symbol)
+            if latest_bar:
+                current_price = latest_bar.close
+
+        # RACE FIX: Calculate available cash minus reserved cash
+        available_cash = self.portfolio.cash - self.reserved_cash
+
+        if available_cash < 0:
+            logger.warning(
+                f"Available cash is negative: ${available_cash:,.2f} "
+                f"(portfolio cash: ${self.portfolio.cash:,.2f}, reserved: ${self.reserved_cash:,.2f})"
+            )
+            return orders
 
         # Calculate target position based on signal
         target_quantity = self.position_sizer.calculate_position_size(
             signal=signal,
             portfolio=self.portfolio,
+            current_price=current_price,
         )
 
         # Get current position
@@ -110,6 +137,52 @@ class PortfolioHandler:
 
         if order_quantity == 0:
             return orders
+
+        # RACE FIX: For BUY orders, check if we have enough available cash
+        if order_quantity > 0:  # BUY order
+            if current_price is None or current_price <= 0:
+                logger.warning(f"Invalid price for {signal.symbol}, cannot generate order")
+                return orders
+
+            # Calculate estimated cost (position + commission + slippage)
+            position_cost = abs(order_quantity) * current_price
+            estimated_commission = position_cost * 0.001  # 0.1% commission
+            estimated_slippage = position_cost * 0.0005  # 0.05% slippage
+            total_estimated_cost = position_cost + estimated_commission + estimated_slippage
+
+            # Check if we have enough available cash
+            if total_estimated_cost > available_cash:
+                # Calculate maximum affordable quantity
+                max_affordable_value = available_cash / (1 + 0.001 + 0.0005)  # Adjust for fees
+                max_affordable_quantity = int(max_affordable_value / current_price)
+
+                if max_affordable_quantity <= 0:
+                    logger.info(
+                        f"Insufficient available cash for {signal.symbol}: "
+                        f"need ${total_estimated_cost:,.2f}, have ${available_cash:,.2f} available "
+                        f"(portfolio: ${self.portfolio.cash:,.2f}, reserved: ${self.reserved_cash:,.2f})"
+                    )
+                    return orders
+
+                # Adjust order quantity to what we can afford
+                logger.info(
+                    f"Reducing order for {signal.symbol} from {order_quantity} to {max_affordable_quantity} shares "
+                    f"due to available cash constraint (${available_cash:,.2f} available)"
+                )
+                order_quantity = max_affordable_quantity
+
+                # Recalculate costs with adjusted quantity
+                position_cost = abs(order_quantity) * current_price
+                estimated_commission = position_cost * 0.001
+                estimated_slippage = position_cost * 0.0005
+                total_estimated_cost = position_cost + estimated_commission + estimated_slippage
+
+            # RACE FIX: Reserve cash for this pending order
+            self.reserved_cash += total_estimated_cost
+            logger.debug(
+                f"Reserved ${total_estimated_cost:,.2f} for {signal.symbol} order "
+                f"(total reserved: ${self.reserved_cash:,.2f}, available: ${available_cash - total_estimated_cost:,.2f})"
+            )
 
         # Create order
         order = OrderEvent(
@@ -124,7 +197,8 @@ class PortfolioHandler:
 
         logger.debug(
             f"Generated {order.direction} order for {order.quantity} {signal.symbol} "
-            f"(current: {current_quantity}, target: {target_quantity})"
+            f"(current: {current_quantity}, target: {target_quantity}, "
+            f"available cash: ${available_cash:,.2f})"
         )
 
         return orders
@@ -135,7 +209,25 @@ class PortfolioHandler:
 
         Args:
             fill: Fill event
+
+        Raises:
+            ValueError: If fill would result in negative cash
         """
+        # CRITICAL FIX: Validate that we have enough cash BEFORE updating
+        position_cost = abs(fill.quantity) * fill.fill_price
+        total_cost = position_cost + fill.commission
+
+        # For BUY orders, check if we have enough cash
+        if fill.quantity > 0:  # BUY
+            if total_cost > self.portfolio.cash:
+                error_msg = (
+                    f"Insufficient cash for fill: need ${total_cost:,.2f} "
+                    f"(position: ${position_cost:,.2f} + commission: ${fill.commission:,.2f}), "
+                    f"but only have ${self.portfolio.cash:,.2f}"
+                )
+                logger.error(error_msg)
+                raise ValueError(error_msg)
+
         # Update position
         self.portfolio.update_position(
             symbol=fill.symbol,
@@ -145,6 +237,15 @@ class PortfolioHandler:
 
         # Deduct commission
         self.portfolio.cash -= fill.commission
+
+        # Final safety check
+        if self.portfolio.cash < 0:
+            error_msg = (
+                f"Portfolio cash went negative: ${self.portfolio.cash:,.2f} "
+                f"after processing {fill.quantity} {fill.symbol} @ ${fill.fill_price:,.2f}"
+            )
+            logger.error(error_msg)
+            raise ValueError(error_msg)
 
         # Record holdings
         self.holdings_history.append({
@@ -170,12 +271,23 @@ class PortfolioHandler:
         """Get holdings history as DataFrame."""
         return pd.DataFrame(self.holdings_history)
 
+    def clear_reserved_cash(self):
+        """
+        Clear reserved cash after all orders in a bar have been processed.
+
+        This should be called by the engine after processing all fills for a bar
+        to reset the reservation system for the next bar.
+        """
+        if self.reserved_cash > 0:
+            logger.debug(f"Clearing reserved cash: ${self.reserved_cash:,.2f}")
+            self.reserved_cash = 0.0
+
 
 class PositionSizer:
     """Base class for position sizing strategies."""
 
     def calculate_position_size(
-        self, signal: SignalEvent, portfolio: Portfolio
+        self, signal: SignalEvent, portfolio: Portfolio, current_price: Optional[float] = None
     ) -> int:
         """
         Calculate target position size.
@@ -183,6 +295,7 @@ class PositionSizer:
         Args:
             signal: Trading signal
             portfolio: Current portfolio state
+            current_price: Current market price for the symbol (optional)
 
         Returns:
             Target position quantity (positive for long, negative for short)
@@ -213,17 +326,75 @@ class FixedAmountSizer(PositionSizer):
         self.amount = amount
 
     def calculate_position_size(
-        self, signal: SignalEvent, portfolio: Portfolio
+        self, signal: SignalEvent, portfolio: Portfolio, current_price: Optional[float] = None
     ) -> int:
-        """Calculate position size based on fixed amount."""
-        # Get current price (would come from market data in real implementation)
-        current_position = portfolio.positions.get(signal.symbol)
-        price = current_position.current_price if current_position else 100.0
+        """
+        Calculate position size based on fixed amount.
+
+        Args:
+            signal: Trading signal
+            portfolio: Current portfolio state
+            current_price: Current market price for the symbol
+
+        Returns:
+            Target position quantity
+        """
+        # Get current price from parameter, position, or fail safely with 0
+        if current_price is None:
+            current_position = portfolio.positions.get(signal.symbol)
+            if current_position:
+                price = current_position.current_price
+            else:
+                logger.warning(
+                    f"No current price available for {signal.symbol}, cannot calculate position size"
+                )
+                return 0
+        else:
+            price = current_price
+
+        if price <= 0:
+            logger.warning(f"Invalid price {price} for {signal.symbol}")
+            return 0
+
+        # CRITICAL FIX: Account for commission, slippage, and market impact
+        # Commission: 0.1% (10 bps)
+        # Slippage: 0.5% (50 bps) average
+        # Market impact: variable based on notional
+        # Safety buffer: 0.5% for rounding and price movements
+        # Total buffer: ~2% to be safe
+
+        # Calculate target shares based on position size
+        target_shares = int(self.amount / price) if price > 0 else 0
+
+        # Calculate worst-case cost including all fees
+        # Slippage can add up to 0.5%, so effective price is price * 1.005
+        # Commission is 0.1% of notional
+        # Add 0.5% safety margin
+        cost_multiplier = 1.016  # 1.005 (slippage) + 0.001 (commission) + 0.010 (safety) = 1.6% total buffer
+
+        # Calculate how many shares we can afford with the buffer
+        max_affordable_shares = int(portfolio.cash / (price * cost_multiplier))
+
+        # Use the minimum to respect cash constraints
+        shares = min(target_shares, max_affordable_shares)
+
+        # Double-check: ensure total cost doesn't exceed available cash
+        estimated_fill_price = price * 1.005  # Account for slippage
+        estimated_commission = shares * estimated_fill_price * 0.001
+        total_estimated_cost = (shares * estimated_fill_price) + estimated_commission
+
+        if total_estimated_cost > portfolio.cash:
+            # Emergency recalculation with even more conservative buffer
+            shares = int(portfolio.cash / (price * 1.020))  # 2% safety margin
+            logger.debug(
+                f"Applied emergency position size reduction to {shares} shares "
+                f"(cash: ${portfolio.cash:,.2f}, estimated cost: ${total_estimated_cost:,.2f})"
+            )
 
         if signal.signal_type == 'LONG':
-            return int(self.amount / price)
+            return shares
         elif signal.signal_type == 'SHORT':
-            return -int(self.amount / price)
+            return -shares
         else:  # EXIT
             return 0
 
@@ -251,18 +422,62 @@ class PercentageOfEquitySizer(PositionSizer):
         self.percentage = percentage
 
     def calculate_position_size(
-        self, signal: SignalEvent, portfolio: Portfolio
+        self, signal: SignalEvent, portfolio: Portfolio, current_price: Optional[float] = None
     ) -> int:
-        """Calculate position size based on equity percentage."""
-        amount = portfolio.equity * self.percentage
+        """
+        Calculate position size based on equity percentage.
 
-        current_position = portfolio.positions.get(signal.symbol)
-        price = current_position.current_price if current_position else 100.0
+        Args:
+            signal: Trading signal
+            portfolio: Current portfolio state
+            current_price: Current market price for the symbol
+
+        Returns:
+            Target position quantity
+        """
+        # Get current price from parameter, position, or fail safely with 0
+        if current_price is None:
+            current_position = portfolio.positions.get(signal.symbol)
+            if current_position:
+                price = current_position.current_price
+            else:
+                logger.warning(
+                    f"No current price available for {signal.symbol}, cannot calculate position size"
+                )
+                return 0
+        else:
+            price = current_price
+
+        if price <= 0:
+            logger.warning(f"Invalid price {price} for {signal.symbol}")
+            return 0
+
+        # Calculate target amount based on equity percentage
+        amount = portfolio.equity * self.percentage
+        target_shares = int(amount / price) if price > 0 else 0
+
+        # CRITICAL FIX: Account for all costs with proper buffer
+        cost_multiplier = 1.016  # Slippage + Commission + Safety (1.6% total)
+        max_affordable_shares = int(portfolio.cash / (price * cost_multiplier))
+
+        # Use the minimum to respect cash constraints
+        shares = min(target_shares, max_affordable_shares)
+
+        # Double-check with estimated costs
+        estimated_fill_price = price * 1.005
+        estimated_commission = shares * estimated_fill_price * 0.001
+        total_estimated_cost = (shares * estimated_fill_price) + estimated_commission
+
+        if total_estimated_cost > portfolio.cash:
+            shares = int(portfolio.cash / (price * 1.020))
+            logger.debug(
+                f"Applied emergency position size reduction to {shares} shares"
+            )
 
         if signal.signal_type == 'LONG':
-            return int(amount / price)
+            return shares
         elif signal.signal_type == 'SHORT':
-            return -int(amount / price)
+            return -shares
         else:
             return 0
 
@@ -290,9 +505,36 @@ class KellyPositionSizer(PositionSizer):
         self.fraction = fraction
 
     def calculate_position_size(
-        self, signal: SignalEvent, portfolio: Portfolio
+        self, signal: SignalEvent, portfolio: Portfolio, current_price: Optional[float] = None
     ) -> int:
-        """Calculate position size using Kelly Criterion."""
+        """
+        Calculate position size using Kelly Criterion.
+
+        Args:
+            signal: Trading signal
+            portfolio: Current portfolio state
+            current_price: Current market price for the symbol
+
+        Returns:
+            Target position quantity
+        """
+        # Get current price from parameter, position, or fail safely with 0
+        if current_price is None:
+            current_position = portfolio.positions.get(signal.symbol)
+            if current_position:
+                price = current_position.current_price
+            else:
+                logger.warning(
+                    f"No current price available for {signal.symbol}, cannot calculate position size"
+                )
+                return 0
+        else:
+            price = current_price
+
+        if price <= 0:
+            logger.warning(f"Invalid price {price} for {signal.symbol}")
+            return 0
+
         # Kelly formula: f = (bp - q) / b
         # where b = odds, p = win probability, q = 1-p
         # For this implementation, use signal strength as proxy for probability
@@ -306,13 +548,29 @@ class KellyPositionSizer(PositionSizer):
         kelly_fraction *= self.fraction  # Apply fractional Kelly
 
         amount = portfolio.equity * kelly_fraction
+        target_shares = int(amount / price) if price > 0 else 0
 
-        current_position = portfolio.positions.get(signal.symbol)
-        price = current_position.current_price if current_position else 100.0
+        # CRITICAL FIX: Account for all costs with proper buffer
+        cost_multiplier = 1.016  # Slippage + Commission + Safety (1.6% total)
+        max_affordable_shares = int(portfolio.cash / (price * cost_multiplier))
+
+        # Use the minimum to respect cash constraints
+        shares = min(target_shares, max_affordable_shares)
+
+        # Double-check with estimated costs
+        estimated_fill_price = price * 1.005
+        estimated_commission = shares * estimated_fill_price * 0.001
+        total_estimated_cost = (shares * estimated_fill_price) + estimated_commission
+
+        if total_estimated_cost > portfolio.cash:
+            shares = int(portfolio.cash / (price * 1.020))
+            logger.debug(
+                f"Applied emergency position size reduction to {shares} shares"
+            )
 
         if signal.signal_type == 'LONG':
-            return int(amount / price)
+            return shares
         elif signal.signal_type == 'SHORT':
-            return -int(amount / price)
+            return -shares
         else:
             return 0
