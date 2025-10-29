@@ -1,0 +1,43 @@
+{
+  "strategy": "Mean Reversion (Bollinger Bands)",
+  "timestamp": "2025-10-29T10:29:51.346545",
+  "parameters": {
+    "bb_period": 20,
+    "bb_std": 2.0,
+    "position_size": 0.15,
+    "stop_loss_pct": 0.02,
+    "take_profit_pct": 0.03,
+    "touch_threshold": 1.001
+  },
+  "symbols": [
+    "AAPL",
+    "MSFT",
+    "GOOGL"
+  ],
+  "period": {
+    "start": "2024-10-01T00:00:00",
+    "end": "2024-12-31T00:00:00"
+  },
+  "initial_capital": 100000.0,
+  "metrics": {
+    "timestamp": "2025-10-29T13:29:51.334453",
+    "metadata": "{}",
+    "total_return": -2.836183507294365,
+    "sharpe_ratio": -11.510722307446905,
+    "sortino_ratio": -11.257759989349898,
+    "max_drawdown": 2.836183507294365,
+    "max_drawdown_duration": 23,
+    "win_rate": 0.0,
+    "profit_factor": 0.0,
+    "total_trades": 63,
+    "winning_trades": 0,
+    "losing_trades": 63,
+    "average_win": 0.0,
+    "average_loss": -30.76402252218971,
+    "largest_win": 0.0,
+    "largest_loss": -231.18654421589895,
+    "volatility": 1.5125592904673448,
+    "calmar_ratio": 1.0,
+    "average_trade": -30.76402252218971
+  }
+}

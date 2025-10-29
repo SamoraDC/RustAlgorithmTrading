@@ -1,0 +1,93 @@
+2025-10-29 17:04:50.280 | INFO     | __main__:run_week35_validation:106 - ================================================================================
+2025-10-29 17:04:50.285 | INFO     | __main__:run_week35_validation:107 - WEEK 3.5 VALIDATION BACKTEST
+2025-10-29 17:04:50.292 | INFO     | __main__:run_week35_validation:108 - Emergency validation after mean reversion re-enabled
+2025-10-29 17:04:50.300 | INFO     | __main__:run_week35_validation:109 - ================================================================================
+2025-10-29 17:04:50.304 | INFO     | __main__:run_week35_validation:117 - Testing period: 2025-05-02 to 2025-10-29
+2025-10-29 17:04:50.307 | INFO     | __main__:run_week35_validation:118 - Symbols: AAPL, MSFT, GOOGL, AMZN, NVDA
+2025-10-29 17:04:50.310 | INFO     | __main__:run_week35_validation:119 - Initial capital: $100,000.00
+2025-10-29 17:04:50.314 | INFO     | __main__:run_week35_validation:120 - 
+2025-10-29 17:04:50.690 | INFO     | src.api.alpaca_client:__init__:64 - Alpaca client initialized successfully (paper=True)
+2025-10-29 17:04:50.702 | INFO     | __main__:run_week35_validation:126 - Initializing Week 3.5 Momentum Strategy...
+2025-10-29 17:04:50.706 | INFO     | src.strategies.base:__init__:69 - Strategy 'MomentumStrategy' initialized with parameters: {'rsi_period': 14, 'rsi_oversold': 30, 'rsi_overbought': 70, 'ema_fast': 12, 'ema_slow': 26, 'macd_signal': 9, 'position_size': 0.15, 'stop_loss_pct': 0.02, 'take_profit_pct': 0.03, 'macd_histogram_threshold': 0.0005, 'volume_confirmation': True, 'volume_ma_period': 20, 'volume_multiplier': 1.05, 'use_trailing_stop': True, 'trailing_stop_pct': 0.015, 'use_atr_sizing': False, 'atr_period': 14, 'atr_multiplier': 1.5, 'use_adx_filter': True, 'adx_period': 14, 'adx_threshold': 25.0}
+2025-10-29 17:04:50.708 | INFO     | src.strategies.momentum:__init__:127 - ✅ ADX trending filter ENABLED: threshold=25.0
+2025-10-29 17:04:50.715 | INFO     | __main__:run_week35_validation:129 - Strategy parameters:
+2025-10-29 17:04:50.717 | INFO     | __main__:run_week35_validation:131 -   rsi_period: 14
+2025-10-29 17:04:50.719 | INFO     | __main__:run_week35_validation:131 -   rsi_oversold: 30
+2025-10-29 17:04:50.723 | INFO     | __main__:run_week35_validation:131 -   rsi_overbought: 70
+2025-10-29 17:04:50.725 | INFO     | __main__:run_week35_validation:131 -   ema_fast: 12
+2025-10-29 17:04:50.732 | INFO     | __main__:run_week35_validation:131 -   ema_slow: 26
+2025-10-29 17:04:50.736 | INFO     | __main__:run_week35_validation:131 -   macd_signal: 9
+2025-10-29 17:04:50.739 | INFO     | __main__:run_week35_validation:131 -   position_size: 0.15
+2025-10-29 17:04:50.749 | INFO     | __main__:run_week35_validation:131 -   stop_loss_pct: 0.02
+2025-10-29 17:04:50.753 | INFO     | __main__:run_week35_validation:131 -   take_profit_pct: 0.03
+2025-10-29 17:04:50.762 | INFO     | __main__:run_week35_validation:131 -   macd_histogram_threshold: 0.0005
+2025-10-29 17:04:50.766 | INFO     | __main__:run_week35_validation:131 -   volume_confirmation: True
+2025-10-29 17:04:50.769 | INFO     | __main__:run_week35_validation:131 -   volume_ma_period: 20
+2025-10-29 17:04:50.781 | INFO     | __main__:run_week35_validation:131 -   volume_multiplier: 1.05
+2025-10-29 17:04:50.792 | INFO     | __main__:run_week35_validation:131 -   use_trailing_stop: True
+2025-10-29 17:04:50.815 | INFO     | __main__:run_week35_validation:131 -   trailing_stop_pct: 0.015
+2025-10-29 17:04:50.839 | INFO     | __main__:run_week35_validation:131 -   use_atr_sizing: False
+2025-10-29 17:04:50.956 | INFO     | __main__:run_week35_validation:131 -   atr_period: 14
+2025-10-29 17:04:51.055 | INFO     | __main__:run_week35_validation:131 -   atr_multiplier: 1.5
+2025-10-29 17:04:51.073 | INFO     | __main__:run_week35_validation:131 -   use_adx_filter: True
+2025-10-29 17:04:51.104 | INFO     | __main__:run_week35_validation:131 -   adx_period: 14
+2025-10-29 17:04:51.117 | INFO     | __main__:run_week35_validation:131 -   adx_threshold: 25.0
+2025-10-29 17:04:51.138 | INFO     | __main__:run_week35_validation:132 - 
+2025-10-29 17:04:51.155 | INFO     | __main__:run_week35_validation:135 - WEEK 3.5 CONFIGURATION VERIFICATION:
+2025-10-29 17:04:51.184 | INFO     | __main__:run_week35_validation:136 -   Mean Reversion Enabled: False
+2025-10-29 17:04:51.216 | INFO     | __main__:run_week35_validation:137 -   RSI Lower Bound: N/A
+2025-10-29 17:04:51.237 | INFO     | __main__:run_week35_validation:138 -   RSI Upper Bound: N/A
+2025-10-29 17:04:51.250 | INFO     | __main__:run_week35_validation:139 -   Short Signals Enabled: False
+2025-10-29 17:04:51.252 | INFO     | __main__:run_week35_validation:140 - 
+2025-10-29 17:04:51.264 | INFO     | __main__:run_week35_validation:143 - Generating signals...
+2025-10-29 17:04:51.273 | INFO     | __main__:run_week35_validation:149 - Processing AAPL...
+2025-10-29 17:04:51.433 | ERROR    | src.api.alpaca_client:get_historical_bars:148 - Failed to fetch historical bars for AAPL: 1 validation error for StockBarsRequest
+timeframe
+  Input should be an instance of TimeFrame [type=is_instance_of, input_value='1Day', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/is_instance_of
+2025-10-29 17:04:51.458 | ERROR    | __main__:run_week35_validation:178 -   Error processing AAPL: 1 validation error for StockBarsRequest
+timeframe
+  Input should be an instance of TimeFrame [type=is_instance_of, input_value='1Day', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/is_instance_of
+2025-10-29 17:04:51.477 | INFO     | __main__:run_week35_validation:149 - Processing MSFT...
+2025-10-29 17:04:51.506 | ERROR    | src.api.alpaca_client:get_historical_bars:148 - Failed to fetch historical bars for MSFT: 1 validation error for StockBarsRequest
+timeframe
+  Input should be an instance of TimeFrame [type=is_instance_of, input_value='1Day', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/is_instance_of
+2025-10-29 17:04:51.528 | ERROR    | __main__:run_week35_validation:178 -   Error processing MSFT: 1 validation error for StockBarsRequest
+timeframe
+  Input should be an instance of TimeFrame [type=is_instance_of, input_value='1Day', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/is_instance_of
+2025-10-29 17:04:51.541 | INFO     | __main__:run_week35_validation:149 - Processing GOOGL...
+2025-10-29 17:04:51.546 | ERROR    | src.api.alpaca_client:get_historical_bars:148 - Failed to fetch historical bars for GOOGL: 1 validation error for StockBarsRequest
+timeframe
+  Input should be an instance of TimeFrame [type=is_instance_of, input_value='1Day', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/is_instance_of
+2025-10-29 17:04:51.561 | ERROR    | __main__:run_week35_validation:178 -   Error processing GOOGL: 1 validation error for StockBarsRequest
+timeframe
+  Input should be an instance of TimeFrame [type=is_instance_of, input_value='1Day', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/is_instance_of
+2025-10-29 17:04:51.569 | INFO     | __main__:run_week35_validation:149 - Processing AMZN...
+2025-10-29 17:04:51.580 | ERROR    | src.api.alpaca_client:get_historical_bars:148 - Failed to fetch historical bars for AMZN: 1 validation error for StockBarsRequest
+timeframe
+  Input should be an instance of TimeFrame [type=is_instance_of, input_value='1Day', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/is_instance_of
+2025-10-29 17:04:51.586 | ERROR    | __main__:run_week35_validation:178 -   Error processing AMZN: 1 validation error for StockBarsRequest
+timeframe
+  Input should be an instance of TimeFrame [type=is_instance_of, input_value='1Day', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/is_instance_of
+2025-10-29 17:04:51.594 | INFO     | __main__:run_week35_validation:149 - Processing NVDA...
+2025-10-29 17:04:51.598 | ERROR    | src.api.alpaca_client:get_historical_bars:148 - Failed to fetch historical bars for NVDA: 1 validation error for StockBarsRequest
+timeframe
+  Input should be an instance of TimeFrame [type=is_instance_of, input_value='1Day', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/is_instance_of
+2025-10-29 17:04:51.600 | ERROR    | __main__:run_week35_validation:178 -   Error processing NVDA: 1 validation error for StockBarsRequest
+timeframe
+  Input should be an instance of TimeFrame [type=is_instance_of, input_value='1Day', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/is_instance_of
+2025-10-29 17:04:51.604 | INFO     | __main__:run_week35_validation:180 - Total signals generated: 0
+2025-10-29 17:04:51.609 | INFO     | __main__:run_week35_validation:181 - 
+2025-10-29 17:04:51.614 | INFO     | __main__:run_week35_validation:187 - ================================================================================
+2025-10-29 17:04:51.618 | INFO     | __main__:run_week35_validation:188 - WEEK 3.5 VALIDATION RESULTS
+2025-10-29 17:04:51.622 | INFO     | __main__:run_week35_validation:189 - ================================================================================
+2025-10-29 17:04:51.633 | ERROR    | __main__:run_week35_validation:402 - Backtest failed to produce results

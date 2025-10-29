@@ -1,0 +1,501 @@
+"""
+Momentum Strategy using RSI and MACD with Risk Management
+"""
+
+from typing import Dict, Any, Optional
+import pandas as pd
+import numpy as np
+from loguru import logger
+
+from src.strategies.base import Strategy, Signal, SignalType
+
+
+class MomentumStrategy(Strategy):
+    """
+    Momentum Strategy using RSI and MACD indicators with comprehensive risk management
+
+    Generates signals based on momentum indicators alignment with proper exit logic,
+    stop-loss, and take-profit mechanisms.
+
+    Parameters:
+        rsi_period: RSI period (default: 14)
+        rsi_oversold: RSI oversold level (default: 30)
+        rsi_overbought: RSI overbought level (default: 70)
+        ema_fast: Fast EMA period for MACD (default: 12)
+        ema_slow: Slow EMA period for MACD (default: 26)
+        macd_signal: MACD signal line period (default: 9)
+        position_size: Position size fraction (default: 0.15)
+        stop_loss_pct: Stop loss percentage (default: 0.02 = 2%)
+        take_profit_pct: Take profit percentage (default: 0.03 = 3% for 1.5:1 ratio)
+    """
+
+    def __init__(
+        self,
+        rsi_period: int = 14,
+        rsi_oversold: float = 30,
+        rsi_overbought: float = 70,
+        ema_fast: int = 12,
+        ema_slow: int = 26,
+        macd_signal: int = 9,
+        position_size: float = 0.15,
+        stop_loss_pct: float = 0.02,
+        take_profit_pct: float = 0.03,
+        # PHASE 1: Relaxed entry conditions
+        macd_histogram_threshold: float = 0.0005,  # Reduced from 0.001
+        # PHASE 2: Volume and trailing stops
+        volume_confirmation: bool = True,
+        volume_ma_period: int = 20,
+        volume_multiplier: float = 1.2,  # Volume must be 20% above average
+        use_trailing_stop: bool = True,
+        trailing_stop_pct: float = 0.015,  # 1.5% trailing stop
+        # PHASE 3: ATR-based position sizing
+        use_atr_sizing: bool = False,
+        atr_period: int = 14,
+        atr_multiplier: float = 1.5,
+        parameters: Optional[Dict[str, Any]] = None
+    ):
+        """
+        Initialize Momentum strategy with advanced risk management
+
+        PHASE 1 - Relaxed Entry Conditions:
+            - Lower histogram threshold (0.0005 vs 0.001)
+            - More signals generated
+
+        PHASE 2 - Volume & Trailing Stops:
+            - Volume confirmation filter
+            - Trailing stop-loss to lock in profits
+
+        PHASE 3 - ATR-Based Sizing:
+            - Position sizing based on volatility
+            - Risk-adjusted capital allocation
+        """
+        params = parameters or {}
+        params.update({
+            'rsi_period': rsi_period,
+            'rsi_oversold': rsi_oversold,
+            'rsi_overbought': rsi_overbought,
+            'ema_fast': ema_fast,
+            'ema_slow': ema_slow,
+            'macd_signal': macd_signal,
+            'position_size': position_size,
+            'stop_loss_pct': stop_loss_pct,
+            'take_profit_pct': take_profit_pct,
+            'macd_histogram_threshold': macd_histogram_threshold,
+            'volume_confirmation': volume_confirmation,
+            'volume_ma_period': volume_ma_period,
+            'volume_multiplier': volume_multiplier,
+            'use_trailing_stop': use_trailing_stop,
+            'trailing_stop_pct': trailing_stop_pct,
+            'use_atr_sizing': use_atr_sizing,
+            'atr_period': atr_period,
+            'atr_multiplier': atr_multiplier,
+        })
+
+        super().__init__(name="MomentumStrategy", parameters=params)
+
+        # Track active positions for exit signals
+        # PHASE 2: Added highest_price for trailing stops
+        self.active_positions = {}  # {symbol: {'entry_price': float, 'entry_time': datetime, 'type': 'long'/'short', 'highest_price': float, 'lowest_price': float}}
+
+    def generate_signals(self, data: pd.DataFrame) -> list[Signal]:
+        """Generate momentum-based signals with exit logic and risk management"""
+        if not self.validate_data(data):
+            return []
+
+        data = data.copy()
+        symbol = data.attrs.get('symbol', 'UNKNOWN')
+
+        # Calculate RSI
+        rsi_period = self.get_parameter('rsi_period', 14)
+        delta = data['close'].diff()
+        gain = (delta.where(delta > 0, 0)).rolling(window=rsi_period).mean()
+        loss = (-delta.where(delta < 0, 0)).rolling(window=rsi_period).mean()
+        rs = gain / loss
+        data['rsi'] = 100 - (100 / (1 + rs))
+
+        # Calculate MACD
+        ema_fast = self.get_parameter('ema_fast', 12)
+        ema_slow = self.get_parameter('ema_slow', 26)
+        macd_signal_period = self.get_parameter('macd_signal', 9)
+
+        data['ema_fast'] = data['close'].ewm(span=ema_fast, adjust=False).mean()
+        data['ema_slow'] = data['close'].ewm(span=ema_slow, adjust=False).mean()
+        data['macd'] = data['ema_fast'] - data['ema_slow']
+        data['macd_signal'] = data['macd'].ewm(span=macd_signal_period, adjust=False).mean()
+        data['macd_histogram'] = data['macd'] - data['macd_signal']
+
+        # CRITICAL FIX: Add 50-period SMA trend filter
+        sma_period = self.get_parameter('sma_period', 50)
+        data['sma_50'] = data['close'].rolling(window=sma_period).mean()
+
+        # PHASE 2: Add volume moving average for confirmation
+        volume_confirmation = self.get_parameter('volume_confirmation', True)
+        if volume_confirmation:
+            volume_ma_period = self.get_parameter('volume_ma_period', 20)
+            data['volume_ma'] = data['volume'].rolling(window=volume_ma_period).mean()
+            logger.debug(f"Volume confirmation enabled with {volume_ma_period}-period MA")
+
+        # PHASE 3: Add ATR for volatility-based position sizing
+        use_atr_sizing = self.get_parameter('use_atr_sizing', False)
+        if use_atr_sizing:
+            atr_period = self.get_parameter('atr_period', 14)
+            data['high_low'] = data['high'] - data['low']
+            data['high_close'] = abs(data['high'] - data['close'].shift())
+            data['low_close'] = abs(data['low'] - data['close'].shift())
+            data['true_range'] = data[['high_low', 'high_close', 'low_close']].max(axis=1)
+            data['atr'] = data['true_range'].rolling(window=atr_period).mean()
+            logger.debug(f"ATR-based position sizing enabled with {atr_period}-period ATR")
+
+        # Get parameters
+        signals = []
+        rsi_oversold = self.get_parameter('rsi_oversold', 30)
+        rsi_overbought = self.get_parameter('rsi_overbought', 70)
+        stop_loss_pct = self.get_parameter('stop_loss_pct', 0.02)
+        take_profit_pct = self.get_parameter('take_profit_pct', 0.03)
+
+        for i in range(max(rsi_period, ema_slow, macd_signal_period) + 1, len(data)):
+            current = data.iloc[i]
+            previous = data.iloc[i - 1]
+
+            if pd.isna(current['rsi']) or pd.isna(current['macd']):
+                logger.debug(f"⏭️ Skipping bar {i}: NaN indicators (RSI or MACD)")
+                continue
+
+            current_price = float(current['close'])
+            signal_type = SignalType.HOLD
+
+            # ENHANCED LOGGING: Log current technical indicators
+            logger.debug(
+                f"📈 Bar {i} ({current.name}): {symbol} @ ${current_price:.2f} | "
+                f"RSI={current['rsi']:.1f}, MACD={current['macd']:.4f}, "
+                f"Signal={current['macd_signal']:.4f}, Hist={current['macd_histogram']:.5f}, "
+                f"SMA50=${current.get('sma_50', 0):.2f}"
+            )
+
+            # Check for EXIT signals first (stop-loss / take-profit / trailing stop)
+            if symbol in self.active_positions:
+                position = self.active_positions[symbol]
+                entry_price = position['entry_price']
+                entry_time = position['entry_time']  # CRITICAL: Define entry_time
+                position_type = position['type']
+
+                # PHASE 2: Track highest/lowest price for trailing stops
+                use_trailing_stop = self.get_parameter('use_trailing_stop', True)
+                if use_trailing_stop:
+                    if position_type == 'long':
+                        highest_price = position.get('highest_price', entry_price)
+                        highest_price = max(highest_price, current_price)
+                        self.active_positions[symbol]['highest_price'] = highest_price
+                    else:  # short
+                        lowest_price = position.get('lowest_price', entry_price)
+                        lowest_price = min(lowest_price, current_price)
+                        self.active_positions[symbol]['lowest_price'] = lowest_price
+
+                # CRITICAL FIX: Calculate holding period FIRST to enforce minimum hold time
+                bars_held = i - data.index.get_loc(entry_time)
+                min_holding_period = self.get_parameter('min_holding_period', 10)  # Hold at least 10 bars
+
+                # Calculate P&L
+                if position_type == 'long':
+                    pnl_pct = (current_price - entry_price) / entry_price
+                else:  # short
+                    pnl_pct = (entry_price - current_price) / entry_price
+
+                # CRITICAL: Only check stop-loss/take-profit AFTER minimum holding period
+                # Exception: Catastrophic loss (-5%) can exit immediately
+                catastrophic_loss_pct = -0.05
+
+                if bars_held < min_holding_period:
+                    # ONLY allow exit on catastrophic loss (prevents blown account)
+                    if pnl_pct <= catastrophic_loss_pct:
+                        signal_type = SignalType.EXIT
+                        signal = Signal(
+                            timestamp=current.name,
+                            symbol=symbol,
+                            signal_type=signal_type,
+                            price=current_price,
+                            confidence=1.0,
+                            metadata={
+                                'exit_reason': 'catastrophic_stop_loss',
+                                'pnl_pct': float(pnl_pct),
+                                'entry_price': entry_price,
+                                'position_type': position_type,
+                                'bars_held': bars_held,
+                                'rsi': float(current['rsi']),
+                                'macd': float(current['macd']),
+                            }
+                        )
+                        signals.append(signal)
+                        del self.active_positions[symbol]
+                        continue
+                    # Otherwise, HOLD regardless of P&L (enforce minimum holding period)
+                    continue
+
+                # AFTER minimum holding period: Check trailing stop-loss first, then fixed stops
+                exit_triggered = False
+                exit_reason = None
+
+                # PHASE 2: Trailing stop-loss (checks highest/lowest price since entry)
+                if use_trailing_stop and bars_held >= min_holding_period:
+                    trailing_stop_pct = self.get_parameter('trailing_stop_pct', 0.015)
+
+                    if position_type == 'long':
+                        # Exit if price drops trailing_stop_pct from highest price
+                        if current_price < highest_price * (1 - trailing_stop_pct):
+                            exit_triggered = True
+                            exit_reason = "trailing_stop_loss"
+                            # Calculate P&L from highest point
+                            pnl_from_peak = (current_price - highest_price) / highest_price
+                            logger.info(f"Trailing stop triggered: price={current_price:.2f}, peak={highest_price:.2f}, drop={pnl_from_peak:.2%}")
+                    else:  # short
+                        # Exit if price rises trailing_stop_pct from lowest price
+                        if current_price > lowest_price * (1 + trailing_stop_pct):
+                            exit_triggered = True
+                            exit_reason = "trailing_stop_loss"
+                            pnl_from_trough = (lowest_price - current_price) / lowest_price
+                            logger.info(f"Trailing stop triggered: price={current_price:.2f}, trough={lowest_price:.2f}, rise={pnl_from_trough:.2%}")
+
+                # Fixed stop-loss or take-profit (original logic)
+                if not exit_triggered and bars_held >= min_holding_period:
+                    if pnl_pct <= -stop_loss_pct:
+                        exit_triggered = True
+                        exit_reason = "stop_loss"
+                    elif pnl_pct >= take_profit_pct:
+                        exit_triggered = True
+                        exit_reason = "take_profit"
+
+                if exit_triggered:
+                    signal = Signal(
+                        timestamp=current.name,
+                        symbol=symbol,
+                        signal_type=SignalType.EXIT,
+                        price=current_price,
+                        confidence=1.0,
+                        metadata={
+                            'exit_reason': exit_reason,
+                            'pnl_pct': float(pnl_pct),
+                            'entry_price': entry_price,
+                            'position_type': position_type,
+                            'bars_held': bars_held,
+                            'rsi': float(current['rsi']),
+                            'macd': float(current['macd']),
+                            'highest_price': float(highest_price) if position_type == 'long' else None,
+                            'lowest_price': float(lowest_price) if position_type == 'short' else None,
+                        }
+                    )
+                    signals.append(signal)
+                    del self.active_positions[symbol]
+                    continue
+
+                # Check for technical exit signals (ONLY after minimum holding period)
+                if bars_held >= min_holding_period:
+                    if position_type == 'long':
+                        # Exit long when momentum reverses: RSI crosses BELOW 50 + MACD bearish
+                        if (current['rsi'] < 50 and previous['rsi'] >= 50 and  # RSI momentum lost
+                            current['macd'] < current['macd_signal'] and       # MACD bearish
+                            current['macd_histogram'] < -0.001):               # Confirmed weakness
+                            signal_type = SignalType.EXIT
+                    elif position_type == 'short':
+                        # Exit short when momentum reverses: RSI crosses ABOVE 50 + MACD bullish
+                        if (current['rsi'] > 50 and previous['rsi'] <= 50 and  # RSI momentum recovering
+                            current['macd'] > current['macd_signal'] and       # MACD bullish
+                            current['macd_histogram'] > 0.001):                # Confirmed strength
+                            signal_type = SignalType.EXIT
+
+                if signal_type == SignalType.EXIT:
+                    pnl_pct = (current_price - entry_price) / entry_price if position_type == 'long' else (entry_price - current_price) / entry_price
+                    signal = Signal(
+                        timestamp=current.name,
+                        symbol=symbol,
+                        signal_type=signal_type,
+                        price=current_price,
+                        confidence=0.8,
+                        metadata={
+                            'exit_reason': 'technical_reversal',
+                            'pnl_pct': float(pnl_pct),
+                            'entry_price': entry_price,
+                            'position_type': position_type,
+                            'bars_held': bars_held,
+                            'rsi': float(current['rsi']),
+                            'macd': float(current['macd']),
+                        }
+                    )
+                    signals.append(signal)
+                    del self.active_positions[symbol]
+                    continue
+
+            # Generate ENTRY signals only if no active position
+            if symbol not in self.active_positions:
+                # PHASE 1: Get relaxed histogram threshold
+                histogram_threshold = self.get_parameter('macd_histogram_threshold', 0.0005)
+
+                # PHASE 2: Check volume confirmation
+                volume_ok = True
+                if volume_confirmation:
+                    volume_multiplier = self.get_parameter('volume_multiplier', 1.2)
+                    if 'volume_ma' in data.columns and not pd.isna(current.get('volume_ma')):
+                        volume_ok = current['volume'] > current['volume_ma'] * volume_multiplier
+                        if not volume_ok:
+                            logger.debug(f"Volume filter blocked entry: vol={current['volume']}, ma={current['volume_ma']}, required={current['volume_ma'] * volume_multiplier}")
+
+                # CRITICAL FIX: Trend-following entries instead of contrarian
+                # PHASE 1: RELAXED histogram threshold (0.0005 instead of 0.001)
+
+                # ENHANCED LOGGING: Check each condition and log why signals are/aren't generated
+                rsi_long_cond = current['rsi'] > 50 and previous['rsi'] <= 50
+                macd_long_cond = current['macd'] > current['macd_signal']
+                hist_long_cond = current['macd_histogram'] > histogram_threshold
+                trend_long_cond = current['close'] > current['sma_50'] and not pd.isna(current['sma_50'])
+
+                # Long signal: RSI crosses ABOVE 50 (momentum building) + MACD bullish + Price above SMA + Volume
+                if (rsi_long_cond and macd_long_cond and hist_long_cond and trend_long_cond and volume_ok):
+                    signal_type = SignalType.LONG
+                    logger.info(
+                        f"🟢 LONG SIGNAL: {symbol} @ ${current_price:.2f} | "
+                        f"RSI={current['rsi']:.1f} (crossed 50↑), "
+                        f"MACD_hist={current['macd_histogram']:.5f} (>{histogram_threshold:.5f}), "
+                        f"Price>${current['sma_50']:.2f}, Volume_OK={volume_ok}"
+                    )
+                elif any([rsi_long_cond, macd_long_cond, hist_long_cond, trend_long_cond]) and not volume_ok:
+                    logger.debug(
+                        f"🟡 LONG signal blocked by conditions: RSI_cross={rsi_long_cond}, "
+                        f"MACD={macd_long_cond}, Hist={hist_long_cond}, "
+                        f"Trend={trend_long_cond}, Volume={volume_ok}"
+                    )
+
+                # Short signal: RSI crosses BELOW 50 (momentum weakening) + MACD bearish + Price below SMA + Volume
+                rsi_short_cond = current['rsi'] < 50 and previous['rsi'] >= 50
+                macd_short_cond = current['macd'] < current['macd_signal']
+                hist_short_cond = current['macd_histogram'] < -histogram_threshold
+                trend_short_cond = current['close'] < current['sma_50'] and not pd.isna(current['sma_50'])
+
+                if (rsi_short_cond and macd_short_cond and hist_short_cond and trend_short_cond and volume_ok):
+                    signal_type = SignalType.SHORT
+                    logger.info(
+                        f"🔴 SHORT SIGNAL: {symbol} @ ${current_price:.2f} | "
+                        f"RSI={current['rsi']:.1f} (crossed 50↓), "
+                        f"MACD_hist={current['macd_histogram']:.5f} (<{-histogram_threshold:.5f}), "
+                        f"Price<${current['sma_50']:.2f}, Volume_OK={volume_ok}"
+                    )
+                elif any([rsi_short_cond, macd_short_cond, hist_short_cond, trend_short_cond]) and not volume_ok:
+                    logger.debug(
+                        f"🟡 SHORT signal blocked by conditions: RSI_cross={rsi_short_cond}, "
+                        f"MACD={macd_short_cond}, Hist={hist_short_cond}, "
+                        f"Trend={trend_short_cond}, Volume={volume_ok}"
+                    )
+
+                if signal_type in [SignalType.LONG, SignalType.SHORT]:
+                    # Calculate confidence based on indicator strength
+                    rsi_strength = abs(current['rsi'] - 50) / 50  # 0 to 1
+                    macd_strength = min(abs(current['macd_histogram']) / (current['close'] * 0.01), 1.0)
+
+                    # PHASE 2: Add volume strength to confidence
+                    volume_strength = 0.5  # Default neutral
+                    if volume_confirmation and 'volume_ma' in data.columns and not pd.isna(current.get('volume_ma')):
+                        volume_ratio = current['volume'] / current['volume_ma']
+                        volume_strength = min(volume_ratio / 2.0, 1.0)  # Normalize to 0-1
+
+                    confidence = min((rsi_strength * 0.4 + macd_strength * 0.3 + volume_strength * 0.3), 1.0)
+
+                    # PHASE 3: Calculate ATR-based position size multiplier
+                    atr_multiplier = 1.0
+                    if use_atr_sizing and 'atr' in data.columns and not pd.isna(current.get('atr')):
+                        atr_multiplier = self.get_parameter('atr_multiplier', 1.5)
+                        # Store ATR for position sizing
+                        current_atr = current['atr']
+                    else:
+                        current_atr = None
+
+                    signal = Signal(
+                        timestamp=current.name,
+                        symbol=symbol,
+                        signal_type=signal_type,
+                        price=current_price,
+                        confidence=float(confidence),
+                        metadata={
+                            'rsi': float(current['rsi']),
+                            'macd': float(current['macd']),
+                            'macd_signal': float(current['macd_signal']),
+                            'macd_histogram': float(current['macd_histogram']),
+                            'volume': float(current.get('volume', 0)),
+                            'volume_ma': float(current.get('volume_ma', 0)) if 'volume_ma' in data.columns else None,
+                            'volume_ratio': float(current['volume'] / current['volume_ma']) if 'volume_ma' in data.columns and not pd.isna(current.get('volume_ma')) else None,
+                            'atr': float(current_atr) if current_atr is not None else None,
+                            'histogram_threshold': float(histogram_threshold),
+                        }
+                    )
+                    signals.append(signal)
+
+                    # Track position (PHASE 2: Initialize highest/lowest price)
+                    self.active_positions[symbol] = {
+                        'entry_price': current_price,
+                        'entry_time': current.name,
+                        'type': 'long' if signal_type == SignalType.LONG else 'short',
+                        'highest_price': current_price,  # For trailing stop
+                        'lowest_price': current_price,   # For trailing stop (short)
+                    }
+
+        logger.info(f"Generated {len(signals)} signals for Momentum strategy (including {sum(1 for s in signals if s.signal_type == SignalType.EXIT)} exits)")
+        return signals
+
+    def calculate_position_size(
+        self,
+        signal: Signal,
+        account_value: float,
+        current_position: float = 0.0
+    ) -> float:
+        """
+        Calculate position size with conservative risk management
+
+        PHASE 3: ATR-based position sizing for volatility adjustment
+        - Uses 15% of account value per position by default
+        - Scaled by confidence
+        - Optionally adjusted by ATR (lower volatility = larger position)
+        """
+        position_size_pct = self.get_parameter('position_size', 0.15)
+        position_value = account_value * position_size_pct
+        shares = position_value / signal.price
+
+        # Scale by confidence
+        shares *= signal.confidence
+
+        # PHASE 3: ATR-based position sizing (volatility adjustment)
+        use_atr_sizing = self.get_parameter('use_atr_sizing', False)
+        if use_atr_sizing and signal.metadata.get('atr') is not None:
+            atr = signal.metadata['atr']
+            atr_pct = atr / signal.price  # ATR as percentage of price
+
+            # Risk-adjusted sizing: Higher volatility = smaller position
+            # Example: If ATR is 2% of price, reduce position by 2x
+            # If ATR is 1% of price, reduce position by 1x
+            volatility_factor = 0.01 / max(atr_pct, 0.005)  # 1% reference / current ATR%
+            volatility_factor = min(volatility_factor, 2.0)  # Cap at 2x
+            volatility_factor = max(volatility_factor, 0.5)  # Floor at 0.5x
+
+            shares *= volatility_factor
+            logger.debug(f"ATR sizing: ATR={atr:.2f}, ATR%={atr_pct:.2%}, vol_factor={volatility_factor:.2f}, final_shares={shares:.2f}")
+
+        return round(shares, 2)
+
+    def get_unrealized_pnl(self, symbol: str, current_price: float) -> Optional[float]:
+        """
+        Calculate unrealized P&L for an active position
+
+        Args:
+            symbol: Stock symbol
+            current_price: Current market price
+
+        Returns:
+            P&L percentage or None if no position
+        """
+        if symbol not in self.active_positions:
+            return None
+
+        position = self.active_positions[symbol]
+        entry_price = position['entry_price']
+        position_type = position['type']
+
+        if position_type == 'long':
+            return (current_price - entry_price) / entry_price
+        else:  # short
+            return (entry_price - current_price) / entry_price

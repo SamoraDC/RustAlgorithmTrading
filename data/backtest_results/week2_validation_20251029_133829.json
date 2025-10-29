@@ -1,0 +1,71 @@
+{
+  "timestamp": "20251029_133829",
+  "test_period": {
+    "start": "2025-05-02T13:38:23.861090",
+    "end": "2025-10-29T13:38:23.861090"
+  },
+  "symbols": [
+    "AAPL",
+    "MSFT",
+    "GOOGL",
+    "AMZN",
+    "NVDA"
+  ],
+  "initial_capital": 100000.0,
+  "strategies": {
+    "strategy1_momentum": {
+      "total_return": 0.04208761075995494,
+      "sharpe_ratio": 0.01526441682460651,
+      "max_drawdown": 0.3895229382449,
+      "win_rate": 0.3333333333333333,
+      "total_trades": 69,
+      "winning_trades": 23,
+      "losing_trades": 46,
+      "avg_win": 0.04382942569010711,
+      "avg_loss": -0.020999764785054532,
+      "profit_factor": 1.043569443246821,
+      "total_signals": 143,
+      "entry_signals": 74,
+      "exit_signals": 69,
+      "criteria_met": 1,
+      "criteria_total": 5,
+      "pass_rate": 0.2
+    },
+    "strategy2_simplified": {
+      "total_return": -0.3283319041503341,
+      "sharpe_ratio": -0.1108695276700999,
+      "max_drawdown": 0.5065929343309181,
+      "win_rate": 0.2875,
+      "total_trades": 80,
+      "winning_trades": 23,
+      "losing_trades": 57,
+      "avg_win": 0.03807036376846125,
+      "avg_loss": -0.021121934575876185,
+      "profit_factor": 0.7272878190181707,
+      "total_signals": 165,
+      "entry_signals": 85,
+      "exit_signals": 80,
+      "criteria_met": 0,
+      "criteria_total": 5,
+      "pass_rate": 0.0
+    },
+    "strategy3_mean_reversion": {
+      "total_return": -0.0029711588353725314,
+      "sharpe_ratio": -0.0024128314553324604,
+      "max_drawdown": 0.1627373675095774,
+      "win_rate": 0.43333333333333335,
+      "total_trades": 30,
+      "winning_trades": 13,
+      "losing_trades": 17,
+      "avg_win": 0.04289679769976685,
+      "avg_loss": -0.03297820758425539,
+      "profit_factor": 0.9947003169079751,
+      "total_signals": 64,
+      "entry_signals": 34,
+      "exit_signals": 30,
+      "criteria_met": 2,
+      "criteria_total": 5,
+      "pass_rate": 0.4
+    }
+  }
+}

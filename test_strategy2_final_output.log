@@ -1,0 +1,72 @@
+2025-10-29 10:28:59.976 | INFO     | __main__:run_strategy2_test:92 - ================================================================================
+2025-10-29 10:28:59.976 | INFO     | __main__:run_strategy2_test:93 - STRATEGY 2 TEST: Simplified Momentum (No SMA, No Volume)
+2025-10-29 10:28:59.976 | INFO     | __main__:run_strategy2_test:94 - ================================================================================
+2025-10-29 10:28:59.999 | INFO     | src.api.alpaca_client:__init__:64 - Alpaca client initialized successfully (paper=True)
+2025-10-29 10:29:00.000 | INFO     | src.strategies.base:__init__:69 - Strategy 'SimplifiedMomentumStrategy' initialized with parameters: {'rsi_period': 14, 'ema_fast': 12, 'ema_slow': 26, 'macd_signal': 9, 'macd_histogram_threshold': 0.0005, 'position_size': 0.15, 'stop_loss_pct': 0.02, 'take_profit_pct': 0.03, 'min_holding_period': 10, 'use_trailing_stop': True, 'trailing_stop_pct': 0.015}
+2025-10-29 10:29:00.000 | INFO     | __main__:run_strategy2_test:114 - Strategy: SimplifiedMomentumStrategy
+2025-10-29 10:29:00.000 | INFO     | __main__:run_strategy2_test:115 - Parameters: {'rsi_period': 14, 'ema_fast': 12, 'ema_slow': 26, 'macd_signal': 9, 'macd_histogram_threshold': 0.0005, 'position_size': 0.15, 'stop_loss_pct': 0.02, 'take_profit_pct': 0.03, 'min_holding_period': 10, 'use_trailing_stop': True, 'trailing_stop_pct': 0.015}
+2025-10-29 10:29:00.000 | INFO     | __main__:run_strategy2_test:123 - 
+Backtest Period: 2025-05-02 to 2025-10-29
+2025-10-29 10:29:00.000 | INFO     | __main__:run_strategy2_test:124 - Symbols: ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'NVDA']
+2025-10-29 10:29:00.000 | INFO     | __main__:run_strategy2_test:125 - Initial Capital: $100,000.00
+2025-10-29 10:29:00.000 | INFO     | __main__:run_strategy2_test:128 - 
+Loading market data and generating signals...
+2025-10-29 10:29:00.917 | INFO     | src.api.alpaca_client:get_historical_bars:144 - Fetched 123 bars for AAPL
+2025-10-29 10:29:00.943 | INFO     | src.strategies.momentum_simplified:generate_signals:275 - SIMPLIFIED SHORT: RSI=46.0, MACD_hist=-0.59650
+2025-10-29 10:29:00.960 | INFO     | src.strategies.momentum_simplified:generate_signals:275 - SIMPLIFIED SHORT: RSI=39.4, MACD_hist=-0.44044
+2025-10-29 10:29:00.991 | INFO     | src.strategies.momentum_simplified:generate_signals:275 - SIMPLIFIED SHORT: RSI=32.1, MACD_hist=-1.37752
+2025-10-29 10:29:00.994 | INFO     | src.strategies.momentum_simplified:generate_signals:309 - Generated 6 signals for Simplified Momentum strategy
+2025-10-29 10:29:00.995 | INFO     | __main__:run_strategy2_test:153 -   AAPL: 123 bars, 6 signals
+2025-10-29 10:29:01.159 | INFO     | src.api.alpaca_client:get_historical_bars:144 - Fetched 123 bars for MSFT
+2025-10-29 10:29:01.175 | INFO     | src.strategies.momentum_simplified:generate_signals:275 - SIMPLIFIED SHORT: RSI=48.0, MACD_hist=-2.57638
+2025-10-29 10:29:01.188 | INFO     | src.strategies.momentum_simplified:generate_signals:267 - SIMPLIFIED LONG: RSI=60.0, MACD_hist=1.45650
+2025-10-29 10:29:01.196 | INFO     | src.strategies.momentum_simplified:generate_signals:275 - SIMPLIFIED SHORT: RSI=49.0, MACD_hist=-1.00897
+2025-10-29 10:29:01.202 | INFO     | src.strategies.momentum_simplified:generate_signals:309 - Generated 6 signals for Simplified Momentum strategy
+2025-10-29 10:29:01.203 | INFO     | __main__:run_strategy2_test:153 -   MSFT: 123 bars, 6 signals
+2025-10-29 10:29:01.375 | INFO     | src.api.alpaca_client:get_historical_bars:144 - Fetched 123 bars for GOOGL
+2025-10-29 10:29:01.396 | INFO     | src.strategies.momentum_simplified:generate_signals:275 - SIMPLIFIED SHORT: RSI=42.5, MACD_hist=-0.61474
+2025-10-29 10:29:01.398 | INFO     | src.strategies.momentum_simplified:generate_signals:267 - SIMPLIFIED LONG: RSI=51.8, MACD_hist=0.32430
+2025-10-29 10:29:01.431 | INFO     | src.strategies.momentum_simplified:generate_signals:275 - SIMPLIFIED SHORT: RSI=36.6, MACD_hist=-2.23586
+2025-10-29 10:29:01.442 | INFO     | src.strategies.momentum_simplified:generate_signals:309 - Generated 6 signals for Simplified Momentum strategy
+2025-10-29 10:29:01.442 | INFO     | __main__:run_strategy2_test:153 -   GOOGL: 123 bars, 6 signals
+2025-10-29 10:29:01.604 | INFO     | src.api.alpaca_client:get_historical_bars:144 - Fetched 123 bars for AMZN
+2025-10-29 10:29:01.623 | INFO     | src.strategies.momentum_simplified:generate_signals:275 - SIMPLIFIED SHORT: RSI=37.7, MACD_hist=-1.16541
+2025-10-29 10:29:01.628 | INFO     | src.strategies.momentum_simplified:generate_signals:267 - SIMPLIFIED LONG: RSI=50.5, MACD_hist=0.58457
+2025-10-29 10:29:01.632 | INFO     | src.strategies.momentum_simplified:generate_signals:275 - SIMPLIFIED SHORT: RSI=49.1, MACD_hist=-0.20874
+2025-10-29 10:29:01.643 | INFO     | src.strategies.momentum_simplified:generate_signals:267 - SIMPLIFIED LONG: RSI=51.7, MACD_hist=0.34807
+2025-10-29 10:29:01.644 | INFO     | src.strategies.momentum_simplified:generate_signals:309 - Generated 7 signals for Simplified Momentum strategy
+2025-10-29 10:29:01.645 | INFO     | __main__:run_strategy2_test:153 -   AMZN: 123 bars, 7 signals
+2025-10-29 10:29:01.802 | INFO     | src.api.alpaca_client:get_historical_bars:144 - Fetched 123 bars for NVDA
+2025-10-29 10:29:01.826 | INFO     | src.strategies.momentum_simplified:generate_signals:275 - SIMPLIFIED SHORT: RSI=44.2, MACD_hist=-1.17611
+2025-10-29 10:29:01.840 | INFO     | src.strategies.momentum_simplified:generate_signals:275 - SIMPLIFIED SHORT: RSI=49.7, MACD_hist=-0.16754
+2025-10-29 10:29:01.851 | INFO     | src.strategies.momentum_simplified:generate_signals:267 - SIMPLIFIED LONG: RSI=62.6, MACD_hist=0.32694
+2025-10-29 10:29:01.857 | INFO     | src.strategies.momentum_simplified:generate_signals:309 - Generated 6 signals for Simplified Momentum strategy
+2025-10-29 10:29:01.858 | INFO     | __main__:run_strategy2_test:153 -   NVDA: 123 bars, 6 signals
+2025-10-29 10:29:01.858 | INFO     | __main__:run_strategy2_test:159 - 
+================================================================================
+2025-10-29 10:29:01.858 | INFO     | __main__:run_strategy2_test:160 - STRATEGY 2 RESULTS: Simplified Momentum
+2025-10-29 10:29:01.858 | INFO     | __main__:run_strategy2_test:161 - ================================================================================
+2025-10-29 10:29:01.859 | INFO     | __main__:run_strategy2_test:165 - 
+Signal Generation:
+2025-10-29 10:29:01.859 | INFO     | __main__:run_strategy2_test:166 -   Total Signals: 31
+2025-10-29 10:29:01.859 | INFO     | __main__:run_strategy2_test:167 -   Entry Signals: 16
+2025-10-29 10:29:01.859 | INFO     | __main__:run_strategy2_test:168 -   Exit Signals: 15
+2025-10-29 10:29:01.859 | INFO     | __main__:run_strategy2_test:170 - 
+Performance Metrics:
+2025-10-29 10:29:01.859 | INFO     | __main__:run_strategy2_test:171 -   Total Return: -25.71%
+2025-10-29 10:29:01.859 | INFO     | __main__:run_strategy2_test:172 -   Sharpe Ratio: -0.38
+2025-10-29 10:29:01.859 | INFO     | __main__:run_strategy2_test:173 -   Max Drawdown: 36.09%
+2025-10-29 10:29:01.859 | INFO     | __main__:run_strategy2_test:174 -   Win Rate: 26.67%
+2025-10-29 10:29:01.859 | INFO     | __main__:run_strategy2_test:176 - 
+Trade Statistics:
+2025-10-29 10:29:01.859 | INFO     | __main__:run_strategy2_test:177 -   Total Trades: 15
+2025-10-29 10:29:01.859 | INFO     | __main__:run_strategy2_test:178 -   Winning Trades: 4
+2025-10-29 10:29:01.860 | INFO     | __main__:run_strategy2_test:179 -   Losing Trades: 11
+2025-10-29 10:29:01.860 | INFO     | __main__:run_strategy2_test:180 -   Avg Win: 4.73%
+2025-10-29 10:29:01.860 | INFO     | __main__:run_strategy2_test:181 -   Avg Loss: -4.06%
+2025-10-29 10:29:01.860 | INFO     | __main__:run_strategy2_test:182 -   Profit Factor: 0.42
+2025-10-29 10:29:01.884 | INFO     | __main__:run_strategy2_test:223 - 
+Results saved to: /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/data/backtest_results/strategy2_simplified.json
+2025-10-29 10:29:01.902 | INFO     | __main__:create_summary_report:341 - Summary report saved to: /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/docs/strategy_comparison/strategy2_results.md
+2025-10-29 10:29:01.903 | INFO     | __main__:<module>:351 - 
+✅ Strategy 2 test complete!

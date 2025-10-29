@@ -1,0 +1,503 @@
+{
+  "strategy": "SimplifiedMomentumStrategy",
+  "parameters": {
+    "rsi_period": 14,
+    "ema_fast": 12,
+    "ema_slow": 26,
+    "macd_signal": 9,
+    "macd_histogram_threshold": 0.0005,
+    "position_size": 0.15,
+    "stop_loss_pct": 0.02,
+    "take_profit_pct": 0.03,
+    "min_holding_period": 10,
+    "use_trailing_stop": true,
+    "trailing_stop_pct": 0.015
+  },
+  "backtest_period": {
+    "start": "2025-05-02T10:29:00.000638",
+    "end": "2025-10-29T10:29:00.000638"
+  },
+  "symbols": [
+    "AAPL",
+    "MSFT",
+    "GOOGL",
+    "AMZN",
+    "NVDA"
+  ],
+  "initial_capital": 100000.0,
+  "metrics": {
+    "total_return": -0.2570567942721462,
+    "sharpe_ratio": -0.37814275706122075,
+    "max_drawdown": 0.3608573350277642,
+    "win_rate": 0.26666666666666666,
+    "total_trades": 15,
+    "winning_trades": 4,
+    "losing_trades": 11,
+    "avg_win": 0.0472984382336925,
+    "avg_loss": -0.04056823156426511,
+    "profit_factor": 0.42396307213276124,
+    "total_signals": 31,
+    "entry_signals": 16,
+    "exit_signals": 15
+  },
+  "trade_statistics": {
+    "total_trades": 15,
+    "winning_trades": 4,
+    "losing_trades": 11,
+    "avg_win": 0.0472984382336925,
+    "avg_loss": -0.04056823156426511,
+    "profit_factor": 0.42396307213276124
+  },
+  "signals": [
+    {
+      "timestamp": "('AAPL', Timestamp('2025-06-16 04:00:00+0000', tz='UTC'))",
+      "symbol": "AAPL",
+      "signal_type": "SHORT",
+      "price": 198.42,
+      "confidence": 0.18982795743992964,
+      "metadata": {
+        "rsi": 46.04856512141275,
+        "macd": -0.8669092244276726,
+        "macd_signal": -0.2704046998449124,
+        "macd_histogram": -0.5965045245827603,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('AAPL', Timestamp('2025-07-01 04:00:00+0000', tz='UTC'))",
+      "symbol": "AAPL",
+      "signal_type": "EXIT",
+      "price": 207.82,
+      "confidence": 1.0,
+      "metadata": {
+        "exit_reason": "trailing_stop_loss",
+        "pnl_pct": -0.04737425662735614,
+        "entry_price": 198.42,
+        "position_type": "short",
+        "bars_held": 10
+      }
+    },
+    {
+      "timestamp": "('AAPL', Timestamp('2025-07-30 04:00:00+0000', tz='UTC'))",
+      "symbol": "AAPL",
+      "signal_type": "SHORT",
+      "price": 209.05,
+      "confidence": 0.21180601853544517,
+      "metadata": {
+        "rsi": 39.353612167300426,
+        "macd": 1.9899831834579516,
+        "macd_signal": 2.4304186716694787,
+        "macd_histogram": -0.4404354882115271,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('AAPL', Timestamp('2025-08-07 04:00:00+0000', tz='UTC'))",
+      "symbol": "AAPL",
+      "signal_type": "EXIT",
+      "price": 220.03,
+      "confidence": 1.0,
+      "metadata": {
+        "exit_reason": "catastrophic_stop_loss",
+        "pnl_pct": -0.0525233197799569,
+        "entry_price": 209.05,
+        "position_type": "short",
+        "bars_held": 6
+      }
+    },
+    {
+      "timestamp": "('AAPL', Timestamp('2025-10-10 04:00:00+0000', tz='UTC'))",
+      "symbol": "AAPL",
+      "signal_type": "SHORT",
+      "price": 245.27,
+      "confidence": 0.45937675585717486,
+      "metadata": {
+        "rsi": 32.14403700033034,
+        "macd": 5.109550144128775,
+        "macd_signal": 6.487070473324765,
+        "macd_histogram": -1.37752032919599,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('AAPL', Timestamp('2025-10-20 04:00:00+0000', tz='UTC'))",
+      "symbol": "AAPL",
+      "signal_type": "EXIT",
+      "price": 262.24,
+      "confidence": 1.0,
+      "metadata": {
+        "exit_reason": "catastrophic_stop_loss",
+        "pnl_pct": -0.06918905695763851,
+        "entry_price": 245.27,
+        "position_type": "short",
+        "bars_held": 6
+      }
+    },
+    {
+      "timestamp": "('MSFT', Timestamp('2025-08-19 04:00:00+0000', tz='UTC'))",
+      "symbol": "MSFT",
+      "signal_type": "SHORT",
+      "price": 509.77,
+      "confidence": 0.27237394935414583,
+      "metadata": {
+        "rsi": 48.0326567638054,
+        "macd": 4.26091172198835,
+        "macd_signal": 6.837294572930624,
+        "macd_histogram": -2.5763828509422737,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('MSFT', Timestamp('2025-09-12 04:00:00+0000', tz='UTC'))",
+      "symbol": "MSFT",
+      "signal_type": "EXIT",
+      "price": 509.9,
+      "confidence": 1.0,
+      "metadata": {
+        "exit_reason": "trailing_stop_loss",
+        "pnl_pct": -0.00025501696843673705,
+        "entry_price": 509.77,
+        "position_type": "short",
+        "bars_held": 17
+      }
+    },
+    {
+      "timestamp": "('MSFT', Timestamp('2025-09-19 04:00:00+0000', tz='UTC'))",
+      "symbol": "MSFT",
+      "signal_type": "LONG",
+      "price": 517.93,
+      "confidence": 0.2407856743851503,
+      "metadata": {
+        "rsi": 60.01782531194292,
+        "macd": 0.3907168133808909,
+        "macd_signal": -1.0657792205422074,
+        "macd_histogram": 1.4564960339230983,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('MSFT', Timestamp('2025-10-10 04:00:00+0000', tz='UTC'))",
+      "symbol": "MSFT",
+      "signal_type": "EXIT",
+      "price": 510.96,
+      "confidence": 1.0,
+      "metadata": {
+        "exit_reason": "trailing_stop_loss",
+        "pnl_pct": -0.013457417025466706,
+        "entry_price": 517.93,
+        "position_type": "long",
+        "bars_held": 15
+      }
+    },
+    {
+      "timestamp": "('MSFT', Timestamp('2025-10-17 04:00:00+0000', tz='UTC'))",
+      "symbol": "MSFT",
+      "signal_type": "SHORT",
+      "price": 513.58,
+      "confidence": 0.10868823234827815,
+      "metadata": {
+        "rsi": 48.95406070549633,
+        "macd": 0.9076856413834093,
+        "macd_signal": 1.9166529881977445,
+        "macd_histogram": -1.0089673468143352,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('MSFT', Timestamp('2025-10-28 04:00:00+0000', tz='UTC'))",
+      "symbol": "MSFT",
+      "signal_type": "EXIT",
+      "price": 542.07,
+      "confidence": 1.0,
+      "metadata": {
+        "exit_reason": "catastrophic_stop_loss",
+        "pnl_pct": -0.055473343977569235,
+        "entry_price": 513.58,
+        "position_type": "short",
+        "bars_held": 7
+      }
+    },
+    {
+      "timestamp": "('GOOGL', Timestamp('2025-06-20 04:00:00+0000', tz='UTC'))",
+      "symbol": "GOOGL",
+      "signal_type": "SHORT",
+      "price": 166.64,
+      "confidence": 0.25914351291818605,
+      "metadata": {
+        "rsi": 42.53075571177502,
+        "macd": 1.9973799347410193,
+        "macd_signal": 2.6121184609567876,
+        "macd_histogram": -0.6147385262157683,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('GOOGL', Timestamp('2025-06-27 04:00:00+0000', tz='UTC'))",
+      "symbol": "GOOGL",
+      "signal_type": "EXIT",
+      "price": 178.53,
+      "confidence": 1.0,
+      "metadata": {
+        "exit_reason": "catastrophic_stop_loss",
+        "pnl_pct": -0.07135141622659635,
+        "entry_price": 166.64,
+        "position_type": "short",
+        "bars_held": 5
+      }
+    },
+    {
+      "timestamp": "('GOOGL', Timestamp('2025-07-02 04:00:00+0000', tz='UTC'))",
+      "symbol": "GOOGL",
+      "signal_type": "LONG",
+      "price": 178.64,
+      "confidence": 0.10909840436113824,
+      "metadata": {
+        "rsi": 51.83290707587382,
+        "macd": 1.9733803614926728,
+        "macd_signal": 1.649079686398018,
+        "macd_histogram": 0.3243006750946549,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('GOOGL', Timestamp('2025-07-18 04:00:00+0000', tz='UTC'))",
+      "symbol": "GOOGL",
+      "signal_type": "EXIT",
+      "price": 185.06,
+      "confidence": 1.0,
+      "metadata": {
+        "exit_reason": "take_profit",
+        "pnl_pct": 0.03593819973130327,
+        "entry_price": 178.64,
+        "position_type": "long",
+        "bars_held": 11
+      }
+    },
+    {
+      "timestamp": "('GOOGL', Timestamp('2025-10-03 04:00:00+0000', tz='UTC'))",
+      "symbol": "GOOGL",
+      "signal_type": "SHORT",
+      "price": 245.35,
+      "confidence": 0.5898670364397292,
+      "metadata": {
+        "rsi": 36.578044596912484,
+        "macd": 7.060894211712537,
+        "macd_signal": 9.296756407892783,
+        "macd_histogram": -2.2358621961802463,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('GOOGL', Timestamp('2025-10-17 04:00:00+0000', tz='UTC'))",
+      "symbol": "GOOGL",
+      "signal_type": "EXIT",
+      "price": 253.3,
+      "confidence": 1.0,
+      "metadata": {
+        "exit_reason": "trailing_stop_loss",
+        "pnl_pct": -0.03240269003464446,
+        "entry_price": 245.35,
+        "position_type": "short",
+        "bars_held": 10
+      }
+    },
+    {
+      "timestamp": "('AMZN', Timestamp('2025-08-01 04:00:00+0000', tz='UTC'))",
+      "symbol": "AMZN",
+      "signal_type": "SHORT",
+      "price": 214.75,
+      "confidence": 0.3941514362984816,
+      "metadata": {
+        "rsi": 37.7189043556354,
+        "macd": 2.9894821408499013,
+        "macd_signal": 4.15488950182642,
+        "macd_histogram": -1.165407360976519,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('AMZN', Timestamp('2025-08-14 04:00:00+0000', tz='UTC'))",
+      "symbol": "AMZN",
+      "signal_type": "EXIT",
+      "price": 230.98,
+      "confidence": 1.0,
+      "metadata": {
+        "exit_reason": "catastrophic_stop_loss",
+        "pnl_pct": -0.07557625145518039,
+        "entry_price": 214.75,
+        "position_type": "short",
+        "bars_held": 9
+      }
+    },
+    {
+      "timestamp": "('AMZN', Timestamp('2025-08-18 04:00:00+0000', tz='UTC'))",
+      "symbol": "AMZN",
+      "signal_type": "LONG",
+      "price": 231.49,
+      "confidence": 0.1309956442669429,
+      "metadata": {
+        "rsi": 50.47337278106511,
+        "macd": 1.758704401884188,
+        "macd_signal": 1.174136981074848,
+        "macd_histogram": 0.5845674208093399,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('AMZN', Timestamp('2025-09-02 04:00:00+0000', tz='UTC'))",
+      "symbol": "AMZN",
+      "signal_type": "EXIT",
+      "price": 225.34,
+      "confidence": 1.0,
+      "metadata": {
+        "exit_reason": "trailing_stop_loss",
+        "pnl_pct": -0.026567022333578147,
+        "entry_price": 231.49,
+        "position_type": "long",
+        "bars_held": 10
+      }
+    },
+    {
+      "timestamp": "('AMZN', Timestamp('2025-09-12 04:00:00+0000', tz='UTC'))",
+      "symbol": "AMZN",
+      "signal_type": "SHORT",
+      "price": 228.15,
+      "confidence": 0.05426220056712079,
+      "metadata": {
+        "rsi": 49.14835843001728,
+        "macd": 1.8021350517948918,
+        "macd_signal": 2.0108730681443525,
+        "macd_histogram": -0.20873801634946076,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('AMZN', Timestamp('2025-09-26 04:00:00+0000', tz='UTC'))",
+      "symbol": "AMZN",
+      "signal_type": "EXIT",
+      "price": 219.78,
+      "confidence": 1.0,
+      "metadata": {
+        "exit_reason": "take_profit",
+        "pnl_pct": 0.0366863905325444,
+        "entry_price": 228.15,
+        "position_type": "short",
+        "bars_held": 10
+      }
+    },
+    {
+      "timestamp": "('AMZN', Timestamp('2025-10-23 04:00:00+0000', tz='UTC'))",
+      "symbol": "AMZN",
+      "signal_type": "LONG",
+      "price": 221.09,
+      "confidence": 0.09569033744615833,
+      "metadata": {
+        "rsi": 51.69746454662657,
+        "macd": -1.9240378825594462,
+        "macd_signal": -2.2721029293561354,
+        "macd_histogram": 0.34806504679668926,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('NVDA', Timestamp('2025-08-19 04:00:00+0000', tz='UTC'))",
+      "symbol": "NVDA",
+      "signal_type": "SHORT",
+      "price": 175.64,
+      "confidence": 0.39288712514636276,
+      "metadata": {
+        "rsi": 44.191999999999965,
+        "macd": 4.39197718833978,
+        "macd_signal": 5.568087657553922,
+        "macd_histogram": -1.1761104692141418,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('NVDA', Timestamp('2025-09-05 04:00:00+0000', tz='UTC'))",
+      "symbol": "NVDA",
+      "signal_type": "EXIT",
+      "price": 167.02,
+      "confidence": 1.0,
+      "metadata": {
+        "exit_reason": "take_profit",
+        "pnl_pct": 0.04907765884764277,
+        "entry_price": 175.64,
+        "position_type": "short",
+        "bars_held": 12
+      }
+    },
+    {
+      "timestamp": "('NVDA', Timestamp('2025-09-12 04:00:00+0000', tz='UTC'))",
+      "symbol": "NVDA",
+      "signal_type": "SHORT",
+      "price": 177.82,
+      "confidence": 0.04978823152621272,
+      "metadata": {
+        "rsi": 49.73211471793253,
+        "macd": 0.0021617449476138972,
+        "macd_signal": 0.1697015393759894,
+        "macd_histogram": -0.1675397944283755,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('NVDA', Timestamp('2025-09-26 04:00:00+0000', tz='UTC'))",
+      "symbol": "NVDA",
+      "signal_type": "EXIT",
+      "price": 178.19,
+      "confidence": 1.0,
+      "metadata": {
+        "exit_reason": "trailing_stop_loss",
+        "pnl_pct": -0.0020807558204926587,
+        "entry_price": 177.82,
+        "position_type": "short",
+        "bars_held": 10
+      }
+    },
+    {
+      "timestamp": "('NVDA', Timestamp('2025-10-13 04:00:00+0000', tz='UTC'))",
+      "symbol": "NVDA",
+      "signal_type": "LONG",
+      "price": 188.32,
+      "confidence": 0.21253639237946487,
+      "metadata": {
+        "rsi": 62.573099415204666,
+        "macd": 3.246958518711267,
+        "macd_signal": 2.920014666827519,
+        "macd_histogram": 0.32694385188374797,
+        "histogram_threshold": 0.0005,
+        "strategy": "simplified_momentum"
+      }
+    },
+    {
+      "timestamp": "('NVDA', Timestamp('2025-10-28 04:00:00+0000', tz='UTC'))",
+      "symbol": "NVDA",
+      "signal_type": "EXIT",
+      "price": 201.03,
+      "confidence": 1.0,
+      "metadata": {
+        "exit_reason": "take_profit",
+        "pnl_pct": 0.06749150382327956,
+        "entry_price": 188.32,
+        "position_type": "long",
+        "bars_held": 11
+      }
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "timestamp": "2025-10-28T20:06:50.734262",
+  "symbols": [
+    "AAPL",
+    "MSFT",
+    "GOOGL"
+  ],
+  "start_date": "2024-10-28T20:06:45.031130",
+  "end_date": "2025-10-27T20:06:45.031206",
+  "initial_capital": 1000.0,
+  "final_value": 990.3913896926088,
+  "total_return": -0.009608610307391246,
+  "sharpe_ratio": -11.38301709343673,
+  "max_drawdown": 0.009608610307391246,
+  "win_rate": 0.0,
+  "profit_factor": 0.0,
+  "metrics": {
+    "timestamp": "2025-10-28T23:06:50.718243",
+    "metadata": {},
+    "total_return": -0.9608610307391247,
+    "sharpe_ratio": -11.38301709343673,
+    "sortino_ratio": -5.951246451694882,
+    "max_drawdown": 0.9608610307391247,
+    "max_drawdown_duration": 190,
+    "win_rate": 0.0,
+    "profit_factor": 0.0,
+    "total_trades": 10,
+    "winning_trades": 0,
+    "losing_trades": 10,
+    "average_win": 0.0,
+    "average_loss": -0.630915718896829,
+    "largest_win": 0.0,
+    "largest_loss": -0.9189678342505545,
+    "volatility": 0.26255720525590615,
+    "calmar_ratio": 1.0,
+    "average_trade": -0.630915718896829
+  }
+}

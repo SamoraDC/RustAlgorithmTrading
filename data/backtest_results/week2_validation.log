@@ -1,0 +1,1151 @@
+2025-10-29 13:38:23 | INFO     | ================================================================================
+2025-10-29 13:38:23 | INFO     | WEEK 2 VALIDATION - COMPREHENSIVE BACKTEST
+2025-10-29 13:38:23 | INFO     | ================================================================================
+2025-10-29 13:38:23 | INFO     | 
+2025-10-29 13:38:23 | INFO     | Test Period: 2025-05-02 to 2025-10-29
+2025-10-29 13:38:23 | INFO     | Symbols: AAPL, MSFT, GOOGL, AMZN, NVDA
+2025-10-29 13:38:23 | INFO     | Initial Capital: $100,000.00
+2025-10-29 13:38:23 | INFO     | 
+2025-10-29 13:38:23 | INFO     | Strategy 'MomentumStrategy' initialized with parameters: {'rsi_period': 14, 'rsi_oversold': 30, 'rsi_overbought': 70, 'ema_fast': 12, 'ema_slow': 26, 'macd_signal': 9, 'position_size': 0.15, 'stop_loss_pct': 0.02, 'take_profit_pct': 0.03, 'macd_histogram_threshold': 0.0005, 'volume_confirmation': True, 'volume_ma_period': 20, 'volume_multiplier': 1.05, 'use_trailing_stop': True, 'trailing_stop_pct': 0.015, 'use_atr_sizing': False, 'atr_period': 14, 'atr_multiplier': 1.5}
+2025-10-29 13:38:23 | INFO     | ================================================================================
+2025-10-29 13:38:23 | INFO     | TESTING: Strategy 1: Full Momentum (Week 2 Fixes)
+2025-10-29 13:38:23 | INFO     | ================================================================================
+2025-10-29 13:38:23 | INFO     | Alpaca client initialized successfully (paper=True)
+2025-10-29 13:38:23 | INFO     | Loading market data for 5 symbols...
+2025-10-29 13:38:24 | INFO     | Fetched 124 bars for AAPL
+2025-10-29 13:38:24 | INFO     |   ✓ AAPL: 124 bars
+2025-10-29 13:38:24 | DEBUG    | Volume confirmation enabled with 20-period MA
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 27 (('AAPL', Timestamp('2025-06-12 04:00:00+0000', tz='UTC'))): AAPL @ $199.20 | RSI=46.3, MACD=-0.3894, Signal=0.0359, Hist=-0.42532, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=43904635.0, ma=52819252.4, required=55460215.02
+2025-10-29 13:38:24 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 28 (('AAPL', Timestamp('2025-06-13 04:00:00+0000', tz='UTC'))): AAPL @ $196.45 | RSI=52.3, MACD=-0.7501, Signal=-0.1213, Hist=-0.62877, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=51447349.0, ma=53140146.2, required=55797153.510000005
+2025-10-29 13:38:24 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 29 (('AAPL', Timestamp('2025-06-16 04:00:00+0000', tz='UTC'))): AAPL @ $198.42 | RSI=46.0, MACD=-0.8669, Signal=-0.2704, Hist=-0.59650, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=43020691.0, ma=52554288.25, required=55182002.6625
+2025-10-29 13:38:24 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 30 (('AAPL', Timestamp('2025-06-17 04:00:00+0000', tz='UTC'))): AAPL @ $195.64 | RSI=40.5, MACD=-1.1704, Signal=-0.4504, Hist=-0.71996, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=38856152.0, ma=52190069.5, required=54799572.975
+2025-10-29 13:38:24 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): AAPL @ $195.64 | RSI=40.5 ✓, MACD ✓, Hist=✓ (-0.71996), Trend ✗, Volume ✗
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 31 (('AAPL', Timestamp('2025-06-18 04:00:00+0000', tz='UTC'))): AAPL @ $196.58 | RSI=43.4, MACD=-1.3198, Signal=-0.6243, Hist=-0.69550, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 32 (('AAPL', Timestamp('2025-06-20 04:00:00+0000', tz='UTC'))): AAPL @ $201.00 | RSI=50.3, MACD=-1.0692, Signal=-0.7133, Hist=-0.35595, SMA50=$nan
+2025-10-29 13:38:24 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AAPL @ $201.00 | Entry=$195.64, P&L=-2.74%, Bars=2
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 33 (('AAPL', Timestamp('2025-06-23 04:00:00+0000', tz='UTC'))): AAPL @ $201.50 | RSI=49.7, MACD=-0.8208, Signal=-0.7348, Hist=-0.08605, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=55814272.0, ma=54668653.85, required=57402086.542500004
+2025-10-29 13:38:24 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 34 (('AAPL', Timestamp('2025-06-24 04:00:00+0000', tz='UTC'))): AAPL @ $200.30 | RSI=44.8, MACD=-0.7126, Signal=-0.7303, Hist=0.01775, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=54064033.0, ma=53450209.6, required=56122720.080000006
+2025-10-29 13:38:24 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 35 (('AAPL', Timestamp('2025-06-25 04:00:00+0000', tz='UTC'))): AAPL @ $201.56 | RSI=47.8, MACD=-0.5192, Signal=-0.6881, Hist=0.16894, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=39525730.0, ma=52612072.35, required=55242675.9675
+2025-10-29 13:38:24 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 36 (('AAPL', Timestamp('2025-06-26 04:00:00+0000', tz='UTC'))): AAPL @ $201.00 | RSI=50.7, MACD=-0.4064, Signal=-0.6317, Hist=0.22539, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=50799121.0, ma=52885044.5, required=55529296.725
+2025-10-29 13:38:24 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 37 (('AAPL', Timestamp('2025-06-27 04:00:00+0000', tz='UTC'))): AAPL @ $201.08 | RSI=44.2, MACD=-0.3070, Signal=-0.5668, Hist=0.25981, SMA50=$nan
+2025-10-29 13:38:24 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): AAPL @ $201.08 | RSI=44.2 ✗, MACD ✓, Hist=✓ (0.25981), Trend ✗, Volume ✓
+2025-10-29 13:38:24 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=False, Volume=True
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 38 (('AAPL', Timestamp('2025-06-30 04:00:00+0000', tz='UTC'))): AAPL @ $205.17 | RSI=57.1, MACD=0.1006, Signal=-0.4333, Hist=0.53396, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 39 (('AAPL', Timestamp('2025-07-01 04:00:00+0000', tz='UTC'))): AAPL @ $207.82 | RSI=59.4, MACD=0.6303, Signal=-0.2206, Hist=0.85086, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 40 (('AAPL', Timestamp('2025-07-02 04:00:00+0000', tz='UTC'))): AAPL @ $212.44 | RSI=74.2, MACD=1.4066, Signal=0.1048, Hist=1.30173, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 41 (('AAPL', Timestamp('2025-07-03 04:00:00+0000', tz='UTC'))): AAPL @ $213.55 | RSI=74.8, MACD=2.0873, Signal=0.5013, Hist=1.58597, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 42 (('AAPL', Timestamp('2025-07-07 04:00:00+0000', tz='UTC'))): AAPL @ $209.95 | RSI=72.7, MACD=2.3097, Signal=0.8630, Hist=1.44668, SMA50=$nan
+2025-10-29 13:38:24 | INFO     | 📉 Trailing stop: price=209.95, peak=213.55, drop=-1.69%
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 43 (('AAPL', Timestamp('2025-07-08 04:00:00+0000', tz='UTC'))): AAPL @ $210.01 | RSI=70.8, MACD=2.4624, Signal=1.1829, Hist=1.27949, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=42848928.0, ma=57401552.45, required=60271630.072500005
+2025-10-29 13:38:24 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): AAPL @ $210.01 | RSI=70.8 ✓, MACD ✓, Hist=✓ (1.27949), Trend ✗, Volume ✗
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 44 (('AAPL', Timestamp('2025-07-09 04:00:00+0000', tz='UTC'))): AAPL @ $211.14 | RSI=79.6, MACD=2.6441, Signal=1.4751, Hist=1.16896, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 45 (('AAPL', Timestamp('2025-07-10 04:00:00+0000', tz='UTC'))): AAPL @ $212.41 | RSI=79.8, MACD=2.8576, Signal=1.7516, Hist=1.10600, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 46 (('AAPL', Timestamp('2025-07-11 04:00:00+0000', tz='UTC'))): AAPL @ $211.16 | RSI=71.7, MACD=2.8926, Signal=1.9798, Hist=0.91282, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 47 (('AAPL', Timestamp('2025-07-14 04:00:00+0000', tz='UTC'))): AAPL @ $208.62 | RSI=64.0, MACD=2.6845, Signal=2.1208, Hist=0.56374, SMA50=$nan
+2025-10-29 13:38:24 | INFO     | 📉 Trailing stop: price=208.62, peak=212.41, drop=-1.78%
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 48 (('AAPL', Timestamp('2025-07-15 04:00:00+0000', tz='UTC'))): AAPL @ $209.11 | RSI=67.8, MACD=2.5299, Signal=2.2026, Hist=0.32733, SMA50=$nan
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=42296339.0, ma=53912465.3, required=56608088.565
+2025-10-29 13:38:24 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): AAPL @ $209.11 | RSI=67.8 ✓, MACD ✓, Hist=✓ (0.32733), Trend ✗, Volume ✗
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 49 (('AAPL', Timestamp('2025-07-16 04:00:00+0000', tz='UTC'))): AAPL @ $210.16 | RSI=67.6, MACD=2.4637, Signal=2.2548, Hist=0.20892, SMA50=$203.87
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 50 (('AAPL', Timestamp('2025-07-17 04:00:00+0000', tz='UTC'))): AAPL @ $210.02 | RSI=68.7, MACD=2.3726, Signal=2.2784, Hist=0.09426, SMA50=$204.10
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 51 (('AAPL', Timestamp('2025-07-18 04:00:00+0000', tz='UTC'))): AAPL @ $211.18 | RSI=70.1, MACD=2.3668, Signal=2.2961, Hist=0.07071, SMA50=$204.35
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 52 (('AAPL', Timestamp('2025-07-21 04:00:00+0000', tz='UTC'))): AAPL @ $212.48 | RSI=66.3, MACD=2.4389, Signal=2.3246, Hist=0.11427, SMA50=$204.68
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 53 (('AAPL', Timestamp('2025-07-22 04:00:00+0000', tz='UTC'))): AAPL @ $214.40 | RSI=65.2, MACD=2.6208, Signal=2.3839, Hist=0.23692, SMA50=$205.01
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 54 (('AAPL', Timestamp('2025-07-23 04:00:00+0000', tz='UTC'))): AAPL @ $214.15 | RSI=55.0, MACD=2.7135, Signal=2.4498, Hist=0.26369, SMA50=$205.33
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 55 (('AAPL', Timestamp('2025-07-24 04:00:00+0000', tz='UTC'))): AAPL @ $213.76 | RSI=50.6, MACD=2.7241, Signal=2.5046, Hist=0.21942, SMA50=$205.39
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 56 (('AAPL', Timestamp('2025-07-25 04:00:00+0000', tz='UTC'))): AAPL @ $213.88 | RSI=65.0, MACD=2.7109, Signal=2.5459, Hist=0.16499, SMA50=$205.40
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 57 (('AAPL', Timestamp('2025-07-28 04:00:00+0000', tz='UTC'))): AAPL @ $214.05 | RSI=65.3, MACD=2.6832, Signal=2.5734, Hist=0.10987, SMA50=$205.44
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 58 (('AAPL', Timestamp('2025-07-29 04:00:00+0000', tz='UTC'))): AAPL @ $211.27 | RSI=50.4, MACD=2.4092, Signal=2.5405, Hist=-0.13131, SMA50=$205.44
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 59 (('AAPL', Timestamp('2025-07-30 04:00:00+0000', tz='UTC'))): AAPL @ $209.05 | RSI=39.4, MACD=1.9900, Signal=2.4304, Hist=-0.44044, SMA50=$205.39
+2025-10-29 13:38:24 | INFO     | 📉 Trailing stop: price=209.05, peak=214.40, drop=-2.50%
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 60 (('AAPL', Timestamp('2025-07-31 04:00:00+0000', tz='UTC'))): AAPL @ $207.57 | RSI=38.8, MACD=1.5208, Signal=2.2485, Hist=-0.72771, SMA50=$205.37
+2025-10-29 13:38:24 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=False, MACD=False, Hist=False, Trend=True, Volume=True
+2025-10-29 13:38:24 | INFO     | 🔴 SHORT SIGNAL (4/5 conditions): AAPL @ $207.57 | RSI=38.8 ✓, MACD ✓, Hist=✓ (-0.72771), Trend ✗, Volume ✓
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 61 (('AAPL', Timestamp('2025-08-01 04:00:00+0000', tz='UTC'))): AAPL @ $202.38 | RSI=33.3, MACD=0.7218, Signal=1.9432, Hist=-1.22133, SMA50=$205.28
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 62 (('AAPL', Timestamp('2025-08-04 04:00:00+0000', tz='UTC'))): AAPL @ $203.35 | RSI=35.0, MACD=0.1650, Signal=1.5875, Hist=-1.42251, SMA50=$205.30
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 63 (('AAPL', Timestamp('2025-08-05 04:00:00+0000', tz='UTC'))): AAPL @ $202.92 | RSI=30.5, MACD=-0.3074, Signal=1.2085, Hist=-1.51595, SMA50=$205.33
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 64 (('AAPL', Timestamp('2025-08-06 04:00:00+0000', tz='UTC'))): AAPL @ $213.25 | RSI=55.6, MACD=0.1500, Signal=0.9968, Hist=-0.84683, SMA50=$205.69
+2025-10-29 13:38:24 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AAPL @ $213.25 | Entry=$207.57, P&L=-2.74%, Bars=4
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 65 (('AAPL', Timestamp('2025-08-07 04:00:00+0000', tz='UTC'))): AAPL @ $220.03 | RSI=62.9, MACD=1.0475, Signal=1.0070, Hist=0.04055, SMA50=$206.09
+2025-10-29 13:38:24 | INFO     | 🟢 LONG SIGNAL (5/5 conditions): AAPL @ $220.03 | RSI=62.9 ✓, MACD ✓, Hist=✓ (0.04055), Trend ✓, Volume ✓
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 66 (('AAPL', Timestamp('2025-08-08 04:00:00+0000', tz='UTC'))): AAPL @ $229.35 | RSI=69.9, MACD=2.4822, Signal=1.3020, Hist=1.18022, SMA50=$206.67
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 67 (('AAPL', Timestamp('2025-08-11 04:00:00+0000', tz='UTC'))): AAPL @ $227.18 | RSI=65.0, MACD=3.4049, Signal=1.7226, Hist=1.68231, SMA50=$207.21
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 68 (('AAPL', Timestamp('2025-08-12 04:00:00+0000', tz='UTC'))): AAPL @ $229.65 | RSI=67.3, MACD=4.2861, Signal=2.2353, Hist=2.05075, SMA50=$207.79
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 69 (('AAPL', Timestamp('2025-08-13 04:00:00+0000', tz='UTC'))): AAPL @ $233.33 | RSI=70.3, MACD=5.2211, Signal=2.8325, Hist=2.38865, SMA50=$208.42
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 70 (('AAPL', Timestamp('2025-08-14 04:00:00+0000', tz='UTC'))): AAPL @ $232.78 | RSI=69.5, MACD=5.8503, Signal=3.4360, Hist=2.41430, SMA50=$209.01
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 71 (('AAPL', Timestamp('2025-08-15 04:00:00+0000', tz='UTC'))): AAPL @ $231.59 | RSI=67.7, MACD=6.1817, Signal=3.9852, Hist=2.19655, SMA50=$209.59
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 72 (('AAPL', Timestamp('2025-08-18 04:00:00+0000', tz='UTC'))): AAPL @ $230.89 | RSI=70.7, MACD=6.3151, Signal=4.4511, Hist=1.86391, SMA50=$210.19
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 73 (('AAPL', Timestamp('2025-08-19 04:00:00+0000', tz='UTC'))): AAPL @ $230.56 | RSI=73.6, MACD=6.3212, Signal=4.8252, Hist=1.49607, SMA50=$210.72
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 74 (('AAPL', Timestamp('2025-08-20 04:00:00+0000', tz='UTC'))): AAPL @ $226.01 | RSI=68.9, MACD=5.8911, Signal=5.0383, Hist=0.85273, SMA50=$211.22
+2025-10-29 13:38:24 | INFO     | 📉 Trailing stop: price=226.01, peak=233.33, drop=-3.14%
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 75 (('AAPL', Timestamp('2025-08-21 04:00:00+0000', tz='UTC'))): AAPL @ $224.90 | RSI=75.3, MACD=5.3984, Signal=5.1104, Hist=0.28802, SMA50=$211.66
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=30621249.0, ma=61854245.3, required=64946957.565
+2025-10-29 13:38:24 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): AAPL @ $224.90 | RSI=75.3 ✓, MACD ✓, Hist=✓ (0.28802), Trend ✓, Volume ✗
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 76 (('AAPL', Timestamp('2025-08-22 04:00:00+0000', tz='UTC'))): AAPL @ $227.76 | RSI=76.3, MACD=5.1790, Signal=5.1241, Hist=0.05491, SMA50=$212.24
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 77 (('AAPL', Timestamp('2025-08-25 04:00:00+0000', tz='UTC'))): AAPL @ $227.16 | RSI=76.0, MACD=4.9002, Signal=5.0793, Hist=-0.17909, SMA50=$212.80
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 78 (('AAPL', Timestamp('2025-08-26 04:00:00+0000', tz='UTC'))): AAPL @ $229.31 | RSI=70.9, MACD=4.7975, Signal=5.0229, Hist=-0.22547, SMA50=$213.46
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 79 (('AAPL', Timestamp('2025-08-27 04:00:00+0000', tz='UTC'))): AAPL @ $230.49 | RSI=65.9, MACD=4.7564, Signal=4.9696, Hist=-0.21320, SMA50=$214.10
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 80 (('AAPL', Timestamp('2025-08-28 04:00:00+0000', tz='UTC'))): AAPL @ $232.56 | RSI=56.3, MACD=4.8352, Signal=4.9428, Hist=-0.10755, SMA50=$214.84
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 81 (('AAPL', Timestamp('2025-08-29 04:00:00+0000', tz='UTC'))): AAPL @ $232.14 | RSI=60.4, MACD=4.8083, Signal=4.9159, Hist=-0.10755, SMA50=$215.55
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 82 (('AAPL', Timestamp('2025-09-02 04:00:00+0000', tz='UTC'))): AAPL @ $229.72 | RSI=50.1, MACD=4.5394, Signal=4.8406, Hist=-0.30117, SMA50=$216.12
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 83 (('AAPL', Timestamp('2025-09-03 04:00:00+0000', tz='UTC'))): AAPL @ $238.47 | RSI=58.9, MACD=4.9750, Signal=4.8675, Hist=0.10754, SMA50=$216.86
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 84 (('AAPL', Timestamp('2025-09-04 04:00:00+0000', tz='UTC'))): AAPL @ $239.78 | RSI=61.8, MACD=5.3641, Signal=4.9668, Hist=0.39729, SMA50=$217.65
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 85 (('AAPL', Timestamp('2025-09-05 04:00:00+0000', tz='UTC'))): AAPL @ $239.69 | RSI=64.2, MACD=5.6006, Signal=5.0935, Hist=0.50705, SMA50=$218.41
+2025-10-29 13:38:24 | INFO     | ✅ TAKE-PROFIT (after 10 bars): AAPL @ $239.69 | Entry=$224.90, P&L=6.58%
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 86 (('AAPL', Timestamp('2025-09-08 04:00:00+0000', tz='UTC'))): AAPL @ $237.88 | RSI=61.8, MACD=5.5777, Signal=5.1904, Hist=0.38732, SMA50=$219.15
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=48999495.0, ma=47186931.85, required=49546278.4425
+2025-10-29 13:38:24 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): AAPL @ $237.88 | RSI=61.8 ✓, MACD ✓, Hist=✓ (0.38732), Trend ✓, Volume ✗
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 87 (('AAPL', Timestamp('2025-09-09 04:00:00+0000', tz='UTC'))): AAPL @ $234.35 | RSI=55.8, MACD=5.2146, Signal=5.1952, Hist=0.01938, SMA50=$219.82
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 88 (('AAPL', Timestamp('2025-09-10 04:00:00+0000', tz='UTC'))): AAPL @ $226.79 | RSI=51.1, MACD=4.2676, Signal=5.0097, Hist=-0.74208, SMA50=$220.25
+2025-10-29 13:38:24 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AAPL @ $226.79 | Entry=$237.88, P&L=-4.66%, Bars=2
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 89 (('AAPL', Timestamp('2025-09-11 04:00:00+0000', tz='UTC'))): AAPL @ $230.03 | RSI=56.8, MACD=3.7355, Signal=4.7549, Hist=-1.01936, SMA50=$220.69
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=50195174.0, ma=47816578.0, required=50207406.9
+2025-10-29 13:38:24 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:24 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 90 (('AAPL', Timestamp('2025-09-12 04:00:00+0000', tz='UTC'))): AAPL @ $234.07 | RSI=58.1, MACD=3.5983, Signal=4.5236, Hist=-0.92523, SMA50=$221.13
+2025-10-29 13:38:24 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): AAPL @ $234.07 | RSI=58.1 ✓, MACD ✗, Hist=✗ (-0.92523), Trend ✓, Volume ✓
+2025-10-29 13:38:24 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): AAPL @ $234.07 | RSI=58.1 ✗, MACD ✓, Hist=✓ (-0.92523), Trend ✗, Volume ✓
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 91 (('AAPL', Timestamp('2025-09-15 04:00:00+0000', tz='UTC'))): AAPL @ $236.70 | RSI=61.6, MACD=3.6596, Signal=4.3508, Hist=-0.69114, SMA50=$221.59
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 92 (('AAPL', Timestamp('2025-09-16 04:00:00+0000', tz='UTC'))): AAPL @ $238.15 | RSI=60.9, MACD=3.7816, Signal=4.2369, Hist=-0.45531, SMA50=$222.15
+2025-10-29 13:38:24 | INFO     | 📈 Trailing stop: price=238.15, trough=234.07, rise=-1.74%
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 93 (('AAPL', Timestamp('2025-09-17 04:00:00+0000', tz='UTC'))): AAPL @ $238.99 | RSI=60.6, MACD=3.9011, Signal=4.1698, Hist=-0.26865, SMA50=$222.73
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=46508017.0, ma=48997536.6, required=51447413.43000001
+2025-10-29 13:38:24 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:24 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 94 (('AAPL', Timestamp('2025-09-18 04:00:00+0000', tz='UTC'))): AAPL @ $237.88 | RSI=56.8, MACD=3.8617, Signal=4.1082, Hist=-0.24642, SMA50=$223.27
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=44249576.0, ma=49096822.15, required=51551663.2575
+2025-10-29 13:38:24 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:24 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 95 (('AAPL', Timestamp('2025-09-19 04:00:00+0000', tz='UTC'))): AAPL @ $245.50 | RSI=64.4, MACD=4.3947, Signal=4.1655, Hist=0.22926, SMA50=$223.93
+2025-10-29 13:38:24 | INFO     | 🟢 LONG SIGNAL (5/5 conditions): AAPL @ $245.50 | RSI=64.4 ✓, MACD ✓, Hist=✓ (0.22926), Trend ✓, Volume ✓
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 96 (('AAPL', Timestamp('2025-09-22 04:00:00+0000', tz='UTC'))): AAPL @ $256.08 | RSI=74.2, MACD=5.6062, Signal=4.4536, Hist=1.15261, SMA50=$224.83
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 97 (('AAPL', Timestamp('2025-09-23 04:00:00+0000', tz='UTC'))): AAPL @ $254.43 | RSI=66.8, MACD=6.3599, Signal=4.8349, Hist=1.52502, SMA50=$225.74
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 98 (('AAPL', Timestamp('2025-09-24 04:00:00+0000', tz='UTC'))): AAPL @ $252.31 | RSI=63.0, MACD=6.7088, Signal=5.2097, Hist=1.49913, SMA50=$226.61
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 99 (('AAPL', Timestamp('2025-09-25 04:00:00+0000', tz='UTC'))): AAPL @ $256.87 | RSI=66.3, MACD=7.2695, Signal=5.6216, Hist=1.64782, SMA50=$227.54
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 100 (('AAPL', Timestamp('2025-09-26 04:00:00+0000', tz='UTC'))): AAPL @ $255.46 | RSI=66.8, MACD=7.5134, Signal=6.0000, Hist=1.51340, SMA50=$228.45
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 101 (('AAPL', Timestamp('2025-09-29 04:00:00+0000', tz='UTC'))): AAPL @ $254.43 | RSI=70.1, MACD=7.5367, Signal=6.3073, Hist=1.22939, SMA50=$229.32
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 102 (('AAPL', Timestamp('2025-09-30 04:00:00+0000', tz='UTC'))): AAPL @ $254.63 | RSI=82.8, MACD=7.4851, Signal=6.5429, Hist=0.94218, SMA50=$230.16
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 103 (('AAPL', Timestamp('2025-10-01 04:00:00+0000', tz='UTC'))): AAPL @ $255.45 | RSI=81.7, MACD=7.4247, Signal=6.7192, Hist=0.70546, SMA50=$230.98
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 104 (('AAPL', Timestamp('2025-10-02 04:00:00+0000', tz='UTC'))): AAPL @ $257.13 | RSI=80.6, MACD=7.4268, Signal=6.8608, Hist=0.56606, SMA50=$231.84
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 105 (('AAPL', Timestamp('2025-10-03 04:00:00+0000', tz='UTC'))): AAPL @ $258.02 | RSI=79.6, MACD=7.4148, Signal=6.9716, Hist=0.44326, SMA50=$232.72
+2025-10-29 13:38:24 | INFO     | ✅ TAKE-PROFIT (after 10 bars): AAPL @ $258.02 | Entry=$245.50, P&L=5.10%
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 106 (('AAPL', Timestamp('2025-10-06 04:00:00+0000', tz='UTC'))): AAPL @ $256.69 | RSI=75.9, MACD=7.2149, Signal=7.0202, Hist=0.19462, SMA50=$233.58
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=44664118.0, ma=59438207.55, required=62410117.9275
+2025-10-29 13:38:24 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): AAPL @ $256.69 | RSI=75.9 ✓, MACD ✓, Hist=✓ (0.19462), Trend ✓, Volume ✗
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 107 (('AAPL', Timestamp('2025-10-07 04:00:00+0000', tz='UTC'))): AAPL @ $256.48 | RSI=74.8, MACD=6.9592, Signal=7.0080, Hist=-0.04882, SMA50=$234.43
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 108 (('AAPL', Timestamp('2025-10-08 04:00:00+0000', tz='UTC'))): AAPL @ $258.06 | RSI=78.3, MACD=6.8056, Signal=6.9675, Hist=-0.16191, SMA50=$235.37
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 109 (('AAPL', Timestamp('2025-10-09 04:00:00+0000', tz='UTC'))): AAPL @ $254.04 | RSI=63.3, MACD=6.2871, Signal=6.8315, Hist=-0.54438, SMA50=$236.26
+2025-10-29 13:38:24 | INFO     | 📉 Trailing stop: price=254.04, peak=258.06, drop=-1.56%
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 110 (('AAPL', Timestamp('2025-10-10 04:00:00+0000', tz='UTC'))): AAPL @ $245.27 | RSI=32.1, MACD=5.1096, Signal=6.4871, Hist=-1.37752, SMA50=$237.02
+2025-10-29 13:38:24 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=False, MACD=False, Hist=False, Trend=True, Volume=True
+2025-10-29 13:38:24 | INFO     | 🔴 SHORT SIGNAL (4/5 conditions): AAPL @ $245.27 | RSI=32.1 ✓, MACD ✓, Hist=✓ (-1.37752), Trend ✗, Volume ✓
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 111 (('AAPL', Timestamp('2025-10-13 04:00:00+0000', tz='UTC'))): AAPL @ $247.66 | RSI=39.1, MACD=4.3194, Signal=6.0535, Hist=-1.73412, SMA50=$237.92
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 112 (('AAPL', Timestamp('2025-10-14 04:00:00+0000', tz='UTC'))): AAPL @ $247.77 | RSI=42.2, MACD=3.6599, Signal=5.5748, Hist=-1.91490, SMA50=$238.81
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 113 (('AAPL', Timestamp('2025-10-15 04:00:00+0000', tz='UTC'))): AAPL @ $249.34 | RSI=35.5, MACD=3.2267, Signal=5.1052, Hist=-1.87846, SMA50=$239.74
+2025-10-29 13:38:24 | INFO     | 📈 Trailing stop: price=249.34, trough=245.27, rise=-1.66%
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 114 (('AAPL', Timestamp('2025-10-16 04:00:00+0000', tz='UTC'))): AAPL @ $247.45 | RSI=34.9, MACD=2.6998, Signal=4.6241, Hist=-1.92430, SMA50=$240.43
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=39776974.0, ma=52608855.55, required=55239298.3275
+2025-10-29 13:38:24 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): AAPL @ $247.45 | RSI=34.9 ✓, MACD ✓, Hist=✓ (-1.92430), Trend ✗, Volume ✗
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 115 (('AAPL', Timestamp('2025-10-17 04:00:00+0000', tz='UTC'))): AAPL @ $252.29 | RSI=46.5, MACD=2.6423, Signal=4.2278, Hist=-1.58544, SMA50=$241.07
+2025-10-29 13:38:24 | INFO     | 📈 Trailing stop: price=252.29, trough=247.45, rise=-1.96%
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 116 (('AAPL', Timestamp('2025-10-20 04:00:00+0000', tz='UTC'))): AAPL @ $262.24 | RSI=59.5, MACD=3.3609, Signal=4.0544, Hist=-0.69349, SMA50=$241.73
+2025-10-29 13:38:24 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): AAPL @ $262.24 | RSI=59.5 ✓, MACD ✗, Hist=✗ (-0.69349), Trend ✓, Volume ✓
+2025-10-29 13:38:24 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): AAPL @ $262.24 | RSI=59.5 ✗, MACD ✓, Hist=✓ (-0.69349), Trend ✗, Volume ✓
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 117 (('AAPL', Timestamp('2025-10-21 04:00:00+0000', tz='UTC'))): AAPL @ $262.77 | RSI=59.2, MACD=3.9279, Signal=4.0291, Hist=-0.10123, SMA50=$242.44
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 118 (('AAPL', Timestamp('2025-10-22 04:00:00+0000', tz='UTC'))): AAPL @ $258.45 | RSI=51.6, MACD=3.9827, Signal=4.0198, Hist=-0.03712, SMA50=$243.02
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 119 (('AAPL', Timestamp('2025-10-23 04:00:00+0000', tz='UTC'))): AAPL @ $259.58 | RSI=51.8, MACD=4.0704, Signal=4.0299, Hist=0.04047, SMA50=$243.54
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 120 (('AAPL', Timestamp('2025-10-24 04:00:00+0000', tz='UTC'))): AAPL @ $262.82 | RSI=56.9, MACD=4.3512, Signal=4.0942, Hist=0.25701, SMA50=$244.14
+2025-10-29 13:38:24 | INFO     | 📈 Trailing stop: price=262.82, trough=258.45, rise=-1.69%
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 121 (('AAPL', Timestamp('2025-10-27 04:00:00+0000', tz='UTC'))): AAPL @ $268.81 | RSI=62.2, MACD=4.9994, Signal=4.2752, Hist=0.72420, SMA50=$244.89
+2025-10-29 13:38:24 | DEBUG    | Volume filter blocked entry: vol=44888052.0, ma=44308073.95, required=46523477.64750001
+2025-10-29 13:38:24 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): AAPL @ $268.81 | RSI=62.2 ✓, MACD ✓, Hist=✓ (0.72420), Trend ✓, Volume ✗
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 122 (('AAPL', Timestamp('2025-10-28 04:00:00+0000', tz='UTC'))): AAPL @ $269.00 | RSI=61.2, MACD=5.4655, Signal=4.5133, Hist=0.95221, SMA50=$245.65
+2025-10-29 13:38:24 | DEBUG    | 📈 Bar 123 (('AAPL', Timestamp('2025-10-29 04:00:00+0000', tz='UTC'))): AAPL @ $268.90 | RSI=66.5, MACD=5.7600, Signal=4.7626, Hist=0.99737, SMA50=$246.42
+2025-10-29 13:38:24 | INFO     | Generated 29 signals for Momentum strategy (including 14 exits)
+2025-10-29 13:38:24 | INFO     |      Generated 29 signals for AAPL
+2025-10-29 13:38:25 | INFO     | Fetched 124 bars for MSFT
+2025-10-29 13:38:25 | INFO     |   ✓ MSFT: 124 bars
+2025-10-29 13:38:25 | DEBUG    | Volume confirmation enabled with 20-period MA
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 27 (('MSFT', Timestamp('2025-06-12 04:00:00+0000', tz='UTC'))): MSFT @ $478.87 | RSI=77.5, MACD=7.9192, Signal=6.8079, Hist=1.11130, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=18950582.0, ma=18636417.45, required=19568238.3225
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): MSFT @ $478.87 | RSI=77.5 ✓, MACD ✓, Hist=✓ (1.11130), Trend ✗, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 28 (('MSFT', Timestamp('2025-06-13 04:00:00+0000', tz='UTC'))): MSFT @ $474.96 | RSI=78.9, MACD=7.9251, Signal=7.0314, Hist=0.89372, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 29 (('MSFT', Timestamp('2025-06-16 04:00:00+0000', tz='UTC'))): MSFT @ $479.14 | RSI=75.2, MACD=8.1728, Signal=7.2597, Hist=0.91314, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 30 (('MSFT', Timestamp('2025-06-17 04:00:00+0000', tz='UTC'))): MSFT @ $478.04 | RSI=80.1, MACD=8.1860, Signal=7.4449, Hist=0.74107, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 31 (('MSFT', Timestamp('2025-06-18 04:00:00+0000', tz='UTC'))): MSFT @ $480.24 | RSI=80.6, MACD=8.2785, Signal=7.6117, Hist=0.66689, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 32 (('MSFT', Timestamp('2025-06-20 04:00:00+0000', tz='UTC'))): MSFT @ $477.40 | RSI=73.4, MACD=8.0302, Signal=7.6954, Hist=0.33480, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 33 (('MSFT', Timestamp('2025-06-23 04:00:00+0000', tz='UTC'))): MSFT @ $486.00 | RSI=77.7, MACD=8.4301, Signal=7.8423, Hist=0.58778, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 34 (('MSFT', Timestamp('2025-06-24 04:00:00+0000', tz='UTC'))): MSFT @ $490.11 | RSI=79.2, MACD=8.9752, Signal=8.0689, Hist=0.90632, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 35 (('MSFT', Timestamp('2025-06-25 04:00:00+0000', tz='UTC'))): MSFT @ $492.27 | RSI=79.7, MACD=9.4723, Signal=8.3496, Hist=1.12275, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 36 (('MSFT', Timestamp('2025-06-26 04:00:00+0000', tz='UTC'))): MSFT @ $497.45 | RSI=80.3, MACD=10.1671, Signal=8.7131, Hist=1.45400, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 37 (('MSFT', Timestamp('2025-06-27 04:00:00+0000', tz='UTC'))): MSFT @ $495.94 | RSI=76.7, MACD=10.4751, Signal=9.0655, Hist=1.40960, SMA50=$nan
+2025-10-29 13:38:25 | INFO     | ✅ TAKE-PROFIT (after 10 bars): MSFT @ $495.94 | Entry=$478.87, P&L=3.56%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 38 (('MSFT', Timestamp('2025-06-30 04:00:00+0000', tz='UTC'))): MSFT @ $497.41 | RSI=76.2, MACD=10.7143, Signal=9.3952, Hist=1.31905, SMA50=$nan
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): MSFT @ $497.41 | RSI=76.2 ✓, MACD ✓, Hist=✓ (1.31905), Trend ✗, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 39 (('MSFT', Timestamp('2025-07-01 04:00:00+0000', tz='UTC'))): MSFT @ $492.05 | RSI=70.9, MACD=10.3520, Signal=9.5866, Hist=0.76542, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 40 (('MSFT', Timestamp('2025-07-02 04:00:00+0000', tz='UTC'))): MSFT @ $491.09 | RSI=68.5, MACD=9.8736, Signal=9.6440, Hist=0.22963, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 41 (('MSFT', Timestamp('2025-07-03 04:00:00+0000', tz='UTC'))): MSFT @ $498.84 | RSI=69.5, MACD=10.0045, Signal=9.7161, Hist=0.28844, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 42 (('MSFT', Timestamp('2025-07-07 04:00:00+0000', tz='UTC'))): MSFT @ $497.72 | RSI=73.4, MACD=9.9037, Signal=9.7536, Hist=0.15012, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 43 (('MSFT', Timestamp('2025-07-08 04:00:00+0000', tz='UTC'))): MSFT @ $496.62 | RSI=69.2, MACD=9.6242, Signal=9.7277, Hist=-0.10357, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 44 (('MSFT', Timestamp('2025-07-09 04:00:00+0000', tz='UTC'))): MSFT @ $503.51 | RSI=74.8, MACD=9.8451, Signal=9.7512, Hist=0.09387, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 45 (('MSFT', Timestamp('2025-07-10 04:00:00+0000', tz='UTC'))): MSFT @ $501.48 | RSI=70.8, MACD=9.7440, Signal=9.7498, Hist=-0.00575, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 46 (('MSFT', Timestamp('2025-07-11 04:00:00+0000', tz='UTC'))): MSFT @ $503.32 | RSI=75.9, MACD=9.7006, Signal=9.7399, Hist=-0.03935, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 47 (('MSFT', Timestamp('2025-07-14 04:00:00+0000', tz='UTC'))): MSFT @ $503.02 | RSI=70.4, MACD=9.5321, Signal=9.6984, Hist=-0.16629, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 48 (('MSFT', Timestamp('2025-07-15 04:00:00+0000', tz='UTC'))): MSFT @ $505.82 | RSI=69.4, MACD=9.5148, Signal=9.6616, Hist=-0.14686, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 49 (('MSFT', Timestamp('2025-07-16 04:00:00+0000', tz='UTC'))): MSFT @ $505.62 | RSI=67.3, MACD=9.3769, Signal=9.6047, Hist=-0.22783, SMA50=$472.41
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 50 (('MSFT', Timestamp('2025-07-17 04:00:00+0000', tz='UTC'))): MSFT @ $511.70 | RSI=68.1, MACD=9.6469, Signal=9.6131, Hist=0.03381, SMA50=$473.92
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 51 (('MSFT', Timestamp('2025-07-18 04:00:00+0000', tz='UTC'))): MSFT @ $510.05 | RSI=67.8, MACD=9.6170, Signal=9.6139, Hist=0.00308, SMA50=$475.45
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 52 (('MSFT', Timestamp('2025-07-21 04:00:00+0000', tz='UTC'))): MSFT @ $510.06 | RSI=66.6, MACD=9.4847, Signal=9.5881, Hist=-0.10335, SMA50=$476.99
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 53 (('MSFT', Timestamp('2025-07-22 04:00:00+0000', tz='UTC'))): MSFT @ $505.27 | RSI=67.6, MACD=8.8909, Signal=9.4486, Hist=-0.55773, SMA50=$478.33
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 54 (('MSFT', Timestamp('2025-07-23 04:00:00+0000', tz='UTC'))): MSFT @ $505.87 | RSI=69.9, MACD=8.3722, Signal=9.2334, Hist=-0.86115, SMA50=$479.67
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 55 (('MSFT', Timestamp('2025-07-24 04:00:00+0000', tz='UTC'))): MSFT @ $510.88 | RSI=67.5, MACD=8.2701, Signal=9.0407, Hist=-0.77063, SMA50=$480.90
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 56 (('MSFT', Timestamp('2025-07-25 04:00:00+0000', tz='UTC'))): MSFT @ $513.71 | RSI=72.1, MACD=8.3215, Signal=8.8969, Hist=-0.57532, SMA50=$482.19
+2025-10-29 13:38:25 | INFO     | ✅ TAKE-PROFIT (after 18 bars): MSFT @ $513.71 | Entry=$497.41, P&L=3.28%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 57 (('MSFT', Timestamp('2025-07-28 04:00:00+0000', tz='UTC'))): MSFT @ $512.50 | RSI=71.9, MACD=8.1705, Signal=8.7516, Hist=-0.58107, SMA50=$483.39
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=14308027.0, ma=16539723.45, required=17366709.6225
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 58 (('MSFT', Timestamp('2025-07-29 04:00:00+0000', tz='UTC'))): MSFT @ $512.57 | RSI=65.4, MACD=7.9647, Signal=8.5942, Hist=-0.62954, SMA50=$484.57
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=16469235.0, ma=15944735.65, required=16741972.432500001
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 59 (('MSFT', Timestamp('2025-07-30 04:00:00+0000', tz='UTC'))): MSFT @ $513.24 | RSI=71.0, MACD=7.7661, Signal=8.4286, Hist=-0.66251, SMA50=$485.75
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): MSFT @ $513.24 | RSI=71.0 ✓, MACD ✗, Hist=✗ (-0.66251), Trend ✓, Volume ✓
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): MSFT @ $513.24 | RSI=71.0 ✗, MACD ✓, Hist=✓ (-0.66251), Trend ✗, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 60 (('MSFT', Timestamp('2025-07-31 04:00:00+0000', tz='UTC'))): MSFT @ $533.50 | RSI=82.5, MACD=9.1382, Signal=8.5705, Hist=0.56766, SMA50=$487.25
+2025-10-29 13:38:25 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: MSFT @ $533.50 | Entry=$513.24, P&L=-3.95%, Bars=1
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 61 (('MSFT', Timestamp('2025-08-01 04:00:00+0000', tz='UTC'))): MSFT @ $524.11 | RSI=69.0, MACD=9.3600, Signal=8.7284, Hist=0.63157, SMA50=$488.56
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (5/5 conditions): MSFT @ $524.11 | RSI=69.0 ✓, MACD ✓, Hist=✓ (0.63157), Trend ✓, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 62 (('MSFT', Timestamp('2025-08-04 04:00:00+0000', tz='UTC'))): MSFT @ $535.64 | RSI=73.2, MACD=10.3468, Signal=9.0521, Hist=1.29476, SMA50=$490.23
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 63 (('MSFT', Timestamp('2025-08-05 04:00:00+0000', tz='UTC'))): MSFT @ $527.75 | RSI=65.4, MACD=10.3727, Signal=9.3162, Hist=1.05651, SMA50=$491.68
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 64 (('MSFT', Timestamp('2025-08-06 04:00:00+0000', tz='UTC'))): MSFT @ $524.94 | RSI=59.6, MACD=10.0506, Signal=9.4631, Hist=0.58754, SMA50=$493.18
+2025-10-29 13:38:25 | INFO     | 📉 Trailing stop: price=524.94, peak=535.64, drop=-2.00%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 65 (('MSFT', Timestamp('2025-08-07 04:00:00+0000', tz='UTC'))): MSFT @ $520.84 | RSI=57.6, MACD=9.3567, Signal=9.4418, Hist=-0.08513, SMA50=$494.38
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=16079144.0, ma=19829429.1, required=20820900.555000003
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 66 (('MSFT', Timestamp('2025-08-08 04:00:00+0000', tz='UTC'))): MSFT @ $522.04 | RSI=58.3, MACD=8.8021, Signal=9.3139, Hist=-0.51178, SMA50=$495.68
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=15531009.0, ma=19783003.95, required=20772154.1475
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 67 (('MSFT', Timestamp('2025-08-11 04:00:00+0000', tz='UTC'))): MSFT @ $521.77 | RSI=62.2, MACD=8.2457, Signal=9.1002, Hist=-0.85452, SMA50=$496.94
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=20194372.0, ma=20189780.15, required=21199269.1575
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 68 (('MSFT', Timestamp('2025-08-12 04:00:00+0000', tz='UTC'))): MSFT @ $529.24 | RSI=65.6, MACD=8.3118, Signal=8.9425, Hist=-0.63079, SMA50=$498.32
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=18688921.0, ma=20377866.1, required=21396759.405
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 69 (('MSFT', Timestamp('2025-08-13 04:00:00+0000', tz='UTC'))): MSFT @ $520.58 | RSI=56.2, MACD=7.5779, Signal=8.6696, Hist=-1.09168, SMA50=$499.49
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=19619160.0, ma=20601281.1, required=21631345.155
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 70 (('MSFT', Timestamp('2025-08-14 04:00:00+0000', tz='UTC'))): MSFT @ $522.48 | RSI=55.7, MACD=7.0682, Signal=8.3493, Hist=-1.28111, SMA50=$500.68
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=20269074.0, ma=20739578.35, required=21776557.267500002
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 71 (('MSFT', Timestamp('2025-08-15 04:00:00+0000', tz='UTC'))): MSFT @ $520.17 | RSI=54.9, MACD=6.4041, Signal=7.9603, Hist=-1.55623, SMA50=$501.80
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=False, MACD=False, Hist=False, Trend=True, Volume=True
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): MSFT @ $520.17 | RSI=54.9 ✗, MACD ✓, Hist=✓ (-1.55623), Trend ✗, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 72 (('MSFT', Timestamp('2025-08-18 04:00:00+0000', tz='UTC'))): MSFT @ $517.10 | RSI=52.8, MACD=5.5658, Signal=7.4814, Hist=-1.91558, SMA50=$502.79
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 73 (('MSFT', Timestamp('2025-08-19 04:00:00+0000', tz='UTC'))): MSFT @ $509.77 | RSI=48.0, MACD=4.2609, Signal=6.8373, Hist=-2.57638, SMA50=$503.58
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 74 (('MSFT', Timestamp('2025-08-20 04:00:00+0000', tz='UTC'))): MSFT @ $505.72 | RSI=30.7, MACD=2.8669, Signal=6.0432, Hist=-3.17630, SMA50=$504.24
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 75 (('MSFT', Timestamp('2025-08-21 04:00:00+0000', tz='UTC'))): MSFT @ $504.24 | RSI=34.5, MACD=1.6240, Signal=5.1594, Hist=-3.53536, SMA50=$504.91
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 76 (('MSFT', Timestamp('2025-08-22 04:00:00+0000', tz='UTC'))): MSFT @ $507.23 | RSI=24.4, MACD=0.8703, Signal=4.3016, Hist=-3.43130, SMA50=$505.60
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 77 (('MSFT', Timestamp('2025-08-25 04:00:00+0000', tz='UTC'))): MSFT @ $504.26 | RSI=26.8, MACD=0.0329, Signal=3.4478, Hist=-3.41496, SMA50=$506.11
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 78 (('MSFT', Timestamp('2025-08-26 04:00:00+0000', tz='UTC'))): MSFT @ $502.04 | RSI=27.1, MACD=-0.8007, Signal=2.5981, Hist=-3.39880, SMA50=$506.65
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 79 (('MSFT', Timestamp('2025-08-27 04:00:00+0000', tz='UTC'))): MSFT @ $506.74 | RSI=36.1, MACD=-1.0697, Signal=1.8646, Hist=-2.93425, SMA50=$507.20
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 80 (('MSFT', Timestamp('2025-08-28 04:00:00+0000', tz='UTC'))): MSFT @ $509.64 | RSI=38.1, MACD=-1.0369, Signal=1.2843, Hist=-2.32119, SMA50=$507.83
+2025-10-29 13:38:25 | INFO     | 📈 Trailing stop: price=509.64, trough=502.04, rise=-1.51%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 81 (('MSFT', Timestamp('2025-08-29 04:00:00+0000', tz='UTC'))): MSFT @ $506.69 | RSI=36.3, MACD=-1.2348, Signal=0.7804, Hist=-2.01523, SMA50=$508.36
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=20951430.0, ma=21296123.5, required=22360929.675
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (4/5 conditions): MSFT @ $506.69 | RSI=36.3 ✓, MACD ✓, Hist=✓ (-2.01523), Trend ✓, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 82 (('MSFT', Timestamp('2025-09-02 04:00:00+0000', tz='UTC'))): MSFT @ $505.12 | RSI=25.4, MACD=-1.5010, Signal=0.3242, Hist=-1.82512, SMA50=$508.91
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 83 (('MSFT', Timestamp('2025-09-03 04:00:00+0000', tz='UTC'))): MSFT @ $505.35 | RSI=31.3, MACD=-1.6740, Signal=-0.0755, Hist=-1.59857, SMA50=$509.30
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 84 (('MSFT', Timestamp('2025-09-04 04:00:00+0000', tz='UTC'))): MSFT @ $507.97 | RSI=32.5, MACD=-1.5816, Signal=-0.3767, Hist=-1.20488, SMA50=$509.66
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 85 (('MSFT', Timestamp('2025-09-05 04:00:00+0000', tz='UTC'))): MSFT @ $495.00 | RSI=25.8, MACD=-2.5257, Signal=-0.8065, Hist=-1.71924, SMA50=$509.71
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 86 (('MSFT', Timestamp('2025-09-08 04:00:00+0000', tz='UTC'))): MSFT @ $498.20 | RSI=31.9, MACD=-2.9814, Signal=-1.2415, Hist=-1.73994, SMA50=$509.73
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 87 (('MSFT', Timestamp('2025-09-09 04:00:00+0000', tz='UTC'))): MSFT @ $498.41 | RSI=37.4, MACD=-3.2877, Signal=-1.6507, Hist=-1.63698, SMA50=$509.78
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 88 (('MSFT', Timestamp('2025-09-10 04:00:00+0000', tz='UTC'))): MSFT @ $500.37 | RSI=43.8, MACD=-3.3339, Signal=-1.9874, Hist=-1.34650, SMA50=$509.84
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 89 (('MSFT', Timestamp('2025-09-11 04:00:00+0000', tz='UTC'))): MSFT @ $501.01 | RSI=46.2, MACD=-3.2810, Signal=-2.2461, Hist=-1.03489, SMA50=$510.02
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 90 (('MSFT', Timestamp('2025-09-12 04:00:00+0000', tz='UTC'))): MSFT @ $509.90 | RSI=52.8, MACD=-2.4930, Signal=-2.2955, Hist=-0.19751, SMA50=$510.39
+2025-10-29 13:38:25 | INFO     | 📈 Trailing stop: price=509.90, trough=495.00, rise=-3.01%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 91 (('MSFT', Timestamp('2025-09-15 04:00:00+0000', tz='UTC'))): MSFT @ $515.36 | RSI=61.0, MACD=-1.4116, Signal=-2.1187, Hist=0.70707, SMA50=$510.72
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=17143786.0, ma=20942125.6, required=21989231.880000003
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): MSFT @ $515.36 | RSI=61.0 ✓, MACD ✓, Hist=✓ (0.70707), Trend ✓, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 92 (('MSFT', Timestamp('2025-09-16 04:00:00+0000', tz='UTC'))): MSFT @ $509.04 | RSI=56.4, MACD=-1.0525, Signal=-1.9054, Hist=0.85296, SMA50=$510.95
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 93 (('MSFT', Timestamp('2025-09-17 04:00:00+0000', tz='UTC'))): MSFT @ $510.02 | RSI=53.2, MACD=-0.6809, Signal=-1.6605, Hist=0.97961, SMA50=$511.22
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 94 (('MSFT', Timestamp('2025-09-18 04:00:00+0000', tz='UTC'))): MSFT @ $508.45 | RSI=48.8, MACD=-0.5073, Signal=-1.4299, Hist=0.92258, SMA50=$511.32
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 95 (('MSFT', Timestamp('2025-09-19 04:00:00+0000', tz='UTC'))): MSFT @ $517.93 | RSI=60.0, MACD=0.3907, Signal=-1.0658, Hist=1.45650, SMA50=$511.65
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 96 (('MSFT', Timestamp('2025-09-22 04:00:00+0000', tz='UTC'))): MSFT @ $514.45 | RSI=58.0, MACD=0.8123, Signal=-0.6902, Hist=1.50243, SMA50=$511.87
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 97 (('MSFT', Timestamp('2025-09-23 04:00:00+0000', tz='UTC'))): MSFT @ $509.23 | RSI=53.1, MACD=0.7168, Signal=-0.4088, Hist=1.12562, SMA50=$511.99
+2025-10-29 13:38:25 | INFO     | 📉 Trailing stop: price=509.23, peak=517.93, drop=-1.68%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 98 (('MSFT', Timestamp('2025-09-24 04:00:00+0000', tz='UTC'))): MSFT @ $510.15 | RSI=51.8, MACD=0.7073, Signal=-0.1856, Hist=0.89287, SMA50=$512.08
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=13533711.0, ma=20544754.25, required=21571991.962500002
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 99 (('MSFT', Timestamp('2025-09-25 04:00:00+0000', tz='UTC'))): MSFT @ $507.03 | RSI=61.7, MACD=0.4429, Signal=-0.0599, Hist=0.50277, SMA50=$512.11
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=15786468.0, ma=20470183.0, required=21493692.150000002
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): MSFT @ $507.03 | RSI=61.7 ✓, MACD ✓, Hist=✓ (0.50277), Trend ✗, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 100 (('MSFT', Timestamp('2025-09-26 04:00:00+0000', tz='UTC'))): MSFT @ $511.46 | RSI=62.6, MACD=0.5841, Signal=0.0689, Hist=0.51516, SMA50=$512.10
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 101 (('MSFT', Timestamp('2025-09-29 04:00:00+0000', tz='UTC'))): MSFT @ $514.60 | RSI=64.6, MACD=0.9385, Signal=0.2429, Hist=0.69568, SMA50=$512.19
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 102 (('MSFT', Timestamp('2025-09-30 04:00:00+0000', tz='UTC'))): MSFT @ $517.95 | RSI=65.4, MACD=1.4728, Signal=0.4888, Hist=0.98393, SMA50=$512.35
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 103 (('MSFT', Timestamp('2025-10-01 04:00:00+0000', tz='UTC'))): MSFT @ $519.71 | RSI=66.1, MACD=2.0149, Signal=0.7941, Hist=1.22089, SMA50=$512.64
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 104 (('MSFT', Timestamp('2025-10-02 04:00:00+0000', tz='UTC'))): MSFT @ $515.74 | RSI=55.5, MACD=2.1001, Signal=1.0553, Hist=1.04481, SMA50=$512.84
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 105 (('MSFT', Timestamp('2025-10-03 04:00:00+0000', tz='UTC'))): MSFT @ $517.35 | RSI=52.0, MACD=2.2713, Signal=1.2985, Hist=0.97280, SMA50=$512.97
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 106 (('MSFT', Timestamp('2025-10-06 04:00:00+0000', tz='UTC'))): MSFT @ $528.57 | RSI=68.0, MACD=3.2746, Signal=1.6937, Hist=1.58087, SMA50=$513.26
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 107 (('MSFT', Timestamp('2025-10-07 04:00:00+0000', tz='UTC'))): MSFT @ $523.98 | RSI=62.1, MACD=3.6571, Signal=2.0864, Hist=1.57076, SMA50=$513.49
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 108 (('MSFT', Timestamp('2025-10-08 04:00:00+0000', tz='UTC'))): MSFT @ $524.85 | RSI=64.3, MACD=3.9846, Signal=2.4660, Hist=1.51858, SMA50=$513.74
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 109 (('MSFT', Timestamp('2025-10-09 04:00:00+0000', tz='UTC'))): MSFT @ $522.40 | RSI=54.5, MACD=4.0003, Signal=2.7729, Hist=1.22744, SMA50=$513.92
+2025-10-29 13:38:25 | INFO     | ✅ TAKE-PROFIT (after 10 bars): MSFT @ $522.40 | Entry=$507.03, P&L=3.03%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 110 (('MSFT', Timestamp('2025-10-10 04:00:00+0000', tz='UTC'))): MSFT @ $510.96 | RSI=47.0, MACD=3.0544, Signal=2.8292, Hist=0.22525, SMA50=$513.47
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): MSFT @ $510.96 | RSI=47.0 ✗, MACD ✓, Hist=✓ (0.22525), Trend ✗, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=False, Hist=False, Trend=True, Volume=True
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 111 (('MSFT', Timestamp('2025-10-13 04:00:00+0000', tz='UTC'))): MSFT @ $514.05 | RSI=54.3, MACD=2.5251, Signal=2.7684, Hist=-0.24330, SMA50=$513.27
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 112 (('MSFT', Timestamp('2025-10-14 04:00:00+0000', tz='UTC'))): MSFT @ $513.57 | RSI=53.1, MACD=2.0432, Signal=2.6233, Hist=-0.58010, SMA50=$512.83
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 113 (('MSFT', Timestamp('2025-10-15 04:00:00+0000', tz='UTC'))): MSFT @ $513.43 | RSI=56.1, MACD=1.6313, Signal=2.4249, Hist=-0.79364, SMA50=$512.54
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 114 (('MSFT', Timestamp('2025-10-16 04:00:00+0000', tz='UTC'))): MSFT @ $511.61 | RSI=50.2, MACD=1.1448, Signal=2.1689, Hist=-1.02413, SMA50=$512.28
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 115 (('MSFT', Timestamp('2025-10-17 04:00:00+0000', tz='UTC'))): MSFT @ $513.58 | RSI=49.0, MACD=0.9077, Signal=1.9167, Hist=-1.00897, SMA50=$512.13
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 116 (('MSFT', Timestamp('2025-10-20 04:00:00+0000', tz='UTC'))): MSFT @ $516.79 | RSI=48.8, MACD=0.9677, Signal=1.7269, Hist=-0.75919, SMA50=$512.03
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 117 (('MSFT', Timestamp('2025-10-21 04:00:00+0000', tz='UTC'))): MSFT @ $517.66 | RSI=47.9, MACD=1.0730, Signal=1.5961, Hist=-0.52306, SMA50=$511.94
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 118 (('MSFT', Timestamp('2025-10-22 04:00:00+0000', tz='UTC'))): MSFT @ $520.54 | RSI=55.1, MACD=1.3731, Signal=1.5515, Hist=-0.17839, SMA50=$511.77
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 119 (('MSFT', Timestamp('2025-10-23 04:00:00+0000', tz='UTC'))): MSFT @ $520.56 | RSI=53.6, MACD=1.5941, Signal=1.5600, Hist=0.03412, SMA50=$511.77
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 120 (('MSFT', Timestamp('2025-10-24 04:00:00+0000', tz='UTC'))): MSFT @ $523.61 | RSI=43.3, MACD=1.9925, Signal=1.6465, Hist=0.34595, SMA50=$511.79
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 121 (('MSFT', Timestamp('2025-10-27 04:00:00+0000', tz='UTC'))): MSFT @ $531.52 | RSI=59.4, MACD=2.9128, Signal=1.8998, Hist=1.01305, SMA50=$512.02
+2025-10-29 13:38:25 | INFO     | ✅ TAKE-PROFIT (after 11 bars): MSFT @ $531.52 | Entry=$510.96, P&L=4.02%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 122 (('MSFT', Timestamp('2025-10-28 04:00:00+0000', tz='UTC'))): MSFT @ $542.07 | RSI=67.3, MACD=4.4423, Signal=2.4083, Hist=2.03403, SMA50=$512.52
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (5/5 conditions): MSFT @ $542.07 | RSI=67.3 ✓, MACD ✓, Hist=✓ (2.03403), Trend ✓, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 123 (('MSFT', Timestamp('2025-10-29 04:00:00+0000', tz='UTC'))): MSFT @ $538.60 | RSI=65.9, MACD=5.3132, Signal=2.9893, Hist=2.32393, SMA50=$513.09
+2025-10-29 13:38:25 | INFO     | Generated 19 signals for Momentum strategy (including 9 exits)
+2025-10-29 13:38:25 | INFO     |      Generated 19 signals for MSFT
+2025-10-29 13:38:25 | INFO     | Fetched 124 bars for GOOGL
+2025-10-29 13:38:25 | INFO     |   ✓ GOOGL: 124 bars
+2025-10-29 13:38:25 | DEBUG    | Volume confirmation enabled with 20-period MA
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 27 (('GOOGL', Timestamp('2025-06-12 04:00:00+0000', tz='UTC'))): GOOGL @ $175.70 | RSI=58.4, MACD=3.1564, Signal=2.4483, Hist=0.70812, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=20941873.0, ma=40868880.35, required=42912324.3675
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): GOOGL @ $175.70 | RSI=58.4 ✓, MACD ✓, Hist=✓ (0.70812), Trend ✗, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 28 (('GOOGL', Timestamp('2025-06-13 04:00:00+0000', tz='UTC'))): GOOGL @ $174.67 | RSI=61.3, MACD=3.0651, Signal=2.5716, Hist=0.49346, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 29 (('GOOGL', Timestamp('2025-06-16 04:00:00+0000', tz='UTC'))): GOOGL @ $176.77 | RSI=57.7, MACD=3.1262, Signal=2.6825, Hist=0.44362, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 30 (('GOOGL', Timestamp('2025-06-17 04:00:00+0000', tz='UTC'))): GOOGL @ $175.95 | RSI=57.1, MACD=3.0730, Signal=2.7606, Hist=0.31234, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 31 (('GOOGL', Timestamp('2025-06-18 04:00:00+0000', tz='UTC'))): GOOGL @ $173.32 | RSI=52.6, MACD=2.7865, Signal=2.7658, Hist=0.02067, SMA50=$nan
+2025-10-29 13:38:25 | INFO     | 📉 Trailing stop: price=173.32, peak=176.77, drop=-1.95%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 32 (('GOOGL', Timestamp('2025-06-20 04:00:00+0000', tz='UTC'))): GOOGL @ $166.64 | RSI=42.5, MACD=1.9974, Signal=2.6121, Hist=-0.61474, SMA50=$nan
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (4/5 conditions): GOOGL @ $166.64 | RSI=42.5 ✓, MACD ✓, Hist=✓ (-0.61474), Trend ✗, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 33 (('GOOGL', Timestamp('2025-06-23 04:00:00+0000', tz='UTC'))): GOOGL @ $165.19 | RSI=44.2, MACD=1.2407, Signal=2.3378, Hist=-1.09713, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 34 (('GOOGL', Timestamp('2025-06-24 04:00:00+0000', tz='UTC'))): GOOGL @ $166.77 | RSI=50.9, MACD=0.7598, Signal=2.0222, Hist=-1.26245, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 35 (('GOOGL', Timestamp('2025-06-25 04:00:00+0000', tz='UTC'))): GOOGL @ $170.68 | RSI=53.9, MACD=0.6862, Signal=1.7550, Hist=-1.06880, SMA50=$nan
+2025-10-29 13:38:25 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: GOOGL @ $170.68 | Entry=$166.64, P&L=-2.42%, Bars=3
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 36 (('GOOGL', Timestamp('2025-06-26 04:00:00+0000', tz='UTC'))): GOOGL @ $173.54 | RSI=57.3, MACD=0.8489, Signal=1.5738, Hist=-0.72487, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=31796690.0, ma=37897127.75, required=39791984.1375
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 37 (('GOOGL', Timestamp('2025-06-27 04:00:00+0000', tz='UTC'))): GOOGL @ $178.53 | RSI=56.8, MACD=1.3648, Signal=1.5320, Hist=-0.16721, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=False, Volume=True
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): GOOGL @ $178.53 | RSI=56.8 ✗, MACD ✓, Hist=✓ (-0.16721), Trend ✗, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 38 (('GOOGL', Timestamp('2025-06-30 04:00:00+0000', tz='UTC'))): GOOGL @ $176.23 | RSI=50.2, MACD=1.5699, Signal=1.5396, Hist=0.03034, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 39 (('GOOGL', Timestamp('2025-07-01 04:00:00+0000', tz='UTC'))): GOOGL @ $175.84 | RSI=45.9, MACD=1.6817, Signal=1.5680, Hist=0.11365, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 40 (('GOOGL', Timestamp('2025-07-02 04:00:00+0000', tz='UTC'))): GOOGL @ $178.64 | RSI=51.8, MACD=1.9734, Signal=1.6491, Hist=0.32430, SMA50=$nan
+2025-10-29 13:38:25 | INFO     | 📈 Trailing stop: price=178.64, trough=175.84, rise=-1.59%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 41 (('GOOGL', Timestamp('2025-07-03 04:00:00+0000', tz='UTC'))): GOOGL @ $179.53 | RSI=55.6, MACD=2.2504, Signal=1.7694, Hist=0.48110, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=21689728.0, ma=41178654.25, required=43237586.9625
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): GOOGL @ $179.53 | RSI=55.6 ✓, MACD ✓, Hist=✓ (0.48110), Trend ✗, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 42 (('GOOGL', Timestamp('2025-07-07 04:00:00+0000', tz='UTC'))): GOOGL @ $176.79 | RSI=52.9, MACD=2.2233, Signal=1.8601, Hist=0.36316, SMA50=$nan
+2025-10-29 13:38:25 | INFO     | 📉 Trailing stop: price=176.79, peak=179.53, drop=-1.53%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 43 (('GOOGL', Timestamp('2025-07-08 04:00:00+0000', tz='UTC'))): GOOGL @ $174.36 | RSI=46.7, MACD=1.9829, Signal=1.8847, Hist=0.09817, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=40442535.0, ma=41300743.6, required=43365780.78
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 44 (('GOOGL', Timestamp('2025-07-09 04:00:00+0000', tz='UTC'))): GOOGL @ $176.62 | RSI=50.9, MACD=1.9522, Signal=1.8982, Hist=0.05398, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=43025594.0, ma=42005228.0, required=44105489.4
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 45 (('GOOGL', Timestamp('2025-07-10 04:00:00+0000', tz='UTC'))): GOOGL @ $177.62 | RSI=55.9, MACD=1.9856, Signal=1.9157, Hist=0.06996, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=29252166.0, ma=40379530.25, required=42398506.7625
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): GOOGL @ $177.62 | RSI=55.9 ✓, MACD ✓, Hist=✓ (0.06996), Trend ✗, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 46 (('GOOGL', Timestamp('2025-07-11 04:00:00+0000', tz='UTC'))): GOOGL @ $180.19 | RSI=71.1, MACD=2.1942, Signal=1.9714, Hist=0.22286, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 47 (('GOOGL', Timestamp('2025-07-14 04:00:00+0000', tz='UTC'))): GOOGL @ $181.56 | RSI=75.5, MACD=2.4420, Signal=2.0655, Hist=0.37646, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 48 (('GOOGL', Timestamp('2025-07-15 04:00:00+0000', tz='UTC'))): GOOGL @ $182.00 | RSI=74.6, MACD=2.6433, Signal=2.1811, Hist=0.46226, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 49 (('GOOGL', Timestamp('2025-07-16 04:00:00+0000', tz='UTC'))): GOOGL @ $182.97 | RSI=71.9, MACD=2.8483, Signal=2.3145, Hist=0.53382, SMA50=$170.88
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 50 (('GOOGL', Timestamp('2025-07-17 04:00:00+0000', tz='UTC'))): GOOGL @ $183.58 | RSI=69.5, MACD=3.0252, Signal=2.4566, Hist=0.56851, SMA50=$171.27
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 51 (('GOOGL', Timestamp('2025-07-18 04:00:00+0000', tz='UTC'))): GOOGL @ $185.06 | RSI=64.7, MACD=3.2473, Signal=2.6148, Hist=0.63251, SMA50=$171.70
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 52 (('GOOGL', Timestamp('2025-07-21 04:00:00+0000', tz='UTC'))): GOOGL @ $190.10 | RSI=77.8, MACD=3.7864, Signal=2.8491, Hist=0.93727, SMA50=$172.48
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 53 (('GOOGL', Timestamp('2025-07-22 04:00:00+0000', tz='UTC'))): GOOGL @ $191.34 | RSI=80.0, MACD=4.2645, Signal=3.1322, Hist=1.13231, SMA50=$173.22
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 54 (('GOOGL', Timestamp('2025-07-23 04:00:00+0000', tz='UTC'))): GOOGL @ $190.23 | RSI=74.0, MACD=4.5019, Signal=3.4061, Hist=1.09581, SMA50=$173.97
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 55 (('GOOGL', Timestamp('2025-07-24 04:00:00+0000', tz='UTC'))): GOOGL @ $192.17 | RSI=75.1, MACD=4.7914, Signal=3.6832, Hist=1.10824, SMA50=$174.64
+2025-10-29 13:38:25 | INFO     | ✅ TAKE-PROFIT (after 10 bars): GOOGL @ $192.17 | Entry=$177.62, P&L=8.19%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 56 (('GOOGL', Timestamp('2025-07-25 04:00:00+0000', tz='UTC'))): GOOGL @ $193.18 | RSI=84.9, MACD=5.0442, Signal=3.9554, Hist=1.08881, SMA50=$175.32
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=39785863.0, ma=43416158.95, required=45586966.89750001
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): GOOGL @ $193.18 | RSI=84.9 ✓, MACD ✓, Hist=✓ (1.08881), Trend ✓, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 57 (('GOOGL', Timestamp('2025-07-28 04:00:00+0000', tz='UTC'))): GOOGL @ $192.58 | RSI=92.1, MACD=5.1369, Signal=4.1917, Hist=0.94521, SMA50=$175.86
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 58 (('GOOGL', Timestamp('2025-07-29 04:00:00+0000', tz='UTC'))): GOOGL @ $195.75 | RSI=92.4, MACD=5.4039, Signal=4.4341, Hist=0.96974, SMA50=$176.50
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 59 (('GOOGL', Timestamp('2025-07-30 04:00:00+0000', tz='UTC'))): GOOGL @ $196.53 | RSI=92.3, MACD=5.6137, Signal=4.6700, Hist=0.94363, SMA50=$177.10
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 60 (('GOOGL', Timestamp('2025-07-31 04:00:00+0000', tz='UTC'))): GOOGL @ $191.90 | RSI=74.0, MACD=5.3447, Signal=4.8050, Hist=0.53975, SMA50=$177.61
+2025-10-29 13:38:25 | INFO     | 📉 Trailing stop: price=191.90, peak=196.53, drop=-2.36%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 61 (('GOOGL', Timestamp('2025-08-01 04:00:00+0000', tz='UTC'))): GOOGL @ $189.13 | RSI=64.7, MACD=4.8521, Signal=4.8144, Hist=0.03772, SMA50=$178.11
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=34832181.0, ma=40410779.65, required=42431318.6325
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): GOOGL @ $189.13 | RSI=64.7 ✓, MACD ✓, Hist=✓ (0.03772), Trend ✓, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 62 (('GOOGL', Timestamp('2025-08-04 04:00:00+0000', tz='UTC'))): GOOGL @ $195.04 | RSI=70.9, MACD=4.8823, Signal=4.8280, Hist=0.05436, SMA50=$178.64
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 63 (('GOOGL', Timestamp('2025-08-05 04:00:00+0000', tz='UTC'))): GOOGL @ $194.67 | RSI=69.1, MACD=4.8209, Signal=4.8266, Hist=-0.00569, SMA50=$179.12
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 64 (('GOOGL', Timestamp('2025-08-06 04:00:00+0000', tz='UTC'))): GOOGL @ $196.09 | RSI=69.9, MACD=4.8310, Signal=4.8275, Hist=0.00359, SMA50=$179.67
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 65 (('GOOGL', Timestamp('2025-08-07 04:00:00+0000', tz='UTC'))): GOOGL @ $196.52 | RSI=68.8, MACD=4.8183, Signal=4.8256, Hist=-0.00735, SMA50=$180.14
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 66 (('GOOGL', Timestamp('2025-08-08 04:00:00+0000', tz='UTC'))): GOOGL @ $201.42 | RSI=68.7, MACD=5.1442, Signal=4.8893, Hist=0.25488, SMA50=$180.72
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 67 (('GOOGL', Timestamp('2025-08-11 04:00:00+0000', tz='UTC'))): GOOGL @ $201.00 | RSI=66.4, MACD=5.3075, Signal=4.9730, Hist=0.33451, SMA50=$181.31
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 68 (('GOOGL', Timestamp('2025-08-12 04:00:00+0000', tz='UTC'))): GOOGL @ $203.34 | RSI=71.4, MACD=5.5616, Signal=5.0907, Hist=0.47088, SMA50=$181.94
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 69 (('GOOGL', Timestamp('2025-08-13 04:00:00+0000', tz='UTC'))): GOOGL @ $201.96 | RSI=66.2, MACD=5.5872, Signal=5.1900, Hist=0.39719, SMA50=$182.60
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 70 (('GOOGL', Timestamp('2025-08-14 04:00:00+0000', tz='UTC'))): GOOGL @ $202.94 | RSI=66.2, MACD=5.6217, Signal=5.2763, Hist=0.34540, SMA50=$183.33
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 71 (('GOOGL', Timestamp('2025-08-15 04:00:00+0000', tz='UTC'))): GOOGL @ $203.90 | RSI=68.6, MACD=5.6613, Signal=5.3533, Hist=0.30800, SMA50=$184.05
+2025-10-29 13:38:25 | INFO     | ✅ TAKE-PROFIT (after 10 bars): GOOGL @ $203.90 | Entry=$189.13, P&L=7.81%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 72 (('GOOGL', Timestamp('2025-08-18 04:00:00+0000', tz='UTC'))): GOOGL @ $203.50 | RSI=64.0, MACD=5.5959, Signal=5.4019, Hist=0.19408, SMA50=$184.76
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=18526594.0, ma=36481448.55, required=38305520.9775
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): GOOGL @ $203.50 | RSI=64.0 ✓, MACD ✓, Hist=✓ (0.19408), Trend ✓, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 73 (('GOOGL', Timestamp('2025-08-19 04:00:00+0000', tz='UTC'))): GOOGL @ $201.57 | RSI=58.7, MACD=5.3270, Signal=5.3869, Hist=-0.05991, SMA50=$185.31
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 74 (('GOOGL', Timestamp('2025-08-20 04:00:00+0000', tz='UTC'))): GOOGL @ $199.32 | RSI=64.0, MACD=4.8760, Signal=5.2847, Hist=-0.40867, SMA50=$185.78
+2025-10-29 13:38:25 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: GOOGL @ $199.32 | Entry=$203.50, P&L=-2.05%, Bars=2
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 75 (('GOOGL', Timestamp('2025-08-21 04:00:00+0000', tz='UTC'))): GOOGL @ $199.75 | RSI=72.0, MACD=4.5015, Signal=5.1281, Hist=-0.62658, SMA50=$186.20
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=19774633.0, ma=31218769.25, required=32779707.712500002
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 76 (('GOOGL', Timestamp('2025-08-22 04:00:00+0000', tz='UTC'))): GOOGL @ $206.09 | RSI=72.5, MACD=4.6625, Signal=5.0350, Hist=-0.37246, SMA50=$186.78
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): GOOGL @ $206.09 | RSI=72.5 ✓, MACD ✗, Hist=✗ (-0.37246), Trend ✓, Volume ✓
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): GOOGL @ $206.09 | RSI=72.5 ✗, MACD ✓, Hist=✓ (-0.37246), Trend ✗, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 77 (('GOOGL', Timestamp('2025-08-25 04:00:00+0000', tz='UTC'))): GOOGL @ $208.49 | RSI=76.0, MACD=4.9269, Signal=5.0134, Hist=-0.08640, SMA50=$187.43
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 78 (('GOOGL', Timestamp('2025-08-26 04:00:00+0000', tz='UTC'))): GOOGL @ $207.14 | RSI=70.8, MACD=4.9703, Signal=5.0047, Hist=-0.03444, SMA50=$188.08
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 79 (('GOOGL', Timestamp('2025-08-27 04:00:00+0000', tz='UTC'))): GOOGL @ $207.48 | RSI=70.7, MACD=4.9748, Signal=4.9987, Hist=-0.02399, SMA50=$188.69
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 80 (('GOOGL', Timestamp('2025-08-28 04:00:00+0000', tz='UTC'))): GOOGL @ $211.64 | RSI=69.9, MACD=5.2534, Signal=5.0497, Hist=0.20373, SMA50=$189.41
+2025-10-29 13:38:25 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: GOOGL @ $211.64 | Entry=$206.09, P&L=-2.69%, Bars=4
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 81 (('GOOGL', Timestamp('2025-08-29 04:00:00+0000', tz='UTC'))): GOOGL @ $212.91 | RSI=72.4, MACD=5.5132, Signal=5.1424, Hist=0.37079, SMA50=$190.20
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (5/5 conditions): GOOGL @ $212.91 | RSI=72.4 ✓, MACD ✓, Hist=✓ (0.37079), Trend ✓, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 82 (('GOOGL', Timestamp('2025-09-02 04:00:00+0000', tz='UTC'))): GOOGL @ $211.35 | RSI=65.6, MACD=5.5294, Signal=5.2198, Hist=0.30962, SMA50=$191.09
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 83 (('GOOGL', Timestamp('2025-09-03 04:00:00+0000', tz='UTC'))): GOOGL @ $230.66 | RSI=82.9, MACD=7.0195, Signal=5.5797, Hist=1.43978, SMA50=$192.40
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 84 (('GOOGL', Timestamp('2025-09-04 04:00:00+0000', tz='UTC'))): GOOGL @ $232.30 | RSI=83.1, MACD=8.2378, Signal=6.1113, Hist=2.12646, SMA50=$193.71
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 85 (('GOOGL', Timestamp('2025-09-05 04:00:00+0000', tz='UTC'))): GOOGL @ $235.00 | RSI=83.7, MACD=9.3138, Signal=6.7518, Hist=2.56198, SMA50=$195.00
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 86 (('GOOGL', Timestamp('2025-09-08 04:00:00+0000', tz='UTC'))): GOOGL @ $234.04 | RSI=82.7, MACD=9.9741, Signal=7.3963, Hist=2.57783, SMA50=$196.21
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 87 (('GOOGL', Timestamp('2025-09-09 04:00:00+0000', tz='UTC'))): GOOGL @ $239.63 | RSI=87.8, MACD=10.8237, Signal=8.0818, Hist=2.74194, SMA50=$197.43
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 88 (('GOOGL', Timestamp('2025-09-10 04:00:00+0000', tz='UTC'))): GOOGL @ $239.17 | RSI=91.1, MACD=11.3293, Signal=8.7313, Hist=2.59803, SMA50=$198.69
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 89 (('GOOGL', Timestamp('2025-09-11 04:00:00+0000', tz='UTC'))): GOOGL @ $240.37 | RSI=91.2, MACD=11.6921, Signal=9.3234, Hist=2.36861, SMA50=$199.98
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 90 (('GOOGL', Timestamp('2025-09-12 04:00:00+0000', tz='UTC'))): GOOGL @ $240.80 | RSI=90.0, MACD=11.8773, Signal=9.8342, Hist=2.04310, SMA50=$201.23
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 91 (('GOOGL', Timestamp('2025-09-15 04:00:00+0000', tz='UTC'))): GOOGL @ $251.61 | RSI=91.6, MACD=12.7494, Signal=10.4173, Hist=2.33218, SMA50=$202.67
+2025-10-29 13:38:25 | INFO     | ✅ TAKE-PROFIT (after 10 bars): GOOGL @ $251.61 | Entry=$212.91, P&L=18.18%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 92 (('GOOGL', Timestamp('2025-09-16 04:00:00+0000', tz='UTC'))): GOOGL @ $251.16 | RSI=93.3, MACD=13.2515, Signal=10.9841, Hist=2.26742, SMA50=$204.15
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=34109720.0, ma=38683683.55, required=40617867.7275
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): GOOGL @ $251.16 | RSI=93.3 ✗, MACD ✓, Hist=✓ (2.26742), Trend ✓, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 93 (('GOOGL', Timestamp('2025-09-17 04:00:00+0000', tz='UTC'))): GOOGL @ $249.53 | RSI=90.3, MACD=13.3639, Signal=11.4601, Hist=1.90381, SMA50=$205.66
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 94 (('GOOGL', Timestamp('2025-09-18 04:00:00+0000', tz='UTC'))): GOOGL @ $252.03 | RSI=90.0, MACD=13.4990, Signal=11.8679, Hist=1.63117, SMA50=$207.17
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 95 (('GOOGL', Timestamp('2025-09-19 04:00:00+0000', tz='UTC'))): GOOGL @ $254.72 | RSI=90.3, MACD=13.6657, Signal=12.2274, Hist=1.43825, SMA50=$208.71
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 96 (('GOOGL', Timestamp('2025-09-22 04:00:00+0000', tz='UTC'))): GOOGL @ $252.53 | RSI=89.2, MACD=13.4658, Signal=12.4751, Hist=0.99070, SMA50=$210.16
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 97 (('GOOGL', Timestamp('2025-09-23 04:00:00+0000', tz='UTC'))): GOOGL @ $251.66 | RSI=80.8, MACD=13.0863, Signal=12.5973, Hist=0.48899, SMA50=$211.56
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 98 (('GOOGL', Timestamp('2025-09-24 04:00:00+0000', tz='UTC'))): GOOGL @ $247.14 | RSI=70.1, MACD=12.2793, Signal=12.5337, Hist=-0.25441, SMA50=$212.86
+2025-10-29 13:38:25 | INFO     | 📉 Trailing stop: price=247.14, peak=254.72, drop=-2.98%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 99 (('GOOGL', Timestamp('2025-09-25 04:00:00+0000', tz='UTC'))): GOOGL @ $245.79 | RSI=65.1, MACD=11.3994, Signal=12.3069, Hist=-0.90744, SMA50=$214.12
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=31020383.0, ma=40775961.95, required=42814760.04750001
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 100 (('GOOGL', Timestamp('2025-09-26 04:00:00+0000', tz='UTC'))): GOOGL @ $246.54 | RSI=67.6, MACD=10.6400, Signal=11.9735, Hist=-1.33351, SMA50=$215.38
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=18503194.0, ma=40084156.3, required=42088364.115
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 101 (('GOOGL', Timestamp('2025-09-29 04:00:00+0000', tz='UTC'))): GOOGL @ $244.05 | RSI=56.8, MACD=9.7251, Signal=11.5238, Hist=-1.79873, SMA50=$216.56
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=32505777.0, ma=39723552.35, required=41709729.9675
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 102 (('GOOGL', Timestamp('2025-09-30 04:00:00+0000', tz='UTC'))): GOOGL @ $243.10 | RSI=56.0, MACD=8.8217, Signal=10.9834, Hist=-2.16171, SMA50=$217.62
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=34724346.0, ma=39083617.8, required=41037798.69
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 103 (('GOOGL', Timestamp('2025-10-01 04:00:00+0000', tz='UTC'))): GOOGL @ $244.90 | RSI=56.8, MACD=8.1569, Signal=10.4181, Hist=-2.26116, SMA50=$218.69
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=31658234.0, ma=35499723.25, required=37274709.4125
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 104 (('GOOGL', Timestamp('2025-10-02 04:00:00+0000', tz='UTC'))): GOOGL @ $245.69 | RSI=57.2, MACD=7.6062, Signal=9.8557, Hist=-2.24953, SMA50=$219.80
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=25483298.0, ma=34189679.8, required=35899163.79
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 105 (('GOOGL', Timestamp('2025-10-03 04:00:00+0000', tz='UTC'))): GOOGL @ $245.35 | RSI=36.6, MACD=7.0609, Signal=9.2968, Hist=-2.23586, SMA50=$220.86
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=30249559.0, ma=33385922.45, required=35055218.5725
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): GOOGL @ $245.35 | RSI=36.6 ✓, MACD ✓, Hist=✓ (-2.23586), Trend ✗, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 106 (('GOOGL', Timestamp('2025-10-06 04:00:00+0000', tz='UTC'))): GOOGL @ $250.43 | RSI=48.7, MACD=6.9584, Signal=8.8291, Hist=-1.87065, SMA50=$222.00
+2025-10-29 13:38:25 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: GOOGL @ $250.43 | Entry=$245.35, P&L=-2.07%, Bars=1
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 107 (('GOOGL', Timestamp('2025-10-07 04:00:00+0000', tz='UTC'))): GOOGL @ $245.76 | RSI=43.9, MACD=6.4263, Signal=8.3485, Hist=-1.92220, SMA50=$223.07
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=23181285.0, ma=32462934.25, required=34086080.9625
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): GOOGL @ $245.76 | RSI=43.9 ✓, MACD ✓, Hist=✓ (-1.92220), Trend ✗, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 108 (('GOOGL', Timestamp('2025-10-08 04:00:00+0000', tz='UTC'))): GOOGL @ $244.62 | RSI=37.5, MACD=5.8453, Signal=7.8479, Hist=-2.00262, SMA50=$224.05
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 109 (('GOOGL', Timestamp('2025-10-09 04:00:00+0000', tz='UTC'))): GOOGL @ $241.53 | RSI=28.0, MACD=5.0769, Signal=7.2937, Hist=-2.21678, SMA50=$224.95
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 110 (('GOOGL', Timestamp('2025-10-10 04:00:00+0000', tz='UTC'))): GOOGL @ $236.57 | RSI=25.7, MACD=4.0214, Signal=6.6392, Hist=-2.61784, SMA50=$225.84
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 111 (('GOOGL', Timestamp('2025-10-13 04:00:00+0000', tz='UTC'))): GOOGL @ $244.15 | RSI=40.5, MACD=3.7533, Signal=6.0620, Hist=-2.30877, SMA50=$226.94
+2025-10-29 13:38:25 | INFO     | 📈 Trailing stop: price=244.15, trough=236.57, rise=-3.20%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 112 (('GOOGL', Timestamp('2025-10-14 04:00:00+0000', tz='UTC'))): GOOGL @ $245.45 | RSI=47.7, MACD=3.6041, Signal=5.5705, Hist=-1.96633, SMA50=$227.95
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=22111572.0, ma=29687264.45, required=31171627.6725
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 113 (('GOOGL', Timestamp('2025-10-15 04:00:00+0000', tz='UTC'))): GOOGL @ $251.03 | RSI=56.5, MACD=3.8913, Signal=5.2346, Hist=-1.34330, SMA50=$229.07
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=27007690.0, ma=29332249.35, required=30798861.817500003
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 114 (('GOOGL', Timestamp('2025-10-16 04:00:00+0000', tz='UTC'))): GOOGL @ $251.46 | RSI=56.1, MACD=4.1063, Signal=5.0090, Hist=-0.90266, SMA50=$230.18
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=27997159.0, ma=29170133.6, required=30628640.28
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 115 (('GOOGL', Timestamp('2025-10-17 04:00:00+0000', tz='UTC'))): GOOGL @ $253.30 | RSI=61.7, MACD=4.3747, Signal=4.8821, Hist=-0.50739, SMA50=$231.32
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): GOOGL @ $253.30 | RSI=61.7 ✓, MACD ✗, Hist=✗ (-0.50739), Trend ✓, Volume ✓
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): GOOGL @ $253.30 | RSI=61.7 ✗, MACD ✓, Hist=✓ (-0.50739), Trend ✗, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 116 (('GOOGL', Timestamp('2025-10-20 04:00:00+0000', tz='UTC'))): GOOGL @ $256.55 | RSI=66.1, MACD=4.7944, Signal=4.8646, Hist=-0.07015, SMA50=$232.42
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 117 (('GOOGL', Timestamp('2025-10-21 04:00:00+0000', tz='UTC'))): GOOGL @ $250.46 | RSI=56.0, MACD=4.5828, Signal=4.8082, Hist=-0.22542, SMA50=$233.41
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 118 (('GOOGL', Timestamp('2025-10-22 04:00:00+0000', tz='UTC'))): GOOGL @ $251.69 | RSI=56.4, MACD=4.4629, Signal=4.7392, Hist=-0.27626, SMA50=$234.38
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 119 (('GOOGL', Timestamp('2025-10-23 04:00:00+0000', tz='UTC'))): GOOGL @ $253.08 | RSI=58.1, MACD=4.4290, Signal=4.6771, Hist=-0.24815, SMA50=$235.40
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 120 (('GOOGL', Timestamp('2025-10-24 04:00:00+0000', tz='UTC'))): GOOGL @ $259.92 | RSI=59.6, MACD=4.8976, Signal=4.7212, Hist=0.17635, SMA50=$236.54
+2025-10-29 13:38:25 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: GOOGL @ $259.92 | Entry=$253.30, P&L=-2.61%, Bars=5
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 121 (('GOOGL', Timestamp('2025-10-27 04:00:00+0000', tz='UTC'))): GOOGL @ $269.27 | RSI=71.7, MACD=5.9548, Signal=4.9679, Hist=0.98683, SMA50=$237.85
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (5/5 conditions): GOOGL @ $269.27 | RSI=71.7 ✓, MACD ✓, Hist=✓ (0.98683), Trend ✓, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 122 (('GOOGL', Timestamp('2025-10-28 04:00:00+0000', tz='UTC'))): GOOGL @ $267.47 | RSI=70.9, MACD=6.5716, Signal=5.2887, Hist=1.28293, SMA50=$239.12
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 123 (('GOOGL', Timestamp('2025-10-29 04:00:00+0000', tz='UTC'))): GOOGL @ $272.13 | RSI=77.2, MACD=7.3517, Signal=5.7013, Hist=1.65044, SMA50=$240.54
+2025-10-29 13:38:25 | INFO     | Generated 29 signals for Momentum strategy (including 14 exits)
+2025-10-29 13:38:25 | INFO     |      Generated 29 signals for GOOGL
+2025-10-29 13:38:25 | INFO     | Fetched 124 bars for AMZN
+2025-10-29 13:38:25 | INFO     |   ✓ AMZN: 124 bars
+2025-10-29 13:38:25 | DEBUG    | Volume confirmation enabled with 20-period MA
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 27 (('AMZN', Timestamp('2025-06-12 04:00:00+0000', tz='UTC'))): AMZN @ $213.24 | RSI=67.5, MACD=5.0233, Signal=4.6998, Hist=0.32358, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=27639991.0, ma=37820855.15, required=39711897.9075
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): AMZN @ $213.24 | RSI=67.5 ✓, MACD ✓, Hist=✓ (0.32358), Trend ✗, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 28 (('AMZN', Timestamp('2025-06-13 04:00:00+0000', tz='UTC'))): AMZN @ $212.10 | RSI=69.8, MACD=4.7753, Signal=4.7149, Hist=0.06046, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 29 (('AMZN', Timestamp('2025-06-16 04:00:00+0000', tz='UTC'))): AMZN @ $216.10 | RSI=68.6, MACD=4.8457, Signal=4.7411, Hist=0.10466, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 30 (('AMZN', Timestamp('2025-06-17 04:00:00+0000', tz='UTC'))): AMZN @ $214.82 | RSI=68.7, MACD=4.7435, Signal=4.7415, Hist=0.00197, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 31 (('AMZN', Timestamp('2025-06-18 04:00:00+0000', tz='UTC'))): AMZN @ $212.52 | RSI=62.0, MACD=4.4259, Signal=4.6784, Hist=-0.25251, SMA50=$nan
+2025-10-29 13:38:25 | INFO     | 📉 Trailing stop: price=212.52, peak=216.10, drop=-1.66%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 32 (('AMZN', Timestamp('2025-06-20 04:00:00+0000', tz='UTC'))): AMZN @ $209.69 | RSI=57.7, MACD=3.9009, Signal=4.5229, Hist=-0.62203, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=False, Volume=True
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): AMZN @ $209.69 | RSI=57.7 ✗, MACD ✓, Hist=✓ (-0.62203), Trend ✗, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 33 (('AMZN', Timestamp('2025-06-23 04:00:00+0000', tz='UTC'))): AMZN @ $208.47 | RSI=53.0, MACD=3.3478, Signal=4.2879, Hist=-0.94012, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 34 (('AMZN', Timestamp('2025-06-24 04:00:00+0000', tz='UTC'))): AMZN @ $212.77 | RSI=60.6, MACD=3.2193, Signal=4.0742, Hist=-0.85489, SMA50=$nan
+2025-10-29 13:38:25 | INFO     | 📈 Trailing stop: price=212.77, trough=208.47, rise=-2.06%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 35 (('AMZN', Timestamp('2025-06-25 04:00:00+0000', tz='UTC'))): AMZN @ $211.99 | RSI=57.3, MACD=3.0197, Signal=3.8633, Hist=-0.84357, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=31755698.0, ma=37857316.75, required=39750182.5875
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 36 (('AMZN', Timestamp('2025-06-26 04:00:00+0000', tz='UTC'))): AMZN @ $217.12 | RSI=62.4, MACD=3.2381, Signal=3.7382, Hist=-0.50010, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=False, Volume=True
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): AMZN @ $217.12 | RSI=62.4 ✗, MACD ✓, Hist=✓ (-0.50010), Trend ✗, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 37 (('AMZN', Timestamp('2025-06-27 04:00:00+0000', tz='UTC'))): AMZN @ $223.30 | RSI=62.9, MACD=3.8654, Signal=3.7637, Hist=0.10172, SMA50=$nan
+2025-10-29 13:38:25 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AMZN @ $223.30 | Entry=$217.12, P&L=-2.85%, Bars=1
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 38 (('AMZN', Timestamp('2025-06-30 04:00:00+0000', tz='UTC'))): AMZN @ $219.39 | RSI=53.2, MACD=4.0009, Signal=3.8111, Hist=0.18975, SMA50=$nan
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): AMZN @ $219.39 | RSI=53.2 ✗, MACD ✓, Hist=✓ (0.18975), Trend ✗, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 39 (('AMZN', Timestamp('2025-07-01 04:00:00+0000', tz='UTC'))): AMZN @ $220.46 | RSI=53.7, MACD=4.1468, Signal=3.8782, Hist=0.26852, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 40 (('AMZN', Timestamp('2025-07-02 04:00:00+0000', tz='UTC'))): AMZN @ $219.92 | RSI=59.7, MACD=4.1707, Signal=3.9367, Hist=0.23400, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 41 (('AMZN', Timestamp('2025-07-03 04:00:00+0000', tz='UTC'))): AMZN @ $223.41 | RSI=63.3, MACD=4.4204, Signal=4.0335, Hist=0.38693, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 42 (('AMZN', Timestamp('2025-07-07 04:00:00+0000', tz='UTC'))): AMZN @ $223.47 | RSI=65.3, MACD=4.5704, Signal=4.1409, Hist=0.42955, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 43 (('AMZN', Timestamp('2025-07-08 04:00:00+0000', tz='UTC'))): AMZN @ $219.36 | RSI=54.4, MACD=4.3080, Signal=4.1743, Hist=0.13371, SMA50=$nan
+2025-10-29 13:38:25 | INFO     | 📉 Trailing stop: price=219.36, peak=223.47, drop=-1.84%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 44 (('AMZN', Timestamp('2025-07-09 04:00:00+0000', tz='UTC'))): AMZN @ $222.54 | RSI=59.9, MACD=4.3070, Signal=4.2008, Hist=0.10616, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=38155121.0, ma=43447761.7, required=45620149.785000004
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): AMZN @ $222.54 | RSI=59.9 ✓, MACD ✓, Hist=✓ (0.10616), Trend ✗, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 45 (('AMZN', Timestamp('2025-07-10 04:00:00+0000', tz='UTC'))): AMZN @ $222.26 | RSI=63.1, MACD=4.2348, Signal=4.2076, Hist=0.02715, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 46 (('AMZN', Timestamp('2025-07-11 04:00:00+0000', tz='UTC'))): AMZN @ $225.02 | RSI=70.7, MACD=4.3501, Signal=4.2361, Hist=0.11399, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 47 (('AMZN', Timestamp('2025-07-14 04:00:00+0000', tz='UTC'))): AMZN @ $225.69 | RSI=73.6, MACD=4.4443, Signal=4.2778, Hist=0.16658, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 48 (('AMZN', Timestamp('2025-07-15 04:00:00+0000', tz='UTC'))): AMZN @ $226.35 | RSI=70.7, MACD=4.5202, Signal=4.3262, Hist=0.19393, SMA50=$nan
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 49 (('AMZN', Timestamp('2025-07-16 04:00:00+0000', tz='UTC'))): AMZN @ $223.19 | RSI=65.9, MACD=4.2760, Signal=4.3162, Hist=-0.04020, SMA50=$210.70
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 50 (('AMZN', Timestamp('2025-07-17 04:00:00+0000', tz='UTC'))): AMZN @ $223.88 | RSI=61.0, MACD=4.0910, Signal=4.2711, Hist=-0.18015, SMA50=$211.45
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 51 (('AMZN', Timestamp('2025-07-18 04:00:00+0000', tz='UTC'))): AMZN @ $226.13 | RSI=55.3, MACD=4.0789, Signal=4.2327, Hist=-0.15378, SMA50=$212.28
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 52 (('AMZN', Timestamp('2025-07-21 04:00:00+0000', tz='UTC'))): AMZN @ $229.30 | RSI=69.0, MACD=4.2759, Signal=4.2413, Hist=0.03452, SMA50=$213.09
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 53 (('AMZN', Timestamp('2025-07-22 04:00:00+0000', tz='UTC'))): AMZN @ $227.47 | RSI=63.1, MACD=4.2354, Signal=4.2402, Hist=-0.00471, SMA50=$213.80
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 54 (('AMZN', Timestamp('2025-07-23 04:00:00+0000', tz='UTC'))): AMZN @ $228.29 | RSI=65.4, MACD=4.2209, Signal=4.2363, Hist=-0.01539, SMA50=$214.50
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 55 (('AMZN', Timestamp('2025-07-24 04:00:00+0000', tz='UTC'))): AMZN @ $232.23 | RSI=66.0, MACD=4.4757, Signal=4.2842, Hist=0.19155, SMA50=$214.97
+2025-10-29 13:38:25 | INFO     | ✅ TAKE-PROFIT (after 11 bars): AMZN @ $232.23 | Entry=$222.54, P&L=4.35%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 56 (('AMZN', Timestamp('2025-07-25 04:00:00+0000', tz='UTC'))): AMZN @ $231.44 | RSI=64.1, MACD=4.5614, Signal=4.3396, Hist=0.22174, SMA50=$215.37
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=28712095.0, ma=41837391.85, required=43929261.4425
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): AMZN @ $231.44 | RSI=64.1 ✓, MACD ✓, Hist=✓ (0.22174), Trend ✓, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 57 (('AMZN', Timestamp('2025-07-28 04:00:00+0000', tz='UTC'))): AMZN @ $232.79 | RSI=76.3, MACD=4.6842, Signal=4.4085, Hist=0.27563, SMA50=$215.82
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 58 (('AMZN', Timestamp('2025-07-29 04:00:00+0000', tz='UTC'))): AMZN @ $231.01 | RSI=67.5, MACD=4.5850, Signal=4.4438, Hist=0.14117, SMA50=$216.34
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 59 (('AMZN', Timestamp('2025-07-30 04:00:00+0000', tz='UTC'))): AMZN @ $230.19 | RSI=66.1, MACD=4.3896, Signal=4.4330, Hist=-0.04335, SMA50=$216.83
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 60 (('AMZN', Timestamp('2025-07-31 04:00:00+0000', tz='UTC'))): AMZN @ $234.11 | RSI=67.6, MACD=4.4993, Signal=4.4462, Hist=0.05302, SMA50=$217.39
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 61 (('AMZN', Timestamp('2025-08-01 04:00:00+0000', tz='UTC'))): AMZN @ $214.75 | RSI=37.7, MACD=2.9895, Signal=4.1549, Hist=-1.16541, SMA50=$217.61
+2025-10-29 13:38:25 | INFO     | 🚨 CATASTROPHIC LOSS: AMZN @ $214.75 | Entry=$231.44, P&L=-7.21%, Bars=5
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 62 (('AMZN', Timestamp('2025-08-04 04:00:00+0000', tz='UTC'))): AMZN @ $211.65 | RSI=34.4, MACD=1.5252, Signal=3.6290, Hist=-2.10371, SMA50=$217.82
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (5/5 conditions): AMZN @ $211.65 | RSI=34.4 ✓, MACD ✓, Hist=✓ (-2.10371), Trend ✓, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 63 (('AMZN', Timestamp('2025-08-05 04:00:00+0000', tz='UTC'))): AMZN @ $213.75 | RSI=39.7, MACD=0.5282, Signal=3.0088, Hist=-2.48061, SMA50=$218.03
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 64 (('AMZN', Timestamp('2025-08-06 04:00:00+0000', tz='UTC'))): AMZN @ $222.31 | RSI=48.5, MACD=0.4239, Signal=2.4918, Hist=-2.06796, SMA50=$218.46
+2025-10-29 13:38:25 | INFO     | 🚨 CATASTROPHIC LOSS: AMZN @ $222.31 | Entry=$211.65, P&L=-5.04%, Bars=2
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 65 (('AMZN', Timestamp('2025-08-07 04:00:00+0000', tz='UTC'))): AMZN @ $223.13 | RSI=47.1, MACD=0.4027, Signal=2.0740, Hist=-1.67130, SMA50=$218.80
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=40603513.0, ma=47624133.45, required=50005340.1225
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 66 (('AMZN', Timestamp('2025-08-08 04:00:00+0000', tz='UTC'))): AMZN @ $222.69 | RSI=43.3, MACD=0.3464, Signal=1.7285, Hist=-1.38205, SMA50=$219.16
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=32970477.0, ma=46746741.95, required=49084079.04750001
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): AMZN @ $222.69 | RSI=43.3 ✓, MACD ✓, Hist=✓ (-1.38205), Trend ✗, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 67 (('AMZN', Timestamp('2025-08-11 04:00:00+0000', tz='UTC'))): AMZN @ $221.30 | RSI=43.7, MACD=0.1875, Signal=1.4203, Hist=-1.23277, SMA50=$219.47
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 68 (('AMZN', Timestamp('2025-08-12 04:00:00+0000', tz='UTC'))): AMZN @ $221.47 | RSI=43.0, MACD=0.0744, Signal=1.1511, Hist=-1.07669, SMA50=$219.80
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 69 (('AMZN', Timestamp('2025-08-13 04:00:00+0000', tz='UTC'))): AMZN @ $224.56 | RSI=42.0, MACD=0.2315, Signal=0.9672, Hist=-0.73571, SMA50=$220.16
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 70 (('AMZN', Timestamp('2025-08-14 04:00:00+0000', tz='UTC'))): AMZN @ $230.98 | RSI=49.6, MACD=0.8640, Signal=0.9466, Hist=-0.08253, SMA50=$220.66
+2025-10-29 13:38:25 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AMZN @ $230.98 | Entry=$222.69, P&L=-3.72%, Bars=4
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 71 (('AMZN', Timestamp('2025-08-15 04:00:00+0000', tz='UTC'))): AMZN @ $231.03 | RSI=48.3, MACD=1.3537, Signal=1.0280, Hist=0.32575, SMA50=$221.14
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=39649244.0, ma=48085511.45, required=50489787.02250001
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): AMZN @ $231.03 | RSI=48.3 ✗, MACD ✓, Hist=✓ (0.32575), Trend ✓, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 72 (('AMZN', Timestamp('2025-08-18 04:00:00+0000', tz='UTC'))): AMZN @ $231.49 | RSI=50.5, MACD=1.7587, Signal=1.1741, Hist=0.58457, SMA50=$221.61
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 73 (('AMZN', Timestamp('2025-08-19 04:00:00+0000', tz='UTC'))): AMZN @ $228.01 | RSI=48.0, MACD=1.7783, Signal=1.2950, Hist=0.48335, SMA50=$221.90
+2025-10-29 13:38:25 | INFO     | 📉 Trailing stop: price=228.01, peak=231.49, drop=-1.50%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 74 (('AMZN', Timestamp('2025-08-20 04:00:00+0000', tz='UTC'))): AMZN @ $223.81 | RSI=40.4, MACD=1.4384, Signal=1.3237, Hist=0.11474, SMA50=$222.04
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=36604319.0, ma=47368917.0, required=49737362.85
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): AMZN @ $223.81 | RSI=40.4 ✗, MACD ✓, Hist=✓ (0.11474), Trend ✓, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 75 (('AMZN', Timestamp('2025-08-21 04:00:00+0000', tz='UTC'))): AMZN @ $221.95 | RSI=60.0, MACD=1.0073, Signal=1.2604, Hist=-0.25309, SMA50=$222.12
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 76 (('AMZN', Timestamp('2025-08-22 04:00:00+0000', tz='UTC'))): AMZN @ $228.84 | RSI=71.5, MACD=1.2077, Signal=1.2498, Hist=-0.04216, SMA50=$222.43
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 77 (('AMZN', Timestamp('2025-08-25 04:00:00+0000', tz='UTC'))): AMZN @ $227.94 | RSI=68.3, MACD=1.2791, Signal=1.2557, Hist=0.02343, SMA50=$222.73
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 78 (('AMZN', Timestamp('2025-08-26 04:00:00+0000', tz='UTC'))): AMZN @ $228.71 | RSI=60.3, MACD=1.3820, Signal=1.2810, Hist=0.10101, SMA50=$223.06
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 79 (('AMZN', Timestamp('2025-08-27 04:00:00+0000', tz='UTC'))): AMZN @ $229.12 | RSI=59.8, MACD=1.4795, Signal=1.3207, Hist=0.15882, SMA50=$223.32
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 80 (('AMZN', Timestamp('2025-08-28 04:00:00+0000', tz='UTC'))): AMZN @ $231.60 | RSI=63.7, MACD=1.7369, Signal=1.4039, Hist=0.33296, SMA50=$223.66
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 81 (('AMZN', Timestamp('2025-08-29 04:00:00+0000', tz='UTC'))): AMZN @ $229.00 | RSI=61.4, MACD=1.7113, Signal=1.4654, Hist=0.24593, SMA50=$223.99
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 82 (('AMZN', Timestamp('2025-09-02 04:00:00+0000', tz='UTC'))): AMZN @ $225.34 | RSI=55.2, MACD=1.3798, Signal=1.4483, Hist=-0.06845, SMA50=$224.30
+2025-10-29 13:38:25 | INFO     | 📉 Trailing stop: price=225.34, peak=231.60, drop=-2.70%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 83 (('AMZN', Timestamp('2025-09-03 04:00:00+0000', tz='UTC'))): AMZN @ $225.99 | RSI=52.1, MACD=1.1562, Signal=1.3899, Hist=-0.23363, SMA50=$224.65
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=29223134.0, ma=34706444.5, required=36441766.725
+2025-10-29 13:38:25 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 84 (('AMZN', Timestamp('2025-09-04 04:00:00+0000', tz='UTC'))): AMZN @ $235.68 | RSI=56.2, MACD=1.7409, Signal=1.4601, Hist=0.28081, SMA50=$225.11
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (5/5 conditions): AMZN @ $235.68 | RSI=56.2 ✓, MACD ✓, Hist=✓ (0.28081), Trend ✓, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 85 (('AMZN', Timestamp('2025-09-05 04:00:00+0000', tz='UTC'))): AMZN @ $232.33 | RSI=51.6, MACD=1.9119, Signal=1.5504, Hist=0.36143, SMA50=$225.51
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 86 (('AMZN', Timestamp('2025-09-08 04:00:00+0000', tz='UTC'))): AMZN @ $235.84 | RSI=54.9, MACD=2.3040, Signal=1.7011, Hist=0.60288, SMA50=$225.89
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 87 (('AMZN', Timestamp('2025-09-09 04:00:00+0000', tz='UTC'))): AMZN @ $238.24 | RSI=61.8, MACD=2.7765, Signal=1.9162, Hist=0.86027, SMA50=$226.19
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 88 (('AMZN', Timestamp('2025-09-10 04:00:00+0000', tz='UTC'))): AMZN @ $230.33 | RSI=56.9, MACD=2.4840, Signal=2.0298, Hist=0.45423, SMA50=$226.41
+2025-10-29 13:38:25 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AMZN @ $230.33 | Entry=$235.68, P&L=-2.27%, Bars=4
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 89 (('AMZN', Timestamp('2025-09-11 04:00:00+0000', tz='UTC'))): AMZN @ $229.95 | RSI=58.8, MACD=2.1962, Signal=2.0631, Hist=0.13316, SMA50=$226.60
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=37471126.0, ma=35787223.65, required=37576584.8325
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): AMZN @ $229.95 | RSI=58.8 ✓, MACD ✓, Hist=✓ (0.13316), Trend ✓, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 90 (('AMZN', Timestamp('2025-09-12 04:00:00+0000', tz='UTC'))): AMZN @ $228.15 | RSI=49.1, MACD=1.8021, Signal=2.0109, Hist=-0.20874, SMA50=$226.76
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 91 (('AMZN', Timestamp('2025-09-15 04:00:00+0000', tz='UTC'))): AMZN @ $231.43 | RSI=54.1, MACD=1.7345, Signal=1.9556, Hist=-0.22110, SMA50=$226.92
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 92 (('AMZN', Timestamp('2025-09-16 04:00:00+0000', tz='UTC'))): AMZN @ $234.05 | RSI=56.0, MACD=1.8707, Signal=1.9386, Hist=-0.06789, SMA50=$227.13
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 93 (('AMZN', Timestamp('2025-09-17 04:00:00+0000', tz='UTC'))): AMZN @ $231.62 | RSI=52.7, MACD=1.7623, Signal=1.9034, Hist=-0.14105, SMA50=$227.38
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 94 (('AMZN', Timestamp('2025-09-18 04:00:00+0000', tz='UTC'))): AMZN @ $231.23 | RSI=49.6, MACD=1.6262, Signal=1.8479, Hist=-0.22175, SMA50=$227.55
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 95 (('AMZN', Timestamp('2025-09-19 04:00:00+0000', tz='UTC'))): AMZN @ $231.48 | RSI=52.9, MACD=1.5209, Signal=1.7825, Hist=-0.26160, SMA50=$227.74
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 96 (('AMZN', Timestamp('2025-09-22 04:00:00+0000', tz='UTC'))): AMZN @ $227.63 | RSI=52.7, MACD=1.1140, Signal=1.6488, Hist=-0.53481, SMA50=$227.79
+2025-10-29 13:38:25 | INFO     | 📉 Trailing stop: price=227.63, peak=234.05, drop=-2.74%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 97 (('AMZN', Timestamp('2025-09-23 04:00:00+0000', tz='UTC'))): AMZN @ $220.71 | RSI=44.6, MACD=0.2305, Signal=1.3652, Hist=-1.13467, SMA50=$227.69
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (5/5 conditions): AMZN @ $220.71 | RSI=44.6 ✓, MACD ✓, Hist=✓ (-1.13467), Trend ✓, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 98 (('AMZN', Timestamp('2025-09-24 04:00:00+0000', tz='UTC'))): AMZN @ $220.21 | RSI=30.5, MACD=-0.5043, Signal=0.9913, Hist=-1.49553, SMA50=$227.57
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 99 (('AMZN', Timestamp('2025-09-25 04:00:00+0000', tz='UTC'))): AMZN @ $218.15 | RSI=31.5, MACD=-1.2385, Signal=0.5453, Hist=-1.78381, SMA50=$227.47
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 100 (('AMZN', Timestamp('2025-09-26 04:00:00+0000', tz='UTC'))): AMZN @ $219.78 | RSI=28.0, MACD=-1.6696, Signal=0.1023, Hist=-1.77193, SMA50=$227.38
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 101 (('AMZN', Timestamp('2025-09-29 04:00:00+0000', tz='UTC'))): AMZN @ $222.17 | RSI=27.9, MACD=-1.7977, Signal=-0.2777, Hist=-1.52001, SMA50=$227.30
+2025-10-29 13:38:25 | INFO     | 📈 Trailing stop: price=222.17, trough=218.15, rise=-1.84%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 102 (('AMZN', Timestamp('2025-09-30 04:00:00+0000', tz='UTC'))): AMZN @ $219.57 | RSI=32.7, MACD=-2.0849, Signal=-0.6391, Hist=-1.44583, SMA50=$227.11
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=48396369.0, ma=46313225.9, required=48628887.195
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (4/5 conditions): AMZN @ $219.57 | RSI=32.7 ✓, MACD ✓, Hist=✓ (-1.44583), Trend ✓, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 103 (('AMZN', Timestamp('2025-10-01 04:00:00+0000', tz='UTC'))): AMZN @ $220.63 | RSI=35.3, MACD=-2.2017, Signal=-0.9516, Hist=-1.25006, SMA50=$226.97
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 104 (('AMZN', Timestamp('2025-10-02 04:00:00+0000', tz='UTC'))): AMZN @ $222.41 | RSI=41.0, MACD=-2.1261, Signal=-1.1865, Hist=-0.93956, SMA50=$226.86
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 105 (('AMZN', Timestamp('2025-10-03 04:00:00+0000', tz='UTC'))): AMZN @ $219.51 | RSI=31.0, MACD=-2.2740, Signal=-1.4040, Hist=-0.86994, SMA50=$226.60
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 106 (('AMZN', Timestamp('2025-10-06 04:00:00+0000', tz='UTC'))): AMZN @ $220.90 | RSI=28.2, MACD=-2.2530, Signal=-1.5738, Hist=-0.67920, SMA50=$226.39
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 107 (('AMZN', Timestamp('2025-10-07 04:00:00+0000', tz='UTC'))): AMZN @ $221.78 | RSI=32.8, MACD=-2.1407, Signal=-1.6872, Hist=-0.45353, SMA50=$226.17
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 108 (('AMZN', Timestamp('2025-10-08 04:00:00+0000', tz='UTC'))): AMZN @ $225.22 | RSI=40.5, MACD=-1.7539, Signal=-1.7005, Hist=-0.05340, SMA50=$226.05
+2025-10-29 13:38:25 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AMZN @ $225.22 | Entry=$219.57, P&L=-2.57%, Bars=6
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 109 (('AMZN', Timestamp('2025-10-09 04:00:00+0000', tz='UTC'))): AMZN @ $227.74 | RSI=44.5, MACD=-1.2299, Signal=-1.6064, Hist=0.37652, SMA50=$226.01
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=46412122.0, ma=46921730.8, required=49267817.339999996
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): AMZN @ $227.74 | RSI=44.5 ✗, MACD ✓, Hist=✓ (0.37652), Trend ✓, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 110 (('AMZN', Timestamp('2025-10-10 04:00:00+0000', tz='UTC'))): AMZN @ $216.37 | RSI=36.4, MACD=-1.7123, Signal=-1.6276, Hist=-0.08471, SMA50=$225.65
+2025-10-29 13:38:25 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AMZN @ $216.37 | Entry=$227.74, P&L=-4.99%, Bars=1
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 111 (('AMZN', Timestamp('2025-10-13 04:00:00+0000', tz='UTC'))): AMZN @ $220.07 | RSI=49.2, MACD=-1.7756, Signal=-1.6572, Hist=-0.11840, SMA50=$225.76
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=37809650.0, ma=48843611.55, required=51285792.1275
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): AMZN @ $220.07 | RSI=49.2 ✗, MACD ✓, Hist=✓ (-0.11840), Trend ✓, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 112 (('AMZN', Timestamp('2025-10-14 04:00:00+0000', tz='UTC'))): AMZN @ $216.39 | RSI=45.4, MACD=-2.0985, Signal=-1.7455, Hist=-0.35305, SMA50=$225.85
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 113 (('AMZN', Timestamp('2025-10-15 04:00:00+0000', tz='UTC'))): AMZN @ $215.57 | RSI=46.8, MACD=-2.3930, Signal=-1.8750, Hist=-0.51803, SMA50=$225.89
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 114 (('AMZN', Timestamp('2025-10-16 04:00:00+0000', tz='UTC'))): AMZN @ $214.47 | RSI=43.3, MACD=-2.6842, Signal=-2.0368, Hist=-0.64739, SMA50=$225.73
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 115 (('AMZN', Timestamp('2025-10-17 04:00:00+0000', tz='UTC'))): AMZN @ $213.04 | RSI=38.2, MACD=-2.9958, Signal=-2.2286, Hist=-0.76722, SMA50=$225.53
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 116 (('AMZN', Timestamp('2025-10-20 04:00:00+0000', tz='UTC'))): AMZN @ $216.48 | RSI=46.1, MACD=-2.9314, Signal=-2.3692, Hist=-0.56226, SMA50=$225.41
+2025-10-29 13:38:25 | INFO     | 📈 Trailing stop: price=216.48, trough=213.04, rise=-1.61%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 117 (('AMZN', Timestamp('2025-10-21 04:00:00+0000', tz='UTC'))): AMZN @ $222.03 | RSI=51.6, MACD=-2.4048, Signal=-2.3763, Hist=-0.02853, SMA50=$225.42
+2025-10-29 13:38:25 | INFO     | 🔴 SHORT SIGNAL (4/5 conditions): AMZN @ $222.03 | RSI=51.6 ✗, MACD ✓, Hist=✓ (-0.02853), Trend ✓, Volume ✓
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 118 (('AMZN', Timestamp('2025-10-22 04:00:00+0000', tz='UTC'))): AMZN @ $217.95 | RSI=45.2, MACD=-2.2903, Signal=-2.3591, Hist=0.06878, SMA50=$225.35
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 119 (('AMZN', Timestamp('2025-10-23 04:00:00+0000', tz='UTC'))): AMZN @ $221.09 | RSI=51.7, MACD=-1.9240, Signal=-2.2721, Hist=0.34807, SMA50=$225.28
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 120 (('AMZN', Timestamp('2025-10-24 04:00:00+0000', tz='UTC'))): AMZN @ $224.21 | RSI=53.4, MACD=-1.3662, Signal=-2.0909, Hist=0.72469, SMA50=$225.14
+2025-10-29 13:38:25 | INFO     | 📈 Trailing stop: price=224.21, trough=217.95, rise=-2.87%
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 121 (('AMZN', Timestamp('2025-10-27 04:00:00+0000', tz='UTC'))): AMZN @ $226.97 | RSI=55.2, MACD=-0.6935, Signal=-1.8114, Hist=1.11797, SMA50=$225.06
+2025-10-29 13:38:25 | DEBUG    | Volume filter blocked entry: vol=38266995.0, ma=43877107.45, required=46070962.822500005
+2025-10-29 13:38:25 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): AMZN @ $226.97 | RSI=55.2 ✓, MACD ✓, Hist=✓ (1.11797), Trend ✓, Volume ✗
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 122 (('AMZN', Timestamp('2025-10-28 04:00:00+0000', tz='UTC'))): AMZN @ $229.25 | RSI=54.1, MACD=0.0234, Signal=-1.4445, Hist=1.46788, SMA50=$225.02
+2025-10-29 13:38:25 | DEBUG    | 📈 Bar 123 (('AMZN', Timestamp('2025-10-29 04:00:00+0000', tz='UTC'))): AMZN @ $231.20 | RSI=53.6, MACD=0.7404, Signal=-1.0075, Hist=1.74792, SMA50=$225.08
+2025-10-29 13:38:25 | INFO     | Generated 35 signals for Momentum strategy (including 17 exits)
+2025-10-29 13:38:25 | INFO     |      Generated 35 signals for AMZN
+2025-10-29 13:38:26 | INFO     | Fetched 124 bars for NVDA
+2025-10-29 13:38:26 | INFO     |   ✓ NVDA: 124 bars
+2025-10-29 13:38:26 | DEBUG    | Volume confirmation enabled with 20-period MA
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 27 (('NVDA', Timestamp('2025-06-12 04:00:00+0000', tz='UTC'))): NVDA @ $145.00 | RSI=69.7, MACD=5.6026, Signal=5.5309, Hist=0.07167, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=162364991.0, ma=215659684.05, required=226442668.25250003
+2025-10-29 13:38:26 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): NVDA @ $145.00 | RSI=69.7 ✓, MACD ✓, Hist=✓ (0.07167), Trend ✗, Volume ✗
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 28 (('NVDA', Timestamp('2025-06-13 04:00:00+0000', tz='UTC'))): NVDA @ $141.97 | RSI=66.5, MACD=5.3127, Signal=5.4873, Hist=-0.17456, SMA50=$nan
+2025-10-29 13:38:26 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: NVDA @ $141.97 | Entry=$145.00, P&L=-2.09%, Bars=1
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 29 (('NVDA', Timestamp('2025-06-16 04:00:00+0000', tz='UTC'))): NVDA @ $144.69 | RSI=64.9, MACD=5.2420, Signal=5.4382, Hist=-0.19618, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=183133666.0, ma=211198644.9, required=221758577.145
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 30 (('NVDA', Timestamp('2025-06-17 04:00:00+0000', tz='UTC'))): NVDA @ $144.12 | RSI=65.1, MACD=5.0815, Signal=5.3669, Hist=-0.28540, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=139108000.0, ma=208496316.35, required=218921132.1675
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 31 (('NVDA', Timestamp('2025-06-18 04:00:00+0000', tz='UTC'))): NVDA @ $145.48 | RSI=61.3, MACD=5.0062, Signal=5.2947, Hist=-0.28850, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=161494121.0, ma=208495310.05, required=218920075.5525
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 32 (('NVDA', Timestamp('2025-06-20 04:00:00+0000', tz='UTC'))): NVDA @ $143.85 | RSI=67.2, MACD=4.7602, Signal=5.1878, Hist=-0.42761, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=False, Volume=True
+2025-10-29 13:38:26 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): NVDA @ $143.85 | RSI=67.2 ✗, MACD ✓, Hist=✓ (-0.42761), Trend ✗, Volume ✓
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 33 (('NVDA', Timestamp('2025-06-23 04:00:00+0000', tz='UTC'))): NVDA @ $144.17 | RSI=64.5, MACD=4.5388, Signal=5.0580, Hist=-0.51926, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 34 (('NVDA', Timestamp('2025-06-24 04:00:00+0000', tz='UTC'))): NVDA @ $147.90 | RSI=64.4, MACD=4.6111, Signal=4.9686, Hist=-0.35756, SMA50=$nan
+2025-10-29 13:38:26 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: NVDA @ $147.90 | Entry=$143.85, P&L=-2.82%, Bars=2
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 35 (('NVDA', Timestamp('2025-06-25 04:00:00+0000', tz='UTC'))): NVDA @ $154.31 | RSI=71.4, MACD=5.1265, Signal=5.0002, Hist=0.12631, SMA50=$nan
+2025-10-29 13:38:26 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): NVDA @ $154.31 | RSI=71.4 ✓, MACD ✓, Hist=✓ (0.12631), Trend ✗, Volume ✓
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 36 (('NVDA', Timestamp('2025-06-26 04:00:00+0000', tz='UTC'))): NVDA @ $155.02 | RSI=77.1, MACD=5.5286, Signal=5.1059, Hist=0.42269, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 37 (('NVDA', Timestamp('2025-06-27 04:00:00+0000', tz='UTC'))): NVDA @ $157.75 | RSI=77.9, MACD=5.9983, Signal=5.2844, Hist=0.71397, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 38 (('NVDA', Timestamp('2025-06-30 04:00:00+0000', tz='UTC'))): NVDA @ $157.99 | RSI=77.4, MACD=6.3172, Signal=5.4909, Hist=0.82625, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 39 (('NVDA', Timestamp('2025-07-01 04:00:00+0000', tz='UTC'))): NVDA @ $153.30 | RSI=64.9, MACD=6.1209, Signal=5.6169, Hist=0.50395, SMA50=$nan
+2025-10-29 13:38:26 | INFO     | 📉 Trailing stop: price=153.30, peak=157.99, drop=-2.97%
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 40 (('NVDA', Timestamp('2025-07-02 04:00:00+0000', tz='UTC'))): NVDA @ $157.25 | RSI=71.0, MACD=6.2124, Signal=5.7360, Hist=0.47639, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=171224111.0, ma=189171776.6, required=198630365.43
+2025-10-29 13:38:26 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): NVDA @ $157.25 | RSI=71.0 ✓, MACD ✓, Hist=✓ (0.47639), Trend ✗, Volume ✗
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 41 (('NVDA', Timestamp('2025-07-03 04:00:00+0000', tz='UTC'))): NVDA @ $159.34 | RSI=71.0, MACD=6.3801, Signal=5.8648, Hist=0.51523, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 42 (('NVDA', Timestamp('2025-07-07 04:00:00+0000', tz='UTC'))): NVDA @ $158.24 | RSI=75.2, MACD=6.3510, Signal=5.9621, Hist=0.38890, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 43 (('NVDA', Timestamp('2025-07-08 04:00:00+0000', tz='UTC'))): NVDA @ $160.00 | RSI=74.5, MACD=6.3962, Signal=6.0489, Hist=0.34729, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 44 (('NVDA', Timestamp('2025-07-09 04:00:00+0000', tz='UTC'))): NVDA @ $162.88 | RSI=77.9, MACD=6.5884, Signal=6.1568, Hist=0.43165, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 45 (('NVDA', Timestamp('2025-07-10 04:00:00+0000', tz='UTC'))): NVDA @ $164.10 | RSI=77.8, MACD=6.7613, Signal=6.2777, Hist=0.48363, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 46 (('NVDA', Timestamp('2025-07-11 04:00:00+0000', tz='UTC'))): NVDA @ $164.92 | RSI=82.3, MACD=6.8851, Signal=6.3992, Hist=0.48595, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 47 (('NVDA', Timestamp('2025-07-14 04:00:00+0000', tz='UTC'))): NVDA @ $164.07 | RSI=80.0, MACD=6.8359, Signal=6.4865, Hist=0.34935, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 48 (('NVDA', Timestamp('2025-07-15 04:00:00+0000', tz='UTC'))): NVDA @ $170.70 | RSI=81.6, MACD=7.2483, Signal=6.6389, Hist=0.60939, SMA50=$nan
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 49 (('NVDA', Timestamp('2025-07-16 04:00:00+0000', tz='UTC'))): NVDA @ $171.37 | RSI=78.1, MACD=7.5422, Signal=6.8195, Hist=0.72267, SMA50=$142.95
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 50 (('NVDA', Timestamp('2025-07-17 04:00:00+0000', tz='UTC'))): NVDA @ $173.00 | RSI=78.8, MACD=7.8166, Signal=7.0190, Hist=0.79763, SMA50=$144.13
+2025-10-29 13:38:26 | INFO     | ✅ TAKE-PROFIT (after 10 bars): NVDA @ $173.00 | Entry=$157.25, P&L=10.02%
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 51 (('NVDA', Timestamp('2025-07-18 04:00:00+0000', tz='UTC'))): NVDA @ $172.41 | RSI=75.2, MACD=7.8954, Signal=7.1942, Hist=0.70116, SMA50=$145.31
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=146454491.0, ma=184750253.4, required=193987766.07000002
+2025-10-29 13:38:26 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): NVDA @ $172.41 | RSI=75.2 ✓, MACD ✓, Hist=✓ (0.70116), Trend ✓, Volume ✗
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 52 (('NVDA', Timestamp('2025-07-21 04:00:00+0000', tz='UTC'))): NVDA @ $171.38 | RSI=72.4, MACD=7.7850, Signal=7.3124, Hist=0.47262, SMA50=$146.40
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 53 (('NVDA', Timestamp('2025-07-22 04:00:00+0000', tz='UTC'))): NVDA @ $167.03 | RSI=73.2, MACD=7.2628, Signal=7.3025, Hist=-0.03967, SMA50=$147.39
+2025-10-29 13:38:26 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: NVDA @ $167.03 | Entry=$172.41, P&L=-3.12%, Bars=2
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 54 (('NVDA', Timestamp('2025-07-23 04:00:00+0000', tz='UTC'))): NVDA @ $170.78 | RSI=73.0, MACD=7.0700, Signal=7.2560, Hist=-0.18595, SMA50=$148.47
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=154354517.0, ma=179044325.45, required=187996541.7225
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 55 (('NVDA', Timestamp('2025-07-24 04:00:00+0000', tz='UTC'))): NVDA @ $173.74 | RSI=73.8, MACD=7.0746, Signal=7.2197, Hist=-0.14513, SMA50=$149.49
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=128984628.0, ma=172036233.3, required=180638044.96500003
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 56 (('NVDA', Timestamp('2025-07-25 04:00:00+0000', tz='UTC'))): NVDA @ $173.50 | RSI=76.0, MACD=6.9784, Signal=7.1714, Hist=-0.19308, SMA50=$150.36
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=122316392.0, ma=168244765.6, required=176657003.88
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 57 (('NVDA', Timestamp('2025-07-28 04:00:00+0000', tz='UTC'))): NVDA @ $176.75 | RSI=77.1, MACD=7.0827, Signal=7.1537, Hist=-0.07098, SMA50=$151.19
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=140023521.0, ma=162084214.7, required=170188425.435
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 58 (('NVDA', Timestamp('2025-07-29 04:00:00+0000', tz='UTC'))): NVDA @ $175.51 | RSI=71.6, MACD=6.9848, Signal=7.1199, Hist=-0.13509, SMA50=$152.00
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=154077512.0, ma=160059074.5, required=168062028.225
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 59 (('NVDA', Timestamp('2025-07-30 04:00:00+0000', tz='UTC'))): NVDA @ $179.27 | RSI=73.9, MACD=7.1285, Signal=7.1216, Hist=0.00686, SMA50=$152.88
+2025-10-29 13:38:26 | INFO     | 🟢 LONG SIGNAL (5/5 conditions): NVDA @ $179.27 | RSI=73.9 ✓, MACD ✓, Hist=✓ (0.00686), Trend ✓, Volume ✓
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 60 (('NVDA', Timestamp('2025-07-31 04:00:00+0000', tz='UTC'))): NVDA @ $177.87 | RSI=70.0, MACD=7.0481, Signal=7.1069, Hist=-0.05881, SMA50=$153.72
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 61 (('NVDA', Timestamp('2025-08-01 04:00:00+0000', tz='UTC'))): NVDA @ $173.72 | RSI=63.5, MACD=6.5738, Signal=7.0003, Hist=-0.42651, SMA50=$154.51
+2025-10-29 13:38:26 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: NVDA @ $173.72 | Entry=$179.27, P&L=-3.10%, Bars=2
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 62 (('NVDA', Timestamp('2025-08-04 04:00:00+0000', tz='UTC'))): NVDA @ $180.00 | RSI=63.2, MACD=6.6282, Signal=6.9259, Hist=-0.29767, SMA50=$155.48
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=148174609.0, ma=164082868.35, required=172287011.7675
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 63 (('NVDA', Timestamp('2025-08-05 04:00:00+0000', tz='UTC'))): NVDA @ $178.26 | RSI=59.5, MACD=6.4565, Signal=6.8320, Hist=-0.37550, SMA50=$156.38
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=156407621.0, ma=164996598.15, required=173246428.0575
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 64 (('NVDA', Timestamp('2025-08-06 04:00:00+0000', tz='UTC'))): NVDA @ $179.42 | RSI=58.9, MACD=6.3409, Signal=6.7338, Hist=-0.39285, SMA50=$157.35
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=137192265.0, ma=162673389.25, required=170807058.7125
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 65 (('NVDA', Timestamp('2025-08-07 04:00:00+0000', tz='UTC'))): NVDA @ $180.77 | RSI=61.4, MACD=6.2858, Signal=6.6442, Hist=-0.35837, SMA50=$158.25
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=151878365.0, ma=161882112.7, required=169976218.335
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 66 (('NVDA', Timestamp('2025-08-08 04:00:00+0000', tz='UTC'))): NVDA @ $182.70 | RSI=65.1, MACD=6.3250, Signal=6.5804, Hist=-0.25538, SMA50=$159.21
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=123396679.0, ma=158370283.5, required=166288797.675
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 67 (('NVDA', Timestamp('2025-08-11 04:00:00+0000', tz='UTC'))): NVDA @ $182.06 | RSI=72.2, MACD=6.2325, Signal=6.5108, Hist=-0.27827, SMA50=$160.07
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=138323191.0, ma=158437655.35, required=166359538.1175
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 68 (('NVDA', Timestamp('2025-08-12 04:00:00+0000', tz='UTC'))): NVDA @ $183.16 | RSI=69.8, MACD=6.1768, Signal=6.4440, Hist=-0.26719, SMA50=$161.03
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=145729202.0, ma=154192747.95, required=161902385.3475
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=True, MACD=False, Hist=False, Trend=True, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 69 (('NVDA', Timestamp('2025-08-13 04:00:00+0000', tz='UTC'))): NVDA @ $181.59 | RSI=63.2, MACD=5.9375, Signal=6.3427, Hist=-0.40519, SMA50=$161.91
+2025-10-29 13:38:26 | INFO     | 🟢 LONG SIGNAL (3/5 conditions): NVDA @ $181.59 | RSI=63.2 ✓, MACD ✗, Hist=✗ (-0.40519), Trend ✓, Volume ✓
+2025-10-29 13:38:26 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): NVDA @ $181.59 | RSI=63.2 ✗, MACD ✓, Hist=✓ (-0.40519), Trend ✗, Volume ✓
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 70 (('NVDA', Timestamp('2025-08-14 04:00:00+0000', tz='UTC'))): NVDA @ $182.02 | RSI=64.2, MACD=5.7167, Signal=6.2175, Hist=-0.50082, SMA50=$162.73
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 71 (('NVDA', Timestamp('2025-08-15 04:00:00+0000', tz='UTC'))): NVDA @ $180.45 | RSI=56.5, MACD=5.3533, Signal=6.0446, Hist=-0.69138, SMA50=$163.50
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 72 (('NVDA', Timestamp('2025-08-18 04:00:00+0000', tz='UTC'))): NVDA @ $182.01 | RSI=61.3, MACD=5.1320, Signal=5.8621, Hist=-0.73013, SMA50=$164.34
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 73 (('NVDA', Timestamp('2025-08-19 04:00:00+0000', tz='UTC'))): NVDA @ $175.64 | RSI=44.2, MACD=4.3920, Signal=5.5681, Hist=-1.17611, SMA50=$165.02
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 74 (('NVDA', Timestamp('2025-08-20 04:00:00+0000', tz='UTC'))): NVDA @ $175.40 | RSI=45.9, MACD=3.7430, Signal=5.2031, Hist=-1.46007, SMA50=$165.67
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 75 (('NVDA', Timestamp('2025-08-21 04:00:00+0000', tz='UTC'))): NVDA @ $174.98 | RSI=52.4, MACD=3.1584, Signal=4.7941, Hist=-1.63574, SMA50=$166.29
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 76 (('NVDA', Timestamp('2025-08-22 04:00:00+0000', tz='UTC'))): NVDA @ $177.99 | RSI=45.6, MACD=2.9045, Signal=4.4162, Hist=-1.51172, SMA50=$167.00
+2025-10-29 13:38:26 | INFO     | 📈 Trailing stop: price=177.99, trough=174.98, rise=-1.72%
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 77 (('NVDA', Timestamp('2025-08-25 04:00:00+0000', tz='UTC'))): NVDA @ $179.81 | RSI=53.3, MACD=2.8176, Signal=4.0965, Hist=-1.27885, SMA50=$167.69
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=163012789.0, ma=161497714.35, required=169572600.0675
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 78 (('NVDA', Timestamp('2025-08-26 04:00:00+0000', tz='UTC'))): NVDA @ $181.77 | RSI=54.9, MACD=2.8738, Signal=3.8520, Hist=-0.97812, SMA50=$168.49
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=168688186.0, ma=162228248.05, required=170339660.45250002
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 79 (('NVDA', Timestamp('2025-08-27 04:00:00+0000', tz='UTC'))): NVDA @ $181.60 | RSI=51.8, MACD=2.8716, Signal=3.6559, Hist=-0.78432, SMA50=$169.23
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=False, MACD=False, Hist=False, Trend=True, Volume=True
+2025-10-29 13:38:26 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): NVDA @ $181.60 | RSI=51.8 ✗, MACD ✓, Hist=✓ (-0.78432), Trend ✗, Volume ✓
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 80 (('NVDA', Timestamp('2025-08-28 04:00:00+0000', tz='UTC'))): NVDA @ $180.17 | RSI=44.3, MACD=2.7230, Signal=3.4693, Hist=-0.74632, SMA50=$169.95
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 81 (('NVDA', Timestamp('2025-08-29 04:00:00+0000', tz='UTC'))): NVDA @ $174.18 | RSI=35.7, MACD=2.0977, Signal=3.1950, Hist=-1.09728, SMA50=$170.52
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 82 (('NVDA', Timestamp('2025-09-02 04:00:00+0000', tz='UTC'))): NVDA @ $170.78 | RSI=29.3, MACD=1.3127, Signal=2.8185, Hist=-1.50584, SMA50=$171.06
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 83 (('NVDA', Timestamp('2025-09-03 04:00:00+0000', tz='UTC'))): NVDA @ $170.62 | RSI=30.8, MACD=0.6699, Signal=2.3888, Hist=-1.71889, SMA50=$171.59
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 84 (('NVDA', Timestamp('2025-09-04 04:00:00+0000', tz='UTC'))): NVDA @ $171.66 | RSI=32.2, MACD=0.2416, Signal=1.9594, Hist=-1.71772, SMA50=$172.06
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 85 (('NVDA', Timestamp('2025-09-05 04:00:00+0000', tz='UTC'))): NVDA @ $167.02 | RSI=29.2, MACD=-0.4668, Signal=1.4741, Hist=-1.94092, SMA50=$172.32
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 86 (('NVDA', Timestamp('2025-09-08 04:00:00+0000', tz='UTC'))): NVDA @ $168.31 | RSI=28.6, MACD=-0.9136, Signal=0.9966, Hist=-1.91019, SMA50=$172.58
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 87 (('NVDA', Timestamp('2025-09-09 04:00:00+0000', tz='UTC'))): NVDA @ $170.76 | RSI=41.3, MACD=-1.0578, Signal=0.5857, Hist=-1.64352, SMA50=$172.84
+2025-10-29 13:38:26 | INFO     | 📈 Trailing stop: price=170.76, trough=167.02, rise=-2.24%
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 88 (('NVDA', Timestamp('2025-09-10 04:00:00+0000', tz='UTC'))): NVDA @ $177.33 | RSI=52.8, MACD=-0.6346, Signal=0.3416, Hist=-0.97628, SMA50=$173.23
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=False, MACD=False, Hist=False, Trend=True, Volume=True
+2025-10-29 13:38:26 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): NVDA @ $177.33 | RSI=52.8 ✗, MACD ✓, Hist=✓ (-0.97628), Trend ✗, Volume ✓
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 89 (('NVDA', Timestamp('2025-09-11 04:00:00+0000', tz='UTC'))): NVDA @ $177.17 | RSI=53.2, MACD=-0.3086, Signal=0.2116, Hist=-0.52022, SMA50=$173.71
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 90 (('NVDA', Timestamp('2025-09-12 04:00:00+0000', tz='UTC'))): NVDA @ $177.82 | RSI=49.7, MACD=0.0022, Signal=0.1697, Hist=-0.16754, SMA50=$174.12
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 91 (('NVDA', Timestamp('2025-09-15 04:00:00+0000', tz='UTC'))): NVDA @ $177.75 | RSI=46.6, MACD=0.2401, Signal=0.1838, Hist=0.05628, SMA50=$174.49
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 92 (('NVDA', Timestamp('2025-09-16 04:00:00+0000', tz='UTC'))): NVDA @ $174.88 | RSI=38.8, MACD=0.1947, Signal=0.1860, Hist=0.00878, SMA50=$174.82
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 93 (('NVDA', Timestamp('2025-09-17 04:00:00+0000', tz='UTC'))): NVDA @ $170.29 | RSI=34.0, MACD=-0.2091, Signal=0.1070, Hist=-0.31607, SMA50=$175.03
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 94 (('NVDA', Timestamp('2025-09-18 04:00:00+0000', tz='UTC'))): NVDA @ $176.24 | RSI=45.1, MACD=-0.0485, Signal=0.0759, Hist=-0.12437, SMA50=$175.29
+2025-10-29 13:38:26 | INFO     | 📈 Trailing stop: price=176.24, trough=170.29, rise=-3.49%
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 95 (('NVDA', Timestamp('2025-09-19 04:00:00+0000', tz='UTC'))): NVDA @ $176.67 | RSI=53.6, MACD=0.1122, Signal=0.0831, Hist=0.02906, SMA50=$175.55
+2025-10-29 13:38:26 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): NVDA @ $176.67 | RSI=53.6 ✗, MACD ✓, Hist=✓ (0.02906), Trend ✓, Volume ✓
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 96 (('NVDA', Timestamp('2025-09-22 04:00:00+0000', tz='UTC'))): NVDA @ $183.61 | RSI=67.0, MACD=0.7904, Signal=0.2246, Hist=0.56583, SMA50=$175.92
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 97 (('NVDA', Timestamp('2025-09-23 04:00:00+0000', tz='UTC'))): NVDA @ $178.43 | RSI=59.1, MACD=0.8996, Signal=0.3596, Hist=0.53999, SMA50=$176.21
+2025-10-29 13:38:26 | INFO     | 📉 Trailing stop: price=178.43, peak=183.61, drop=-2.82%
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 98 (('NVDA', Timestamp('2025-09-24 04:00:00+0000', tz='UTC'))): NVDA @ $176.97 | RSI=56.1, MACD=0.8584, Signal=0.4593, Hist=0.39903, SMA50=$176.33
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=143564116.0, ma=194035926.1, required=203737722.405
+2025-10-29 13:38:26 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): NVDA @ $176.97 | RSI=56.1 ✓, MACD ✓, Hist=✓ (0.39903), Trend ✓, Volume ✗
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 99 (('NVDA', Timestamp('2025-09-25 04:00:00+0000', tz='UTC'))): NVDA @ $177.69 | RSI=63.6, MACD=0.8737, Signal=0.5422, Hist=0.33152, SMA50=$176.46
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 100 (('NVDA', Timestamp('2025-09-26 04:00:00+0000', tz='UTC'))): NVDA @ $178.19 | RSI=62.8, MACD=0.9157, Signal=0.6169, Hist=0.29880, SMA50=$176.56
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 101 (('NVDA', Timestamp('2025-09-29 04:00:00+0000', tz='UTC'))): NVDA @ $181.85 | RSI=63.9, MACD=1.2301, Signal=0.7396, Hist=0.49057, SMA50=$176.75
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 102 (('NVDA', Timestamp('2025-09-30 04:00:00+0000', tz='UTC'))): NVDA @ $186.58 | RSI=62.2, MACD=1.8398, Signal=0.9596, Hist=0.88017, SMA50=$177.06
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 103 (('NVDA', Timestamp('2025-10-01 04:00:00+0000', tz='UTC'))): NVDA @ $187.24 | RSI=63.1, MACD=2.3491, Signal=1.2375, Hist=1.11159, SMA50=$177.46
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 104 (('NVDA', Timestamp('2025-10-02 04:00:00+0000', tz='UTC'))): NVDA @ $188.89 | RSI=64.0, MACD=2.8530, Signal=1.5606, Hist=1.29239, SMA50=$177.82
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 105 (('NVDA', Timestamp('2025-10-03 04:00:00+0000', tz='UTC'))): NVDA @ $187.62 | RSI=62.2, MACD=3.1140, Signal=1.8713, Hist=1.24269, SMA50=$178.10
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 106 (('NVDA', Timestamp('2025-10-06 04:00:00+0000', tz='UTC'))): NVDA @ $185.54 | RSI=63.4, MACD=3.1170, Signal=2.1204, Hist=0.99659, SMA50=$178.34
+2025-10-29 13:38:26 | INFO     | 📉 Trailing stop: price=185.54, peak=188.89, drop=-1.77%
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 107 (('NVDA', Timestamp('2025-10-07 04:00:00+0000', tz='UTC'))): NVDA @ $185.04 | RSI=70.6, MACD=3.0440, Signal=2.3051, Hist=0.73886, SMA50=$178.51
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=140088008.0, ma=177672567.1, required=186556195.455
+2025-10-29 13:38:26 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): NVDA @ $185.04 | RSI=70.6 ✓, MACD ✓, Hist=✓ (0.73886), Trend ✓, Volume ✗
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 108 (('NVDA', Timestamp('2025-10-08 04:00:00+0000', tz='UTC'))): NVDA @ $189.11 | RSI=69.0, MACD=3.2768, Signal=2.4995, Hist=0.77730, SMA50=$178.78
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 109 (('NVDA', Timestamp('2025-10-09 04:00:00+0000', tz='UTC'))): NVDA @ $192.57 | RSI=71.6, MACD=3.6978, Signal=2.7391, Hist=0.95868, SMA50=$179.04
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 110 (('NVDA', Timestamp('2025-10-10 04:00:00+0000', tz='UTC'))): NVDA @ $183.16 | RSI=49.4, MACD=3.2349, Signal=2.8383, Hist=0.39661, SMA50=$179.15
+2025-10-29 13:38:26 | INFO     | 📉 Trailing stop: price=183.16, peak=192.57, drop=-4.89%
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 111 (('NVDA', Timestamp('2025-10-13 04:00:00+0000', tz='UTC'))): NVDA @ $188.32 | RSI=62.6, MACD=3.2470, Signal=2.9200, Hist=0.32694, SMA50=$179.44
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=153482755.0, ma=181946480.0, required=191043804.0
+2025-10-29 13:38:26 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): NVDA @ $188.32 | RSI=62.6 ✓, MACD ✓, Hist=✓ (0.32694), Trend ✓, Volume ✗
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 112 (('NVDA', Timestamp('2025-10-14 04:00:00+0000', tz='UTC'))): NVDA @ $180.03 | RSI=53.3, MACD=2.5581, Signal=2.8476, Hist=-0.28953, SMA50=$179.44
+2025-10-29 13:38:26 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: NVDA @ $180.03 | Entry=$188.32, P&L=-4.40%, Bars=1
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 113 (('NVDA', Timestamp('2025-10-15 04:00:00+0000', tz='UTC'))): NVDA @ $179.83 | RSI=52.3, MACD=1.9733, Signal=2.6728, Hist=-0.69947, SMA50=$179.47
+2025-10-29 13:38:26 | DEBUG    | 🟡 LONG near-miss (2/5): RSI=False, MACD=False, Hist=False, Trend=True, Volume=True
+2025-10-29 13:38:26 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): NVDA @ $179.83 | RSI=52.3 ✗, MACD ✓, Hist=✓ (-0.69947), Trend ✗, Volume ✓
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 114 (('NVDA', Timestamp('2025-10-16 04:00:00+0000', tz='UTC'))): NVDA @ $181.81 | RSI=53.8, MACD=1.6506, Signal=2.4683, Hist=-0.81775, SMA50=$179.52
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 115 (('NVDA', Timestamp('2025-10-17 04:00:00+0000', tz='UTC'))): NVDA @ $183.22 | RSI=51.5, MACD=1.4914, Signal=2.2729, Hist=-0.78154, SMA50=$179.57
+2025-10-29 13:38:26 | INFO     | 📈 Trailing stop: price=183.22, trough=179.83, rise=-1.89%
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 116 (('NVDA', Timestamp('2025-10-20 04:00:00+0000', tz='UTC'))): NVDA @ $182.64 | RSI=45.2, MACD=1.3034, Signal=2.0790, Hist=-0.77561, SMA50=$179.57
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=128541265.0, ma=174462860.6, required=183186003.63
+2025-10-29 13:38:26 | DEBUG    | 🟡 SHORT near-miss (2/5): RSI=False, MACD=True, Hist=True, Trend=False, Volume=False
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 117 (('NVDA', Timestamp('2025-10-21 04:00:00+0000', tz='UTC'))): NVDA @ $181.16 | RSI=42.7, MACD=1.0232, Signal=1.8679, Hist=-0.84464, SMA50=$179.55
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=124238917.0, ma=171046828.85, required=179599170.2925
+2025-10-29 13:38:26 | INFO     | 🔴 SHORT SIGNAL (3/5 conditions): NVDA @ $181.16 | RSI=42.7 ✓, MACD ✓, Hist=✓ (-0.84464), Trend ✗, Volume ✗
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 118 (('NVDA', Timestamp('2025-10-22 04:00:00+0000', tz='UTC'))): NVDA @ $180.28 | RSI=39.4, MACD=0.7219, Signal=1.6387, Hist=-0.91682, SMA50=$179.49
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 119 (('NVDA', Timestamp('2025-10-23 04:00:00+0000', tz='UTC'))): NVDA @ $182.16 | RSI=43.4, MACD=0.6275, Signal=1.4364, Hist=-0.80896, SMA50=$179.51
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 120 (('NVDA', Timestamp('2025-10-24 04:00:00+0000', tz='UTC'))): NVDA @ $186.26 | RSI=50.8, MACD=0.8734, Signal=1.3238, Hist=-0.45039, SMA50=$179.59
+2025-10-29 13:38:26 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: NVDA @ $186.26 | Entry=$181.16, P&L=-2.82%, Bars=3
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 121 (('NVDA', Timestamp('2025-10-27 04:00:00+0000', tz='UTC'))): NVDA @ $191.49 | RSI=56.7, MACD=1.4734, Signal=1.3538, Hist=0.11966, SMA50=$179.81
+2025-10-29 13:38:26 | DEBUG    | Volume filter blocked entry: vol=153451565.0, ma=165124625.6, required=173380856.88
+2025-10-29 13:38:26 | INFO     | 🟢 LONG SIGNAL (4/5 conditions): NVDA @ $191.49 | RSI=56.7 ✓, MACD ✓, Hist=✓ (0.11966), Trend ✓, Volume ✗
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 122 (('NVDA', Timestamp('2025-10-28 04:00:00+0000', tz='UTC'))): NVDA @ $201.03 | RSI=61.1, MACD=2.6877, Signal=1.6205, Hist=1.06716, SMA50=$180.19
+2025-10-29 13:38:26 | DEBUG    | 📈 Bar 123 (('NVDA', Timestamp('2025-10-29 04:00:00+0000', tz='UTC'))): NVDA @ $205.67 | RSI=62.0, MACD=3.9786, Signal=2.0922, Hist=1.88644, SMA50=$180.79
+2025-10-29 13:38:26 | INFO     | Generated 31 signals for Momentum strategy (including 15 exits)
+2025-10-29 13:38:26 | INFO     |      Generated 31 signals for NVDA
+2025-10-29 13:38:26 | INFO     | 
+Calculating metrics from 143 total signals...
+2025-10-29 13:38:26 | INFO     | 
+2025-10-29 13:38:26 | INFO     | RESULTS:
+2025-10-29 13:38:26 | INFO     |   Total Return: 4.21%
+2025-10-29 13:38:26 | INFO     |   Sharpe Ratio: 0.02
+2025-10-29 13:38:26 | INFO     |   Max Drawdown: 38.95%
+2025-10-29 13:38:26 | INFO     |   Win Rate: 33.3%
+2025-10-29 13:38:26 | INFO     |   Total Trades: 69
+2025-10-29 13:38:26 | INFO     |   Winning: 23 | Losing: 46
+2025-10-29 13:38:26 | INFO     |   Avg Win: 4.38% | Avg Loss: -2.10%
+2025-10-29 13:38:26 | INFO     |   Profit Factor: 1.04
+2025-10-29 13:38:26 | INFO     | 
+2025-10-29 13:38:26 | INFO     | WEEK 2 SUCCESS CRITERIA:
+2025-10-29 13:38:26 | WARNING  |   ✗ Win Rate: 33.3% < 40% (FAIL)
+2025-10-29 13:38:26 | WARNING  |   ✗ Sharpe Ratio: 0.02 < 0.5 (FAIL)
+2025-10-29 13:38:26 | WARNING  |   ✗ Total Trades: 69 > 40 (HIGH)
+2025-10-29 13:38:26 | SUCCESS  |   ✓ Total Return: 4.21% > 0%
+2025-10-29 13:38:26 | WARNING  |   ✗ Max Drawdown: 39.0% > 15% (HIGH)
+2025-10-29 13:38:26 | INFO     | 
+2025-10-29 13:38:26 | INFO     | CRITERIA MET: 1/5 (20%)
+2025-10-29 13:38:26 | INFO     | 
+================================================================================
+
+2025-10-29 13:38:26 | INFO     | Strategy 'SimplifiedMomentumStrategy' initialized with parameters: {'rsi_period': 14, 'ema_fast': 12, 'ema_slow': 26, 'macd_signal': 9, 'macd_histogram_threshold': 0.0005, 'position_size': 0.15, 'stop_loss_pct': 0.02, 'take_profit_pct': 0.03, 'min_holding_period': 10, 'use_trailing_stop': True, 'trailing_stop_pct': 0.015}
+2025-10-29 13:38:26 | INFO     | ================================================================================
+2025-10-29 13:38:26 | INFO     | TESTING: Strategy 2: Simplified Momentum (Week 2 Fixes)
+2025-10-29 13:38:26 | INFO     | ================================================================================
+2025-10-29 13:38:26 | INFO     | Alpaca client initialized successfully (paper=True)
+2025-10-29 13:38:26 | INFO     | Loading market data for 5 symbols...
+2025-10-29 13:38:26 | INFO     | Fetched 124 bars for AAPL
+2025-10-29 13:38:26 | INFO     |   ✓ AAPL: 124 bars
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED SHORT (2/3): RSI=46.3 ✗, MACD ✓, Hist=✓ (-0.42532)
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED SHORT (2/3): RSI=49.7 ✗, MACD ✓, Hist=✓ (-0.08605)
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED LONG (3/3): RSI=59.4 ✓, MACD ✓, Hist=✓ (0.85086)
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED LONG (3/3): RSI=70.8 ✓, MACD ✓, Hist=✓ (1.27949)
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED LONG (3/3): RSI=67.8 ✓, MACD ✓, Hist=✓ (0.32733)
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED SHORT (3/3): RSI=38.8 ✓, MACD ✓, Hist=✓ (-0.72771)
+2025-10-29 13:38:26 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AAPL @ $213.25 | Entry=$207.57, P&L=-2.74%, Bars=4
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED LONG (3/3): RSI=62.9 ✓, MACD ✓, Hist=✓ (0.04055)
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED LONG (3/3): RSI=75.3 ✓, MACD ✓, Hist=✓ (0.28802)
+2025-10-29 13:38:26 | INFO     | ✅ TAKE-PROFIT (after 10 bars): AAPL @ $239.69 | Entry=$224.90, P&L=6.58%
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED LONG (3/3): RSI=61.8 ✓, MACD ✓, Hist=✓ (0.38732)
+2025-10-29 13:38:26 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AAPL @ $226.79 | Entry=$237.88, P&L=-4.66%, Bars=2
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED SHORT (2/3): RSI=56.8 ✗, MACD ✓, Hist=✓ (-1.01936)
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED SHORT (2/3): RSI=61.6 ✗, MACD ✓, Hist=✓ (-0.69114)
+2025-10-29 13:38:26 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AAPL @ $245.50 | Entry=$236.70, P&L=-3.72%, Bars=4
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED LONG (3/3): RSI=74.2 ✓, MACD ✓, Hist=✓ (1.15261)
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED SHORT (3/3): RSI=32.1 ✓, MACD ✓, Hist=✓ (-1.37752)
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED SHORT (3/3): RSI=34.9 ✓, MACD ✓, Hist=✓ (-1.92430)
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED SHORT (2/3): RSI=59.5 ✗, MACD ✓, Hist=✓ (-0.69349)
+2025-10-29 13:38:26 | INFO     | SIMPLIFIED LONG (3/3): RSI=62.2 ✓, MACD ✓, Hist=✓ (0.72420)
+2025-10-29 13:38:27 | INFO     | Generated 31 signals for Simplified Momentum strategy
+2025-10-29 13:38:27 | INFO     |      Generated 31 signals for AAPL
+2025-10-29 13:38:27 | INFO     | Fetched 124 bars for MSFT
+2025-10-29 13:38:27 | INFO     |   ✓ MSFT: 124 bars
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=77.5 ✓, MACD ✓, Hist=✓ (1.11130)
+2025-10-29 13:38:27 | INFO     | ✅ TAKE-PROFIT (after 10 bars): MSFT @ $495.94 | Entry=$478.87, P&L=3.56%
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=76.2 ✓, MACD ✓, Hist=✓ (1.31905)
+2025-10-29 13:38:27 | INFO     | ✅ TAKE-PROFIT (after 18 bars): MSFT @ $513.71 | Entry=$497.41, P&L=3.28%
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=71.9 ✗, MACD ✓, Hist=✓ (-0.58107)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: MSFT @ $533.50 | Entry=$512.50, P&L=-4.10%, Bars=3
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=69.0 ✓, MACD ✓, Hist=✓ (0.63157)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=57.6 ✗, MACD ✓, Hist=✓ (-0.08513)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=56.2 ✗, MACD ✓, Hist=✓ (-1.09168)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (3/3): RSI=36.3 ✓, MACD ✓, Hist=✓ (-2.01523)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=61.0 ✓, MACD ✓, Hist=✓ (0.70707)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (2/3): RSI=51.8 ✗, MACD ✓, Hist=✓ (0.89287)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=54.3 ✗, MACD ✓, Hist=✓ (-0.24330)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (2/3): RSI=53.6 ✗, MACD ✓, Hist=✓ (0.03412)
+2025-10-29 13:38:27 | INFO     | Generated 21 signals for Simplified Momentum strategy
+2025-10-29 13:38:27 | INFO     |      Generated 21 signals for MSFT
+2025-10-29 13:38:27 | INFO     | Fetched 124 bars for GOOGL
+2025-10-29 13:38:27 | INFO     |   ✓ GOOGL: 124 bars
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=58.4 ✓, MACD ✓, Hist=✓ (0.70812)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (3/3): RSI=42.5 ✓, MACD ✓, Hist=✓ (-0.61474)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: GOOGL @ $170.68 | Entry=$166.64, P&L=-2.42%, Bars=3
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=57.3 ✗, MACD ✓, Hist=✓ (-0.72487)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: GOOGL @ $178.53 | Entry=$173.54, P&L=-2.88%, Bars=1
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (2/3): RSI=50.2 ✗, MACD ✓, Hist=✓ (0.03034)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (2/3): RSI=46.7 ✗, MACD ✓, Hist=✓ (0.09817)
+2025-10-29 13:38:27 | INFO     | ✅ TAKE-PROFIT (after 10 bars): GOOGL @ $191.34 | Entry=$174.36, P&L=9.74%
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=74.0 ✓, MACD ✓, Hist=✓ (1.09581)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=64.7 ✓, MACD ✓, Hist=✓ (0.03772)
+2025-10-29 13:38:27 | INFO     | ✅ TAKE-PROFIT (after 10 bars): GOOGL @ $203.90 | Entry=$189.13, P&L=7.81%
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=64.0 ✓, MACD ✓, Hist=✓ (0.19408)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: GOOGL @ $199.32 | Entry=$203.50, P&L=-2.05%, Bars=2
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=72.0 ✗, MACD ✓, Hist=✓ (-0.62658)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: GOOGL @ $206.09 | Entry=$199.75, P&L=-3.17%, Bars=1
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=76.0 ✗, MACD ✓, Hist=✓ (-0.08640)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=72.4 ✓, MACD ✓, Hist=✓ (0.37079)
+2025-10-29 13:38:27 | INFO     | ✅ TAKE-PROFIT (after 10 bars): GOOGL @ $251.61 | Entry=$212.91, P&L=18.18%
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (2/3): RSI=93.3 ✗, MACD ✓, Hist=✓ (2.26742)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=65.1 ✗, MACD ✓, Hist=✓ (-0.90744)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (3/3): RSI=43.9 ✓, MACD ✓, Hist=✓ (-1.92220)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=47.7 ✗, MACD ✓, Hist=✓ (-1.96633)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: GOOGL @ $251.03 | Entry=$245.45, P&L=-2.27%, Bars=1
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=56.1 ✗, MACD ✓, Hist=✓ (-0.90266)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: GOOGL @ $256.55 | Entry=$251.46, P&L=-2.02%, Bars=2
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=56.0 ✗, MACD ✓, Hist=✓ (-0.22542)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: GOOGL @ $259.92 | Entry=$250.46, P&L=-3.78%, Bars=3
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=71.7 ✓, MACD ✓, Hist=✓ (0.98683)
+2025-10-29 13:38:27 | INFO     | Generated 35 signals for Simplified Momentum strategy
+2025-10-29 13:38:27 | INFO     |      Generated 35 signals for GOOGL
+2025-10-29 13:38:27 | INFO     | Fetched 124 bars for AMZN
+2025-10-29 13:38:27 | INFO     |   ✓ AMZN: 124 bars
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=67.5 ✓, MACD ✓, Hist=✓ (0.32358)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=57.7 ✗, MACD ✓, Hist=✓ (-0.62203)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=57.3 ✗, MACD ✓, Hist=✓ (-0.84357)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AMZN @ $217.12 | Entry=$211.99, P&L=-2.42%, Bars=1
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=62.9 ✓, MACD ✓, Hist=✓ (0.10172)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (2/3): RSI=53.7 ✗, MACD ✓, Hist=✓ (0.26852)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=59.9 ✓, MACD ✓, Hist=✓ (0.10616)
+2025-10-29 13:38:27 | INFO     | ✅ TAKE-PROFIT (after 11 bars): AMZN @ $232.23 | Entry=$222.54, P&L=4.35%
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=64.1 ✓, MACD ✓, Hist=✓ (0.22174)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (3/3): RSI=34.4 ✓, MACD ✓, Hist=✓ (-2.10371)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=47.1 ✗, MACD ✓, Hist=✓ (-1.67130)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AMZN @ $230.98 | Entry=$223.13, P&L=-3.52%, Bars=5
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (2/3): RSI=48.3 ✗, MACD ✓, Hist=✓ (0.32575)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (2/3): RSI=40.4 ✗, MACD ✓, Hist=✓ (0.11474)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=52.1 ✗, MACD ✓, Hist=✓ (-0.23363)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AMZN @ $235.68 | Entry=$225.99, P&L=-4.29%, Bars=1
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (2/3): RSI=51.6 ✗, MACD ✓, Hist=✓ (0.36143)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=58.8 ✓, MACD ✓, Hist=✓ (0.13316)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (3/3): RSI=44.6 ✓, MACD ✓, Hist=✓ (-1.13467)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (3/3): RSI=32.7 ✓, MACD ✓, Hist=✓ (-1.44583)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AMZN @ $225.22 | Entry=$219.57, P&L=-2.57%, Bars=6
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (2/3): RSI=44.5 ✗, MACD ✓, Hist=✓ (0.37652)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: AMZN @ $216.37 | Entry=$227.74, P&L=-4.99%, Bars=1
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=49.2 ✗, MACD ✓, Hist=✓ (-0.11840)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=51.6 ✗, MACD ✓, Hist=✓ (-0.02853)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=55.2 ✓, MACD ✓, Hist=✓ (1.11797)
+2025-10-29 13:38:27 | INFO     | Generated 39 signals for Simplified Momentum strategy
+2025-10-29 13:38:27 | INFO     |      Generated 39 signals for AMZN
+2025-10-29 13:38:27 | INFO     | Fetched 124 bars for NVDA
+2025-10-29 13:38:27 | INFO     |   ✓ NVDA: 124 bars
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=69.7 ✓, MACD ✓, Hist=✓ (0.07167)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: NVDA @ $141.97 | Entry=$145.00, P&L=-2.09%, Bars=1
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=64.9 ✗, MACD ✓, Hist=✓ (-0.19618)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: NVDA @ $147.90 | Entry=$144.69, P&L=-2.22%, Bars=5
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=71.4 ✓, MACD ✓, Hist=✓ (0.12631)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=71.0 ✓, MACD ✓, Hist=✓ (0.47639)
+2025-10-29 13:38:27 | INFO     | ✅ TAKE-PROFIT (after 10 bars): NVDA @ $173.00 | Entry=$157.25, P&L=10.02%
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=75.2 ✓, MACD ✓, Hist=✓ (0.70116)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: NVDA @ $167.03 | Entry=$172.41, P&L=-3.12%, Bars=2
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=73.0 ✗, MACD ✓, Hist=✓ (-0.18595)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=76.0 ✗, MACD ✓, Hist=✓ (-0.19308)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=71.6 ✗, MACD ✓, Hist=✓ (-0.13509)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: NVDA @ $179.27 | Entry=$175.51, P&L=-2.14%, Bars=1
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=70.0 ✗, MACD ✓, Hist=✓ (-0.05881)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=59.5 ✗, MACD ✓, Hist=✓ (-0.37550)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: NVDA @ $182.70 | Entry=$178.26, P&L=-2.49%, Bars=3
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=72.2 ✗, MACD ✓, Hist=✓ (-0.27827)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=53.3 ✗, MACD ✓, Hist=✓ (-1.27885)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=52.8 ✗, MACD ✓, Hist=✓ (-0.97628)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (2/3): RSI=53.6 ✗, MACD ✓, Hist=✓ (0.02906)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=56.1 ✓, MACD ✓, Hist=✓ (0.39903)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=70.6 ✓, MACD ✓, Hist=✓ (0.73886)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=62.6 ✓, MACD ✓, Hist=✓ (0.32694)
+2025-10-29 13:38:27 | INFO     | ⚠️ IMMEDIATE STOP-LOSS: NVDA @ $180.03 | Entry=$188.32, P&L=-4.40%, Bars=1
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=52.3 ✗, MACD ✓, Hist=✓ (-0.69947)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED SHORT (2/3): RSI=45.2 ✗, MACD ✓, Hist=✓ (-0.77561)
+2025-10-29 13:38:27 | INFO     | SIMPLIFIED LONG (3/3): RSI=56.7 ✓, MACD ✓, Hist=✓ (0.11966)
+2025-10-29 13:38:27 | INFO     | Generated 39 signals for Simplified Momentum strategy
+2025-10-29 13:38:27 | INFO     |      Generated 39 signals for NVDA
+2025-10-29 13:38:27 | INFO     | 
+Calculating metrics from 165 total signals...
+2025-10-29 13:38:27 | INFO     | 
+2025-10-29 13:38:27 | INFO     | RESULTS:
+2025-10-29 13:38:27 | INFO     |   Total Return: -32.83%
+2025-10-29 13:38:27 | INFO     |   Sharpe Ratio: -0.11
+2025-10-29 13:38:27 | INFO     |   Max Drawdown: 50.66%
+2025-10-29 13:38:27 | INFO     |   Win Rate: 28.7%
+2025-10-29 13:38:27 | INFO     |   Total Trades: 80
+2025-10-29 13:38:27 | INFO     |   Winning: 23 | Losing: 57
+2025-10-29 13:38:27 | INFO     |   Avg Win: 3.81% | Avg Loss: -2.11%
+2025-10-29 13:38:27 | INFO     |   Profit Factor: 0.73
+2025-10-29 13:38:27 | INFO     | 
+2025-10-29 13:38:27 | INFO     | WEEK 2 SUCCESS CRITERIA:
+2025-10-29 13:38:27 | WARNING  |   ✗ Win Rate: 28.7% < 40% (FAIL)
+2025-10-29 13:38:27 | WARNING  |   ✗ Sharpe Ratio: -0.11 < 0.5 (FAIL)
+2025-10-29 13:38:27 | WARNING  |   ✗ Total Trades: 80 > 40 (HIGH)
+2025-10-29 13:38:27 | WARNING  |   ✗ Total Return: -32.83% < 0% (FAIL)
+2025-10-29 13:38:27 | WARNING  |   ✗ Max Drawdown: 50.7% > 15% (HIGH)
+2025-10-29 13:38:27 | INFO     | 
+2025-10-29 13:38:27 | INFO     | CRITERIA MET: 0/5 (0%)
+2025-10-29 13:38:27 | INFO     | 
+================================================================================
+
+2025-10-29 13:38:27 | INFO     | Strategy 'MeanReversion' initialized with parameters: {'bb_period': 20, 'bb_std': 2.0, 'position_size': 0.15, 'stop_loss_pct': 0.02, 'take_profit_pct': 0.03, 'touch_threshold': 1.001}
+2025-10-29 13:38:27 | INFO     | ================================================================================
+2025-10-29 13:38:27 | INFO     | TESTING: Strategy 3: Mean Reversion (Bollinger Bands)
+2025-10-29 13:38:27 | INFO     | ================================================================================
+2025-10-29 13:38:27 | INFO     | Alpaca client initialized successfully (paper=True)
+2025-10-29 13:38:27 | INFO     | Loading market data for 5 symbols...
+2025-10-29 13:38:28 | INFO     | Fetched 124 bars for AAPL
+2025-10-29 13:38:28 | INFO     |   ✓ AAPL: 124 bars
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=207.82, upper_band=206.93, middle=200.96
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=213.55, upper_band=211.48, middle=201.96
+2025-10-29 13:38:28 | INFO     | LONG signal (mean reversion): price=202.38, lower_band=205.16, middle=210.84
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=220.03, upper_band=219.32, middle=210.64
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=227.18, upper_band=226.31, middle=212.48
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=239.78, upper_band=238.94, middle=230.18
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=245.50, upper_band=244.70, middle=234.37
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=254.43, upper_band=252.57, middle=237.15
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=268.81, upper_band=268.00, middle=255.75
+2025-10-29 13:38:28 | INFO     | Generated 17 signals for Mean Reversion strategy (including 8 exits)
+2025-10-29 13:38:28 | INFO     |      Generated 17 signals for AAPL
+2025-10-29 13:38:28 | INFO     | Fetched 124 bars for MSFT
+2025-10-29 13:38:28 | INFO     |   ✓ MSFT: 124 bars
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=472.75, upper_band=472.02, middle=458.50
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=490.11, upper_band=490.06, middle=471.25
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=533.50, upper_band=523.87, middle=507.76
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=517.93, upper_band=517.29, middle=505.94
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=531.52, upper_band=530.16, middle=518.92
+2025-10-29 13:38:28 | INFO     | Generated 9 signals for Mean Reversion strategy (including 4 exits)
+2025-10-29 13:38:28 | INFO     |      Generated 9 signals for MSFT
+2025-10-29 13:38:28 | INFO     | Fetched 124 bars for GOOGL
+2025-10-29 13:38:28 | INFO     |   ✓ GOOGL: 124 bars
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=178.60, upper_band=178.14, middle=169.11
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=190.10, upper_band=189.72, middle=177.79
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=212.91, upper_band=213.06, middle=202.74
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=232.30, upper_band=225.93, middle=207.16
+2025-10-29 13:38:28 | INFO     | LONG signal (mean reversion): price=236.57, lower_band=238.37, middle=247.24
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=256.55, upper_band=255.82, middle=246.75
+2025-10-29 13:38:28 | INFO     | SHORT signal (mean reversion): price=267.47, upper_band=266.73, middle=250.43
+2025-10-29 13:38:28 | INFO     | Generated 13 signals for Mean Reversion strategy (including 6 exits)
+2025-10-29 13:38:28 | INFO     |      Generated 13 signals for GOOGL
+2025-10-29 13:38:29 | INFO     | Fetched 124 bars for AMZN
+2025-10-29 13:38:29 | INFO     |   ✓ AMZN: 124 bars
+2025-10-29 13:38:29 | INFO     | SHORT signal (mean reversion): price=216.98, upper_band=214.60, middle=206.80
+2025-10-29 13:38:29 | INFO     | SHORT signal (mean reversion): price=223.30, upper_band=221.63, middle=212.30
+2025-10-29 13:38:29 | INFO     | SHORT signal (mean reversion): price=232.23, upper_band=231.43, middle=223.94
+2025-10-29 13:38:29 | INFO     | LONG signal (mean reversion): price=211.65, lower_band=214.12, middle=225.88
+2025-10-29 13:38:29 | INFO     | SHORT signal (mean reversion): price=235.68, upper_band=235.17, middle=227.13
+2025-10-29 13:38:29 | INFO     | LONG signal (mean reversion): price=220.71, lower_band=222.47, middle=230.42
+2025-10-29 13:38:29 | INFO     | SHORT signal (mean reversion): price=231.20, upper_band=231.35, middle=221.13
+2025-10-29 13:38:29 | INFO     | Generated 13 signals for Mean Reversion strategy (including 6 exits)
+2025-10-29 13:38:29 | INFO     |      Generated 13 signals for AMZN
+2025-10-29 13:38:29 | INFO     | Fetched 124 bars for NVDA
+2025-10-29 13:38:29 | INFO     |   ✓ NVDA: 124 bars
+2025-10-29 13:38:29 | INFO     | SHORT signal (mean reversion): price=154.31, upper_band=151.29, middle=142.61
+2025-10-29 13:38:29 | INFO     | SHORT signal (mean reversion): price=157.99, upper_band=157.47, middle=145.69
+2025-10-29 13:38:29 | INFO     | LONG signal (mean reversion): price=174.18, lower_band=174.20, middle=179.70
+2025-10-29 13:38:29 | INFO     | LONG signal (mean reversion): price=167.02, lower_band=168.00, middle=177.78
+2025-10-29 13:38:29 | INFO     | SHORT signal (mean reversion): price=186.58, upper_band=186.02, middle=175.99
+2025-10-29 13:38:29 | INFO     | SHORT signal (mean reversion): price=201.03, upper_band=196.30, middle=185.87
+2025-10-29 13:38:29 | INFO     | Generated 12 signals for Mean Reversion strategy (including 6 exits)
+2025-10-29 13:38:29 | INFO     |      Generated 12 signals for NVDA
+2025-10-29 13:38:29 | INFO     | 
+Calculating metrics from 64 total signals...
+2025-10-29 13:38:29 | INFO     | 
+2025-10-29 13:38:29 | INFO     | RESULTS:
+2025-10-29 13:38:29 | INFO     |   Total Return: -0.30%
+2025-10-29 13:38:29 | INFO     |   Sharpe Ratio: -0.00
+2025-10-29 13:38:29 | INFO     |   Max Drawdown: 16.27%
+2025-10-29 13:38:29 | INFO     |   Win Rate: 43.3%
+2025-10-29 13:38:29 | INFO     |   Total Trades: 30
+2025-10-29 13:38:29 | INFO     |   Winning: 13 | Losing: 17
+2025-10-29 13:38:29 | INFO     |   Avg Win: 4.29% | Avg Loss: -3.30%
+2025-10-29 13:38:29 | INFO     |   Profit Factor: 0.99
+2025-10-29 13:38:29 | INFO     | 
+2025-10-29 13:38:29 | INFO     | WEEK 2 SUCCESS CRITERIA:
+2025-10-29 13:38:29 | SUCCESS  |   ✓ Win Rate: 43.3% > 40%
+2025-10-29 13:38:29 | WARNING  |   ✗ Sharpe Ratio: -0.00 < 0.5 (FAIL)
+2025-10-29 13:38:29 | SUCCESS  |   ✓ Total Trades: 30 (30-40)
+2025-10-29 13:38:29 | WARNING  |   ✗ Total Return: -0.30% < 0% (FAIL)
+2025-10-29 13:38:29 | WARNING  |   ✗ Max Drawdown: 16.3% > 15% (HIGH)
+2025-10-29 13:38:29 | INFO     | 
+2025-10-29 13:38:29 | INFO     | CRITERIA MET: 2/5 (40%)
+2025-10-29 13:38:29 | INFO     | 
+2025-10-29 13:38:29 | INFO     | ================================================================================
+2025-10-29 13:38:29 | INFO     | WEEK 2 VALIDATION SUMMARY
+2025-10-29 13:38:29 | INFO     | ================================================================================
+2025-10-29 13:38:29 | INFO     | 
+2025-10-29 13:38:29 | INFO     | 
+                Strategy  Return Sharpe Win Rate  Trades Max DD Criteria Pass
+      strategy1_momentum   4.21%   0.02    33.3%      69  39.0%      1/5  20%
+    strategy2_simplified -32.83%  -0.11    28.7%      80  50.7%      0/5   0%
+strategy3_mean_reversion  -0.30%  -0.00    43.3%      30  16.3%      2/5  40%
+2025-10-29 13:38:29 | INFO     | 
+2025-10-29 13:38:29 | INFO     | Results saved to: /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/data/backtest_results/week2_validation_20251029_133829.json
+2025-10-29 13:38:29 | INFO     | 
+2025-10-29 13:38:29 | INFO     | ================================================================================
+2025-10-29 13:38:29 | INFO     | WEEK 3 GO/NO-GO RECOMMENDATION
+2025-10-29 13:38:29 | INFO     | ================================================================================
+2025-10-29 13:38:29 | WARNING  | ✗ NO-GO: Best strategy (strategy3_mean_reversion) only meets 2/5 criteria
+2025-10-29 13:38:29 | WARNING  |   Recommendation: More optimization needed before Week 3

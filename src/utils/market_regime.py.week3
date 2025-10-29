@@ -1,0 +1,342 @@
+"""
+Market Regime Detection Module
+
+Detects market conditions to enable adaptive trading strategies:
+- Trending (Up/Down): Strong directional movement (ADX > 25)
+- Ranging: Sideways market with no clear trend (ADX < 20)
+- Volatile: High volatility market (ATR > 1.5x average)
+"""
+
+import pandas as pd
+import numpy as np
+from typing import Dict, Tuple, Optional
+from enum import Enum
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+class MarketRegime(Enum):
+    """Market regime classifications"""
+    TRENDING_UP = "trending_up"
+    TRENDING_DOWN = "trending_down"
+    RANGING = "ranging"
+    VOLATILE_TRENDING_UP = "volatile_trending_up"
+    VOLATILE_TRENDING_DOWN = "volatile_trending_down"
+    VOLATILE_RANGING = "volatile_ranging"
+    UNKNOWN = "unknown"
+
+
+class MarketRegimeDetector:
+    """
+    Detects market regimes using technical indicators:
+    - ADX (Average Directional Index) for trend strength
+    - ATR (Average True Range) for volatility
+    - Price momentum for trend direction
+    """
+
+    def __init__(
+        self,
+        adx_period: int = 14,
+        atr_period: int = 14,
+        adx_trending_threshold: float = 25.0,
+        adx_ranging_threshold: float = 20.0,
+        atr_volatility_multiplier: float = 1.5
+    ):
+        """
+        Initialize market regime detector
+
+        Args:
+            adx_period: Period for ADX calculation
+            atr_period: Period for ATR calculation
+            adx_trending_threshold: ADX level indicating strong trend
+            adx_ranging_threshold: ADX level indicating ranging market
+            atr_volatility_multiplier: Multiplier for ATR to detect high volatility
+        """
+        self.adx_period = adx_period
+        self.atr_period = atr_period
+        self.adx_trending_threshold = adx_trending_threshold
+        self.adx_ranging_threshold = adx_ranging_threshold
+        self.atr_volatility_multiplier = atr_volatility_multiplier
+
+    def calculate_adx(self, data: pd.DataFrame) -> pd.Series:
+        """
+        Calculate Average Directional Index (ADX)
+
+        Args:
+            data: DataFrame with 'high', 'low', 'close' columns
+
+        Returns:
+            Series with ADX values
+        """
+        # Calculate True Range
+        high_low = data['high'] - data['low']
+        high_close = np.abs(data['high'] - data['close'].shift())
+        low_close = np.abs(data['low'] - data['close'].shift())
+
+        tr = pd.concat([high_low, high_close, low_close], axis=1).max(axis=1)
+        atr = tr.rolling(window=self.adx_period).mean()
+
+        # Calculate Directional Movement
+        up_move = data['high'] - data['high'].shift()
+        down_move = data['low'].shift() - data['low']
+
+        plus_dm = np.where((up_move > down_move) & (up_move > 0), up_move, 0)
+        minus_dm = np.where((down_move > up_move) & (down_move > 0), down_move, 0)
+
+        plus_dm_series = pd.Series(plus_dm, index=data.index)
+        minus_dm_series = pd.Series(minus_dm, index=data.index)
+
+        # Calculate Directional Indicators
+        plus_di = 100 * (plus_dm_series.rolling(window=self.adx_period).mean() / atr)
+        minus_di = 100 * (minus_dm_series.rolling(window=self.adx_period).mean() / atr)
+
+        # Calculate DX and ADX
+        dx = 100 * np.abs(plus_di - minus_di) / (plus_di + minus_di)
+        adx = dx.rolling(window=self.adx_period).mean()
+
+        return adx
+
+    def calculate_atr(self, data: pd.DataFrame) -> pd.Series:
+        """
+        Calculate Average True Range (ATR)
+
+        Args:
+            data: DataFrame with 'high', 'low', 'close' columns
+
+        Returns:
+            Series with ATR values
+        """
+        high_low = data['high'] - data['low']
+        high_close = np.abs(data['high'] - data['close'].shift())
+        low_close = np.abs(data['low'] - data['close'].shift())
+
+        tr = pd.concat([high_low, high_close, low_close], axis=1).max(axis=1)
+        atr = tr.rolling(window=self.atr_period).mean()
+
+        return atr
+
+    def calculate_trend_direction(
+        self,
+        data: pd.DataFrame,
+        lookback: int = 20
+    ) -> pd.Series:
+        """
+        Calculate trend direction using price momentum
+
+        Args:
+            data: DataFrame with 'close' column
+            lookback: Lookback period for momentum
+
+        Returns:
+            Series with +1 (uptrend), -1 (downtrend), 0 (neutral)
+        """
+        momentum = data['close'] - data['close'].shift(lookback)
+
+        # Use SMA to smooth trend detection
+        sma_short = data['close'].rolling(window=10).mean()
+        sma_long = data['close'].rolling(window=50).mean()
+
+        trend = np.where(
+            (momentum > 0) & (sma_short > sma_long), 1,
+            np.where((momentum < 0) & (sma_short < sma_long), -1, 0)
+        )
+
+        return pd.Series(trend, index=data.index)
+
+    def detect_regime(self, data: pd.DataFrame) -> pd.Series:
+        """
+        Detect market regime for each timestamp
+
+        Args:
+            data: DataFrame with OHLC data
+
+        Returns:
+            Series with MarketRegime enum values
+        """
+        # Calculate indicators
+        adx = self.calculate_adx(data)
+        atr = self.calculate_atr(data)
+        trend_direction = self.calculate_trend_direction(data)
+
+        # Calculate average ATR for volatility detection
+        atr_ma = atr.rolling(window=self.atr_period).mean()
+        is_volatile = atr > (atr_ma * self.atr_volatility_multiplier)
+
+        # Determine regime
+        regime = []
+        for i in range(len(data)):
+            adx_val = adx.iloc[i] if not pd.isna(adx.iloc[i]) else 0
+            trend_val = trend_direction.iloc[i] if not pd.isna(trend_direction.iloc[i]) else 0
+            volatile = is_volatile.iloc[i] if not pd.isna(is_volatile.iloc[i]) else False
+
+            # Classify regime
+            if adx_val >= self.adx_trending_threshold:
+                # Strong trend
+                if trend_val > 0:
+                    if volatile:
+                        regime.append(MarketRegime.VOLATILE_TRENDING_UP)
+                    else:
+                        regime.append(MarketRegime.TRENDING_UP)
+                elif trend_val < 0:
+                    if volatile:
+                        regime.append(MarketRegime.VOLATILE_TRENDING_DOWN)
+                    else:
+                        regime.append(MarketRegime.TRENDING_DOWN)
+                else:
+                    regime.append(MarketRegime.UNKNOWN)
+            elif adx_val <= self.adx_ranging_threshold:
+                # Ranging market
+                if volatile:
+                    regime.append(MarketRegime.VOLATILE_RANGING)
+                else:
+                    regime.append(MarketRegime.RANGING)
+            else:
+                # Transition zone
+                regime.append(MarketRegime.UNKNOWN)
+
+        return pd.Series(regime, index=data.index)
+
+    def get_regime_stats(self, regimes: pd.Series) -> Dict[str, float]:
+        """
+        Calculate statistics about regime distribution
+
+        Args:
+            regimes: Series with regime classifications
+
+        Returns:
+            Dictionary with regime percentages
+        """
+        total = len(regimes)
+        stats = {}
+
+        for regime in MarketRegime:
+            count = (regimes == regime).sum()
+            stats[regime.value] = (count / total * 100) if total > 0 else 0
+
+        return stats
+
+    def get_current_regime(self, data: pd.DataFrame) -> Tuple[MarketRegime, Dict[str, float]]:
+        """
+        Get current market regime and supporting indicators
+
+        Args:
+            data: DataFrame with OHLC data
+
+        Returns:
+            Tuple of (current regime, indicator values)
+        """
+        regimes = self.detect_regime(data)
+        current_regime = regimes.iloc[-1]
+        previous_regime = regimes.iloc[-2] if len(regimes) > 1 else None
+
+        # Log regime changes
+        if previous_regime and previous_regime != current_regime:
+            strategy_config = select_strategy_for_regime(current_regime)
+            logger.info(
+                f"🔄 Market regime changed: {get_regime_display_name(previous_regime)} "
+                f"→ {get_regime_display_name(current_regime)} | "
+                f"Strategy: {strategy_config['strategy']} | "
+                f"Enabled: {strategy_config['enabled']}"
+            )
+
+            # Special logging for ranging regime (mean reversion DISABLED - Week 2 failure)
+            if current_regime in [MarketRegime.RANGING, MarketRegime.VOLATILE_RANGING]:
+                logger.info(
+                    f"📊 RANGING MARKET DETECTED - Mean reversion strategy DISABLED (Week 2: 0% win rate, -283% return) | "
+                    f"Strategy: {strategy_config['strategy']} | "
+                    f"Position size: {strategy_config['position_size']*100:.0f}%"
+                )
+
+        # Get current indicator values
+        adx = self.calculate_adx(data)
+        atr = self.calculate_atr(data)
+        trend = self.calculate_trend_direction(data)
+
+        indicators = {
+            'adx': float(adx.iloc[-1]) if not pd.isna(adx.iloc[-1]) else 0.0,
+            'atr': float(atr.iloc[-1]) if not pd.isna(atr.iloc[-1]) else 0.0,
+            'trend': float(trend.iloc[-1]) if not pd.isna(trend.iloc[-1]) else 0.0,
+            'close': float(data['close'].iloc[-1])
+        }
+
+        return current_regime, indicators
+
+
+def select_strategy_for_regime(regime: MarketRegime) -> Dict[str, any]:
+    """
+    Select trading strategy and parameters based on market regime
+
+    Args:
+        regime: Current market regime
+
+    Returns:
+        Dictionary with strategy configuration
+    """
+    strategy_config = {
+        MarketRegime.TRENDING_UP: {
+            'strategy': 'momentum',
+            'direction': 'long_only',
+            'stop_loss': 0.02,  # 2% stop loss
+            'position_size': 1.0,  # Normal size
+            'enabled': True
+        },
+        MarketRegime.TRENDING_DOWN: {
+            'strategy': 'momentum',
+            'direction': 'short_only',
+            'stop_loss': 0.02,
+            'position_size': 1.0,
+            'enabled': True
+        },
+        MarketRegime.RANGING: {
+            'strategy': 'hold',  # DISABLED: Week 2 backtest showed 0% win rate (0/63 trades), -283% annual return
+            'direction': 'neutral',
+            'stop_loss': 0.03,
+            'position_size': 0.0,  # No position - mean reversion disabled
+            'enabled': False  # DISABLED: Strategy enters at BB extremes but market continues trending
+        },
+        MarketRegime.VOLATILE_TRENDING_UP: {
+            'strategy': 'momentum',
+            'direction': 'long_only',
+            'stop_loss': 0.05,  # Wider 5% stop loss
+            'position_size': 0.5,  # Half position size
+            'enabled': True
+        },
+        MarketRegime.VOLATILE_TRENDING_DOWN: {
+            'strategy': 'momentum',
+            'direction': 'short_only',
+            'stop_loss': 0.05,
+            'position_size': 0.5,
+            'enabled': True
+        },
+        MarketRegime.VOLATILE_RANGING: {
+            'strategy': 'hold',
+            'direction': 'neutral',
+            'stop_loss': 0.05,
+            'position_size': 0.0,  # No trading in volatile ranging markets
+            'enabled': False
+        },
+        MarketRegime.UNKNOWN: {
+            'strategy': 'hold',
+            'direction': 'neutral',
+            'stop_loss': 0.03,
+            'position_size': 0.0,  # No trading when regime is unclear
+            'enabled': False
+        }
+    }
+
+    return strategy_config.get(regime, strategy_config[MarketRegime.UNKNOWN])
+
+
+def get_regime_display_name(regime: MarketRegime) -> str:
+    """Get human-readable display name for regime"""
+    display_names = {
+        MarketRegime.TRENDING_UP: "📈 Trending Up",
+        MarketRegime.TRENDING_DOWN: "📉 Trending Down",
+        MarketRegime.RANGING: "↔️  Ranging",
+        MarketRegime.VOLATILE_TRENDING_UP: "⚡📈 Volatile Trending Up",
+        MarketRegime.VOLATILE_TRENDING_DOWN: "⚡📉 Volatile Trending Down",
+        MarketRegime.VOLATILE_RANGING: "⚡↔️  Volatile Ranging",
+        MarketRegime.UNKNOWN: "❓ Unknown"
+    }
+    return display_names.get(regime, "Unknown")

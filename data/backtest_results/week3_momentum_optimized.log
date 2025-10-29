@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/scripts/run_optimized_backtest.py", line 29, in <module>
+    from src.data.data_handler import DataHandler
+ModuleNotFoundError: No module named 'src.data.data_handler'

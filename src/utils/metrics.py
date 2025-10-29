@@ -4,7 +4,18 @@ Performance metrics calculation utilities.
 
 from typing import Dict
 import pandas as pd
-from tabulate import tabulate
+
+# Temporary workaround: tabulate installation failing
+try:
+    from tabulate import tabulate
+except ImportError:
+    # Fallback: Simple table formatting without tabulate
+    def tabulate(data, tablefmt='grid'):
+        """Simple fallback table formatter"""
+        lines = []
+        for row in data:
+            lines.append(f"{row[0]:<30} | {row[1]:>15}")
+        return '\n'.join(lines)
 
 
 def calculate_metrics(results: Dict) -> Dict:

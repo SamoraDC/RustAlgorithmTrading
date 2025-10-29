@@ -1,0 +1,42 @@
+17:07:41 | INFO     | ================================================================================
+17:07:41 | INFO     | WEEK 3.5 VALIDATION BACKTEST
+17:07:41 | INFO     | Emergency validation after mean reversion re-enabled
+17:07:41 | INFO     | ================================================================================
+17:07:41 | INFO     | Testing period: 2025-05-02 to 2025-10-29
+17:07:41 | INFO     | Symbols: AAPL, MSFT, GOOGL, AMZN, NVDA
+17:07:41 | INFO     | Initial capital: $100,000.00
+17:07:41 | INFO     | 
+17:07:41 | INFO     | Alpaca client initialized successfully (paper=True)
+17:07:41 | INFO     | Initializing Week 3.5 Momentum Strategy...
+17:07:41 | INFO     | Strategy 'MomentumStrategy' initialized with parameters: {'rsi_period': 14, 'rsi_oversold': 30, 'rsi_overbought': 70, 'ema_fast': 12, 'ema_slow': 26, 'macd_signal': 9, 'position_size': 0.15, 'stop_loss_pct': 0.02, 'take_profit_pct': 0.03, 'macd_histogram_threshold': 0.0005, 'volume_confirmation': True, 'volume_ma_period': 20, 'volume_multiplier': 1.05, 'use_trailing_stop': True, 'trailing_stop_pct': 0.015, 'use_atr_sizing': False, 'atr_period': 14, 'atr_multiplier': 1.5, 'use_adx_filter': True, 'adx_period': 14, 'adx_threshold': 25.0}
+17:07:41 | INFO     | ✅ ADX trending filter ENABLED: threshold=25.0
+17:07:41 | INFO     | Strategy parameters:
+17:07:41 | INFO     |   rsi_period: 14
+17:07:41 | INFO     |   rsi_oversold: 30
+17:07:41 | INFO     |   rsi_overbought: 70
+17:07:41 | INFO     |   ema_fast: 12
+17:07:41 | INFO     |   ema_slow: 26
+17:07:41 | INFO     |   macd_signal: 9
+17:07:41 | INFO     |   position_size: 0.15
+17:07:41 | INFO     |   stop_loss_pct: 0.02
+17:07:41 | INFO     |   take_profit_pct: 0.03
+17:07:41 | INFO     |   macd_histogram_threshold: 0.0005
+17:07:41 | INFO     |   volume_confirmation: True
+17:07:41 | INFO     |   volume_ma_period: 20
+17:07:41 | INFO     |   volume_multiplier: 1.05
+17:07:41 | INFO     |   use_trailing_stop: True
+17:07:41 | INFO     |   trailing_stop_pct: 0.015
+17:07:41 | INFO     |   use_atr_sizing: False
+17:07:41 | INFO     |   atr_period: 14
+17:07:41 | INFO     |   atr_multiplier: 1.5
+17:07:41 | INFO     |   use_adx_filter: True
+17:07:41 | INFO     |   adx_period: 14
+17:07:41 | INFO     |   adx_threshold: 25.0
+17:07:41 | INFO     | 
+17:07:41 | INFO     | WEEK 3.5 CONFIGURATION VERIFICATION:
+17:07:41 | INFO     |   Mean Reversion Enabled: False
+17:07:41 | INFO     |   RSI Lower Bound: N/A
+17:07:41 | INFO     |   RSI Upper Bound: N/A
+17:07:41 | INFO     |   Short Signals Enabled: False
+17:07:41 | INFO     | 
+17:07:41 | INFO     | Generating signals...

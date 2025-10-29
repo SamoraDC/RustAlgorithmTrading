@@ -1,0 +1,47 @@
+2025-10-29 10:25:30.303 | INFO     | __main__:run_strategy2_test:28 - ================================================================================
+2025-10-29 10:25:30.303 | INFO     | __main__:run_strategy2_test:29 - STRATEGY 2 TEST: Simplified Momentum (No SMA, No Volume)
+2025-10-29 10:25:30.303 | INFO     | __main__:run_strategy2_test:30 - ================================================================================
+2025-10-29 10:25:30.320 | INFO     | src.api.alpaca_client:__init__:64 - Alpaca client initialized successfully (paper=True)
+2025-10-29 10:25:30.320 | INFO     | src.strategies.base:__init__:69 - Strategy 'SimplifiedMomentumStrategy' initialized with parameters: {'rsi_period': 14, 'ema_fast': 12, 'ema_slow': 26, 'macd_signal': 9, 'macd_histogram_threshold': 0.0005, 'position_size': 0.15, 'stop_loss_pct': 0.02, 'take_profit_pct': 0.03, 'min_holding_period': 10, 'use_trailing_stop': True, 'trailing_stop_pct': 0.015}
+2025-10-29 10:25:30.320 | INFO     | __main__:run_strategy2_test:50 - Strategy: SimplifiedMomentumStrategy
+2025-10-29 10:25:30.320 | INFO     | __main__:run_strategy2_test:51 - Parameters: {'rsi_period': 14, 'ema_fast': 12, 'ema_slow': 26, 'macd_signal': 9, 'macd_histogram_threshold': 0.0005, 'position_size': 0.15, 'stop_loss_pct': 0.02, 'take_profit_pct': 0.03, 'min_holding_period': 10, 'use_trailing_stop': True, 'trailing_stop_pct': 0.015}
+2025-10-29 10:25:30.320 | INFO     | __main__:run_strategy2_test:59 - 
+Backtest Period: 2025-05-02 to 2025-10-29
+2025-10-29 10:25:30.320 | INFO     | __main__:run_strategy2_test:60 - Symbols: ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'NVDA']
+2025-10-29 10:25:30.320 | INFO     | __main__:run_strategy2_test:61 - Initial Capital: $100,000.00
+2025-10-29 10:25:30.320 | INFO     | __main__:run_strategy2_test:64 - 
+Loading market data...
+2025-10-29 10:25:30.872 | INFO     | src.api.alpaca_client:get_historical_bars:144 - Fetched 123 bars for AAPL
+2025-10-29 10:25:30.873 | INFO     | __main__:run_strategy2_test:75 -   AAPL: 123 bars loaded
+2025-10-29 10:25:31.018 | INFO     | src.api.alpaca_client:get_historical_bars:144 - Fetched 123 bars for MSFT
+2025-10-29 10:25:31.018 | INFO     | __main__:run_strategy2_test:75 -   MSFT: 123 bars loaded
+2025-10-29 10:25:31.163 | INFO     | src.api.alpaca_client:get_historical_bars:144 - Fetched 123 bars for GOOGL
+2025-10-29 10:25:31.163 | INFO     | __main__:run_strategy2_test:75 -   GOOGL: 123 bars loaded
+2025-10-29 10:25:31.308 | INFO     | src.api.alpaca_client:get_historical_bars:144 - Fetched 123 bars for AMZN
+2025-10-29 10:25:31.309 | INFO     | __main__:run_strategy2_test:75 -   AMZN: 123 bars loaded
+2025-10-29 10:25:31.462 | INFO     | src.api.alpaca_client:get_historical_bars:144 - Fetched 123 bars for NVDA
+2025-10-29 10:25:31.463 | INFO     | __main__:run_strategy2_test:75 -   NVDA: 123 bars loaded
+2025-10-29 10:25:31.463 | INFO     | __main__:run_strategy2_test:86 - 
+Running backtest...
+Traceback (most recent call last):
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py", line 56, in __init__
+    self.data_dir = Path(data_dir)
+                    ^^^^^^^^^^^^^^
+  File "/home/samoradc/.local/share/uv/python/cpython-3.12.11-linux-x86_64-gnu/lib/python3.12/pathlib.py", line 1162, in __init__
+    super().__init__(*args)
+  File "/home/samoradc/.local/share/uv/python/cpython-3.12.11-linux-x86_64-gnu/lib/python3.12/pathlib.py", line 373, in __init__
+    raise TypeError(
+TypeError: argument should be a str or an os.PathLike object where __fspath__ returns a str, not 'dict'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/scripts/test_strategy2.py", line 225, in <module>
+    results = run_strategy2_test()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/scripts/test_strategy2.py", line 89, in run_strategy2_test
+    data_handler = HistoricalDataHandler(symbols, market_data)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py", line 58, in __init__
+    raise TypeError(f"data_dir must be a valid path: {e}")
+TypeError: data_dir must be a valid path: argument should be a str or an os.PathLike object where __fspath__ returns a str, not 'dict'

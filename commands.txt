@@ -1,0 +1,5 @@
+./scripts/autonomous_trading_system.sh --mode=full
+
+./scripts/autonomous_trading_system.sh --mode=backtest-only
+
+cat data/backtest_results/backtest_*.json | tail -50 
