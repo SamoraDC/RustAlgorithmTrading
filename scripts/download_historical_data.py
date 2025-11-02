@@ -15,6 +15,8 @@ import sys
 import json
 import logging
 import argparse
+import random
+import time
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import List, Optional, Dict, Any
@@ -60,6 +62,8 @@ class DownloadConfig:
     chunk_size: int = 1000
     retry_attempts: int = 3
     retry_delay: int = 5
+    max_retry_delay: int = 60  # Maximum delay cap for exponential backoff
+    inter_symbol_delay: float = 1.0  # Delay between symbol downloads to prevent rate limiting
     feed: str = "iex"  # Data feed: 'iex' (free), 'sip' (requires subscription), or 'otc'
     adjustment: str = "all"  # Price adjustments: 'raw', 'split', 'dividend', or 'all'
 
@@ -123,9 +127,15 @@ class AlpacaDataDownloader:
             'successful_downloads': 0,
             'failed_downloads': 0,
             'total_rows': 0,
+            'rate_limit_hits': 0,
+            'total_retries': 0,
             'start_time': None,
             'end_time': None
         }
+
+        # Rate limit tracking
+        self.consecutive_no_data = 0  # Track consecutive "No data" responses
+        self.last_rate_limit_info = {}  # Store rate limit headers
 
         logger.info(f"Initialized AlpacaDataDownloader for {len(config.symbols)} symbols")
 
@@ -203,6 +213,118 @@ class AlpacaDataDownloader:
         logger.info(f"Validated {len(df)} rows for {symbol}")
         return True
 
+    def _is_rate_limited(self, error: Exception, response=None) -> bool:
+        """
+        Detect if an error or response indicates rate limiting
+
+        Args:
+            error: Exception that occurred
+            response: Optional response object with headers
+
+        Returns:
+            True if rate limited, False otherwise
+        """
+        error_str = str(error).lower()
+
+        # Check for HTTP 429 status code
+        if "429" in error_str:
+            logger.warning("Rate limit detected: HTTP 429 Too Many Requests")
+            self.stats['rate_limit_hits'] += 1
+            return True
+
+        # Check for rate limit keywords in error message
+        rate_limit_keywords = [
+            "rate limit",
+            "too many requests",
+            "quota exceeded",
+            "throttle",
+            "slow down"
+        ]
+
+        if any(keyword in error_str for keyword in rate_limit_keywords):
+            logger.warning(f"Rate limit detected in error message: {error_str}")
+            self.stats['rate_limit_hits'] += 1
+            return True
+
+        # Check response headers if available
+        if response and hasattr(response, 'headers'):
+            self._check_rate_limit_headers(response.headers)
+
+        return False
+
+    def _check_rate_limit_headers(self, headers: Dict[str, str]) -> None:
+        """
+        Check and log rate limit information from response headers
+
+        Args:
+            headers: Response headers dictionary
+        """
+        rate_limit_headers = {
+            'X-RateLimit-Limit': 'total_limit',
+            'X-RateLimit-Remaining': 'remaining',
+            'X-RateLimit-Reset': 'reset_time',
+            'Retry-After': 'retry_after'
+        }
+
+        rate_info = {}
+        for header, key in rate_limit_headers.items():
+            if header in headers:
+                rate_info[key] = headers[header]
+
+        if rate_info:
+            self.last_rate_limit_info = rate_info
+            logger.info(f"Rate limit info: {rate_info}")
+
+            # Warn if getting close to limit
+            if 'remaining' in rate_info and 'total_limit' in rate_info:
+                remaining = int(rate_info['remaining'])
+                total = int(rate_info['total_limit'])
+                percentage = (remaining / total) * 100 if total > 0 else 0
+
+                if percentage < 20:
+                    logger.warning(f"Rate limit warning: Only {remaining}/{total} ({percentage:.1f}%) requests remaining")
+
+            # Log reset time if available
+            if 'reset_time' in rate_info:
+                reset_timestamp = int(rate_info['reset_time'])
+                reset_time = datetime.fromtimestamp(reset_timestamp)
+                logger.info(f"Rate limit resets at: {reset_time}")
+
+    def _calculate_backoff_delay(self, attempt: int, is_rate_limited: bool = False) -> float:
+        """
+        Calculate delay with exponential backoff, jitter, and maximum cap
+
+        Args:
+            attempt: Current attempt number (0-indexed)
+            is_rate_limited: Whether this is due to rate limiting
+
+        Returns:
+            Delay in seconds
+        """
+        # Base exponential backoff
+        base_delay = self.config.retry_delay * (2 ** attempt)
+
+        # Apply maximum delay cap
+        capped_delay = min(base_delay, self.config.max_retry_delay)
+
+        # Add jitter (random +/- 20%) to prevent thundering herd
+        jitter_range = capped_delay * 0.2
+        jitter = random.uniform(-jitter_range, jitter_range)
+        final_delay = max(1.0, capped_delay + jitter)  # Never less than 1 second
+
+        # If rate limited, use a longer delay
+        if is_rate_limited:
+            # Check for Retry-After header
+            if 'retry_after' in self.last_rate_limit_info:
+                retry_after = int(self.last_rate_limit_info['retry_after'])
+                final_delay = max(final_delay, retry_after)
+                logger.info(f"Using Retry-After header value: {retry_after} seconds")
+            else:
+                # Use at least 60 seconds for rate limit errors
+                final_delay = max(final_delay, 60.0)
+
+        return final_delay
+
     def _fetch_data_with_retry(self, symbol: str) -> Optional[pd.DataFrame]:
         """
         Fetch data with automatic retry logic
@@ -247,19 +369,32 @@ class AlpacaDataDownloader:
                 logger.debug(f"API Response data: {bars}")
 
                 if not bars:
-                    logger.error(f"No response from API for {symbol}")
+                    self.consecutive_no_data += 1
+                    logger.error(f"No response from API for {symbol} (consecutive no-data count: {self.consecutive_no_data})")
                     logger.error(f"This may indicate: 1) Invalid date range, 2) No trading data for period, "
-                               f"3) Data feed '{self.config.feed}' not available for paper trading account")
+                               f"3) Data feed '{self.config.feed}' not available for paper trading account, "
+                               f"4) Potential rate limiting (check if many consecutive failures)")
+
+                    # Warn if many consecutive no-data responses (possible rate limiting)
+                    if self.consecutive_no_data >= 3:
+                        logger.warning(f"Detected {self.consecutive_no_data} consecutive 'No data' responses - "
+                                     f"this may indicate rate limiting. Adding extra delay...")
+                        time.sleep(10)  # Add extra delay
+
                     return None
 
-                if symbol not in bars:
-                    logger.error(f"Symbol {symbol} not in API response")
-                    logger.error(f"Available symbols in response: {list(bars.keys()) if hasattr(bars, 'keys') else 'N/A'}")
-                    logger.error(f"Try different date range or verify symbol is valid")
-                    return None
+                # Reset consecutive no-data counter on successful response
+                self.consecutive_no_data = 0
 
-                # Convert to DataFrame
+                # Convert to DataFrame first
                 df = bars.df
+
+                # CRITICAL FIX: Check if DataFrame is empty, not if symbol is in bars object
+                if df is None or df.empty:
+                    logger.error(f"No data in DataFrame for {symbol}")
+                    logger.error(f"DataFrame is {'None' if df is None else 'empty'}")
+                    logger.error(f"Possible causes: 1) No trading data for date range 2) Weekend/holiday 3) Invalid date range")
+                    return None
 
                 # Reset index to get timestamp as column
                 if isinstance(df.index, pd.MultiIndex):
@@ -308,23 +443,28 @@ class AlpacaDataDownloader:
 
             except Exception as e:
                 import traceback
-                logger.error(f"Error fetching data for {symbol} (attempt {attempt + 1}): {str(e)}")
+                logger.error(f"Error fetching data for {symbol} (attempt {attempt + 1}/{self.config.retry_attempts}): {str(e)}")
                 logger.debug(f"Full traceback: {traceback.format_exc()}")
+
+                self.stats['total_retries'] += 1
+
+                # Detect rate limiting
+                is_rate_limited = self._is_rate_limited(e)
 
                 # Provide helpful error context
                 if "403" in str(e) or "unauthorized" in str(e).lower():
                     logger.error(f"Authorization error - check API credentials")
                 elif "404" in str(e):
                     logger.error(f"Symbol {symbol} not found - verify it's a valid ticker")
-                elif "rate limit" in str(e).lower():
-                    logger.error(f"Rate limit exceeded - consider increasing retry delay")
+                elif is_rate_limited:
+                    logger.error(f"Rate limit exceeded - using extended backoff delay")
                 elif "feed" in str(e).lower():
                     logger.error(f"Data feed error - try changing feed parameter from '{self.config.feed}' to 'sip' or 'iex'")
 
                 if attempt < self.config.retry_attempts - 1:
-                    import time
-                    delay = self.config.retry_delay * (2 ** attempt)  # Exponential backoff
-                    logger.info(f"Retrying in {delay} seconds...")
+                    # Calculate delay with exponential backoff, jitter, and cap
+                    delay = self._calculate_backoff_delay(attempt, is_rate_limited)
+                    logger.info(f"Retrying in {delay:.2f} seconds (attempt {attempt + 1}/{self.config.retry_attempts})...")
                     time.sleep(delay)
                 else:
                     logger.error(f"Failed to fetch data for {symbol} after {self.config.retry_attempts} attempts")
@@ -333,6 +473,7 @@ class AlpacaDataDownloader:
                     logger.error(f"  2. Try feed='sip' instead of '{self.config.feed}'")
                     logger.error(f"  3. Check if paper trading account has data access")
                     logger.error(f"  4. Use recent dates (last 5 years for free data)")
+                    logger.error(f"  5. If seeing many failures, try increasing --inter-symbol-delay")
                     return None
 
         return None
@@ -441,12 +582,18 @@ class AlpacaDataDownloader:
         """
         self.stats['start_time'] = datetime.now()
         logger.info(f"Starting bulk download for {len(self.config.symbols)} symbols")
+        logger.info(f"Using inter-symbol delay of {self.config.inter_symbol_delay} seconds to prevent rate limiting")
 
         # Download with progress bar
         with tqdm(total=len(self.config.symbols), desc="Downloading symbols") as pbar:
-            for symbol in self.config.symbols:
+            for i, symbol in enumerate(self.config.symbols):
                 self.download_symbol(symbol)
                 pbar.update(1)
+
+                # Add delay between symbols to prevent rate limiting
+                # Skip delay after the last symbol
+                if i < len(self.config.symbols) - 1 and self.config.inter_symbol_delay > 0:
+                    time.sleep(self.config.inter_symbol_delay)
 
         self.stats['end_time'] = datetime.now()
         duration = (self.stats['end_time'] - self.stats['start_time']).total_seconds()
@@ -460,8 +607,12 @@ class AlpacaDataDownloader:
         logger.info(f"Successful downloads: {self.stats['successful_downloads']}")
         logger.info(f"Failed downloads: {self.stats['failed_downloads']}")
         logger.info(f"Total rows downloaded: {self.stats['total_rows']}")
+        logger.info(f"Rate limit hits: {self.stats['rate_limit_hits']}")
+        logger.info(f"Total retries: {self.stats['total_retries']}")
         logger.info(f"Duration: {duration:.2f} seconds")
         logger.info(f"Average time per symbol: {duration / len(self.config.symbols):.2f} seconds")
+        if self.last_rate_limit_info:
+            logger.info(f"Last rate limit info: {self.last_rate_limit_info}")
         logger.info("=" * 80)
 
         # Save statistics
@@ -575,6 +726,20 @@ Examples:
     )
 
     parser.add_argument(
+        '--max-retry-delay',
+        type=int,
+        default=60,
+        help='Maximum retry delay cap in seconds (default: 60)'
+    )
+
+    parser.add_argument(
+        '--inter-symbol-delay',
+        type=float,
+        default=1.0,
+        help='Delay between symbol downloads in seconds to prevent rate limiting (default: 1.0)'
+    )
+
+    parser.add_argument(
         '--feed',
         default='iex',
         choices=['iex', 'sip', 'otc'],
@@ -623,9 +788,34 @@ def main():
                 sys.exit(1)
 
             if not args.end_date:
-                # Default to today
-                args.end_date = datetime.now().strftime('%Y-%m-%d')
-                logger.info(f"No end date specified, using today: {args.end_date}")
+                # CRITICAL FIX: Default to YESTERDAY to ensure complete market data
+                # Market data for "today" may not be available until after close
+                yesterday = (datetime.now() - timedelta(days=1)).date()
+                args.end_date = yesterday.strftime('%Y-%m-%d')
+                logger.info(f"No end date specified, using yesterday: {args.end_date}")
+
+            # CRITICAL FIX: Validate and cap end_date to prevent future dates
+            end_date_parsed = datetime.strptime(args.end_date, '%Y-%m-%d').date()
+            today = datetime.now().date()
+
+            if end_date_parsed > today:
+                logger.warning(f"CRITICAL: End date {end_date_parsed} is in the future!")
+                logger.warning(f"Today is {today}, capping end_date to yesterday")
+                # Use yesterday to ensure complete market data
+                yesterday = today - timedelta(days=1)
+                args.end_date = yesterday.strftime('%Y-%m-%d')
+                logger.info(f"Adjusted end_date to: {args.end_date}")
+            elif end_date_parsed == today:
+                # Even if end_date is today, use yesterday for complete data
+                logger.info(f"End date is today ({today}), adjusting to yesterday for complete data")
+                yesterday = today - timedelta(days=1)
+                args.end_date = yesterday.strftime('%Y-%m-%d')
+
+            # Validate start_date < end_date
+            start_date_parsed = datetime.strptime(args.start_date, '%Y-%m-%d').date()
+            if start_date_parsed >= end_date_parsed:
+                logger.error(f"CRITICAL: Start date {start_date_parsed} must be before end date {end_date_parsed}")
+                sys.exit(1)
 
             # Create config from arguments
             config = DownloadConfig(
@@ -638,6 +828,8 @@ def main():
                 save_parquet=not args.no_parquet,
                 retry_attempts=args.retry_attempts,
                 retry_delay=args.retry_delay,
+                max_retry_delay=args.max_retry_delay if hasattr(args, 'max_retry_delay') else 60,
+                inter_symbol_delay=args.inter_symbol_delay if hasattr(args, 'inter_symbol_delay') else 1.0,
                 feed=args.feed if hasattr(args, 'feed') else 'iex',
                 adjustment=args.adjustment if hasattr(args, 'adjustment') else 'all'
             )

@@ -283,11 +283,21 @@ class SimplifiedMomentumStrategy(Strategy):
                 if long_conditions_met >= 2:
                     signal_type = SignalType.LONG
                     logger.info(
-                        f"SIMPLIFIED LONG ({long_conditions_met}/3): "
+                        f"[{symbol}] LONG SIGNAL ({long_conditions_met}/3): "
+                        f"Price=${current_price:.2f}, "
                         f"RSI={current['rsi']:.1f} {'✓' if rsi_long_cond else '✗'}, "
                         f"MACD {'✓' if macd_long_cond else '✗'}, "
                         f"Hist={'✓' if hist_long_cond else '✗'} ({current['macd_histogram']:.5f})"
                     )
+                else:
+                    # Debug: Log when close but not enough conditions
+                    if long_conditions_met == 1:
+                        logger.debug(
+                            f"[{symbol}] Near LONG ({long_conditions_met}/3): "
+                            f"RSI={current['rsi']:.1f} {'✓' if rsi_long_cond else '✗'}, "
+                            f"MACD {'✓' if macd_long_cond else '✗'}, "
+                            f"Hist={'✓' if hist_long_cond else '✗'}"
+                        )
 
                 # ============================================================
                 # WEEK 3 FIX: SHORT SIGNALS DISABLED

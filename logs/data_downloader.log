@@ -360,3 +360,47 @@ BrokenPipeError: [Errno 32] Broken pipe
 2025-10-22 17:22:14,719 - download_historical_data - ERROR - Symbol AAPL not in API response
 2025-10-22 17:22:14,720 - download_historical_data - ERROR - Available symbols in response: N/A
 2025-10-22 17:22:14,721 - download_historical_data - ERROR - Try different date range or verify symbol is valid
+2025-11-02 18:00:05,635 - __main__ - INFO - Initialized AlpacaDataDownloader for 1 symbols
+2025-11-02 18:00:05,637 - __main__ - INFO - Starting bulk download for 1 symbols
+2025-11-02 18:00:05,638 - __main__ - INFO - Using inter-symbol delay of 1.0 seconds to prevent rate limiting
+2025-11-02 18:00:05,653 - __main__ - INFO - Starting download for AAPL
+2025-11-02 18:00:05,656 - __main__ - INFO - Fetching data for AAPL (attempt 1/3)
+2025-11-02 18:00:06,662 - __main__ - ERROR - Symbol AAPL not in API response
+2025-11-02 18:00:06,692 - __main__ - ERROR - Available symbols in response: N/A
+2025-11-02 18:00:06,697 - __main__ - ERROR - Try different date range or verify symbol is valid
+2025-11-02 18:00:06,702 - __main__ - INFO - ================================================================================
+2025-11-02 18:00:06,705 - __main__ - INFO - DOWNLOAD SUMMARY
+2025-11-02 18:00:06,706 - __main__ - INFO - ================================================================================
+2025-11-02 18:00:06,707 - __main__ - INFO - Total symbols: 1
+2025-11-02 18:00:06,709 - __main__ - INFO - Successful downloads: 0
+2025-11-02 18:00:06,710 - __main__ - INFO - Failed downloads: 1
+2025-11-02 18:00:06,711 - __main__ - INFO - Total rows downloaded: 0
+2025-11-02 18:00:06,711 - __main__ - INFO - Rate limit hits: 0
+2025-11-02 18:00:06,714 - __main__ - INFO - Total retries: 0
+2025-11-02 18:00:06,716 - __main__ - INFO - Duration: 1.07 seconds
+2025-11-02 18:00:06,719 - __main__ - INFO - Average time per symbol: 1.07 seconds
+2025-11-02 18:00:06,722 - __main__ - INFO - ================================================================================
+2025-11-02 18:00:06,737 - __main__ - INFO - Saved statistics to data/download_stats_20251102_180006.json
+2025-11-02 18:00:06,738 - __main__ - WARNING - Completed with 1 failures
+2025-11-02 18:00:49,300 - __main__ - INFO - Initialized AlpacaDataDownloader for 1 symbols
+2025-11-02 18:00:49,301 - __main__ - INFO - Starting bulk download for 1 symbols
+2025-11-02 18:00:49,303 - __main__ - INFO - Using inter-symbol delay of 1.0 seconds to prevent rate limiting
+2025-11-02 18:00:49,313 - __main__ - INFO - Starting download for AAPL
+2025-11-02 18:00:49,316 - __main__ - INFO - Fetching data for AAPL (attempt 1/3)
+2025-11-02 18:00:50,061 - __main__ - ERROR - Symbol AAPL not in API response
+2025-11-02 18:00:50,062 - __main__ - ERROR - Available symbols in response: N/A
+2025-11-02 18:00:50,063 - __main__ - ERROR - Try different date range or verify symbol is valid
+2025-11-02 18:00:50,064 - __main__ - INFO - ================================================================================
+2025-11-02 18:00:50,065 - __main__ - INFO - DOWNLOAD SUMMARY
+2025-11-02 18:00:50,066 - __main__ - INFO - ================================================================================
+2025-11-02 18:00:50,067 - __main__ - INFO - Total symbols: 1
+2025-11-02 18:00:50,068 - __main__ - INFO - Successful downloads: 0
+2025-11-02 18:00:50,069 - __main__ - INFO - Failed downloads: 1
+2025-11-02 18:00:50,070 - __main__ - INFO - Total rows downloaded: 0
+2025-11-02 18:00:50,071 - __main__ - INFO - Rate limit hits: 0
+2025-11-02 18:00:50,072 - __main__ - INFO - Total retries: 0
+2025-11-02 18:00:50,073 - __main__ - INFO - Duration: 0.76 seconds
+2025-11-02 18:00:50,074 - __main__ - INFO - Average time per symbol: 0.76 seconds
+2025-11-02 18:00:50,075 - __main__ - INFO - ================================================================================
+2025-11-02 18:00:50,087 - __main__ - INFO - Saved statistics to data/download_stats_20251102_180050.json
+2025-11-02 18:00:50,088 - __main__ - WARNING - Completed with 1 failures

@@ -1,0 +1,50 @@
+{
+  "strategy": "StrategyRouter (Multi-Strategy)",
+  "timestamp": "2025-11-02T18:42:45.394537",
+  "symbols": [
+    "AAPL",
+    "MSFT",
+    "GOOGL"
+  ],
+  "period": {
+    "start": "2024-11-01T04:00:00+00:00",
+    "end": "2025-10-30T04:00:00+00:00"
+  },
+  "initial_capital": 100000.0,
+  "metrics": {
+    "timestamp": "2025-11-02T21:42:45.375873",
+    "metadata": "{}",
+    "total_return": 0.0,
+    "sharpe_ratio": 0.0,
+    "sortino_ratio": 0.0,
+    "max_drawdown": 0.0,
+    "max_drawdown_duration": 0,
+    "win_rate": 0.0,
+    "profit_factor": 0.0,
+    "total_trades": 0,
+    "winning_trades": 0,
+    "losing_trades": 0,
+    "average_win": 0.0,
+    "average_loss": 0.0,
+    "largest_win": 0.0,
+    "largest_loss": 0.0,
+    "volatility": 0.0,
+    "calmar_ratio": 0.0,
+    "average_trade": 0.0
+  },
+  "routing_summary": {
+    "total_symbols": 0,
+    "strategy_usage": {
+      "momentum": 0,
+      "mean_reversion": 0,
+      "trend_following": 0
+    },
+    "regime_distribution": {
+      "trending": 0,
+      "ranging": 0,
+      "volatile": 0,
+      "unknown": 0
+    },
+    "avg_confidence": 0.0
+  }
+}

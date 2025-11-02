@@ -1,0 +1,74 @@
+{
+  "timestamp": "20251102_191349",
+  "summary": {
+    "successful": 0,
+    "no_signals": 0,
+    "errors": 9,
+    "total": 9
+  },
+  "results": [
+    {
+      "strategy": "SimplifiedMomentum",
+      "symbol": "AAPL",
+      "status": "ERROR",
+      "error": "Missing required columns for AAPL: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']",
+      "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/scripts/test_strategies_individually.py\", line 143, in test_strategy\n    data_handler = HistoricalDataHandler(\n                   ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 95, in __init__\n    self._load_data()\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 249, in _load_data\n    raise ValueError(\nValueError: Missing required columns for AAPL: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']\n"
+    },
+    {
+      "strategy": "TrendFollowing",
+      "symbol": "AAPL",
+      "status": "ERROR",
+      "error": "Missing required columns for AAPL: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']",
+      "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/scripts/test_strategies_individually.py\", line 143, in test_strategy\n    data_handler = HistoricalDataHandler(\n                   ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 95, in __init__\n    self._load_data()\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 249, in _load_data\n    raise ValueError(\nValueError: Missing required columns for AAPL: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']\n"
+    },
+    {
+      "strategy": "MeanReversion",
+      "symbol": "AAPL",
+      "status": "ERROR",
+      "error": "Missing required columns for AAPL: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']",
+      "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/scripts/test_strategies_individually.py\", line 143, in test_strategy\n    data_handler = HistoricalDataHandler(\n                   ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 95, in __init__\n    self._load_data()\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 249, in _load_data\n    raise ValueError(\nValueError: Missing required columns for AAPL: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']\n"
+    },
+    {
+      "strategy": "SimplifiedMomentum",
+      "symbol": "MSFT",
+      "status": "ERROR",
+      "error": "Missing required columns for MSFT: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']",
+      "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/scripts/test_strategies_individually.py\", line 143, in test_strategy\n    data_handler = HistoricalDataHandler(\n                   ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 95, in __init__\n    self._load_data()\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 249, in _load_data\n    raise ValueError(\nValueError: Missing required columns for MSFT: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']\n"
+    },
+    {
+      "strategy": "TrendFollowing",
+      "symbol": "MSFT",
+      "status": "ERROR",
+      "error": "Missing required columns for MSFT: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']",
+      "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/scripts/test_strategies_individually.py\", line 143, in test_strategy\n    data_handler = HistoricalDataHandler(\n                   ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 95, in __init__\n    self._load_data()\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 249, in _load_data\n    raise ValueError(\nValueError: Missing required columns for MSFT: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']\n"
+    },
+    {
+      "strategy": "MeanReversion",
+      "symbol": "MSFT",
+      "status": "ERROR",
+      "error": "Missing required columns for MSFT: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']",
+      "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/scripts/test_strategies_individually.py\", line 143, in test_strategy\n    data_handler = HistoricalDataHandler(\n                   ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 95, in __init__\n    self._load_data()\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 249, in _load_data\n    raise ValueError(\nValueError: Missing required columns for MSFT: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']\n"
+    },
+    {
+      "strategy": "SimplifiedMomentum",
+      "symbol": "GOOGL",
+      "status": "ERROR",
+      "error": "Missing required columns for GOOGL: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']",
+      "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/scripts/test_strategies_individually.py\", line 143, in test_strategy\n    data_handler = HistoricalDataHandler(\n                   ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 95, in __init__\n    self._load_data()\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 249, in _load_data\n    raise ValueError(\nValueError: Missing required columns for GOOGL: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']\n"
+    },
+    {
+      "strategy": "TrendFollowing",
+      "symbol": "GOOGL",
+      "status": "ERROR",
+      "error": "Missing required columns for GOOGL: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']",
+      "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/scripts/test_strategies_individually.py\", line 143, in test_strategy\n    data_handler = HistoricalDataHandler(\n                   ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 95, in __init__\n    self._load_data()\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 249, in _load_data\n    raise ValueError(\nValueError: Missing required columns for GOOGL: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']\n"
+    },
+    {
+      "strategy": "MeanReversion",
+      "symbol": "GOOGL",
+      "status": "ERROR",
+      "error": "Missing required columns for GOOGL: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']",
+      "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/scripts/test_strategies_individually.py\", line 143, in test_strategy\n    data_handler = HistoricalDataHandler(\n                   ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 95, in __init__\n    self._load_data()\n  File \"/mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/src/backtesting/data_handler.py\", line 249, in _load_data\n    raise ValueError(\nValueError: Missing required columns for GOOGL: ['timestamp']. Available columns: ['symbol', 'open', 'high', 'low', 'close', 'volume', 'vwap', 'trade_count']\n"
+    }
+  ]
+}

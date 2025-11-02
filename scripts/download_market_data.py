@@ -111,19 +111,36 @@ class MarketDataDownloader:
         Returns:
             Tuple of (start_date, end_date)
         """
-        end_date = datetime.now()
+        # CRITICAL FIX: Get current date and ensure we NEVER use future dates
+        # Use date() to strip time component for consistent comparison
+        today = datetime.now().date()
+
+        # Calculate end_date: ALWAYS use yesterday to ensure market data is available
+        # Market data for "today" may not be complete until after market close
+        end_date = datetime.combine(today - timedelta(days=1), datetime.min.time())
+
+        # Calculate start_date
         start_date = end_date - timedelta(days=self.days_back)
 
-        # Adjust for market days only
+        # Adjust for market days only (weekends)
         # Move start date back if it's a weekend
         while start_date.weekday() >= 5:  # Saturday=5, Sunday=6
             start_date -= timedelta(days=1)
 
-        # Move end date back if it's a weekend or in the future
-        while end_date.weekday() >= 5 or end_date > datetime.now():
+        # Move end date back if it's a weekend
+        while end_date.weekday() >= 5:
             end_date -= timedelta(days=1)
 
-        logger.info(f"Date range: {start_date.date()} to {end_date.date()}")
+        # DOUBLE VALIDATION: ensure end_date never exceeds today
+        today_datetime = datetime.combine(today, datetime.min.time())
+        if end_date > today_datetime:
+            logger.warning(f"CRITICAL: End date {end_date.date()} exceeds today {today}, forcing to yesterday")
+            end_date = today_datetime - timedelta(days=1)
+            # Re-adjust if yesterday was a weekend
+            while end_date.weekday() >= 5:
+                end_date -= timedelta(days=1)
+
+        logger.info(f"Date range: {start_date.date()} to {end_date.date()} (today is {today})")
         return start_date, end_date
 
     def _fetch_symbol_data(
@@ -158,19 +175,29 @@ class MarketDataDownloader:
 
                 bars = self.client.get_stock_bars(request)
 
-                if not bars or symbol not in bars:
-                    logger.warning(f"No data returned for {symbol}")
-
-                    # Try with shorter date range
+                if not bars:
+                    logger.warning(f"No response from API for {symbol}")
+                    # Try with shorter date range on first attempt only
                     if attempt == 0 and self.days_back > 90:
                         logger.info(f"Retrying {symbol} with 90-day range")
                         new_start = end_date - timedelta(days=90)
-                        return self._fetch_symbol_data(symbol, new_start, end_date, retry_count - 1)
-
+                        remaining_retries = max(1, retry_count - 1)
+                        return self._fetch_symbol_data(symbol, new_start, end_date, remaining_retries)
                     continue
 
                 # Convert to DataFrame
                 df = bars.df
+
+                # CRITICAL FIX: Check if DataFrame is empty, not if symbol is in bars object
+                if df is None or df.empty:
+                    logger.warning(f"No data returned for {symbol} (empty DataFrame)")
+                    # Try with shorter date range on first attempt only
+                    if attempt == 0 and self.days_back > 90:
+                        logger.info(f"Retrying {symbol} with 90-day range")
+                        new_start = end_date - timedelta(days=90)
+                        remaining_retries = max(1, retry_count - 1)
+                        return self._fetch_symbol_data(symbol, new_start, end_date, remaining_retries)
+                    continue
 
                 if isinstance(df.index, pd.MultiIndex):
                     df = df.reset_index()
@@ -210,15 +237,29 @@ class MarketDataDownloader:
                 return df
 
             except Exception as e:
+                error_message = str(e)
                 logger.error(f"Error fetching {symbol} (attempt {attempt + 1}): {e}")
 
-                if attempt < retry_count - 1:
+                # Detect rate limit errors
+                if "rate limit" in error_message.lower() or "429" in error_message:
+                    logger.warning(f"Rate limit detected for {symbol}")
+                    if attempt < retry_count - 1:
+                        import time
+                        # Longer delay for rate limits with exponential backoff
+                        delay = min(60, 5 * (2 ** attempt))  # 5s, 10s, 20s, capped at 60s
+                        logger.info(f"Rate limit: waiting {delay} seconds before retry...")
+                        time.sleep(delay)
+                elif "403" in error_message or "forbidden" in error_message.lower():
+                    logger.error(f"Authentication error - check ALPACA_API_KEY and ALPACA_SECRET_KEY in .env")
+                    return None  # Don't retry auth errors
+                elif attempt < retry_count - 1:
                     import time
-                    delay = 2 ** attempt  # Exponential backoff
-                    logger.info(f"Retrying in {delay} seconds...")
+                    delay = 5 * (2 ** attempt)  # Exponential backoff: 5s, 10s, 20s
+                    logger.info(f"Retrying in {delay} seconds (exponential backoff)...")
                     time.sleep(delay)
 
         logger.error(f"Failed to fetch {symbol} after {retry_count} attempts")
+        logger.error(f"Possible causes: 1) Invalid date range 2) API credentials 3) Symbol not found 4) Rate limiting")
         return None
 
     def _validate_data(self, df: pd.DataFrame, symbol: str) -> bool:
