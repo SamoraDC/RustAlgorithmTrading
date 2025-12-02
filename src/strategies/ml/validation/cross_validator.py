@@ -5,7 +5,7 @@ Implements time-series aware cross-validation strategies.
 """
 
 import numpy as np
-from typing import Dict, List, Iterator, Tuple
+from typing import Dict, List, Iterator, Tuple, Optional
 from sklearn.model_selection import TimeSeriesSplit
 
 

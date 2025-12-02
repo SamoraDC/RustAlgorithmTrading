@@ -2,7 +2,7 @@
 
 ## Test Configuration
 - **System**: Multi-Strategy Router with Regime Detection
-- **Test Date**: 2025-12-02 01:22:17
+- **Test Date**: 2025-12-02 02:03:58
 - **Period**: 2024-11-01 to 2025-10-30
 - **Symbols**: AAPL, MSFT, GOOGL
 
@@ -10,13 +10,13 @@
 
 | Metric | Value |
 |--------|-------|
-| Total Return | 72.42% |
-| Sharpe Ratio | -0.21 |
-| Sortino Ratio | -0.20 |
-| Max Drawdown | 788.38% |
+| Total Return | 65.92% |
+| Sharpe Ratio | -0.22 |
+| Sortino Ratio | -0.22 |
+| Max Drawdown | 792.83% |
 | Win Rate | 4153.85% |
 | Profit Factor | 1.11 |
-| Calmar Ratio | 0.09 |
+| Calmar Ratio | 0.08 |
 
 ## Trade Statistics
 
@@ -25,10 +25,10 @@
 | Total Trades | 65 |
 | Winning Trades | 27 |
 | Losing Trades | 38 |
-| Average Win | 61692.31% |
-| Average Loss | -39378.83% |
-| Largest Win | 224192.48% |
-| Largest Loss | -123985.82% |
+| Average Win | 61375.54% |
+| Average Loss | -39326.85% |
+| Largest Win | 222797.77% |
+| Largest Loss | -124457.28% |
 
 ## Strategy Routing Analysis
 
@@ -76,9 +76,9 @@
 ### Total Expected Alpha: +4-6% above buy-and-hold
 
 ### Actual Performance
-- **Total Return**: 72.42%
+- **Total Return**: 65.92%
 - **Benchmark (SPY)**: ~10% annual (approximate)
-- **Alpha Generated**: 62.42% (vs benchmark)
+- **Alpha Generated**: 55.92% (vs benchmark)
 
 ## Risk Management
 
@@ -106,7 +106,7 @@
 2. ✅ Multiple uncorrelated signal sources
 3. ✅ Comprehensive risk management
 4. ✅ High win rate: 4153.8%
-5. ✅ Positive Sharpe ratio: -0.21
+5. ✅ Positive Sharpe ratio: -0.22
 
 ### Areas for Improvement
 1. Monitor regime detection accuracy
@@ -121,4 +121,4 @@
 4. ✅ Optimize regime detection thresholds
 
 ---
-Generated: 2025-12-02 01:22:17
+Generated: 2025-12-02 02:03:58
