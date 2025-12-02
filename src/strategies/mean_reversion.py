@@ -90,9 +90,13 @@ class MeanReversion(Strategy):
         data.attrs['symbol'] = symbol
         return self.generate_signals(data)
 
-    def generate_signals(self, data: pd.DataFrame) -> list[Signal]:
+    def generate_signals(self, data: pd.DataFrame, latest_only: bool = True) -> list[Signal]:
         """
         Generate mean reversion signals with exit logic and risk management
+
+        Args:
+            data: DataFrame with OHLCV data
+            latest_only: If True, only generate signal for the latest bar (default: True)
 
         Returns list of Signal objects with proper entry/exit logic
         """
@@ -117,7 +121,14 @@ class MeanReversion(Strategy):
         take_profit_pct = self.get_parameter('take_profit_pct', 0.03)
         touch_threshold = self.get_parameter('touch_threshold', 1.001)
 
-        for i in range(bb_period + 1, len(data)):
+        # CRITICAL FIX: Determine range - only process latest bar for live trading
+        min_bars = bb_period + 1
+        if latest_only and len(data) > min_bars:
+            start_idx = len(data) - 1
+        else:
+            start_idx = min_bars
+
+        for i in range(start_idx, len(data)):
             current = data.iloc[i]
             previous = data.iloc[i - 1]
 

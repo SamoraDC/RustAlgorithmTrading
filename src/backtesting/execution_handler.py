@@ -88,6 +88,10 @@ class SimulatedExecutionHandler:
 
         return fill
 
+    def set_data_handler(self, data_handler):
+        """Set data handler for getting actual market prices."""
+        self.data_handler = data_handler
+
     def _calculate_fill_price(self, order: OrderEvent, quantity: int) -> float:
         """
         Calculate realistic fill price with slippage and market impact.
@@ -103,9 +107,20 @@ class SimulatedExecutionHandler:
         if order.order_type == 'LMT' and order.price:
             base_price = order.price
         else:
-            # In real backtest, this would come from market data
-            # For now, use order price or a placeholder
-            base_price = order.price if order.price else 100.0
+            # CRITICAL FIX: Get actual market price from data handler
+            base_price = None
+            if hasattr(self, 'data_handler') and self.data_handler:
+                latest_bar = self.data_handler.get_latest_bar(order.symbol)
+                if latest_bar:
+                    base_price = latest_bar.close
+
+            # Fallback to order price or reject if no price available
+            if base_price is None:
+                base_price = order.price if order.price else None
+
+            if base_price is None:
+                logger.error(f"No price available for {order.symbol}, cannot execute order")
+                return 0.0
 
         # Calculate slippage (random within range)
         slippage_factor = np.random.normal(self.slippage_bps / 10000.0, self.slippage_bps / 20000.0)

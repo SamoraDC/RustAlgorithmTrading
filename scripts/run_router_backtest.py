@@ -214,10 +214,14 @@ def run_router_backtest():
         if isinstance(value, (int, float)):
             if key.endswith('_ratio') or key.startswith('sharpe') or key.startswith('sortino') or key.startswith('calmar'):
                 logger.info(f"  {key:30s}: {value:.2f}")
-            elif 'return' in key or 'drawdown' in key or 'rate' in key:
-                logger.info(f"  {key:30s}: {value:.2%}")
+            elif key == 'max_drawdown_duration':
+                # Duration is in bars, not percentage
+                logger.info(f"  {key:30s}: {int(value)} bars")
+            elif 'return' in key or 'drawdown' in key or 'rate' in key or key == 'volatility':
+                # Values are already in percentage form (e.g., 65.02 = 65.02%)
+                logger.info(f"  {key:30s}: {value:.2f}%")
             elif 'trades' in key or 'total_' in key:
-                logger.info(f"  {key:30s}: {value}")
+                logger.info(f"  {key:30s}: {int(value)}")
             else:
                 logger.info(f"  {key:30s}: {value:.4f}")
 
@@ -430,11 +434,12 @@ if __name__ == "__main__":
         logger.info("DEPLOYMENT READINESS CHECK")
         logger.info("=" * 80)
 
+        # Note: total_return, win_rate, max_dd are already in percentage form (e.g., 65.0 = 65%)
         checks = {
             'Sharpe Ratio > 1.0': (sharpe > 1.0, f"{sharpe:.2f}"),
-            'Total Return > 5%': (total_return > 0.05, f"{total_return:.2%}"),
-            'Win Rate > 50%': (win_rate > 0.50, f"{win_rate:.2%}"),
-            'Max Drawdown < 20%': (abs(max_dd) < 0.20, f"{max_dd:.2%}"),
+            'Total Return > 5%': (total_return > 5.0, f"{total_return:.2f}%"),
+            'Win Rate > 50%': (win_rate > 50.0, f"{win_rate:.2f}%"),
+            'Max Drawdown < 20%': (abs(max_dd) < 20.0, f"{max_dd:.2f}%"),
         }
 
         all_passed = True

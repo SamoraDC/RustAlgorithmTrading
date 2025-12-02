@@ -50,6 +50,10 @@ class BacktestEngine:
         self.start_date = start_date
         self.end_date = end_date
 
+        # CRITICAL FIX: Connect data handler to execution handler for accurate pricing
+        if hasattr(execution_handler, 'set_data_handler'):
+            execution_handler.set_data_handler(data_handler)
+
         self.events: deque[Event] = deque()
         self.continue_backtest = True
         self.performance_analyzer = PerformanceAnalyzer()

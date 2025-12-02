@@ -134,8 +134,13 @@ class MomentumStrategy(Strategy):
         # PHASE 2: Added highest_price for trailing stops
         self.active_positions = {}  # {symbol: {'entry_price': float, 'entry_time': datetime, 'type': 'long'/'short', 'highest_price': float, 'lowest_price': float}}
 
-    def generate_signals(self, data: pd.DataFrame) -> list[Signal]:
-        """Generate momentum-based signals with exit logic and risk management"""
+    def generate_signals(self, data: pd.DataFrame, latest_only: bool = True) -> list[Signal]:
+        """Generate momentum-based signals with exit logic and risk management
+
+        Args:
+            data: DataFrame with OHLCV data
+            latest_only: If True, only generate signal for the latest bar (default: True)
+        """
         if not self.validate_data(data):
             return []
 
@@ -198,7 +203,14 @@ class MomentumStrategy(Strategy):
         stop_loss_pct = self.get_parameter('stop_loss_pct', 0.02)
         take_profit_pct = self.get_parameter('take_profit_pct', 0.03)
 
-        for i in range(max(rsi_period, ema_slow, macd_signal_period) + 1, len(data)):
+        # CRITICAL FIX: Determine range - only process latest bar for live trading
+        min_bars = max(rsi_period, ema_slow, macd_signal_period) + 1
+        if latest_only and len(data) > min_bars:
+            start_idx = len(data) - 1
+        else:
+            start_idx = min_bars
+
+        for i in range(start_idx, len(data)):
             current = data.iloc[i]
             previous = data.iloc[i - 1]
 
