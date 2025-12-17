@@ -2,7 +2,7 @@
 
 ## Test Configuration
 - **System**: Multi-Strategy Router with Regime Detection
-- **Test Date**: 2025-11-02 18:42:45
+- **Test Date**: 2025-12-02 02:03:58
 - **Period**: 2024-11-01 to 2025-10-30
 - **Symbols**: AAPL, MSFT, GOOGL
 
@@ -10,32 +10,32 @@
 
 | Metric | Value |
 |--------|-------|
-| Total Return | 0.00% |
-| Sharpe Ratio | 0.00 |
-| Sortino Ratio | 0.00 |
-| Max Drawdown | 0.00% |
-| Win Rate | 0.00% |
-| Profit Factor | 0.00 |
-| Calmar Ratio | 0.00 |
+| Total Return | 65.92% |
+| Sharpe Ratio | -0.22 |
+| Sortino Ratio | -0.22 |
+| Max Drawdown | 792.83% |
+| Win Rate | 4153.85% |
+| Profit Factor | 1.11 |
+| Calmar Ratio | 0.08 |
 
 ## Trade Statistics
 
 | Statistic | Value |
 |-----------|-------|
-| Total Trades | 0 |
-| Winning Trades | 0 |
-| Losing Trades | 0 |
-| Average Win | 0.00% |
-| Average Loss | 0.00% |
-| Largest Win | 0.00% |
-| Largest Loss | 0.00% |
+| Total Trades | 65 |
+| Winning Trades | 27 |
+| Losing Trades | 38 |
+| Average Win | 61375.54% |
+| Average Loss | -39326.85% |
+| Largest Win | 222797.77% |
+| Largest Loss | -124457.28% |
 
 ## Strategy Routing Analysis
 
 ### Strategy Usage Distribution
 | Strategy | Usage Count |
 |----------|-------------|
-| Momentum | 0 symbols |
+| Momentum | 3 symbols |
 | Mean Reversion | 0 symbols |
 | Trend Following | 0 symbols |
 
@@ -44,10 +44,10 @@
 |--------|-------------|
 | Trending | 0 |
 | Ranging | 0 |
-| Volatile | 0 |
+| Volatile | 3 |
 | Unknown | 0 |
 
-**Average Routing Confidence**: 0.00%
+**Average Routing Confidence**: 51.82%
 
 ## Key Advantages of Strategy Router
 
@@ -76,9 +76,9 @@
 ### Total Expected Alpha: +4-6% above buy-and-hold
 
 ### Actual Performance
-- **Total Return**: 0.00%
+- **Total Return**: 65.92%
 - **Benchmark (SPY)**: ~10% annual (approximate)
-- **Alpha Generated**: -10.00% (vs benchmark)
+- **Alpha Generated**: 55.92% (vs benchmark)
 
 ## Risk Management
 
@@ -99,14 +99,14 @@
 ## Conclusions
 
 ### Overall Assessment
-❌ **POOR**: Router system underperforming
+⚠️ **MODERATE**: Router system needs optimization
 
 ### Key Strengths
 1. ✅ Adaptive strategy selection based on market regime
 2. ✅ Multiple uncorrelated signal sources
 3. ✅ Comprehensive risk management
-4. ✅ High win rate: 0.0%
-5. ✅ Positive Sharpe ratio: 0.00
+4. ✅ High win rate: 4153.8%
+5. ✅ Positive Sharpe ratio: -0.22
 
 ### Areas for Improvement
 1. Monitor regime detection accuracy
@@ -121,4 +121,4 @@
 4. ✅ Optimize regime detection thresholds
 
 ---
-Generated: 2025-11-02 18:42:45
+Generated: 2025-12-02 02:03:58

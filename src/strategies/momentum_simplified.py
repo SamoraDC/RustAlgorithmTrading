@@ -79,8 +79,14 @@ class SimplifiedMomentumStrategy(Strategy):
         # Track active positions
         self.active_positions = {}
 
-    def generate_signals(self, data: pd.DataFrame) -> list[Signal]:
-        """Generate simplified momentum-based signals"""
+    def generate_signals(self, data: pd.DataFrame, latest_only: bool = True) -> list[Signal]:
+        """Generate simplified momentum-based signals
+
+        Args:
+            data: DataFrame with OHLCV data
+            latest_only: If True, only generate signal for the latest bar (default: True)
+                        Set to False for full historical backtesting analysis
+        """
         if not self.validate_data(data):
             return []
 
@@ -114,7 +120,16 @@ class SimplifiedMomentumStrategy(Strategy):
         take_profit_pct = self.get_parameter('take_profit_pct', 0.03)
         min_holding_period = self.get_parameter('min_holding_period', 10)
 
-        for i in range(max(rsi_period, ema_slow, macd_signal_period) + 1, len(data)):
+        # CRITICAL FIX: Determine range - only process latest bar for live trading
+        min_bars = max(rsi_period, ema_slow, macd_signal_period) + 1
+        if latest_only and len(data) > min_bars:
+            # Only process the latest bar
+            start_idx = len(data) - 1
+        else:
+            # Process all historical bars (for analysis only)
+            start_idx = min_bars
+
+        for i in range(start_idx, len(data)):
             current = data.iloc[i]
             previous = data.iloc[i - 1]
 

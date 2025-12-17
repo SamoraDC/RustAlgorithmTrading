@@ -115,8 +115,13 @@ class TrendFollowingStrategy(Strategy):
 
         return df
 
-    def generate_signals(self, data: pd.DataFrame) -> list[Signal]:
-        """Generate trend following signals"""
+    def generate_signals(self, data: pd.DataFrame, latest_only: bool = True) -> list[Signal]:
+        """Generate trend following signals
+
+        Args:
+            data: DataFrame with OHLCV data
+            latest_only: If True, only generate signal for the latest bar (default: True)
+        """
         if not self.validate_data(data):
             return []
 
@@ -142,7 +147,14 @@ class TrendFollowingStrategy(Strategy):
         min_holding_period = self.get_parameter('min_holding_period', 15)
         adx_threshold = self.get_parameter('adx_threshold', 25.0)
 
-        for i in range(max(ema_slow, adx_period * 2) + 1, len(data)):
+        # CRITICAL FIX: Determine range - only process latest bar for live trading
+        min_bars = max(ema_slow, adx_period * 2) + 1
+        if latest_only and len(data) > min_bars:
+            start_idx = len(data) - 1
+        else:
+            start_idx = min_bars
+
+        for i in range(start_idx, len(data)):
             current = data.iloc[i]
             previous = data.iloc[i - 1]
 

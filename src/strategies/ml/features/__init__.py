@@ -1,7 +1,5 @@
 """Feature engineering module for ML trading strategies."""
 
-from .feature_engineering import FeatureEngineer
-from .technical_features import TechnicalFeatures
-from .statistical_features import StatisticalFeatures
+from .feature_engineering import FeatureEngineer, FeatureConfig
 
-__all__ = ['FeatureEngineer', 'TechnicalFeatures', 'StatisticalFeatures']
+__all__ = ['FeatureEngineer', 'FeatureConfig']
