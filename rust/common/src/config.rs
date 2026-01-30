@@ -108,6 +108,13 @@ pub struct ExecutionConfig {
     pub retry_attempts: u32,
     pub retry_delay_ms: u64,
     pub paper_trading: bool,
+    /// Maximum allowed slippage in basis points (default: 50.0 = 0.5%)
+    #[serde(default = "default_max_slippage_bps")]
+    pub max_slippage_bps: f64,
+}
+
+fn default_max_slippage_bps() -> f64 {
+    50.0 // 50 basis points = 0.5%
 }
 
 impl ExecutionConfig {
@@ -134,6 +141,28 @@ impl ExecutionConfig {
         if self.retry_delay_ms < 100 {
             return Err(TradingError::Configuration(
                 "retry_delay_ms must be at least 100ms".to_string()
+            ));
+        }
+
+        // Validate max_slippage_bps: must be finite, positive and <= 500 bps (5%)
+        if !self.max_slippage_bps.is_finite() {
+            return Err(TradingError::Configuration(
+                "max_slippage_bps must be a finite number (not NaN or Infinity)".to_string()
+            ));
+        }
+
+        if self.max_slippage_bps <= 0.0 {
+            return Err(TradingError::Configuration(
+                "max_slippage_bps must be positive".to_string()
+            ));
+        }
+
+        if self.max_slippage_bps > 500.0 {
+            return Err(TradingError::Configuration(
+                format!(
+                    "max_slippage_bps ({}) exceeds maximum allowed (500 bps = 5%)",
+                    self.max_slippage_bps
+                )
             ));
         }
 
