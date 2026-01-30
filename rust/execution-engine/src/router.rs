@@ -32,7 +32,6 @@ pub struct AlpacaOrderResponse {
 pub struct OrderRouter {
     config: ExecutionConfig,
     retry_policy: RetryPolicy,
-    max_slippage_bps: f64,
     rate_limiter: Arc<RateLimiter<NotKeyed, InMemoryState, DefaultClock>>,
     http_client: Client,
 }
@@ -49,8 +48,6 @@ impl OrderRouter {
             config.retry_attempts,
             config.retry_delay_ms,
         );
-
-        let max_slippage_bps = 50.0; // 50 basis points max slippage
 
         // Create rate limiter with proper error handling
         let quota = Quota::per_second(
@@ -72,7 +69,6 @@ impl OrderRouter {
         Ok(Self {
             config,
             retry_policy,
-            max_slippage_bps,
             rate_limiter,
             http_client,
         })
@@ -83,11 +79,36 @@ impl OrderRouter {
         // Check slippage for limit orders
         if let Some(limit_price) = order.price {
             if let Some(market_price) = current_market_price {
+                // CRITICAL FIX: Validate market_price to prevent division by zero or NaN/Inf
+                if market_price <= 0.0 {
+                    return Err(TradingError::MarketData(format!(
+                        "Invalid market price for slippage calculation: {} (must be positive)",
+                        market_price
+                    )));
+                }
+
+                // Also validate limit_price is reasonable
+                if limit_price.0 <= 0.0 {
+                    return Err(TradingError::OrderValidation(format!(
+                        "Invalid limit price: {} (must be positive)",
+                        limit_price.0
+                    )));
+                }
+
                 let slippage_bps = ((limit_price.0 - market_price).abs() / market_price) * 10000.0;
-                if slippage_bps > self.max_slippage_bps {
+
+                // Additional check for NaN/Inf results (defensive programming)
+                if slippage_bps.is_nan() || slippage_bps.is_infinite() {
+                    return Err(TradingError::MarketData(format!(
+                        "Slippage calculation resulted in invalid value: limit={}, market={}",
+                        limit_price.0, market_price
+                    )));
+                }
+
+                if slippage_bps > self.config.max_slippage_bps {
                     return Err(TradingError::Risk(format!(
                         "Slippage too high: {:.2} bps (limit={}, market={}, max={})",
-                        slippage_bps, limit_price.0, market_price, self.max_slippage_bps
+                        slippage_bps, limit_price.0, market_price, self.config.max_slippage_bps
                     )));
                 }
             }
