@@ -137,6 +137,7 @@ class PortfolioHandler:
         # ================================
         # EXIT signals should ALWAYS close the full position, bypassing position sizing
         # This ensures proper exit execution regardless of position sizer logic
+        # BUG FIX: For SHORT positions (quantity < 0), we need to BUY to close, not SELL
         if signal.signal_type == 'EXIT':
             if current_quantity == 0:
                 logger.debug(f"🚫 EXIT signal for {signal.symbol} but no position to close (skipping)")
@@ -144,25 +145,36 @@ class PortfolioHandler:
 
             # Close the entire position (negate current quantity)
             order_quantity = -current_quantity
+
+            # CRITICAL FIX: Determine direction based on position type
+            # - LONG position (quantity > 0): SELL to close
+            # - SHORT position (quantity < 0): BUY to close (cover)
+            if current_quantity > 0:
+                direction = 'SELL'
+                action_desc = "selling long"
+            else:
+                direction = 'BUY'
+                action_desc = "covering short"
+
             logger.info(
-                f"🚪 EXIT signal: closing {abs(order_quantity)} shares of {signal.symbol} "
+                f"🚪 EXIT signal: {action_desc} {abs(current_quantity)} shares of {signal.symbol} "
                 f"(current: {current_quantity} → target: 0)"
             )
 
-            # Create SELL order to exit position
+            # Create order to exit position with correct direction
             order = OrderEvent(
                 timestamp=signal.timestamp,
                 symbol=signal.symbol,
                 order_type='MKT',
                 quantity=abs(order_quantity),
-                direction='SELL',  # Always SELL for EXIT
+                direction=direction,
             )
 
             orders.append(order)
 
             logger.info(
-                f"✅ EXIT ORDER: SELL {order.quantity} {signal.symbol} @ market | "
-                f"Expected proceeds: ${abs(order_quantity) * (current_price or 0):,.2f}"
+                f"✅ EXIT ORDER: {direction} {order.quantity} {signal.symbol} @ market | "
+                f"Expected {'proceeds' if direction == 'SELL' else 'cost'}: ${abs(order_quantity) * (current_price or 0):,.2f}"
             )
 
             return orders

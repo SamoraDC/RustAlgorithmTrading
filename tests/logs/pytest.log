@@ -1,6 +1,6 @@
-2025-10-29 15:21:18 [   DEBUG] matplotlib: matplotlib data path: /mnt/c/Users/DaviCastroSamora/Documents/SamoraDC/RustAlgorithmTrading/venv/lib/python3.12/site-packages/matplotlib/mpl-data
-2025-10-29 15:21:18 [   DEBUG] matplotlib: CONFIGDIR=/home/samoradc/.config/matplotlib
-2025-10-29 15:21:18 [   DEBUG] matplotlib: interactive is False
-2025-10-29 15:21:18 [   DEBUG] matplotlib: platform is linux
-2025-10-29 15:21:19 [   DEBUG] matplotlib: CACHEDIR=/home/samoradc/.cache/matplotlib
-2025-10-29 15:21:19 [   DEBUG] matplotlib.font_manager: Using fontManager instance from /home/samoradc/.cache/matplotlib/fontlist-v390.json
+2026-01-30 18:46:21 [   DEBUG] matplotlib: matplotlib data path: /home/samoradc/SamoraDC/RustAlgorithmTrading/.venv/lib/python3.12/site-packages/matplotlib/mpl-data
+2026-01-30 18:46:21 [   DEBUG] matplotlib: CONFIGDIR=/home/samoradc/.config/matplotlib
+2026-01-30 18:46:21 [   DEBUG] matplotlib: interactive is False
+2026-01-30 18:46:21 [   DEBUG] matplotlib: platform is linux
+2026-01-30 18:46:21 [   DEBUG] matplotlib: CACHEDIR=/home/samoradc/.cache/matplotlib
+2026-01-30 18:46:21 [   DEBUG] matplotlib.font_manager: Using fontManager instance from /home/samoradc/.cache/matplotlib/fontlist-v390.json

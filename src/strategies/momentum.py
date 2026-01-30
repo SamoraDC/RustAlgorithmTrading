@@ -147,13 +147,54 @@ class MomentumStrategy(Strategy):
         data = data.copy()
         symbol = data.attrs.get('symbol', 'UNKNOWN')
 
-        # Calculate RSI
+        # Calculate RSI with division-by-zero protection using Wilder's smoothing
+        # RSI = 100 - (100 / (1 + RS)) where RS = avg_gain / avg_loss
+        # Behavior:
+        # - When avg_loss ≈ 0 and avg_gain > 0: RSI = 100 (pure bullish momentum)
+        # - When avg_loss ≈ 0 and avg_gain ≈ 0: RSI = 50 (neutral, no movement)
+        # - Normal case: RSI calculated via standard formula
         rsi_period = self.get_parameter('rsi_period', 14)
+
+        # Validate and convert rsi_period to int for min_periods compatibility
+        try:
+            rsi_period = int(rsi_period)
+        except (TypeError, ValueError):
+            logger.warning(f"Invalid rsi_period type, using default 14")
+            rsi_period = 14
+
+        if rsi_period < 1:
+            logger.warning(f"Invalid rsi_period={rsi_period}, using default 14")
+            rsi_period = 14
+
         delta = data['close'].diff()
-        gain = (delta.where(delta > 0, 0)).rolling(window=rsi_period).mean()
-        loss = (-delta.where(delta < 0, 0)).rolling(window=rsi_period).mean()
-        rs = gain / loss
-        data['rsi'] = 100 - (100 / (1 + rs))
+
+        # Use Wilder's smoothing (EWMA with alpha=1/period) for RSI compatibility
+        # This matches the standard RSI calculation used by most platforms
+        alpha = 1.0 / rsi_period
+        gain = (delta.where(delta > 0, 0)).ewm(alpha=alpha, min_periods=rsi_period, adjust=False).mean()
+        loss = (-delta.where(delta < 0, 0)).ewm(alpha=alpha, min_periods=rsi_period, adjust=False).mean()
+
+        # CRITICAL FIX: Use np.where for safe RSI calculation without intermediate NaN issues
+        # Tolerance for float comparison to handle precision issues (rtol=0 for strict comparison)
+        epsilon = 1e-10
+
+        # Calculate RSI using conditional logic to handle edge cases properly
+        rsi_values = np.where(
+            np.isclose(loss, 0, atol=epsilon, rtol=0) & (gain > epsilon),  # loss ≈ 0, gain > 0
+            100.0,  # Pure bullish: RSI = 100
+            np.where(
+                np.isclose(loss, 0, atol=epsilon, rtol=0) & np.isclose(gain, 0, atol=epsilon, rtol=0),  # both ≈ 0
+                50.0,  # Neutral: RSI = 50
+                np.where(
+                    loss > epsilon,  # Normal case: loss > 0
+                    100 - (100 / (1 + (gain / loss))),  # Standard RSI formula
+                    np.nan  # Fallback for unexpected cases
+                )
+            )
+        )
+
+        # Clamp RSI values to valid range [0, 100] and preserve index alignment
+        data['rsi'] = pd.Series(np.clip(rsi_values, 0, 100), index=data.index)
 
         # Calculate MACD
         ema_fast = self.get_parameter('ema_fast', 12)
