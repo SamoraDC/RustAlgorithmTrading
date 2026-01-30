@@ -122,41 +122,51 @@ impl RetryPolicy {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::sync::atomic::{AtomicU32, Ordering};
+    use std::sync::Arc;
 
     #[tokio::test]
     async fn test_retry_success_on_second_attempt() {
         let policy = RetryPolicy::new(3, 10);
-        let mut attempts = 0;
+        let attempts = Arc::new(AtomicU32::new(0));
+        let attempts_clone = attempts.clone();
 
         let result = policy
-            .execute(|| async {
-                attempts += 1;
-                if attempts < 2 {
-                    Err("temporary error")
-                } else {
-                    Ok(42)
+            .execute(|| {
+                let attempts = attempts_clone.clone();
+                async move {
+                    let current = attempts.fetch_add(1, Ordering::Relaxed) + 1;
+                    if current < 2 {
+                        Err("temporary error")
+                    } else {
+                        Ok(42)
+                    }
                 }
             })
             .await;
 
         assert!(result.is_ok());
         assert_eq!(result.unwrap(), 42);
-        assert_eq!(attempts, 2);
+        assert_eq!(attempts.load(Ordering::Relaxed), 2);
     }
 
     #[tokio::test]
     async fn test_retry_max_attempts() {
         let policy = RetryPolicy::new(3, 10);
-        let mut attempts = 0;
+        let attempts = Arc::new(AtomicU32::new(0));
+        let attempts_clone = attempts.clone();
 
         let result = policy
-            .execute(|| async {
-                attempts += 1;
-                Err::<i32, &str>("persistent error")
+            .execute(|| {
+                let attempts = attempts_clone.clone();
+                async move {
+                    attempts.fetch_add(1, Ordering::Relaxed);
+                    Err::<i32, &str>("persistent error")
+                }
             })
             .await;
 
         assert!(result.is_err());
-        assert_eq!(attempts, 3);
+        assert_eq!(attempts.load(Ordering::Relaxed), 3);
     }
 }
