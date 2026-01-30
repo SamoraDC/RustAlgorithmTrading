@@ -209,7 +209,7 @@ class TestSignalGeneration:
         assert len(signals) >= 0, "Strategy should execute"
 
         # Check BUY signals exist and have required metadata
-        buy_signals = [s for s in signals if s.signal_type == SignalType.BUY]
+        buy_signals = [s for s in signals if s.signal_type == SignalType.LONG]
         for signal in buy_signals:
             assert signal.price > 0, "Signal price should be positive"
             assert 0 <= signal.confidence <= 1, "Confidence should be 0-1"
@@ -239,7 +239,7 @@ class TestSignalGeneration:
         signals = strategy.generate_signals(data)
 
         # Check SELL signals have proper structure
-        sell_signals = [s for s in signals if s.signal_type == SignalType.SELL]
+        sell_signals = [s for s in signals if s.signal_type == SignalType.SHORT]
         for signal in sell_signals:
             assert signal.price > 0
             assert 0 <= signal.confidence <= 1
@@ -301,7 +301,7 @@ class TestPositionSizing:
         signal = Signal(
             timestamp=datetime.now(),
             symbol='TEST',
-            signal_type=SignalType.BUY,
+            signal_type=SignalType.LONG,
             price=100.0,
             confidence=1.0
         )
@@ -321,7 +321,7 @@ class TestPositionSizing:
         high_conf_signal = Signal(
             timestamp=datetime.now(),
             symbol='TEST',
-            signal_type=SignalType.BUY,
+            signal_type=SignalType.LONG,
             price=100.0,
             confidence=1.0
         )
@@ -330,7 +330,7 @@ class TestPositionSizing:
         low_conf_signal = Signal(
             timestamp=datetime.now(),
             symbol='TEST',
-            signal_type=SignalType.BUY,
+            signal_type=SignalType.LONG,
             price=100.0,
             confidence=0.5
         )
@@ -352,7 +352,7 @@ class TestPositionSizing:
         expensive_signal = Signal(
             timestamp=datetime.now(),
             symbol='TEST',
-            signal_type=SignalType.BUY,
+            signal_type=SignalType.LONG,
             price=500.0,
             confidence=1.0
         )
@@ -361,7 +361,7 @@ class TestPositionSizing:
         cheap_signal = Signal(
             timestamp=datetime.now(),
             symbol='TEST',
-            signal_type=SignalType.BUY,
+            signal_type=SignalType.LONG,
             price=10.0,
             confidence=1.0
         )
@@ -390,7 +390,7 @@ class TestRiskManagement:
         signal = Signal(
             timestamp=datetime.now(),
             symbol='TEST',
-            signal_type=SignalType.BUY,
+            signal_type=SignalType.LONG,
             price=100.0,
             confidence=1.0
         )
@@ -492,7 +492,7 @@ class TestSimpleMomentumStrategy:
         signal = Signal(
             timestamp=datetime.now(),
             symbol='TEST',
-            signal_type=SignalType.BUY,
+            signal_type=SignalType.LONG,
             price=100.0,
             confidence=1.0
         )
