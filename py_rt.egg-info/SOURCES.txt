@@ -7,3 +7,9 @@ py_rt.egg-info/dependency_links.txt
 py_rt.egg-info/requires.txt
 py_rt.egg-info/top_level.txt
 src/__init__.py
+tests/test_alpaca_api_limits.py
+tests/test_alpaca_quick.py
+tests/test_backtest_integration.py
+tests/test_data_download.py
+tests/test_data_downloader.py
+tests/test_timezone_handling.py

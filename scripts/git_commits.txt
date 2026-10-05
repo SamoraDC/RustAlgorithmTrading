@@ -1,0 +1,71 @@
+# ============================================
+# COMANDOS GIT PARA AS 4 MELHORIAS NÃO-CRÍTICAS
+# Copie e cole cada bloco individualmente no terminal
+# ============================================
+
+# --------------------------------------------
+# MELHORIA 4: max_slippage_bps configurável (config.rs)
+# --------------------------------------------
+git add rust/common/src/config.rs
+
+git commit -m "feat(config): add configurable max_slippage_bps to ExecutionConfig
+
+- Add max_slippage_bps field with serde default of 50.0 bps (0.5%)
+- Add validation: is_finite(), > 0.0, <= 500.0 bps (5% max)
+- Prevents NaN/Infinity configuration values"
+
+# --------------------------------------------
+# MELHORIA 4: max_slippage_bps configurável (router.rs)
+# --------------------------------------------
+git add rust/execution-engine/src/router.rs
+
+git commit -m "refactor(router): use configurable max_slippage_bps from config
+
+- Remove hardcoded max_slippage_bps field from OrderRouter struct
+- Use self.config.max_slippage_bps instead of hardcoded 50.0
+- Allows runtime configuration of slippage limits"
+
+# --------------------------------------------
+# MELHORIA 3: Corrigir testes retry.rs
+# --------------------------------------------
+git add rust/execution-engine/src/retry.rs
+
+git commit -m "fix(retry): resolve async closure compilation error in tests
+
+- Replace mutable variable capture with Arc<AtomicU32>
+- Use Ordering::Relaxed for thread-safe counter
+- Fixes: captured variable cannot escape FnMut closure body
+- All 12 execution-engine tests now pass"
+
+# --------------------------------------------
+# MELHORIA 1: Corrigir SignalType nos testes
+# --------------------------------------------
+git add tests/unit/test_momentum_strategy.py
+
+git commit -m "fix(tests): correct SignalType enum values in momentum tests
+
+- Replace SignalType.BUY with SignalType.LONG
+- Replace SignalType.SELL with SignalType.SHORT
+- Aligns tests with actual enum: LONG, SHORT, EXIT, HOLD
+- All 23 momentum strategy tests pass"
+
+# --------------------------------------------
+# MELHORIA 2: Adicionar testes para shorts
+# --------------------------------------------
+git add tests/unit/test_portfolio_handler_shorts.py
+
+git commit -m "test(portfolio): add comprehensive short position tests
+
+Add 18 tests covering:
+- Short position entry (negative quantity)
+- Short position exit (negative market_value)
+- P&L calculation (profit when price drops, loss when rises)
+- Reserved cash tracking for margin
+- EXIT signal direction fix verification (BUY to cover shorts)
+- Portfolio equity curve tracking"
+
+# ============================================
+# VERIFICAÇÃO FINAL (opcional)
+# ============================================
+git status
+git log --oneline -5
